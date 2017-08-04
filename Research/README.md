@@ -4,32 +4,46 @@
 
 * Tried and tested; version 1.0 was released in August 2000
 * Open source
-* Familiar query language for database developers and admins - 기존 쿼리문에 익숙한 개발자들에게 쉽고 친근함.
-* Cross-platform - 말그대로
-* No hassle of configuration - Shipped with iOS so it adds no overhead to your app’s bundle 즉, iOS에 내장되어있어 추가를 위해 초기 설정이 거의 필요 없음.
-* Easy storage of data in tables with multiple columns - 많은 column을 가진 테이블 데이터를 쉽게 저장.
-* Easy and secured access to data from multiple threads - 멀티스레드 환경에서도 쉽고 안전하게 데이터에 접근 가능.
+* Familiar query language for database developers and admins
+  : 기존 쿼리문에 익숙한 개발자들에게 쉽고 친근함.
+* Cross-platform : 말그대로
+* No hassle of configuration
+  : Shipped with iOS so it adds no overhead to your app’s bundle
+    즉, iOS에 내장되어있어 추가를 위해 초기 설정이 거의 필요 없음.
+* Easy storage of data in tables with multiple columns
+  : 많은 column을 가진 테이블 데이터를 쉽게 저장.
+* Easy and secured access to data from multiple threads 
+  : 멀티스레드 환경에서도 쉽고 안전하게 데이터에 접근 가능.
 
 ## Core Data
-SQLLite가 table storage contents에 주로 초점을 둔다면, 코어데이터는 객체의 contents를 디테일한 방법을 통해서 저장하는 데 초점을 둔다. 그래서, 저장할 내용을 어떻게 선택할 것인지를 바탕으로 데이터베이스를 선택하는 것이 좋다.
+SQLLite가 **table storage contents**에 주로 초점을 둔다면,
+코어데이터는 **객체의 contents를 디테일한 방법을 통해서 저장**하는 데 초점을 둔다.
 
-* Core Data has faster responsiveness and thus performs better than SQLite - 코어데이터는 SQLLite보다 빠른 응답성을 가진다.
-* Space utilization is greater in Core Data when compared to SQLite - SQLLite에 비해서 저장을 위해 필요한 공간이 많이 필요함.
-* Core Data uses more memory for storage of contents than SQLite - SQLLite에 비해서 저장을 위해 많은 메모리를 필요로 함.
+그래서, 저장할 내용을 어떻게 선택할 것인지를 바탕으로 데이터베이스를 선택하는 것이 좋다.
+
+* Core Data has faster responsiveness and thus performs better than SQLite
+  : 코어데이터는 SQLLite보다 빠른 응답성을 가진다.
+* Space utilization is greater in Core Data when compared to SQLite
+  : SQLLite에 비해서 저장을 위해 필요한 공간이 많이 필요함.
+* Core Data uses more memory for storage of contents than SQLite
+  : SQLLite에 비해서 저장을 위해 많은 메모리를 필요로 함.
 
 ## Realm
-* 모바일 cross platform. - iOS, Android 모두 사용가능함.
+* 모바일 cross platform.
+  : iOS, Android 모두 사용가능함.
 * iOS 8 이상부터 지원. 즉, 사용하는데 문제 버전 관련 문제는 없을 것 같음.
 * 렘 사용을 위해 초기 코드 작성에 최소한의 비용(시간) 필요함.
 * Obj-C, Swift 모두 사용가능.
 * SQLite와 Core Data에 비해서 더 나은 퍼포먼스를 보여줌.
 * iOS, Android간 db file 공유 쉽게 가능.
-* 공짜.
+* **공짜.**
 * 데이터 저장에 제한이 없음. - 이거 무슨말인지 정확히 모르겠습니다.
 * 데이터 크기가 크더라도 속도 저하 없음.
 
 ## 야곰님 발표 정리 - 좌충우돌 Realm 모바일 플랫폼 사용기
-야곰님께서 3일간 Realm 사용하여 간단한 앱 개발하시면서 느낀 점들 정리. 오브젝트 서버는 서버에서 사용할 데이터베이스를 말하는거같음. 우리는 주로 모바일 데이터베이스의 기능에 초점을 두면 될 것 같습니다.
+야곰님께서 3일간 Realm 사용하여 간단한 앱 개발하시면서 느낀 점들 정리.
+오브젝트 서버는 서버에서 사용할 데이터베이스를 말하는거같음.
+**우리는 주로 모바일 데이터베이스의 기능에 초점을 두면 될 것 같습니다.**
 
 ### 모바일 데이터베이스 좋았던 점
 * 로컬 DB를 구성하는데 전체 제작 시간의 10% 소요. - DB 개발 시간 단축
@@ -57,7 +71,8 @@ SQLLite가 table storage contents에 주로 초점을 둔다면, 코어데이터
 ### Q&A
 
 * Q: Realm 브라우저 다른 플랫폼 지원
-A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 만날 수 있지만, 당장 사용해보고 싶은 윈도우 사용자는 Stetho-Realm으로 크롬에서 확인할 수 있습니다.
+A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 만날 수 있지만,
+  당장 사용해보고 싶은 윈도우 사용자는 Stetho-Realm으로 크롬에서 확인할 수 있습니다.
 
 * Realm Addon에서 Realm 관련된 소스를 많이 볼 수 있습니다.
 
