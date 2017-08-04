@@ -1,4 +1,5 @@
 # 데이터베이스 리서치
+
 ## SQLLite
 
 * Tried and tested; version 1.0 was released in August 2000
@@ -63,8 +64,7 @@ A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 
 ### Reference
 
 * SQLLite tutorial blog - [SQLite Tutorial: Getting Started](https://www.raywenderlich.com/123579/sqlite-tutorial-swift)
-* https://medium.com/@hiddenbrains/sqlite-core-data-and-realm-which-one-to-choose-for-ios-database-b12c0cd424df
-* [2017-03-12 Realm World Tour - Seoul](http://sonim1.tistory.com/192)
-* https://news.realm.io/kr/news/develop-app-in-3-days-with-rmp/
-* vivekragunathan.wordpress.com
+* [sqllite vs coredata vs realm](https://medium.com/@hiddenbrains/sqlite-core-data-and-realm-which-one-to-choose-for-ios-database-b12c0cd424df)
+* [Realm World Tour - Seoul 세션 참고를 위한 글](http://sonim1.tistory.com/192)
+* [야곰님의 Realm 사용기](https://news.realm.io/kr/news/develop-app-in-3-days-with-rmp/)
 
