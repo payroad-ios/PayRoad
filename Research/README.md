@@ -1,6 +1,6 @@
 # 데이터베이스 리서치
 
-## SQLLite
+## SQLite
 
 * Tried and tested; version 1.0 was released in August 2000
 * Open source
@@ -15,18 +15,20 @@
 * Easy and secured access to data from multiple threads 
   : 멀티스레드 환경에서도 쉽고 안전하게 데이터에 접근 가능.
 
+
+
 ## Core Data
-SQLLite가 **table storage contents**에 주로 초점을 둔다면,
+SQLite가 **table storage contents**에 주로 초점을 둔다면,
 코어데이터는 **객체의 contents를 디테일한 방법을 통해서 저장**하는 데 초점을 둔다.
 
 그래서, 저장할 내용을 어떻게 선택할 것인지를 바탕으로 데이터베이스를 선택하는 것이 좋다.
 
 * Core Data has faster responsiveness and thus performs better than SQLite
-  : 코어데이터는 SQLLite보다 빠른 응답성을 가진다.
+  : 코어데이터는 SQLite보다 빠른 응답성을 가진다.
 * Space utilization is greater in Core Data when compared to SQLite
-  : SQLLite에 비해서 저장을 위해 필요한 공간이 많이 필요함.
+  : SQLite에 비해서 저장을 위해 필요한 공간이 많이 필요함.
 * Core Data uses more memory for storage of contents than SQLite
-  : SQLLite에 비해서 저장을 위해 많은 메모리를 필요로 함.
+  : SQLite에 비해서 저장을 위해 많은 메모리를 필요로 함.
 
 ## Realm
 * 모바일 cross platform.
@@ -75,6 +77,12 @@ A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 
   당장 사용해보고 싶은 윈도우 사용자는 Stetho-Realm으로 크롬에서 확인할 수 있습니다.
 
 * Realm Addon에서 Realm 관련된 소스를 많이 볼 수 있습니다.
+
+## 추가 조사 내용
+
+* [FMDB has not been updated for Swift](https://stackoverflow.com/questions/43625972/how-to-use-existing-sqlite-in-swift-3-fmdb)
+* [database 기능별 성능 비교](https://github.com/groue/GRDB.swift/wiki/Performance)
+* [SQLite - GRDB](https://github.com/groue/GRDB.swift)
 
 ### Reference
 
