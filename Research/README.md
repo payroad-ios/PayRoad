@@ -4,15 +4,15 @@
 
 * Tried and tested; version 1.0 was released in August 2000
 * Open source
-* Familiar query language for database developers and admins
+* Familiar query language for database developers and admins  
   : 기존 쿼리문에 익숙한 개발자들에게 쉽고 친근함.
 * Cross-platform : 말그대로
-* No hassle of configuration
-  : Shipped with iOS so it adds no overhead to your app’s bundle
+* No hassle of configuration  
+  : Shipped with iOS so it adds no overhead to your app’s bundle  
     즉, iOS에 내장되어있어 추가를 위해 초기 설정이 거의 필요 없음.
-* Easy storage of data in tables with multiple columns
+* Easy storage of data in tables with multiple columns  
   : 많은 column을 가진 테이블 데이터를 쉽게 저장.
-* Easy and secured access to data from multiple threads 
+* Easy and secured access to data from multiple threads  
   : 멀티스레드 환경에서도 쉽고 안전하게 데이터에 접근 가능.
 
 
@@ -43,8 +43,8 @@ SQLite가 **table storage contents**에 주로 초점을 둔다면,
 * 데이터 크기가 크더라도 속도 저하 없음.
 
 ## 야곰님 발표 정리 - 좌충우돌 Realm 모바일 플랫폼 사용기
-야곰님께서 3일간 Realm 사용하여 간단한 앱 개발하시면서 느낀 점들 정리.
-오브젝트 서버는 서버에서 사용할 데이터베이스를 말하는거같음.
+야곰님께서 3일간 Realm 사용하여 간단한 앱 개발하시면서 느낀 점들 정리.  
+오브젝트 서버는 서버에서 사용할 데이터베이스를 말하는거같음.  
 **우리는 주로 모바일 데이터베이스의 기능에 초점을 두면 될 것 같습니다.**
 
 ### 모바일 데이터베이스 좋았던 점
@@ -73,7 +73,7 @@ SQLite가 **table storage contents**에 주로 초점을 둔다면,
 ### Q&A
 
 * Q: Realm 브라우저 다른 플랫폼 지원
-A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 만날 수 있지만,
+A: 현재 브라우저를 다시 만들고 있어서 곧 여러 플랫폼에서 만날 수 있지만,  
   당장 사용해보고 싶은 윈도우 사용자는 Stetho-Realm으로 크롬에서 확인할 수 있습니다.
 
 * Realm Addon에서 Realm 관련된 소스를 많이 볼 수 있습니다.
