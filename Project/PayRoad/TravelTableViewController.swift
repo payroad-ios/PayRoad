@@ -25,6 +25,7 @@ class TravelTableViewController: UIViewController {
         
         
         // Observe Results Notifications
+        //TODO: 중복 코드 줄이는 방향
         notificationToken = travels.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             switch changes {

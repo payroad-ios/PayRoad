@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--여행 이름-->
+        <scene sceneID="57G-n7-LG2">
+            <objects>
+                <viewController storyboardIdentifier="Travel" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gj9-wY-KtZ" customClass="TransactionTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RM4-Eg-1Gu"/>
+                        <viewControllerLayoutGuide type="bottom" id="a7t-0f-yvN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wY8-m7-I3k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qAj-v2-Up4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransactionCell" textLabel="xnx-Uw-s1H" detailTextLabel="4hP-74-yIU" style="IBUITableViewCellStyleValue1" id="2yQ-va-ipq">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2yQ-va-ipq" id="0Jj-OJ-pjb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xnx-Uw-s1H">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4hP-74-yIU">
+                                                    <rect key="frame" x="301" y="12" width="59" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="7ac-qW-9G9"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="wY8-m7-I3k" secondAttribute="top" id="ggO-Un-LHC"/>
+                            <constraint firstAttribute="bottom" secondItem="qAj-v2-Up4" secondAttribute="bottom" id="jqh-iq-fjy"/>
+                            <constraint firstAttribute="trailing" secondItem="qAj-v2-Up4" secondAttribute="trailing" id="lS4-BB-Whv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="여행 이름" id="k9i-xs-t2o">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="8kM-Su-BHv">
+                                <connections>
+                                    <segue destination="ylc-d5-iEM" kind="show" identifier="addTransaction" id="vld-HV-hgd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="organize" id="4P3-ku-1P4">
+                                <connections>
+                                    <segue destination="rZP-px-mfd" kind="presentation" identifier="showCurrencies" id="dn4-HD-NhX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="qAj-v2-Up4" id="Vvj-mu-HVs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8WD-7G-RXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="926" y="170"/>
+        </scene>
+        <!--Currency-->
+        <scene sceneID="2Af-aE-pEg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Currency" id="rZP-px-mfd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kOE-zx-FZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925" y="638"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VHY-Dv-Y57">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R3c-s2-qYk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w80-53-IxO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gj9-wY-KtZ" kind="relationship" relationship="rootViewController" id="vSx-dT-dQx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kig-Cg-TMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133.59999999999999" y="171.36431784107947"/>
+        </scene>
+        <!--AddTransactionViewController-->
+        <scene sceneID="hMA-Mu-QZZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddTransactionViewController" id="ylc-d5-iEM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c0r-06-Gxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1884" y="170"/>
+        </scene>
+    </scenes>
+</document>

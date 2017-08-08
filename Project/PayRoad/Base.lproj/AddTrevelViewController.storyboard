@@ -1,76 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GCl-po-igM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Travel Table View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="TravelTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="8vu-1n-wAi">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8vu-1n-wAi" id="4zR-6o-9eg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="50m-xi-2PA" kind="show" identifier="showTransactions" id="3hQ-i7-iBf"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="8GV-yg-0eI" secondAttribute="trailing" id="Ix3-3m-XhL"/>
-                            <constraint firstAttribute="bottom" secondItem="8GV-yg-0eI" secondAttribute="bottom" id="Nhk-f6-bIV"/>
-                            <constraint firstItem="8GV-yg-0eI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="m3q-7a-DTW"/>
-                            <constraint firstItem="8GV-yg-0eI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xTc-GH-nHX"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="4dE-vc-FwP">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kIF-rI-xH4">
-                            <connections>
-                                <segue destination="Hcl-Cc-P0i" kind="presentation" id="Hnw-iv-bYC"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="8GV-yg-0eI" id="fpS-rK-hf5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="916" y="691"/>
-        </scene>
-        <!--Transaction-->
-        <scene sceneID="sSH-nq-gSe">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Transaction" id="50m-xi-2PA" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="956-yE-GQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="916" y="1348"/>
-        </scene>
-        <!--Add Trevel View Controller-->
+        <!--새 여행-->
         <scene sceneID="7eH-Fd-Axa">
             <objects>
                 <viewController id="zEU-DO-42O" customClass="AddTrevelViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +62,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="RG7-3j-DYp">
+                    <navigationItem key="navigationItem" title="새 여행" id="RG7-3j-DYp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rEe-qe-gYE">
                             <connections>
                                 <action selector="cancelButtonAction:" destination="zEU-DO-42O" id="2pU-8r-gVk"/>
@@ -150,28 +85,11 @@
             <point key="canvasLocation" x="2672.8000000000002" y="689.5052473763119"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="PFe-Dl-Hap">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GCl-po-igM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5yX-6B-puh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="w0x-cF-idL"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="INh-EY-wy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="116" y="691.304347826087"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="hW4-gf-rdp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hcl-Cc-P0i" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DPF-L7-efR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

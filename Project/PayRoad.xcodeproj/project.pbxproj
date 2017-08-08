@@ -10,19 +10,22 @@
 		37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */; };
 		A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BA1F3976C300DFFADF /* AppDelegate.swift */; };
 		A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */; };
-		A74507C01F3976C300DFFADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* Main.storyboard */; };
+		A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */; };
 		A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74507C11F3976C300DFFADF /* Assets.xcassets */; };
 		A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */; };
 		A74507D61F397E4E00DFFADF /* AddTrevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */; };
 		A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D71F3984AB00DFFADF /* Transaction.swift */; };
 		A74507DA1F39878B00DFFADF /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D91F39878B00DFFADF /* Travel.swift */; };
-		A74507DC1F39887B00DFFADF /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507DB1F39887B00DFFADF /* Transaction.storyboard */; };
+		A74507DC1F39887B00DFFADF /* TransactionTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */; };
 		A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */; };
 		A74507E01F398BB800DFFADF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507DF1F398BB800DFFADF /* Currency.swift */; };
 		A74507E21F398E2200DFFADF /* AddCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */; };
 		A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */; };
-		A74507E71F3991E700DFFADF /* Currency.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507E51F3991E700DFFADF /* Currency.storyboard */; };
+		A74507E71F3991E700DFFADF /* CurrencyTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507E51F3991E700DFFADF /* CurrencyTableViewController.storyboard */; };
 		A74507E91F39966600DFFADF /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E81F39966600DFFADF /* AddTransactionViewController.swift */; };
+		A74507F11F39B29000DFFADF /* AddTrevelViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507EF1F39B29000DFFADF /* AddTrevelViewController.storyboard */; };
+		A74507F31F39B2AA00DFFADF /* AddTransactionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F21F39B2AA00DFFADF /* AddTransactionViewController.storyboard */; };
+		A74507F61F39B2C700DFFADF /* AddCurrencyViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* AddCurrencyViewController.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,20 +35,23 @@
 		A74507B71F3976C300DFFADF /* PayRoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayRoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74507BA1F3976C300DFFADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewController.swift; sourceTree = "<group>"; };
-		A74507BF1F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A74507BF1F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TravelTableViewController.storyboard; sourceTree = "<group>"; };
 		A74507C11F3976C300DFFADF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A74507C41F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A74507C61F3976C300DFFADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrevelViewController.swift; sourceTree = "<group>"; };
 		A74507D71F3984AB00DFFADF /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		A74507D91F39878B00DFFADF /* Travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
-		A74507DB1F39887B00DFFADF /* Transaction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
+		A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionTableViewController.storyboard; sourceTree = "<group>"; };
 		A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
 		A74507DF1F398BB800DFFADF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCurrencyViewController.swift; sourceTree = "<group>"; };
 		A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewController.swift; sourceTree = "<group>"; };
-		A74507E61F3991E700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Currency.storyboard; sourceTree = "<group>"; };
+		A74507E61F3991E700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyTableViewController.storyboard; sourceTree = "<group>"; };
 		A74507E81F39966600DFFADF /* AddTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
+		A74507F01F39B29000DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AddTrevelViewController.storyboard; sourceTree = "<group>"; };
+		A74507F21F39B2AA00DFFADF /* AddTransactionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddTransactionViewController.storyboard; sourceTree = "<group>"; };
+		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AddCurrencyViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,16 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				A74507BA1F3976C300DFFADF /* AppDelegate.swift */,
-				A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */,
-				A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */,
-				A74507BE1F3976C300DFFADF /* Main.storyboard */,
-				A74507DB1F39887B00DFFADF /* Transaction.storyboard */,
-				A74507E51F3991E700DFFADF /* Currency.storyboard */,
-				A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */,
-				A74507E81F39966600DFFADF /* AddTransactionViewController.swift */,
-				A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */,
-				A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */,
 				A74507D41F397C6B00DFFADF /* Model */,
+				A74507EA1F399CDB00DFFADF /* Travel */,
+				A74507EB1F399CE600DFFADF /* Transaction */,
+				A74507EC1F399CF200DFFADF /* Currency */,
 				A74507CD1F3976FF00DFFADF /* Resource */,
 			);
 			path = PayRoad;
@@ -123,6 +123,39 @@
 				A74507DF1F398BB800DFFADF /* Currency.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		A74507EA1F399CDB00DFFADF /* Travel */ = {
+			isa = PBXGroup;
+			children = (
+				A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */,
+				A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */,
+				A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */,
+				A74507EF1F39B29000DFFADF /* AddTrevelViewController.storyboard */,
+			);
+			name = Travel;
+			sourceTree = "<group>";
+		};
+		A74507EB1F399CE600DFFADF /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */,
+				A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */,
+				A74507E81F39966600DFFADF /* AddTransactionViewController.swift */,
+				A74507F21F39B2AA00DFFADF /* AddTransactionViewController.storyboard */,
+			);
+			name = Transaction;
+			sourceTree = "<group>";
+		};
+		A74507EC1F399CF200DFFADF /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */,
+				A74507E51F3991E700DFFADF /* CurrencyTableViewController.storyboard */,
+				A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */,
+				A74507F41F39B2C700DFFADF /* AddCurrencyViewController.storyboard */,
+			);
+			name = Currency;
 			sourceTree = "<group>";
 		};
 		CDA36D981A0D25526FB5B498 /* Pods */ = {
@@ -197,10 +230,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
+				A74507F11F39B29000DFFADF /* AddTrevelViewController.storyboard in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
-				A74507E71F3991E700DFFADF /* Currency.storyboard in Resources */,
-				A74507DC1F39887B00DFFADF /* Transaction.storyboard in Resources */,
-				A74507C01F3976C300DFFADF /* Main.storyboard in Resources */,
+				A74507E71F3991E700DFFADF /* CurrencyTableViewController.storyboard in Resources */,
+				A74507DC1F39887B00DFFADF /* TransactionTableViewController.storyboard in Resources */,
+				A74507F31F39B2AA00DFFADF /* AddTransactionViewController.storyboard in Resources */,
+				A74507F61F39B2C700DFFADF /* AddCurrencyViewController.storyboard in Resources */,
+				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,12 +311,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A74507BE1F3976C300DFFADF /* Main.storyboard */ = {
+		A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A74507BF1F3976C300DFFADF /* Base */,
 			);
-			name = Main.storyboard;
+			name = TravelTableViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */ = {
@@ -291,12 +327,28 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		A74507E51F3991E700DFFADF /* Currency.storyboard */ = {
+		A74507E51F3991E700DFFADF /* CurrencyTableViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A74507E61F3991E700DFFADF /* Base */,
 			);
-			name = Currency.storyboard;
+			name = CurrencyTableViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		A74507EF1F39B29000DFFADF /* AddTrevelViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74507F01F39B29000DFFADF /* Base */,
+			);
+			name = AddTrevelViewController.storyboard;
+			sourceTree = "<group>";
+		};
+		A74507F41F39B2C700DFFADF /* AddCurrencyViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74507F51F39B2C700DFFADF /* Base */,
+			);
+			name = AddCurrencyViewController.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

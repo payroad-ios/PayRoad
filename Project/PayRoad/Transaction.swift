@@ -13,6 +13,7 @@ class Transaction: Object {
     dynamic var id = UUID().uuidString
     dynamic var name = ""
     dynamic var amount: Double = 0.0
+    dynamic var currency: Currency?
     dynamic var date = Date()
     dynamic var timeZone: String = ""
     dynamic var content: String = ""

@@ -36,7 +36,7 @@ class AddCurrencyViewController: UIViewController {
         do {
             try realm.write {
                 travel.currencies.append(currency)
-                print("추가")
+                print("Currency 추가")
                 dismiss(animated: true, completion: nil)
             }
         } catch {

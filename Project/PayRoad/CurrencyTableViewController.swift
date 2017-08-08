@@ -14,6 +14,7 @@ class CurrencyTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var travel: Travel!
+    var notificationToken: NotificationToken? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,31 @@ class CurrencyTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        // Do any additional setup after loading the view.
+        // Observe Results Notifications
+        notificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+                break
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.endUpdates()
+                break
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+                break
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +62,9 @@ class CurrencyTableViewController: UIViewController {
         }
     }
 
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSource {
