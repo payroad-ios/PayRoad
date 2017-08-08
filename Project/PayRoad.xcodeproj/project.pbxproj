@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */; };
+		A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BA1F3976C300DFFADF /* AppDelegate.swift */; };
+		A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */; };
+		A74507C01F3976C300DFFADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* Main.storyboard */; };
+		A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74507C11F3976C300DFFADF /* Assets.xcassets */; };
+		A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */; };
+		A74507D61F397E4E00DFFADF /* AddTrevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */; };
+		A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D71F3984AB00DFFADF /* Transaction.swift */; };
+		A74507DA1F39878B00DFFADF /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D91F39878B00DFFADF /* Travel.swift */; };
+		A74507DC1F39887B00DFFADF /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507DB1F39887B00DFFADF /* Transaction.storyboard */; };
+		A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */; };
+		A74507E01F398BB800DFFADF /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507DF1F398BB800DFFADF /* Currency.swift */; };
+		A74507E21F398E2200DFFADF /* AddCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */; };
+		A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */; };
+		A74507E71F3991E700DFFADF /* Currency.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507E51F3991E700DFFADF /* Currency.storyboard */; };
+		A74507E91F39966600DFFADF /* AddTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507E81F39966600DFFADF /* AddTransactionViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayRoad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.release.xcconfig"; sourceTree = "<group>"; };
+		7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.debug.xcconfig"; sourceTree = "<group>"; };
+		A74507B71F3976C300DFFADF /* PayRoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayRoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A74507BA1F3976C300DFFADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewController.swift; sourceTree = "<group>"; };
+		A74507BF1F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A74507C11F3976C300DFFADF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A74507C41F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A74507C61F3976C300DFFADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrevelViewController.swift; sourceTree = "<group>"; };
+		A74507D71F3984AB00DFFADF /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		A74507D91F39878B00DFFADF /* Travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
+		A74507DB1F39887B00DFFADF /* Transaction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
+		A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewController.swift; sourceTree = "<group>"; };
+		A74507DF1F398BB800DFFADF /* Currency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCurrencyViewController.swift; sourceTree = "<group>"; };
+		A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewController.swift; sourceTree = "<group>"; };
+		A74507E61F3991E700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Currency.storyboard; sourceTree = "<group>"; };
+		A74507E81F39966600DFFADF /* AddTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransactionViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A74507B41F3976C300DFFADF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C424914B26BD5474F521B59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A74507AE1F3976C300DFFADF = {
+			isa = PBXGroup;
+			children = (
+				A74507B91F3976C300DFFADF /* PayRoad */,
+				A74507B81F3976C300DFFADF /* Products */,
+				CDA36D981A0D25526FB5B498 /* Pods */,
+				5C424914B26BD5474F521B59 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A74507B81F3976C300DFFADF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A74507B71F3976C300DFFADF /* PayRoad.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A74507B91F3976C300DFFADF /* PayRoad */ = {
+			isa = PBXGroup;
+			children = (
+				A74507BA1F3976C300DFFADF /* AppDelegate.swift */,
+				A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */,
+				A74507D51F397E4E00DFFADF /* AddTrevelViewController.swift */,
+				A74507BE1F3976C300DFFADF /* Main.storyboard */,
+				A74507DB1F39887B00DFFADF /* Transaction.storyboard */,
+				A74507E51F3991E700DFFADF /* Currency.storyboard */,
+				A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */,
+				A74507E81F39966600DFFADF /* AddTransactionViewController.swift */,
+				A74507E31F39905900DFFADF /* CurrencyTableViewController.swift */,
+				A74507E11F398E2200DFFADF /* AddCurrencyViewController.swift */,
+				A74507D41F397C6B00DFFADF /* Model */,
+				A74507CD1F3976FF00DFFADF /* Resource */,
+			);
+			path = PayRoad;
+			sourceTree = "<group>";
+		};
+		A74507CD1F3976FF00DFFADF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A74507C11F3976C300DFFADF /* Assets.xcassets */,
+				A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */,
+				A74507C61F3976C300DFFADF /* Info.plist */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		A74507D41F397C6B00DFFADF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A74507D91F39878B00DFFADF /* Travel.swift */,
+				A74507D71F3984AB00DFFADF /* Transaction.swift */,
+				A74507DF1F398BB800DFFADF /* Currency.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		CDA36D981A0D25526FB5B498 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */,
+				53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A74507B61F3976C300DFFADF /* PayRoad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A74507C91F3976C300DFFADF /* Build configuration list for PBXNativeTarget "PayRoad" */;
+			buildPhases = (
+				757D2B083F5008C88442AB10 /* [CP] Check Pods Manifest.lock */,
+				A74507B31F3976C300DFFADF /* Sources */,
+				A74507B41F3976C300DFFADF /* Frameworks */,
+				A74507B51F3976C300DFFADF /* Resources */,
+				2478FBA26A58B5BA478048E9 /* [CP] Embed Pods Frameworks */,
+				94C20AD4755C436885F9942C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PayRoad;
+			productName = PayRoad;
+			productReference = A74507B71F3976C300DFFADF /* PayRoad.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A74507AF1F3976C300DFFADF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = REFUEL;
+				TargetAttributes = {
+					A74507B61F3976C300DFFADF = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A74507B21F3976C300DFFADF /* Build configuration list for PBXProject "PayRoad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A74507AE1F3976C300DFFADF;
+			productRefGroup = A74507B81F3976C300DFFADF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A74507B61F3976C300DFFADF /* PayRoad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A74507B51F3976C300DFFADF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
+				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
+				A74507E71F3991E700DFFADF /* Currency.storyboard in Resources */,
+				A74507DC1F39887B00DFFADF /* Transaction.storyboard in Resources */,
+				A74507C01F3976C300DFFADF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2478FBA26A58B5BA478048E9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		757D2B083F5008C88442AB10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		94C20AD4755C436885F9942C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A74507B31F3976C300DFFADF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
+				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
+				A74507D61F397E4E00DFFADF /* AddTrevelViewController.swift in Sources */,
+				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
+				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
+				A74507DA1F39878B00DFFADF /* Travel.swift in Sources */,
+				A74507E21F398E2200DFFADF /* AddCurrencyViewController.swift in Sources */,
+				A74507E91F39966600DFFADF /* AddTransactionViewController.swift in Sources */,
+				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
+				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A74507BE1F3976C300DFFADF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74507BF1F3976C300DFFADF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74507C41F3976C300DFFADF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A74507E51F3991E700DFFADF /* Currency.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A74507E61F3991E700DFFADF /* Base */,
+			);
+			name = Currency.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A74507C71F3976C300DFFADF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A74507C81F3976C300DFFADF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A74507CA1F3976C300DFFADF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PayRoad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A74507CB1F3976C300DFFADF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PayRoad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A74507B21F3976C300DFFADF /* Build configuration list for PBXProject "PayRoad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A74507C71F3976C300DFFADF /* Debug */,
+				A74507C81F3976C300DFFADF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A74507C91F3976C300DFFADF /* Build configuration list for PBXNativeTarget "PayRoad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A74507CA1F3976C300DFFADF /* Debug */,
+				A74507CB1F3976C300DFFADF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A74507AF1F3976C300DFFADF /* Project object */;
+}
