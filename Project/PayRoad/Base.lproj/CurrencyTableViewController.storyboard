@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9DK-q4-WR7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9DK-q4-WR7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,7 +63,7 @@
                     <navigationItem key="navigationItem" title="통화 관리" id="YRp-bv-Ojc">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qn5-hy-xsu">
                             <connections>
-                                <action selector="cancelButtonAction:" destination="HR1-Bc-H6Q" id="sR0-sS-ArT"/>
+                                <action selector="cancelButtonDidTap:" destination="HR1-Bc-H6Q" id="psJ-5D-M4O"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YI7-mP-KAO">
@@ -78,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXc-3O-AiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2673" y="1511"/>
+            <point key="canvasLocation" x="2554" y="1496"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gRk-l6-lsb">
@@ -98,13 +98,13 @@
             </objects>
             <point key="canvasLocation" x="1692" y="1496"/>
         </scene>
-        <!--AddCurrencyViewController-->
+        <!--CurrencyEditorViewController-->
         <scene sceneID="wN2-gb-Zed">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddCurrencyViewController" id="2WP-aE-6fY" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="CurrencyEditorViewController" id="2WP-aE-6fY" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ly7-uo-nFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3646" y="1511"/>
+            <point key="canvasLocation" x="3484" y="1495"/>
         </scene>
     </scenes>
 </document>

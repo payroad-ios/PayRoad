@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--새 여행-->
         <scene sceneID="7eH-Fd-Axa">
             <objects>
-                <viewController id="zEU-DO-42O" customClass="AddTrevelViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zEU-DO-42O" customClass="TravelEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wxi-0f-Iaa"/>
                         <viewControllerLayoutGuide type="bottom" id="g1C-5N-GT2"/>
@@ -65,12 +69,12 @@
                     <navigationItem key="navigationItem" title="새 여행" id="RG7-3j-DYp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rEe-qe-gYE">
                             <connections>
-                                <action selector="cancelButtonAction:" destination="zEU-DO-42O" id="2pU-8r-gVk"/>
+                                <action selector="cancelButtonDidTap:" destination="zEU-DO-42O" id="Q0b-pf-YLH"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="9o9-hC-WxP">
                             <connections>
-                                <action selector="saveButtonAction:" destination="zEU-DO-42O" id="77q-Ik-EWK"/>
+                                <action selector="saveButtonDidTap:" destination="zEU-DO-42O" id="unk-D2-Nmf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -89,7 +93,6 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hcl-Cc-P0i" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DPF-L7-efR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

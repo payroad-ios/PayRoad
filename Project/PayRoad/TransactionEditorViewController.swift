@@ -7,16 +7,10 @@
 //
 
 import UIKit
+
 import RealmSwift
 
-class AddTransactionViewController: UIViewController {
-    
-    lazy var pickerView: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        return pickerView
-    }()
+class TransactionEditorViewController: UIViewController {
     
     let realm = try! Realm()
     
@@ -26,6 +20,13 @@ class AddTransactionViewController: UIViewController {
     
     var travel: Travel!
     var currency: Currency!
+    
+    lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +38,6 @@ class AddTransactionViewController: UIViewController {
         }
         
         currencyTextField.inputView = pickerView
-        
-        for currency in travel.currencies {
-            print("\(currency.code) : \(currency.rate)")
-        }
         
         let toolbar = UIToolbar()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
@@ -56,12 +53,15 @@ class AddTransactionViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @IBAction func saveButtonAction(_ sender: Any) {
+    @IBAction func saveButtonDidTap(_ sender: Any) {
         let transaction = Transaction()
         
         guard let name = nameTextField.text,
             let amountText = amountTextField.text,
-            let amount = Double(amountText) else { return }
+            let amount = Double(amountText)
+        else {
+            return
+        }
         
         transaction.name = name
         transaction.amount = amount
@@ -74,18 +74,19 @@ class AddTransactionViewController: UIViewController {
                 dismiss(animated: true, completion: nil)
             }
         } catch {
+            // Alert 위해 남겨둠
             print(error)
         }
         
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension AddTransactionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import RealmSwift
 
 class TravelTableViewController: UIViewController {
@@ -22,7 +23,6 @@ class TravelTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
         
         // Observe Results Notifications
         //TODO: 중복 코드 줄이는 방향
@@ -54,8 +54,8 @@ class TravelTableViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTransactions" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let transactionTableViewController = segue.destination as! TransactionTableViewController
+            if let indexPath = tableView.indexPathForSelectedRow,
+                let transactionTableViewController = segue.destination as? TransactionTableViewController {
                 transactionTableViewController.travel = travels[indexPath.row]
             }
         }

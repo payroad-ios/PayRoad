@@ -6,7 +6,6 @@
 //  Copyright © 2017년 REFUEL. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 class Transaction: Object {

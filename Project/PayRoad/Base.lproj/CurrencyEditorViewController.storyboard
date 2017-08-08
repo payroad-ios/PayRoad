@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJ0-Uc-ksM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJ0-Uc-ksM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--새 통화-->
         <scene sceneID="GGL-dR-Lmg">
             <objects>
-                <viewController id="F8w-PZ-Zlp" customClass="AddCurrencyViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F8w-PZ-Zlp" customClass="CurrencyEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gQK-J9-JUh"/>
                         <viewControllerLayoutGuide type="bottom" id="gC5-Cd-lCL"/>
@@ -51,12 +55,12 @@
                     <navigationItem key="navigationItem" title="새 통화" id="ifX-ax-57W">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="b2o-ZQ-5vz">
                             <connections>
-                                <action selector="cancelButtonAction:" destination="F8w-PZ-Zlp" id="Hg1-Ve-p0g"/>
+                                <action selector="cancelButtonDidTap:" destination="F8w-PZ-Zlp" id="hJl-YA-dVZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="xoa-bl-qU8">
                             <connections>
-                                <action selector="saveButtonAction:" destination="F8w-PZ-Zlp" id="JOm-4Q-QwU"/>
+                                <action selector="saveButtonDidTap:" destination="F8w-PZ-Zlp" id="pAb-AG-YmN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -74,7 +78,6 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJ0-Uc-ksM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="woN-cp-dyl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

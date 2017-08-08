@@ -7,14 +7,15 @@
 //
 
 import UIKit
+
 import RealmSwift
 
 class TransactionTableViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var notificationToken: NotificationToken? = nil
     var travel: Travel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,24 +50,25 @@ class TransactionTableViewController: UIViewController {
         }
     }
     
+    //TODO: 스트링 길다. 나중에 자릅시다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCurrencies" {
-            let navigationController = segue.destination as! UINavigationController
-            let currencyTableViewController = navigationController.topViewController as! CurrencyTableViewController
+            guard let navigationController = segue.destination as? UINavigationController,
+                let currencyTableViewController = navigationController.topViewController as? CurrencyTableViewController
+            else {
+                return
+            }
+            
             currencyTableViewController.travel = travel
         } else if segue.identifier == "addTransaction" {
-            let navigationController = segue.destination as! UINavigationController
-            let addTransactionTableViewController = navigationController.topViewController as! AddTransactionViewController
+            guard let navigationController = segue.destination as? UINavigationController,
+                let addTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
+            else {
+                return
+            }
             addTransactionTableViewController.travel = travel
         }
     }
-    
-//    dynamic var id = UUID().uuidString
-//    dynamic var name = ""
-//    dynamic var amount: Double = 0.0
-//    dynamic var date = Date()
-//    dynamic var timeZone: String = ""
-//    dynamic var content: String = ""
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
