@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="926" y="170"/>
         </scene>
-        <!--Currency-->
+        <!--CurrencyTableViewController-->
         <scene sceneID="2Af-aE-pEg">
             <objects>
-                <viewControllerPlaceholder storyboardName="Currency" id="rZP-px-mfd" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="CurrencyTableViewController" id="rZP-px-mfd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOE-zx-FZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="925" y="638"/>
@@ -109,10 +109,10 @@
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="171.36431784107947"/>
         </scene>
-        <!--AddTransactionViewController-->
+        <!--TransactionEditorViewController-->
         <scene sceneID="hMA-Mu-QZZ">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddTransactionViewController" id="ylc-d5-iEM" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="TransactionEditorViewController" id="ylc-d5-iEM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0r-06-Gxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1884" y="170"/>

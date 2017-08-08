@@ -7,9 +7,10 @@
 //
 
 import UIKit
+
 import RealmSwift
 
-class AddTrevelViewController: UIViewController {
+class TravelEditorViewController: UIViewController {
     let pickerView1: UIDatePicker = {
         let pickerView = UIDatePicker()
         pickerView.datePickerMode = .date
@@ -32,7 +33,7 @@ class AddTrevelViewController: UIViewController {
     }()
     
     let realm = try! Realm()
-
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
@@ -70,25 +71,23 @@ class AddTrevelViewController: UIViewController {
         endDateTextField.text = dateFormatter.string(from: selectedYear)
         self.view.endEditing(true)
     }
-    @IBAction func saveButtonAction(_ sender: Any) {
+    @IBAction func saveButtonDidTap(_ sender: Any) {
         let travel = Travel()
         
         travel.name = titleTextField.text!
         travel.starteDate = pickerView1.date
         travel.endDate = pickerView2.date
         
-        do {
-            try? realm.write {
-                realm.add(travel)
-                print("여행생성")
-                dump(travel)
-                dismiss(animated: true, completion: nil)
-            }
+        try? realm.write {
+            realm.add(travel)
+            print("여행생성")
+            dump(travel)
+            dismiss(animated: true, completion: nil)
         }
     }
     
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+
 import RealmSwift
 
-class AddCurrencyViewController: UIViewController {
+class CurrencyEditorViewController: UIViewController {
     
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var rateTextField: UITextField!
@@ -21,8 +22,7 @@ class AddCurrencyViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
-    @IBAction func saveButtonAction(_ sender: Any) {
+    @IBAction func saveButtonDidTap(_ sender: Any) {
         let currency = Currency()
         
         
@@ -44,7 +44,7 @@ class AddCurrencyViewController: UIViewController {
         }
     }
     
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     

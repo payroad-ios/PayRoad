@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import RealmSwift
 
 class CurrencyTableViewController: UIViewController {
@@ -48,21 +49,16 @@ class CurrencyTableViewController: UIViewController {
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addCurrency" {
-            let navigationController = segue.destination as! UINavigationController
-            let addCurrencyTableViewController = navigationController.topViewController as! AddCurrencyViewController
+        if segue.identifier == "addCurrency",
+            let navigationController = segue.destination as? UINavigationController,
+            let addCurrencyTableViewController = navigationController.topViewController as? CurrencyEditorViewController {
             addCurrencyTableViewController.travel = travel
         }
     }
 
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
