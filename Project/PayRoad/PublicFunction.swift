@@ -39,6 +39,7 @@ public func tableViewNotificationToken<T>(for tableView: UITableView, list: List
         }
     }
     
+    //TODO: 좀 더 고민이 필요함.
     if list == nil {
         notificationToken = results!._addNotificationBlock(closure)
     } else {

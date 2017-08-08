@@ -17,7 +17,6 @@ class TravelTableViewController: UIViewController {
     }()
     var notificationToken: NotificationToken? = nil
 
-
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ class TravelTableViewController: UIViewController {
 extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = travels[indexPath.row].name
         
         return cell

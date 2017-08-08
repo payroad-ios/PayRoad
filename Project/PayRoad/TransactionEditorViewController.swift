@@ -46,7 +46,6 @@ class TransactionEditorViewController: UIViewController {
         currencyTextField.inputView = pickerView
     }
 
-    //TODO: DatePicker 코드 중복 문제 해결과제
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
