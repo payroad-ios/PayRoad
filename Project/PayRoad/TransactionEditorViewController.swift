@@ -12,8 +12,6 @@ import RealmSwift
 
 class TransactionEditorViewController: UIViewController {
     
-    let realm = try! Realm()
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!

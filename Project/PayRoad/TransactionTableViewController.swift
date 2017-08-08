@@ -12,9 +12,10 @@ import RealmSwift
 
 class TransactionTableViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    var notificationToken: NotificationToken? = nil
     var travel: Travel!
+    var notificationToken: NotificationToken? = nil
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,30 +25,7 @@ class TransactionTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
-            guard let tableView = self?.tableView else { return }
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                tableView.reloadData()
-                break
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the UITableView
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.endUpdates()
-                break
-            case .error(let error):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(error)")
-                break
-            }
-        }
+        notificationToken = tableViewNotificationToken(for: tableView, list: travel.transactions)
     }
     
     //TODO: 스트링 길다. 나중에 자릅시다.
@@ -81,7 +59,11 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         
         let transaction = travel.transactions[indexPath.row]
         cell.textLabel?.text = transaction.name
-        cell.detailTextLabel?.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+//        cell.detailTextLabel?.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        
+        let attributedString = NSMutableAttributedString(string: "\(transaction.currency?.code ?? "") \(transaction.amount)")
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSRange(location: 0, length: 3))
+        cell.detailTextLabel?.attributedText = attributedString
         
         return cell
     }

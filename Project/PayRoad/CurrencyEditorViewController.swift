@@ -12,11 +12,11 @@ import RealmSwift
 
 class CurrencyEditorViewController: UIViewController {
     
+    var travel: Travel!
+    
     @IBOutlet weak var codeTextField: UITextField!
     @IBOutlet weak var rateTextField: UITextField!
     
-    var travel: Travel!
-    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
