@@ -11,11 +11,12 @@ import UIKit
 import RealmSwift
 
 class TravelTableViewController: UIViewController {
-    var notificationToken: NotificationToken? = nil
+    
     let travels: Results<Travel> = {
         let realm = try! Realm()
         return realm.objects(Travel.self)
     }()
+    var notificationToken: NotificationToken? = nil
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -24,32 +25,7 @@ class TravelTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Observe Results Notifications
-        //TODO: 중복 코드 줄이는 방향
-        notificationToken = travels.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
-            guard let tableView = self?.tableView else { return }
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                tableView.reloadData()
-                break
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the UITableView
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.endUpdates()
-                break
-            case .error(let error):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(error)")
-                break
-            }
-        }
+        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,7 +46,7 @@ class TravelTableViewController: UIViewController {
 extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = travels[indexPath.row].name
         
         return cell

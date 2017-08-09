@@ -12,11 +12,11 @@ import RealmSwift
 
 class TransactionEditorViewController: UIViewController {
     
-    let realm = try! Realm()
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
+    
+    let realm = try! Realm()
     
     var travel: Travel!
     var currency: Currency!
@@ -48,7 +48,6 @@ class TransactionEditorViewController: UIViewController {
         currencyTextField.inputView = pickerView
     }
 
-    //TODO: DatePicker 코드 중복 문제 해결과제
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
