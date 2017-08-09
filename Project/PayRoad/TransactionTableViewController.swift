@@ -17,6 +17,10 @@ class TransactionTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var dateDictionary = [String : [Transaction]]()
+    var dateList = [String]()
+    let dateFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +29,13 @@ class TransactionTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.transactions)
+        initDataStructures()
+        
+        notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            self?.initDataStructures()
+            tableView.reloadData()
+        }
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -62,19 +72,58 @@ class TransactionTableViewController: UIViewController {
             addTransactionTableViewController.travel = travel
         }
     }
+    
+    func initDataStructures() {
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        dateDictionary = [String : [Transaction]]()
+        dateList = [String]()
+        
+        for transaction in travel.transactions {
+            let dateString = dateFormatter.string(from: transaction.date)
+            
+            if dateDictionary[dateString] == nil {
+                dateDictionary[dateString] = []
+            }
+            
+            if !dateList.contains(dateString) {
+                dateList.append(dateString)
+            }
+            
+            dateDictionary[dateString]?.append(transaction)
+        }
+        
+        //TODO: String sort인데, Date 포맷에 종속적이라 나중에 바꿀 필요 있음.
+        dateList.sort(by: <)
+    }
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return travel.transactions.count
+        let dateString = dateList[section]
+        
+        guard let transactions = dateDictionary[dateString] else {
+            return 0
+        }
+        
+        return transactions.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dateList[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let transaction = travel.transactions[indexPath.row]
+        
+        let dateString = dateList[indexPath.section]
+        
+        guard let transaction = dateDictionary[dateString]?[indexPath.row] else {
+            return cell
+        }
+        
         cell.textLabel?.text = transaction.name
-//        cell.detailTextLabel?.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
         
         //TODO: 하나의 Label에 String 속성 변경하는 코드 (통화 3글자 색상 변경) -> 이 코드는 UITableViewCell이 별도의 클래스로 지정될 때 그 클래스의 내부에 선언
         let attributedString = NSMutableAttributedString(string: "\(transaction.currency?.code ?? "") \(transaction.amount)")
@@ -82,5 +131,9 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         cell.detailTextLabel?.attributedText = attributedString
         
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dateList.count
     }
 }
