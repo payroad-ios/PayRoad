@@ -10,7 +10,7 @@ import UIKit
 
 import RealmSwift
 
-class CurrencyEditorViewController: UIViewController {
+class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewControllerDelegate {
     
     let realm = try! Realm()
     
@@ -49,4 +49,14 @@ class CurrencyEditorViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func currencySelectResponse(code: String) {
+        codeTextField.text = code
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectCurrencyCode" {
+            let currencySelectTableViewController = segue.destination as! CurrencySelectTableViewController
+            currencySelectTableViewController.delegate = self
+        }
+    }
 }
