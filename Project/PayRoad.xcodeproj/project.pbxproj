@@ -27,6 +27,8 @@
 		A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */; };
 		A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */; };
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
+		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
+		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
 		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
+		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
+		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
 		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +165,8 @@
 				A74507E51F3991E700DFFADF /* CurrencyTableViewController.storyboard */,
 				A74507E11F398E2200DFFADF /* CurrencyEditorViewController.swift */,
 				A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */,
+				B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */,
+				B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */,
 			);
 			name = Currency;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 				A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */,
 				A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */,
 				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
+				B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,9 +273,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -281,13 +293,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PayRoad-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94C20AD4755C436885F9942C /* [CP] Copy Pods Resources */ = {
@@ -324,6 +339,7 @@
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
 				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
 				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
+				B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */,
 				E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
