@@ -68,9 +68,9 @@
                                     <segue destination="ylc-d5-iEM" kind="show" identifier="addTransaction" id="vld-HV-hgd"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="organize" id="4P3-ku-1P4">
+                            <barButtonItem systemItem="edit" id="4P3-ku-1P4">
                                 <connections>
-                                    <segue destination="rZP-px-mfd" kind="presentation" identifier="showCurrencies" id="dn4-HD-NhX"/>
+                                    <action selector="editButtonDidTap:" destination="gj9-wY-KtZ" id="AlR-hT-pnR"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -82,14 +82,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8WD-7G-RXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="926" y="170"/>
-        </scene>
-        <!--CurrencyTableViewController-->
-        <scene sceneID="2Af-aE-pEg">
-            <objects>
-                <viewControllerPlaceholder storyboardName="CurrencyTableViewController" id="rZP-px-mfd" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kOE-zx-FZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="925" y="638"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VHY-Dv-Y57">
