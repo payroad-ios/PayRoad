@@ -28,6 +28,29 @@ class TransactionTableViewController: UIViewController {
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.transactions)
     }
     
+    @IBAction func editButtonDidTap(_ sender: Any) {
+        let moreOptionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let travelEdit = UIAlertAction(title: "여행 수정", style: .default) { _ in
+            print("여행 수정")
+            //TODO: present(여행 수정 ViewController)
+        }
+        
+        let currencySetting = UIAlertAction(title: "통화 설정", style: .default) { [unowned self] _ in
+            let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
+            let navigationController = UINavigationController(rootViewController: currencyTableViewController)
+            currencyTableViewController.travel = self.travel
+
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        moreOptionAlertController.addAction(travelEdit)
+        moreOptionAlertController.addAction(currencySetting)
+        moreOptionAlertController.addAction(cancel)
+        present(moreOptionAlertController, animated: true, completion: nil)
+    }
+    
     //TODO: 스트링 길다. 나중에 자릅시다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCurrencies" {
@@ -36,8 +59,8 @@ class TransactionTableViewController: UIViewController {
             else {
                 return
             }
-            
             currencyTableViewController.travel = travel
+            
         } else if segue.identifier == "addTransaction" {
             guard let navigationController = segue.destination as? UINavigationController,
                 let addTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
