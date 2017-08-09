@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9DK-q4-WR7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9DK-q4-WR7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--통화 관리-->
         <scene sceneID="k3e-6o-atd">
             <objects>
-                <viewController id="HR1-Bc-H6Q" customClass="CurrencyTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrencyTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HR1-Bc-H6Q" customClass="CurrencyTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xhG-4Z-VS2"/>
                         <viewControllerLayoutGuide type="bottom" id="XB4-G4-M3e"/>
@@ -83,6 +83,7 @@
         <!--Navigation Controller-->
         <scene sceneID="gRk-l6-lsb">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2lp-hA-3fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9DK-q4-WR7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wy0-Fj-aAJ">
@@ -94,7 +95,6 @@
                         <segue destination="HR1-Bc-H6Q" kind="relationship" relationship="rootViewController" id="12Z-OU-juZ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2lp-hA-3fb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1692" y="1496"/>
         </scene>
