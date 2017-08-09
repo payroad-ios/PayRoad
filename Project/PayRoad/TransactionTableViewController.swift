@@ -53,15 +53,7 @@ class TransactionTableViewController: UIViewController {
     
     //TODO: 스트링 길다. 나중에 자릅시다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showCurrencies" {
-            guard let navigationController = segue.destination as? UINavigationController,
-                let currencyTableViewController = navigationController.topViewController as? CurrencyTableViewController
-            else {
-                return
-            }
-            currencyTableViewController.travel = travel
-            
-        } else if segue.identifier == "addTransaction" {
+        if segue.identifier == "addTransaction" {
             guard let navigationController = segue.destination as? UINavigationController,
                 let addTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
             else {
