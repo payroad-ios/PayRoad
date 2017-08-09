@@ -16,6 +16,8 @@ class TransactionEditorViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
     
+    let realm = try! Realm()
+    
     var travel: Travel!
     var currency: Currency!
     

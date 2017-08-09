@@ -22,7 +22,7 @@ class CurrencyTableViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        notificationToken = tableViewNotificationToken(for: tableView, list: travel.currencies)
+        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.currencies)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

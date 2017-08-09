@@ -26,8 +26,8 @@
 		A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507EF1F39B29000DFFADF /* TravelEditorViewController.storyboard */; };
 		A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */; };
 		A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */; };
-		A74507F91F3A218300DFFADF /* PublicFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507F81F3A218300DFFADF /* PublicFunction.swift */; };
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
+		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,8 +54,8 @@
 		A74507F01F39B29000DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TravelEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyEditorViewController.storyboard; sourceTree = "<group>"; };
-		A74507F81F3A218300DFFADF /* PublicFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicFunction.swift; sourceTree = "<group>"; };
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
+		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,7 @@
 		A74507F71F3A217400DFFADF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				A74507F81F3A218300DFFADF /* PublicFunction.swift */,
+				E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
 			);
 			name = Extension;
@@ -310,7 +310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
-				A74507F91F3A218300DFFADF /* PublicFunction.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
 				A74507D61F397E4E00DFFADF /* TravelEditorViewController.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
@@ -321,6 +320,7 @@
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
 				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
+				E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

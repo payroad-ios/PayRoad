@@ -25,7 +25,7 @@ class TransactionTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        notificationToken = tableViewNotificationToken(for: tableView, list: travel.transactions)
+        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.transactions)
     }
     
     //TODO: 스트링 길다. 나중에 자릅시다.

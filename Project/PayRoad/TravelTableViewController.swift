@@ -13,6 +13,7 @@ import RealmSwift
 class TravelTableViewController: UIViewController {
     
     let travels: Results<Travel> = {
+        let realm = try! Realm()
         return realm.objects(Travel.self)
     }()
     var notificationToken: NotificationToken? = nil
@@ -24,7 +25,7 @@ class TravelTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        notificationToken = tableViewNotificationToken(for: tableView, results: travels)
+        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
