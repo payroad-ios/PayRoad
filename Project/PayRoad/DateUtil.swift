@@ -9,28 +9,34 @@
 import UIKit
 
 struct DateUtil {
-    private static let defaultFormat = "YYYY월 MM월 dd일 HH:mm:ss"
-    
-    static let defaultFormatter: DateFormatter = {
+    static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = defaultFormat
-        //dateFormatter.locale = Locale(identifier: "ko_KR")
-        
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+
         return dateFormatter
     }()
     
-    static func dateKeyFromDate(from date: Date) -> Date {
-        let dateFormatter = defaultFormatter
-        //dateFormatter.timeZone = TimeZone(identifier: "GMT")
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-        print("aa \(dateFormatter.string(from: date))")
+    //TODO: 함수명 변경해야될것 같음
+    static func dateKeyFromDate(from date: Date) -> Date? {
+        let df: DateFormatter = {
+            let df = DateFormatter()
+            df.dateStyle = .medium
+            df.timeStyle = .none
+            
+            return df
+        }()
         
-        //print(dateFormatter.string(from: Date()))
-        guard let dateKey = dateFormatter.date(from: dateFormatter.string(from: date)) else {
-            return Date(timeIntervalSince1970: 0)
+        df.timeZone = TimeZone.current
+        let dateString = df.string(from: date)
+        
+        df.timeZone = TimeZone(identifier: "UTC")
+        df.date(from: dateString)
+        
+        guard let dateKey = df.date(from: dateString) else {
+            return nil
         }
         
-        print("bb \(dateKey)")
         return dateKey
     }
 }

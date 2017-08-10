@@ -13,7 +13,6 @@ extension UITextField {
         let pickerView: UIDatePicker = {
             let pickerView = UIDatePicker()
             pickerView.datePickerMode = .date
-            pickerView.locale = Locale(identifier: "ko_KR")
             return pickerView
         }()
         
@@ -33,7 +32,7 @@ extension UITextField {
     @objc private func doneDidPressed(_ sender: UIBarButtonItem) {
         guard let targetTextField = sender.target as? UITextField,
             let inputDatePicker = targetTextField.inputView as? UIDatePicker else { return }
-        targetTextField.text = DateUtil.defaultFormatter.string(from: inputDatePicker.date)
+        targetTextField.text = DateUtil.dateFormatter.string(from: inputDatePicker.date)
         endEditing(true)
     }
 }

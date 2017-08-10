@@ -77,7 +77,10 @@ class TransactionTableViewController: UIViewController {
         dateList = [Date]()
         
         for transaction in travel.transactions {
-            let dateKey = DateUtil.dateKeyFromDate(from: transaction.date)
+            guard let dateKey = DateUtil.dateKeyFromDate(from: transaction.date) else {
+                print("dateKey로 변환 실패 : \(transaction)")
+                continue
+            }
             
             if dateDictionary[dateKey] == nil {
                 dateDictionary[dateKey] = []
@@ -123,7 +126,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         
-        return DateUtil.defaultFormatter.string(from: dateList[section])
+        return DateUtil.dateFormatter.string(from: dateList[section])
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
