@@ -41,7 +41,15 @@ class TransactionTableViewController: UIViewController {
         let moreOptionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let travelEdit = UIAlertAction(title: "여행 수정", style: .default) { _ in
             print("여행 수정")
+            
             //TODO: present(여행 수정 ViewController)
+            let travelEditorViewController = UIStoryboard.loadViewController(from: .TravelEditorView, ID: "TravelEditorViewController") as! TravelEditorViewController
+            travelEditorViewController.originTravel = self.travel
+            travelEditorViewController.mode = .edit
+            
+            let navigationController = UINavigationController(rootViewController: travelEditorViewController)
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
         
         let currencySetting = UIAlertAction(title: "통화 설정", style: .default) { [unowned self] _ in

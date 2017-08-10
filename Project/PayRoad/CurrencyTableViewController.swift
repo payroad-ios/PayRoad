@@ -22,6 +22,7 @@ class CurrencyTableViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.currencies)
     }
     

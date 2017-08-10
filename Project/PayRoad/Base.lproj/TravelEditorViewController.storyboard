@@ -12,7 +12,7 @@
         <!--새 여행-->
         <scene sceneID="7eH-Fd-Axa">
             <objects>
-                <viewController id="zEU-DO-42O" customClass="TravelEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TravelEditorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zEU-DO-42O" customClass="TravelEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wxi-0f-Iaa"/>
                         <viewControllerLayoutGuide type="bottom" id="g1C-5N-GT2"/>

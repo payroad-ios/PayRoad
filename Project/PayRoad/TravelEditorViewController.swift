@@ -12,17 +12,41 @@ import RealmSwift
 
 class TravelEditorViewController: UIViewController {
     
+    enum Mode {
+        case new
+        case edit
+    }
+    
+    // MARK: - Properties
+    var originTravel: Travel!
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
     
     let realm = try! Realm()
     
+    var mode: Mode = .new {
+        didSet {
+            self.adjustViewMode()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         startDateTextField.inputDatePicker()
         endDateTextField.inputDatePicker()
+        
+        guard let startDate = originTravel?.starteDate,
+            let endDate = originTravel?.endDate
+            else {
+                return
+        }
+        
+        titleTextField?.text = originTravel?.name
+        startDateTextField?.text = DateUtil.dateFormatter.string(from: startDate)
+        endDateTextField?.text = DateUtil.dateFormatter.string(from: endDate)
     }
     
     @IBAction func saveButtonDidTap(_ sender: Any) {
@@ -53,4 +77,39 @@ class TravelEditorViewController: UIViewController {
     
 }
 
+
+extension TravelEditorViewController {
+    fileprivate func adjustViewMode() {
+        switch self.mode {
+        case .new:
+            break
+        case .edit:
+            self.navigationItem.title = self.originTravel?.name
+            
+            let editBarButtonItem: UIBarButtonItem
+            let selector = #selector(endEdit)
+            editBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: selector)
+            self.navigationItem.rightBarButtonItem = editBarButtonItem
+        }
+    }
+    
+    func endEdit() {
+        defer {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        guard let name = titleTextField?.text,
+            let startDateText = startDateTextField?.text,
+            let startDate = DateUtil.dateFormatter.date(from: startDateText),
+            let endDateText = endDateTextField?.text,
+            let endDate = DateUtil.dateFormatter.date(from: endDateText)
+        else {
+            return
+        }
+        
+        originTravel?.name = name
+        originTravel?.starteDate = startDate
+        originTravel?.endDate = endDate
+    }
+}
 
