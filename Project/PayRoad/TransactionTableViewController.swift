@@ -17,9 +17,8 @@ class TransactionTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var dateDictionary = [String : [Transaction]]()
-    var dateList = [String]()
-    let dateFormatter = DateFormatter()
+    var dateDictionary = [Date : [Transaction]]()
+    var dateList = [Date]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,23 +73,38 @@ class TransactionTableViewController: UIViewController {
     }
     
     func initDataStructures() {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        dateDictionary = [String : [Transaction]]()
-        dateList = [String]()
+        dateDictionary = [Date : [Transaction]]()
+        dateList = [Date]()
         
         for transaction in travel.transactions {
-            let dateString = dateFormatter.string(from: transaction.date)
-            
-            if dateDictionary[dateString] == nil {
-                dateDictionary[dateString] = []
+            guard let dateKey = DateUtil.dateKeyFromDate(from: transaction.date) else {
+                print("dateKey로 변환 실패 : \(transaction)")
+                continue
             }
             
-            if !dateList.contains(dateString) {
-                dateList.append(dateString)
+            if dateDictionary[dateKey] == nil {
+                dateDictionary[dateKey] = []
             }
             
-            dateDictionary[dateString]?.append(transaction)
+            if !dateList.contains(dateKey) {
+                dateList.append(dateKey)
+            }
+            
+            dateDictionary[dateKey]?.append(transaction)
+            
+//            let dateString = DateUtil.defaultFormatter.string(from: transaction.date)
+//            
+//            print(DateUtil.dateKeyFromDate(from: transaction.date))
+//            
+//            if dateDictionary[dateString] == nil {
+//                dateDictionary[dateString] = []
+//            }
+//            
+//            if !dateList.contains(dateString) {
+//                dateList.append(dateString)
+//            }
+//            
+//            dateDictionary[dateString]?.append(transaction)
         }
         
         //TODO: String sort인데, Date 포맷에 종속적이라 나중에 바꿀 필요 있음.
@@ -110,7 +124,9 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dateList[section]
+        
+        
+        return DateUtil.dateFormatter.string(from: dateList[section])
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
