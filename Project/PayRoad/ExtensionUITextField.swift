@@ -31,16 +31,9 @@ extension UITextField {
     }
     
     @objc private func doneDidPressed(_ sender: UIBarButtonItem) {
-        let dateFormatter: DateFormatter = {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY년 MM월 dd일"
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            return dateFormatter
-        }()
-        
         guard let targetTextField = sender.target as? UITextField,
             let inputDatePicker = targetTextField.inputView as? UIDatePicker else { return }
-        targetTextField.text = dateFormatter.string(from: inputDatePicker.date)
+        targetTextField.text = DateUtil.defaultFormatter.string(from: inputDatePicker.date)
         endEditing(true)
     }
 }
