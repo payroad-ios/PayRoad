@@ -32,6 +32,13 @@ class TravelEditorViewController: UIViewController {
         travel.starteDate = (startDateTextField.inputView as? UIDatePicker)!.date
         travel.endDate = (endDateTextField.inputView as? UIDatePicker)!.date
         
+        if let currencyCode = Locale.current.currencyCode {
+            let currency = Currency()
+            currency.code = currencyCode
+            currency.rate = 1.0
+            travel.currencies.append(currency)
+        }
+        
         try? realm.write {
             realm.add(travel)
             print("여행생성")
