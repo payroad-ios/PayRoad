@@ -13,8 +13,19 @@ class Transaction: Object {
     dynamic var name = ""
     dynamic var amount: Double = 0.0
     dynamic var currency: Currency?
+    
+    // Date: Date
     dynamic var date = Date()
     dynamic var timeZone: String = ""
+    
+    // Date: Int
+    dynamic var year = 0
+    dynamic var month = 0
+    dynamic var day = 0
+    dynamic var hour = 0
+    dynamic var minute = 0
+    dynamic var second = 0
+    
     dynamic var content: String = ""
     
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
