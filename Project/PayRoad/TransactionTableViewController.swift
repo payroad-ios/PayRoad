@@ -17,7 +17,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var dateDictionary = [Date : [Transaction]]()
+    var dateDictionary = [Date: [Transaction]]()
     var dateList = [Date]()
     
     override func viewDidLoad() {
@@ -73,7 +73,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     func initDataStructures() {
-        dateDictionary = [Date : [Transaction]]()
+        dateDictionary = [Date: [Transaction]]()
         dateList = [Date]()
         
         for transaction in travel.transactions {
