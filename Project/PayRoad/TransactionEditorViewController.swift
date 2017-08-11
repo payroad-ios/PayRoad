@@ -61,7 +61,7 @@ class TransactionEditorViewController: UIViewController {
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
-    
+
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -115,8 +115,10 @@ extension TransactionEditorViewController {
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
         
-        let date = Date()
-        transaction.date = date
+        let dateInRegion = DateInRegion()
+        dateInRegion.date = Date()
+        dateInRegion.timeZone = TimeZone.current
+        transaction.dateInRegion = dateInRegion
         
         do {
             try realm.write {
