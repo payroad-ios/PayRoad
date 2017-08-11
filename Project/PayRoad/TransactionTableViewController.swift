@@ -77,8 +77,14 @@ class TransactionTableViewController: UIViewController {
         dateList = [String]()
         
         for transaction in travel.transactions {
-            let dateString = DateUtil.dateFormatter.string(from: transaction.date)
             
+            guard let dateInRegion = transaction.dateInRegion else {
+                return
+            }
+            
+            //let dateString = DateUtil.dateFormatter.string(from: dateInRegion.date)
+            let dateString = dateInRegion.string(format: .section)
+                
             if dateDictionary[dateString] == nil {
                 dateDictionary[dateString] = []
             }

@@ -66,17 +66,11 @@ class TransactionEditorViewController: UIViewController {
         transaction.amount = amount
         transaction.currency = currency
         
-        let date = Date()
-        transaction.date = date
+        let dateInRegion = DateInRegion()
+        dateInRegion.date = Date()
+        dateInRegion.timeZone = TimeZone.current
+        transaction.dateInRegion = dateInRegion
         
-        let calendar = Calendar.current
-        transaction.year = calendar.component(.year, from: date)
-        transaction.month = calendar.component(.month, from: date)
-        transaction.day = calendar.component(.day, from: date)
-        transaction.hour = calendar.component(.hour, from: date)
-        transaction.minute = calendar.component(.minute, from: date)
-        transaction.second = calendar.component(.second, from: date)
-
         do {
             try realm.write {
                 travel.transactions.append(transaction)
