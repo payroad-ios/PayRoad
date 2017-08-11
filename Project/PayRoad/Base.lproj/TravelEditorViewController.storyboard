@@ -72,11 +72,7 @@
                                 <action selector="cancelButtonDidTap:" destination="zEU-DO-42O" id="Q0b-pf-YLH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="9o9-hC-WxP">
-                            <connections>
-                                <action selector="saveButtonDidTap:" destination="zEU-DO-42O" id="unk-D2-Nmf"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="9o9-hC-WxP"/>
                     </navigationItem>
                     <connections>
                         <outlet property="endDateTextField" destination="eO1-9n-Yp5" id="r9Y-9Z-Oya"/>

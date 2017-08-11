@@ -27,10 +27,27 @@ class CurrencyTableViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addCurrency",
-            let navigationController = segue.destination as? UINavigationController,
-            let addCurrencyTableViewController = navigationController.topViewController as? CurrencyEditorViewController {
+        if segue.identifier == "addCurrency" {
+            guard let navigationController = segue.destination as? UINavigationController,
+            let addCurrencyTableViewController = navigationController.topViewController as? CurrencyEditorViewController
+            else {
+                return
+            }
+            
             addCurrencyTableViewController.travel = travel
+        }
+        
+        if segue.identifier == "editCurrency" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                let navigationController = segue.destination as? UINavigationController,
+                let editCurrencyTableViewController = navigationController.topViewController as? CurrencyEditorViewController
+            else {
+                return
+            }
+            
+            editCurrencyTableViewController.mode = .edit
+            editCurrencyTableViewController.travel = travel
+            editCurrencyTableViewController.originCurrency = travel.currencies[indexPath.row]
         }
     }
 

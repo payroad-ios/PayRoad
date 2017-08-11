@@ -56,7 +56,7 @@ class TransactionTableViewController: UIViewController {
             let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
             let navigationController = UINavigationController(rootViewController: currencyTableViewController)
             currencyTableViewController.travel = self.travel
-
+            
             self.present(navigationController, animated: true, completion: nil)
         }
         
@@ -78,6 +78,20 @@ class TransactionTableViewController: UIViewController {
             }
             addTransactionTableViewController.travel = travel
         }
+        
+        if segue.identifier == "editTransaction" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                let navigationController = segue.destination as? UINavigationController,
+                let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
+            else {
+                return
+            }
+            
+            editTransactionTableViewController.mode = .edit
+            editTransactionTableViewController.travel = travel
+            editTransactionTableViewController.originTransaction = travel.transactions[indexPath.row]
+        }
+        
     }
     
     func initDataStructures() {
@@ -94,7 +108,7 @@ class TransactionTableViewController: UIViewController {
             if !dateList.contains(dateString) {
                 dateList.append(dateString)
             }
-
+            
             dateDictionary[dateString]?.append(transaction)
         }
         

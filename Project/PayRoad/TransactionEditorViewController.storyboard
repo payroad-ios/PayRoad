@@ -72,11 +72,7 @@
                                 <action selector="cancelButtonDidTap:" destination="8cC-mM-Tm3" id="LAy-N0-cRo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="QCy-aZ-DNJ">
-                            <connections>
-                                <action selector="saveButtonDidTap:" destination="8cC-mM-Tm3" id="1re-nL-G33"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="QCy-aZ-DNJ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="amountTextField" destination="cBu-pu-8GF" id="kJP-Bp-ioi"/>
