@@ -41,14 +41,22 @@ class TransactionTableViewController: UIViewController {
         let moreOptionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let travelEdit = UIAlertAction(title: "여행 수정", style: .default) { _ in
             print("여행 수정")
+            
             //TODO: present(여행 수정 ViewController)
+            let travelEditorViewController = UIStoryboard.loadViewController(from: .TravelEditorView, ID: "TravelEditorViewController") as! TravelEditorViewController
+            travelEditorViewController.originTravel = self.travel
+            travelEditorViewController.mode = .edit
+            
+            let navigationController = UINavigationController(rootViewController: travelEditorViewController)
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
         
         let currencySetting = UIAlertAction(title: "통화 설정", style: .default) { [unowned self] _ in
             let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
             let navigationController = UINavigationController(rootViewController: currencyTableViewController)
             currencyTableViewController.travel = self.travel
-
+            
             self.present(navigationController, animated: true, completion: nil)
         }
         
@@ -70,6 +78,20 @@ class TransactionTableViewController: UIViewController {
             }
             addTransactionTableViewController.travel = travel
         }
+        
+        if segue.identifier == "editTransaction" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                let navigationController = segue.destination as? UINavigationController,
+                let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
+            else {
+                return
+            }
+            
+            editTransactionTableViewController.mode = .edit
+            editTransactionTableViewController.travel = travel
+            editTransactionTableViewController.originTransaction = travel.transactions[indexPath.row]
+        }
+        
     }
     
     func initDataStructures() {
@@ -92,7 +114,7 @@ class TransactionTableViewController: UIViewController {
             if !dateList.contains(dateString) {
                 dateList.append(dateString)
             }
-
+            
             dateDictionary[dateString]?.append(transaction)
         }
         

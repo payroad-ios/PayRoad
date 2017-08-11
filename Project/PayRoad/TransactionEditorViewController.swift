@@ -12,6 +12,11 @@ import RealmSwift
 
 class TransactionEditorViewController: UIViewController {
     
+    enum Mode {
+        case new
+        case edit
+    }
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
@@ -20,6 +25,9 @@ class TransactionEditorViewController: UIViewController {
     
     var travel: Travel!
     var currency: Currency!
+    var originTransaction: Transaction!
+    
+    var mode: Mode = .new
     
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -46,45 +54,14 @@ class TransactionEditorViewController: UIViewController {
         
         currencyTextField.inputAccessoryView = toolbar
         currencyTextField.inputView = pickerView
+        
+        self.adjustViewMode()
     }
 
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
-    
-    @IBAction func saveButtonDidTap(_ sender: Any) {
-        let transaction = Transaction()
-        
-        guard let name = nameTextField.text,
-            let amountText = amountTextField.text,
-            let amount = Double(amountText)
-        else {
-            return
-        }
-        
-        transaction.name = name
-        transaction.amount = amount
-        transaction.currency = currency
-        
-        let dateInRegion = DateInRegion()
-        dateInRegion.date = Date()
-        dateInRegion.timeZone = TimeZone.current
-        transaction.dateInRegion = dateInRegion
-        
-        do {
-            try realm.write {
-                travel.transactions.append(transaction)
-                print("트랜젝션 추가")
-                dismiss(animated: true, completion: nil)
-            }
-        } catch {
-            // Alert 위해 남겨둠
-            print(error)
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
+
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -106,5 +83,86 @@ extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         currency = travel.currencies[row]
         currencyTextField.text = currency.code
+    }
+}
+
+extension TransactionEditorViewController {
+    fileprivate func adjustViewMode() {
+        switch self.mode {
+        case .new:
+            let saveBarButtonItem: UIBarButtonItem
+            let selector = #selector(saveButtonDidTap)
+            saveBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: selector)
+            self.navigationItem.rightBarButtonItem = saveBarButtonItem
+        case .edit:
+            self.navigationItem.title = "항목 수정"
+            nameTextField?.text = originTransaction.name
+            amountTextField?.text = String(originTransaction.amount)
+            currencyTextField?.text = originTransaction.currency?.code
+            
+            let editBarButtonItem: UIBarButtonItem
+            let selector = #selector(editButtonDidTap)
+            editBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: selector)
+            self.navigationItem.rightBarButtonItem = editBarButtonItem
+        }
+    }
+    
+    func saveButtonDidTap() {
+        defer {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        var transaction = Transaction()
+        transactionFromUI(transaction: &transaction)
+        
+        let dateInRegion = DateInRegion()
+        dateInRegion.date = Date()
+        dateInRegion.timeZone = TimeZone.current
+        transaction.dateInRegion = dateInRegion
+        
+        do {
+            try realm.write {
+                travel.transactions.append(transaction)
+                print("트랜젝션 추가")
+            }
+        } catch {
+            // Alert 위해 남겨둠
+            print(error)
+        }
+    }
+    
+    func editButtonDidTap() {
+        defer {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        var transaction = Transaction()
+        transactionFromUI(transaction: &transaction)
+        
+        do {
+            try realm.write {
+                originTransaction.name = transaction.name
+                originTransaction.amount = transaction.amount
+                originTransaction.currency = transaction.currency
+                print("트랜젝션 수정")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func transactionFromUI(transaction: inout Transaction) {
+        
+        guard let name = nameTextField.text,
+            let amountText = amountTextField.text,
+            let amount = Double(amountText)
+        else {
+            print("fail to get transaction from UI")
+            return
+        }
+        
+        transaction.name = name
+        transaction.amount = amount
+        transaction.currency = currency
     }
 }
