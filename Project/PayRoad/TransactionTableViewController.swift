@@ -12,6 +12,8 @@ import RealmSwift
 
 class TransactionTableViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     var travel: Travel!
     var notificationToken: NotificationToken? = nil
     
@@ -77,10 +79,19 @@ class TransactionTableViewController: UIViewController {
             self.present(navigationController, animated: true, completion: nil)
         }
         
+        let deleteTravel = UIAlertAction(title: "여행 삭제", style: .destructive) { [unowned self] _ in
+            try! self.realm.write {
+                self.realm.delete(self.travel)
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         moreOptionAlertController.addAction(travelEdit)
         moreOptionAlertController.addAction(currencySetting)
+        moreOptionAlertController.addAction(deleteTravel)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
     }

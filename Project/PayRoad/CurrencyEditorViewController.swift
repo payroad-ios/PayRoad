@@ -89,6 +89,17 @@ extension CurrencyEditorViewController {
             let selector = #selector(editButtonDidTap)
             editBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: selector)
             self.navigationItem.rightBarButtonItem = editBarButtonItem
+            
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+            button.setTitle("통화 삭제", for: .normal)
+            button.setTitleColor(.red, for: .normal)
+            button.setTitleColor(UIColor.red.withAlphaComponent(0.3) , for: .highlighted)
+            
+            let buttonX = view.frame.width / 2
+            let buttonY = view.frame.height / 2
+            button.center = CGPoint(x: buttonX, y: buttonY)
+            button.addTarget(self, action: #selector(deleteCurrencyDidTap), for: .touchUpInside)
+            self.view.addSubview(button)
         }
     }
     
@@ -141,6 +152,16 @@ extension CurrencyEditorViewController {
         
         currency.code = code
         currency.rate = rate
+    }
+    
+    func deleteCurrencyDidTap() {
+        defer {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        try! realm.write {
+            self.realm.delete(originCurrency)
+        }
     }
 }
 
