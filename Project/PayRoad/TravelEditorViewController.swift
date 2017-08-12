@@ -19,15 +19,13 @@ class TravelEditorViewController: UIViewController {
     
     // MARK: - Properties
     
+    let realm = try! Realm()
+    var mode: Mode = .new
     var originTravel: Travel!
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
-    
-    let realm = try! Realm()
-    
-    var mode: Mode = .new
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +67,17 @@ extension TravelEditorViewController {
             titleTextField?.text = originTravel?.name
             startDateTextField?.text = DateUtil.dateFormatter.string(from: startDate)
             endDateTextField?.text = DateUtil.dateFormatter.string(from: endDate)
+            
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+            button.setTitle("여행 삭제", for: .normal)
+            button.setTitleColor(.red, for: .normal)
+            button.setTitleColor(UIColor.red.withAlphaComponent(0.3) , for: .highlighted)
+            
+            let buttonX = view.frame.width / 2
+            let buttonY = view.frame.height / 2
+            button.center = CGPoint(x: buttonX, y: buttonY)
+            button.addTarget(self, action: #selector(deleteTravelDidTap), for: .touchUpInside)
+            self.view.addSubview(button)
         }
     }
     
@@ -122,6 +131,16 @@ extension TravelEditorViewController {
         travel.name = name
         travel.starteDate = startDate
         travel.endDate = endDate
+    }
+    
+    func deleteTravelDidTap() {
+        defer {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        try! realm.write {
+            self.realm.delete(originTravel)
+        }
     }
 }
 

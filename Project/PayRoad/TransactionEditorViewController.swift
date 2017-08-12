@@ -17,10 +17,6 @@ class TransactionEditorViewController: UIViewController {
         case edit
     }
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var currencyTextField: UITextField!
-    
     let realm = try! Realm()
     
     var travel: Travel!
@@ -35,7 +31,11 @@ class TransactionEditorViewController: UIViewController {
         pickerView.dataSource = self
         return pickerView
     }()
-
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var currencyTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
