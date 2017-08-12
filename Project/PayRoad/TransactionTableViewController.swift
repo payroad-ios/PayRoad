@@ -15,10 +15,20 @@ class TransactionTableViewController: UIViewController {
     var travel: Travel!
     var notificationToken: NotificationToken? = nil
     
-    @IBOutlet weak var tableView: UITableView!
-    
+    var travelPeriodDates = [Date]()
     var dateDictionary = [String: [Transaction]]()
-    var dateList = [String]()
+    var originDateList = [String]()
+    var dynamicDateList = [String]()
+    
+    var currentSelectedDate: Date? {
+        didSet {
+            filterTransaction(currentSelectedDate)
+        }
+    }
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var allListButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +38,19 @@ class TransactionTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        initDataStructures()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsHorizontalScrollIndicator = false
         
+        allListButton.isSelected = true
+        allListButton.setTitleColor(UIColor.blue, for: .selected)
+        allListButton.setTitleColor(UIColor.black, for: .normal)
+        extractDatePeriod()
+
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             self?.initDataStructures()
-            tableView.reloadData()
+            self?.filterTransaction(self?.currentSelectedDate)
         }
     }
     
@@ -86,17 +103,15 @@ class TransactionTableViewController: UIViewController {
             else {
                 return
             }
-            
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
             editTransactionTableViewController.originTransaction = travel.transactions[indexPath.row]
         }
-        
     }
     
     func initDataStructures() {
         dateDictionary = [String: [Transaction]]()
-        dateList = [String]()
+        originDateList = [String]()
         
         for transaction in travel.transactions {
             
@@ -106,26 +121,53 @@ class TransactionTableViewController: UIViewController {
             
             //let dateString = DateUtil.dateFormatter.string(from: dateInRegion.date)
             let dateString = dateInRegion.string(format: .section)
-                
+            
             if dateDictionary[dateString] == nil {
                 dateDictionary[dateString] = []
             }
             
-            if !dateList.contains(dateString) {
-                dateList.append(dateString)
+            if !originDateList.contains(dateString) {
+                originDateList.append(dateString)
             }
             
             dateDictionary[dateString]?.append(transaction)
         }
         
         //TODO: String sort인데, Date 포맷에 종속적이라 나중에 바꿀 필요 있음.
-        dateList.sort(by: <)
+        originDateList.sort(by: <)
+    }
+    
+    func extractDatePeriod() {
+        let dates = DateUtil.generateDatePeriod(from: travel.starteDate, to: travel.endDate)
+        travelPeriodDates = dates
+    }
+    
+    @IBAction func allListButtonDidTap(_ sender: Any) {
+        allListButton.isSelected = !allListButton.isSelected
+        
+        currentSelectedDate = nil
+        let seletedIndexPath = collectionView.indexPathsForSelectedItems
+        guard let indexPath = seletedIndexPath?.first else { return }
+        collectionView.deselectItem(at: indexPath, animated: false)
+    }
+    
+    func filterTransaction(_ selected: Date?) {
+        guard let date = selected else {
+            dynamicDateList = originDateList
+            tableView.reloadData()
+            return
+        }
+        
+        let sectionString = DateFormatter.stringTo(for: date, format: .section)
+        let filterDateList = [sectionString]
+        dynamicDateList = filterDateList
+        tableView.reloadData()
     }
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dateString = dateList[section]
+        let dateString = dynamicDateList[section]
         
         guard let transactions = dateDictionary[dateString] else {
             return 0
@@ -135,14 +177,14 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dateList[section]
+        return dynamicDateList[section]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         
-        let dateString = dateList[indexPath.section]
+        let dateString = dynamicDateList[indexPath.section]
         
         guard let transaction = dateDictionary[dateString]?[indexPath.row] else {
             return cell
@@ -159,6 +201,6 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dateList.count
+        return dynamicDateList.count
     }
 }

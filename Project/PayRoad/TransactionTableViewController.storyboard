@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,11 +20,11 @@
                         <viewControllerLayoutGuide type="bottom" id="a7t-0f-yvN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wY8-m7-I3k">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qAj-v2-Up4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="transactionTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qAj-v2-Up4">
+                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="xnx-Uw-s1H" detailTextLabel="4hP-74-yIU" style="IBUITableViewCellStyleValue1" id="2yQ-va-ipq">
@@ -55,15 +56,78 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="dateSelectCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-lm-94X">
+                                <rect key="frame" x="60" y="0.0" width="315" height="60"/>
+                                <color key="backgroundColor" red="0.98044819078947365" green="0.98044819078947365" blue="0.98044819078947365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Sub-GG-Ns8"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cg4-zD-osG">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dateCell" id="YP1-U5-Tf3" customClass="DateSelectCollectionViewCell" customModule="PayRoad" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="5" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38S-SJ-Gu0">
+                                                    <rect key="frame" x="12.5" y="16.5" width="25" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="38S-SJ-Gu0" firstAttribute="centerX" secondItem="YP1-U5-Tf3" secondAttribute="centerX" id="H85-Ev-LJl"/>
+                                            <constraint firstItem="38S-SJ-Gu0" firstAttribute="centerY" secondItem="YP1-U5-Tf3" secondAttribute="centerY" id="ozs-BI-7zA"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dayLabel" destination="38S-SJ-Gu0" id="NTb-4r-a8T"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Dj-6J-E3J">
+                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKm-Z2-jJ3">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WKm-Z2-jJ3" secondAttribute="height" id="Mrt-fN-WOD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="All"/>
+                                        <connections>
+                                            <action selector="allListButtonDidTap:" destination="gj9-wY-KtZ" eventType="touchUpInside" id="OVr-8w-Hiy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qAj-v2-Up4" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="7ac-qW-9G9"/>
-                            <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="wY8-m7-I3k" secondAttribute="top" id="ggO-Un-LHC"/>
-                            <constraint firstAttribute="bottom" secondItem="qAj-v2-Up4" secondAttribute="bottom" id="jqh-iq-fjy"/>
-                            <constraint firstAttribute="trailing" secondItem="qAj-v2-Up4" secondAttribute="trailing" id="lS4-BB-Whv"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="8Ag-3V-G4W"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="AId-x6-D0h"/>
+                            <constraint firstAttribute="bottom" secondItem="qAj-v2-Up4" secondAttribute="bottom" id="Gfg-eE-XpZ"/>
+                            <constraint firstItem="cg4-lm-94X" firstAttribute="leading" secondItem="9Dj-6J-E3J" secondAttribute="trailing" id="IiY-8Q-7fn"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="height" secondItem="cg4-lm-94X" secondAttribute="height" id="SAj-Ws-zMX"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="top" secondItem="RM4-Eg-1Gu" secondAttribute="bottom" id="UFD-EU-e5w"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="cg4-lm-94X" secondAttribute="bottom" id="WSk-4N-Db2"/>
+                            <constraint firstAttribute="trailing" secondItem="cg4-lm-94X" secondAttribute="trailing" id="j6J-HL-cec"/>
+                            <constraint firstAttribute="trailing" secondItem="qAj-v2-Up4" secondAttribute="trailing" id="ogb-RB-JUW"/>
+                            <constraint firstItem="cg4-lm-94X" firstAttribute="top" secondItem="wY8-m7-I3k" secondAttribute="top" id="u2p-pa-LYQ"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="9Dj-6J-E3J" secondAttribute="bottom" id="vmb-Jk-3cA"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="여행 이름" id="k9i-xs-t2o">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="8kM-Su-BHv">
@@ -79,12 +143,14 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="allListButton" destination="WKm-Z2-jJ3" id="ogZ-DV-7Br"/>
+                        <outlet property="collectionView" destination="cg4-lm-94X" id="lAW-0U-xyK"/>
                         <outlet property="tableView" destination="qAj-v2-Up4" id="Vvj-mu-HVs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8WD-7G-RXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="170"/>
+            <point key="canvasLocation" x="925.60000000000002" y="169.56521739130437"/>
         </scene>
         <!--TransactionEditorViewController-->
         <scene sceneID="cfx-tO-KGz">
@@ -99,7 +165,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R3c-s2-qYk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w80-53-IxO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w80-53-IxO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -110,7 +176,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kig-Cg-TMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.59999999999999" y="171.36431784107947"/>
+            <point key="canvasLocation" x="65" y="170"/>
         </scene>
         <!--TransactionEditorViewController-->
         <scene sceneID="hMA-Mu-QZZ">
