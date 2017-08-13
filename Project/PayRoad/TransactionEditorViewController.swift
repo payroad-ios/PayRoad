@@ -35,6 +35,7 @@ class TransactionEditorViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
+    @IBOutlet weak var transactionImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,7 @@ class TransactionEditorViewController: UIViewController {
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+
 }
 
 extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -99,6 +101,11 @@ extension TransactionEditorViewController {
             nameTextField?.text = originTransaction.name
             amountTextField?.text = String(originTransaction.amount)
             currencyTextField?.text = originTransaction.currency?.code
+            
+            if let imageData = originTransaction.imageData,
+                let image = UIImage(data: imageData) {
+                transactionImageView.image = image
+            }
             
             let editBarButtonItem: UIBarButtonItem
             let selector = #selector(editButtonDidTap)
@@ -144,6 +151,7 @@ extension TransactionEditorViewController {
                 originTransaction.name = transaction.name
                 originTransaction.amount = transaction.amount
                 originTransaction.currency = transaction.currency
+                originTransaction.imageData = transaction.imageData
                 print("트랜젝션 수정")
             }
         } catch {
@@ -164,5 +172,35 @@ extension TransactionEditorViewController {
         transaction.name = name
         transaction.amount = amount
         transaction.currency = currency
+        transaction.imageData = transactionImageView.image?.data()
+    }
+}
+
+extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        // Set photoImageView to display the selected image.
+        transactionImageView.image = selectedImage
+        
+        // Dismiss the picker.
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.sourceType = .photoLibrary
+        
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
     }
 }
