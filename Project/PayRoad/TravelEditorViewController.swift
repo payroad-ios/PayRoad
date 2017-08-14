@@ -134,12 +134,13 @@ extension TravelEditorViewController {
     }
     
     func deleteTravelDidTap() {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
-        
         try! realm.write {
             self.realm.delete(originTravel)
+        }
+        
+        let navigationController = presentingViewController as? UINavigationController
+        self.dismiss(animated: true) {
+            navigationController?.popToRootViewController(animated: true)
         }
     }
 }
