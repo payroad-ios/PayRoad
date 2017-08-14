@@ -113,6 +113,13 @@ extension TravelEditorViewController {
             originTravel?.name = travel.name
             originTravel?.starteDate = travel.starteDate
             originTravel?.endDate = travel.endDate
+            
+            originTravel?.startYear = travel.startYear
+            originTravel?.startMonth = travel.startMonth
+            originTravel?.startDay = travel.startDay
+            originTravel?.endYear = travel.endYear
+            originTravel?.endMonth = travel.endMonth
+            originTravel?.endDay = travel.endDay
         }
     }
     
@@ -131,6 +138,14 @@ extension TravelEditorViewController {
         travel.name = name
         travel.starteDate = startDate
         travel.endDate = endDate
+        
+        let calendar = Calendar.current
+        travel.startYear = calendar.component(.year, from: startDate)
+        travel.startMonth = calendar.component(.month, from: startDate)
+        travel.startDay = calendar.component(.day, from: startDate)
+        travel.endYear = calendar.component(.year, from: endDate)
+        travel.endMonth = calendar.component(.month, from: endDate)
+        travel.endDay = calendar.component(.day, from: endDate)
     }
     
     func deleteTravelButtonDidTap() {

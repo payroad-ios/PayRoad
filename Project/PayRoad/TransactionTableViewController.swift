@@ -15,20 +15,21 @@ class TransactionTableViewController: UIViewController {
     let realm = try! Realm()
     
     var travel: Travel!
+    var transactions: Results<Transaction>!
+
     var notificationToken: NotificationToken? = nil
     
-    var travelPeriodDates = [Date]()
-    var dateDictionary = [String: [Transaction]]()
-    var originDateList = [String]()
-    var dynamicDateList = [String]()
+    var travelPeriodDates = [YMD]()
+    var dateDictionary = [YMD: [Transaction]]()
+    var dateList = [YMD]()
     
     var totalAmountByCurrency = [Currency: Double]()
     var totalAmountOfFirstCurrency = 0.0
     var totalAmountIndex = 0
     
-    var currentSelectedDate: Date? {
+    var currentSelectedDate: YMD? {
         didSet {
-            filterTransaction(selected: currentSelectedDate)
+            self.tableView.reloadData()
         }
     }
     
@@ -42,6 +43,7 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         
         title = travel.name
+        transactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -57,7 +59,7 @@ class TransactionTableViewController: UIViewController {
         
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.tableView.reloadData()
         }
     }
     
@@ -117,34 +119,35 @@ class TransactionTableViewController: UIViewController {
     }
     
     func initDataStructures() {
-        dateDictionary = [String: [Transaction]]()
-        originDateList = [String]()
+        dateDictionary = [YMD: [Transaction]]()
+        dateList = [YMD]()
         
-        for transaction in travel.transactions {
+        totalAmountByCurrency = [Currency: Double]()
+        totalAmountOfFirstCurrency = 0.0
+        
+        for transaction in transactions {
             
             guard let dateInRegion = transaction.dateInRegion else {
                 return
             }
             
-            let dateString = dateInRegion.string(format: .section)
-            
-            if dateDictionary[dateString] == nil {
-                dateDictionary[dateString] = []
+            if dateDictionary[dateInRegion.ymd] == nil {
+                dateDictionary[dateInRegion.ymd] = []
             }
             
-            if !originDateList.contains(dateString) {
-                originDateList.append(dateString)
+            if !dateList.contains(dateInRegion.ymd) {
+                dateList.append(dateInRegion.ymd)
             }
             
-            dateDictionary[dateString]?.append(transaction)
+            dateDictionary[dateInRegion.ymd]?.append(transaction)
             
             guard let currency = transaction.currency else {
                 return
             }
             
-            // TODO: Dictionary에서 Optional을 처리하는 방법?
-            if totalAmountByCurrency.keys.contains(currency) {
-                totalAmountByCurrency[currency]! += transaction.amount
+            if var totalAmount = totalAmountByCurrency[currency] {
+                totalAmount += transaction.amount
+                totalAmountByCurrency[currency] = totalAmount
             } else {
                 totalAmountByCurrency[currency] = transaction.amount
             }
@@ -152,8 +155,7 @@ class TransactionTableViewController: UIViewController {
             totalAmountOfFirstCurrency += transaction.amount / currency.rate
         }
         
-        //TODO: String sort인데, Date 포맷에 종속적이라 나중에 바꿀 필요 있음.
-        originDateList.sort(by: <)
+        dateList.sort(by: >)
         
         // MARK: 여행가계부 앱을 참고하여 소숫점 두 자리까지만 표기
         totalAmountIndex = 0
@@ -162,7 +164,9 @@ class TransactionTableViewController: UIViewController {
     }
     
     func extractDatePeriod() {
-        let dates = DateUtil.extractDatePeriod(from: travel.starteDate, to: travel.endDate)
+        let startYMD = YMD(year: travel.startYear, month: travel.startMonth, day: travel.startDay)
+        let endYMD = YMD(year: travel.endYear, month: travel.endMonth, day: travel.endDay)
+        let dates = DateUtil.generateYMDPeriod(from: startYMD, to: endYMD)
         travelPeriodDates = dates
     }
     
@@ -173,19 +177,6 @@ class TransactionTableViewController: UIViewController {
         let seletedIndexPath = collectionView.indexPathsForSelectedItems
         guard let indexPath = seletedIndexPath?.first else { return }
         collectionView.deselectItem(at: indexPath, animated: false)
-    }
-    
-    func filterTransaction(selected: Date?) {
-        guard let date = selected else {
-            dynamicDateList = originDateList
-            tableView.reloadData()
-            return
-        }
-        
-        let sectionString = DateFormatter.stringTo(for: date, format: .section)
-        let filterDateList = [sectionString]
-        dynamicDateList = filterDateList
-        tableView.reloadData()
     }
     
     @IBAction func changeTotalAmountCurrency(_ sender: UITapGestureRecognizer) {
@@ -206,28 +197,42 @@ class TransactionTableViewController: UIViewController {
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dateString = dynamicDateList[section]
         
-        guard let transactions = dateDictionary[dateString] else {
-            return 0
+        let transactions: [Transaction]?
+        
+        if let currentSelectedDate = currentSelectedDate {
+            transactions = dateDictionary[currentSelectedDate]
+        } else {
+            transactions = dateDictionary[dateList[section]]
         }
         
-        return transactions.count
+        if let transactions = transactions {
+            return transactions.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dynamicDateList[section]
+        if let currentSelectedDate = currentSelectedDate {
+            return currentSelectedDate.string()
+        }
+        
+        return dateList[section].string()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
+        let transactions: [Transaction]
         
-        let dateString = dynamicDateList[indexPath.section]
-        
-        guard let transaction = dateDictionary[dateString]?[indexPath.row] else {
-            return cell
+        if let currentSelectedDate = currentSelectedDate {
+            transactions = dateDictionary[currentSelectedDate]!
+        } else {
+            transactions = dateDictionary[dateList[indexPath.section]]!
         }
+        
+        let transaction: Transaction = transactions[indexPath.row]
         
         cell.textLabel?.text = transaction.name
         
@@ -240,7 +245,11 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dynamicDateList.count
+        if currentSelectedDate != nil {
+            return 1
+        }
+        
+        return dateList.count
     }
 }
 
@@ -253,8 +262,7 @@ extension TransactionTableViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateSelectCollectionViewCell
-        let date = travelPeriodDates[indexPath.row]
-        cell.dayLabel.text = DateFormatter.stringToDay(for: date)
+        cell.dayLabel.text = "\(travelPeriodDates[indexPath.row].day)"
         return cell
     }
     

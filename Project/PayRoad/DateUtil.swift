@@ -28,6 +28,16 @@ struct DateUtil {
         }
         return dateArray
     }
+    
+    static func generateYMDPeriod(from fromYMD: YMD, to toYMD: YMD) -> [YMD] {
+        var ymds = [YMD]()
+        var ymd = fromYMD
+        while ymd <= toYMD {
+            ymds.append(ymd)
+            ymd.add(day: 1)
+        }
+        return ymds
+    }
 }
 
 extension DateFormatter {
@@ -35,20 +45,5 @@ extension DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd"
         return dateFormatter.string(from: date)
-    }
-    
-    static func stringTo(for date: Date, format: DateFormat) -> String {
-        let formatter = DateFormatter()
-        
-        switch format {
-        case .section:
-            formatter.dateStyle = .long
-            formatter.timeStyle = .none
-        case .detail:
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .medium
-        }
-        
-        return formatter.string(from: date)
     }
 }

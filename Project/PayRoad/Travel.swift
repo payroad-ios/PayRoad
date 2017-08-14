@@ -14,6 +14,13 @@ class Travel: Object {
     dynamic var starteDate = Date()
     dynamic var endDate = Date()
     
+    dynamic var startYear = 0
+    dynamic var startMonth = 0
+    dynamic var startDay = 0
+    dynamic var endYear = 0
+    dynamic var endMonth = 0
+    dynamic var endDay = 0
+    
     let transactions = List<Transaction>()
     let currencies = List<Currency>()
     

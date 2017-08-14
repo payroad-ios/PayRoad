@@ -8,11 +8,6 @@
 
 import RealmSwift
 
-enum DateFormat {
-    case section
-    case detail
-}
-
 class DateInRegion: Object {
     
     dynamic var date = Date()
@@ -22,28 +17,33 @@ class DateInRegion: Object {
         get { return TimeZone(identifier: _timeZone) ?? .current }
         set { _timeZone = timeZone.identifier }
     }
-
-    override static func ignoredProperties() -> [String] {
-        return ["timeZone"]
+    
+    var ymd: YMD {
+        var calendar = Calendar.current
+        calendar.timeZone = self.timeZone
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        return YMD(year: year, month: month, day: day)
     }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["timeZone", "ymd"]
+    }
+    
 }
 
 // MARK: DateInRegion Formatter
 
 extension DateInRegion {
     
-    public func string(format: DateFormat) -> String {
+    public func string() -> String {
         let formatter = DateFormatter()
         formatter.timeZone = self.timeZone
-        
-        switch format {
-        case .section:
-            formatter.dateStyle = .long
-            formatter.timeStyle = .none
-        case .detail:
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .medium
-        }
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
         
         return formatter.string(from: date)
     }
