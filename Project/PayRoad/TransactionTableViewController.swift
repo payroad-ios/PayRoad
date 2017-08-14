@@ -22,6 +22,10 @@ class TransactionTableViewController: UIViewController {
     var originDateList = [String]()
     var dynamicDateList = [String]()
     
+    var totalAmountByCurrency = [Currency: Double]()
+    var totalAmountOfFirstCurrency = 0.0
+    var totalAmountIndex = 0
+    
     var currentSelectedDate: Date? {
         didSet {
             filterTransaction(currentSelectedDate)
@@ -31,6 +35,8 @@ class TransactionTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var allListButton: UIButton!
+    @IBOutlet weak var totalAmountTitleLabel: UILabel!
+    @IBOutlet weak var totalAmountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +54,7 @@ class TransactionTableViewController: UIViewController {
         allListButton.setTitleColor(UIColor.blue, for: .selected)
         allListButton.setTitleColor(UIColor.black, for: .normal)
         extractDatePeriod()
+        
 
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
@@ -130,7 +137,6 @@ class TransactionTableViewController: UIViewController {
                 return
             }
             
-            //let dateString = DateUtil.dateFormatter.string(from: dateInRegion.date)
             let dateString = dateInRegion.string(format: .section)
             
             if dateDictionary[dateString] == nil {
@@ -142,10 +148,28 @@ class TransactionTableViewController: UIViewController {
             }
             
             dateDictionary[dateString]?.append(transaction)
+            
+            guard let currency = transaction.currency else {
+                return
+            }
+            
+            // TODO: Dictionary에서 Optional을 처리하는 방법?
+            if totalAmountByCurrency.keys.contains(currency) {
+                totalAmountByCurrency[currency]! += transaction.amount
+            } else {
+                totalAmountByCurrency[currency] = transaction.amount
+            }
+            
+            totalAmountOfFirstCurrency += transaction.amount / currency.rate
         }
         
         //TODO: String sort인데, Date 포맷에 종속적이라 나중에 바꿀 필요 있음.
         originDateList.sort(by: <)
+        
+        // MARK: 여행가계부 앱을 참고하여 소숫점 두 자리까지만 표기
+        totalAmountIndex = 0
+        totalAmountTitleLabel.text = "총 지출 금액"
+        totalAmountLabel.text = "\(String(format: "%.2f", totalAmountOfFirstCurrency)) \(travel.currencies.first!.code)"
     }
     
     func extractDatePeriod() {
@@ -174,6 +198,21 @@ class TransactionTableViewController: UIViewController {
         dynamicDateList = filterDateList
         tableView.reloadData()
     }
+    
+    @IBAction func changeTotalAmountCurrency(_ sender: UITapGestureRecognizer) {
+        if totalAmountByCurrency.count == totalAmountIndex {
+            totalAmountIndex = 0
+            totalAmountTitleLabel.text = "총 지출 금액"
+            totalAmountLabel.text = "\(String(format: "%.2f", totalAmountOfFirstCurrency)) \(travel.currencies.first!.code)"
+        } else {
+            totalAmountIndex += 1
+            let currency = Array(totalAmountByCurrency.keys)[totalAmountIndex - 1]
+            guard let currencyAmount = totalAmountByCurrency[currency] else { return }
+            totalAmountTitleLabel.text = "\(currency.code) 지출 금액"
+            totalAmountLabel.text = "\(String(format: "%.2f", currencyAmount)) \(currency.code)"
+        }
+    }
+    
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
