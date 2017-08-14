@@ -32,19 +32,11 @@ class DateInRegion: Object {
     override static func ignoredProperties() -> [String] {
         return ["timeZone", "ymd"]
     }
-    
 }
 
 // MARK: DateInRegion Formatter
-
 extension DateInRegion {
-    
     public func string() -> String {
-        let formatter = DateFormatter()
-        formatter.timeZone = self.timeZone
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
-        
-        return formatter.string(from: date)
+        return DateFormatter.string(for: date, timeZone: timeZone)
     }
 }
