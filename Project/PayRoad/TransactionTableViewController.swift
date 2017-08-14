@@ -28,7 +28,7 @@ class TransactionTableViewController: UIViewController {
     
     var currentSelectedDate: Date? {
         didSet {
-            filterTransaction(currentSelectedDate)
+            filterTransaction(selected: currentSelectedDate)
         }
     }
     
@@ -55,11 +55,9 @@ class TransactionTableViewController: UIViewController {
         allListButton.setTitleColor(UIColor.black, for: .normal)
         extractDatePeriod()
         
-
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
-            guard let tableView = self?.tableView else { return }
             self?.initDataStructures()
-            self?.filterTransaction(self?.currentSelectedDate)
+            self?.filterTransaction(selected: self?.currentSelectedDate)
         }
     }
     
@@ -164,7 +162,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     func extractDatePeriod() {
-        let dates = DateUtil.generateDatePeriod(from: travel.starteDate, to: travel.endDate)
+        let dates = DateUtil.extractDatePeriod(from: travel.starteDate, to: travel.endDate)
         travelPeriodDates = dates
     }
     
@@ -177,7 +175,7 @@ class TransactionTableViewController: UIViewController {
         collectionView.deselectItem(at: indexPath, animated: false)
     }
     
-    func filterTransaction(_ selected: Date?) {
+    func filterTransaction(selected: Date?) {
         guard let date = selected else {
             dynamicDateList = originDateList
             tableView.reloadData()
@@ -243,5 +241,41 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dynamicDateList.count
+    }
+}
+
+//MARK:- DateSelect CollectionView Delegate, DataSource
+
+extension TransactionTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return travelPeriodDates.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateSelectCollectionViewCell
+        let date = travelPeriodDates[indexPath.row]
+        cell.dayLabel.text = DateFormatter.stringToDay(for: date)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        allListButton.isSelected = false
+        currentSelectedDate = travelPeriodDates[indexPath.row]
+    }
+}
+
+extension TransactionTableViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        
+        return CGSize(width: height, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }

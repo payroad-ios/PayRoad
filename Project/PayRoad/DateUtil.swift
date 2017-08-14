@@ -18,7 +18,7 @@ struct DateUtil {
         return dateFormatter
     }()
     
-    static func generateDatePeriod(from: Date, to: Date) -> [Date] {
+    static func extractDatePeriod(from: Date, to: Date) -> [Date] {
         let numberOfDay = calendar.dateComponents([.day], from: from, to: to).day!
         
         var dateArray = [Date]()
