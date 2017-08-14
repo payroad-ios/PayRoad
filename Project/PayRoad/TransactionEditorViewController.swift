@@ -102,8 +102,8 @@ extension TransactionEditorViewController {
             amountTextField?.text = String(originTransaction.amount)
             currencyTextField?.text = originTransaction.currency?.code
             
-            if let imageData = originTransaction.imageData,
-                let image = UIImage(data: imageData) {
+            if let photoURL = originTransaction.photos.first?.fileURL,
+                let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
                 transactionImageView.image = image
             }
             
@@ -121,6 +121,16 @@ extension TransactionEditorViewController {
         
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
+        
+        if let image = transactionImageView.image {
+            let photo = Photo()
+            
+            photo.id = UUID().uuidString
+            photo.fileType = "jpg"
+            
+            FileUtil.saveImageToDocumentDir(image, filePath: photo.fileURL)
+            transaction.photos.append(photo)
+        }
         
         let dateInRegion = DateInRegion()
         dateInRegion.date = Date()
@@ -145,13 +155,20 @@ extension TransactionEditorViewController {
         
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
+
+        let urlString = UUID().uuidString
+        
+        if let image = transactionImageView.image {
+            FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
+        }
         
         do {
             try realm.write {
                 originTransaction.name = transaction.name
                 originTransaction.amount = transaction.amount
                 originTransaction.currency = transaction.currency
-                originTransaction.imageData = transaction.imageData
+                originTransaction.photos.first?.id = urlString
+                originTransaction.photos.first?.fileType = "jpg"
                 print("트랜젝션 수정")
             }
         } catch {
@@ -172,14 +189,13 @@ extension TransactionEditorViewController {
         transaction.name = name
         transaction.amount = amount
         transaction.currency = currency
-        transaction.imageData = transactionImageView.image?.data()
     }
 }
 
 extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+        guard let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
@@ -198,9 +214,16 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
         
+        if mode == .edit,
+            let photo = originTransaction.photos.first {
+            FileUtil.removeImageOnDocumentDir(filePath: photo.fileURL)
+            transactionImageView.image = nil
+        }
+        
         imagePickerController.sourceType = .photoLibrary
         
         imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
     }
 }
