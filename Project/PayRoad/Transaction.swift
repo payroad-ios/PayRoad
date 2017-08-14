@@ -13,6 +13,7 @@ class Transaction: Object {
     dynamic var name = ""
     dynamic var amount: Double = 0.0
     dynamic var currency: Currency?
+    dynamic var imageData: Data?
     
     dynamic var dateInRegion: DateInRegion?
     

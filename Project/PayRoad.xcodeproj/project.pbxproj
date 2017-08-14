@@ -37,6 +37,7 @@
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
+		E5EA601B1F3FD4AC0077B39D /* UIImageEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEncoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
 				E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */,
 				A7EBD22E1F3ED8790057E844 /* Color.swift */,
+				E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */,
 				A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */,
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
+				E5EA601B1F3FD4AC0077B39D /* UIImageEncoding.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
 				A7EBD2331F3EDAE90057E844 /* DateSelectCollectionView.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
