@@ -38,16 +38,18 @@ class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewCon
     func currencySelectResponse(code: String) {
         codeTextField.text = code
         
-        guard let firstCode = travel.currencies.first?.code,
-            let url = URL(string: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22\(firstCode)\(code)%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
-        else {
-            return
+        exchangeRateFromAPI(standard: travel.currencies.first!.code, compare: code) { [unowned self] rate in
+            OperationQueue.main.addOperation {
+                self.rateTextField.text = rate
+            }
         }
+    }
+    
+    func exchangeRateFromAPI(standard: String, compare: String, completion: @escaping (String) -> Void) {
+        let url = URL(string: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22\(standard)\(compare)%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")!
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             let jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
-            
             guard let jsonObject = jsonData as? [String: Any],
                 let query = jsonObject["query"] as? [String: Any],
                 let results = query["results"] as? [String: Any],
@@ -56,10 +58,7 @@ class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewCon
             else {
                 return
             }
-            
-            OperationQueue.main.addOperation {
-                self.rateTextField.text = rate
-            }
+            completion(rate)
         }
         task.resume()
     }
