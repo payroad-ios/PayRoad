@@ -76,7 +76,7 @@ extension TravelEditorViewController {
             let buttonX = view.frame.width / 2
             let buttonY = view.frame.height / 2
             button.center = CGPoint(x: buttonX, y: buttonY)
-            button.addTarget(self, action: #selector(deleteTravelDidTap), for: .touchUpInside)
+            button.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
             self.view.addSubview(button)
         }
     }
@@ -133,7 +133,7 @@ extension TravelEditorViewController {
         travel.endDate = endDate
     }
     
-    func deleteTravelDidTap() {
+    func deleteTravelButtonDidTap() {
         try! realm.write {
             self.realm.delete(originTravel)
         }

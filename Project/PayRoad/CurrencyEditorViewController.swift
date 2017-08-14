@@ -97,7 +97,7 @@ extension CurrencyEditorViewController {
             let buttonX = view.frame.width / 2
             let buttonY = view.frame.height / 2
             button.center = CGPoint(x: buttonX, y: buttonY)
-            button.addTarget(self, action: #selector(deleteCurrencyDidTap), for: .touchUpInside)
+            button.addTarget(self, action: #selector(deleteCurrencyButtonDidTap), for: .touchUpInside)
             self.view.addSubview(button)
         }
     }
@@ -153,7 +153,7 @@ extension CurrencyEditorViewController {
         currency.rate = rate
     }
     
-    func deleteCurrencyDidTap() {
+    func deleteCurrencyButtonDidTap() {
         defer {
             dismiss(animated: true, completion: nil)
         }
