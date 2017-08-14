@@ -31,7 +31,6 @@
 		A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */; };
 		A7EBD22F1F3ED8790057E844 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* Color.swift */; };
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
-		A7EBD2331F3EDAE90057E844 /* DateSelectCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2321F3EDAE90057E844 /* DateSelectCollectionView.swift */; };
 		B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380C12E1F3D3109003857A2 /* DateInRegion.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
@@ -69,7 +68,6 @@
 		A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7EBD22E1F3ED8790057E844 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
-		A7EBD2321F3EDAE90057E844 /* DateSelectCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionView.swift; sourceTree = "<group>"; };
 		B380C12E1F3D3109003857A2 /* DateInRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInRegion.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				A74507DD1F3988BB00DFFADF /* TransactionTableViewController.swift */,
-				A7EBD2321F3EDAE90057E844 /* DateSelectCollectionView.swift */,
 				A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */,
 				A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */,
 				A74507E81F39966600DFFADF /* TransactionEditorViewController.swift */,
@@ -359,7 +356,6 @@
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
 				E5EA601B1F3FD4AC0077B39D /* UIImageEncoding.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
-				A7EBD2331F3EDAE90057E844 /* DateSelectCollectionView.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
 				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
