@@ -13,12 +13,10 @@ class Transaction: Object {
     dynamic var name = ""
     dynamic var amount: Double = 0.0
     dynamic var currency: Currency?
-    dynamic var imageData: Data?
-    
     dynamic var dateInRegion: DateInRegion?
-    
     dynamic var content: String = ""
     
+    let photos = List<Photo>()
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
     
     override static func primaryKey() -> String? {

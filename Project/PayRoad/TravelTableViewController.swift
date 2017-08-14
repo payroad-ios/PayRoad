@@ -17,9 +17,9 @@ class TravelTableViewController: UIViewController {
         return realm.objects(Travel.self)
     }()
     var notificationToken: NotificationToken? = nil
-
+    
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -29,12 +29,12 @@ class TravelTableViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showTransactions" {
-            if let indexPath = tableView.indexPathForSelectedRow,
-                let transactionTableViewController = segue.destination as? TransactionTableViewController {
-                transactionTableViewController.travel = travels[indexPath.row]
-            }
+        if segue.identifier == "showTransactions",
+            let indexPath = tableView.indexPathForSelectedRow,
+            let transactionTableViewController = segue.destination as? TransactionTableViewController {
+            transactionTableViewController.travel = travels[indexPath.row]
         }
+        
     }
     
     deinit {
@@ -51,7 +51,7 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travels.count
