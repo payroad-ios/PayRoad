@@ -21,7 +21,8 @@ class TransactionTableViewController: UIViewController {
     
     var travelPeriodDates = [YMD]()
     var dateDictionary = [YMD: [Transaction]]()
-    var dateList = [YMD]()
+    var originDateList = [YMD]()
+    var dynamicDateList = [YMD]()
     
     var totalAmountByCurrency = [Currency: Double]()
     var totalAmountOfFirstCurrency = 0.0
@@ -29,7 +30,7 @@ class TransactionTableViewController: UIViewController {
     
     var currentSelectedDate: YMD? {
         didSet {
-            self.tableView.reloadData()
+            filterTransaction(selected: currentSelectedDate)
         }
     }
     
@@ -59,7 +60,7 @@ class TransactionTableViewController: UIViewController {
         
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
-            self?.tableView.reloadData()
+            self?.filterTransaction(selected: self?.currentSelectedDate)
         }
     }
     
@@ -120,7 +121,7 @@ class TransactionTableViewController: UIViewController {
     
     func initDataStructures() {
         dateDictionary = [YMD: [Transaction]]()
-        dateList = [YMD]()
+        originDateList = [YMD]()
         
         totalAmountByCurrency = [Currency: Double]()
         totalAmountOfFirstCurrency = 0.0
@@ -135,8 +136,8 @@ class TransactionTableViewController: UIViewController {
                 dateDictionary[dateInRegion.ymd] = []
             }
             
-            if !dateList.contains(dateInRegion.ymd) {
-                dateList.append(dateInRegion.ymd)
+            if !originDateList.contains(dateInRegion.ymd) {
+                originDateList.append(dateInRegion.ymd)
             }
             
             dateDictionary[dateInRegion.ymd]?.append(transaction)
@@ -155,12 +156,22 @@ class TransactionTableViewController: UIViewController {
             totalAmountOfFirstCurrency += transaction.amount / currency.rate
         }
         
-        dateList.sort(by: >)
+        originDateList.sort(by: >)
         
         // MARK: 여행가계부 앱을 참고하여 소숫점 두 자리까지만 표기
         totalAmountIndex = 0
         totalAmountTitleLabel.text = "총 지출 금액"
         totalAmountLabel.text = "\(String(format: "%.2f", totalAmountOfFirstCurrency)) \(travel.currencies.first!.code)"
+    }
+    
+    func filterTransaction(selected: YMD?) {
+        guard let date = selected else {
+            dynamicDateList = originDateList
+            tableView.reloadData()
+            return
+        }
+        dynamicDateList = [date]
+        tableView.reloadData()
     }
     
     func extractDatePeriod() {
@@ -203,7 +214,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         if let currentSelectedDate = currentSelectedDate {
             transactions = dateDictionary[currentSelectedDate]
         } else {
-            transactions = dateDictionary[dateList[section]]
+            transactions = dateDictionary[originDateList[section]]
         }
         
         if let transactions = transactions {
@@ -218,7 +229,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return currentSelectedDate.string()
         }
         
-        return dateList[section].string()
+        return originDateList[section].string()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -229,7 +240,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         if let currentSelectedDate = currentSelectedDate {
             transactions = dateDictionary[currentSelectedDate]!
         } else {
-            transactions = dateDictionary[dateList[indexPath.section]]!
+            transactions = dateDictionary[originDateList[indexPath.section]]!
         }
         
         let transaction: Transaction = transactions[indexPath.row]
@@ -249,7 +260,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return 1
         }
         
-        return dateList.count
+        return originDateList.count
     }
 }
 
