@@ -29,7 +29,7 @@
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
 		A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */; };
-		A7EBD22F1F3ED8790057E844 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* Color.swift */; };
+		A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* ColorStore.swift */; };
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
 		B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380C12E1F3D3109003857A2 /* DateInRegion.swift */; };
 		B38735E21F418E51000DC81C /* YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E11F418E51000DC81C /* YMD.swift */; };
@@ -70,7 +70,7 @@
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
 		A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionViewCell.swift; sourceTree = "<group>"; };
-		A7EBD22E1F3ED8790057E844 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A7EBD22E1F3ED8790057E844 /* ColorStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		B380C12E1F3D3109003857A2 /* DateInRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInRegion.swift; sourceTree = "<group>"; };
 		B38735E11F418E51000DC81C /* YMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMD.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
 				E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */,
-				A7EBD22E1F3ED8790057E844 /* Color.swift */,
+				A7EBD22E1F3ED8790057E844 /* ColorStore.swift */,
 				E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */,
 				E50D13A91F41C56E00BD36CC /* FileUtil.swift */,
 			);
@@ -379,7 +379,7 @@
 				E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */,
 				E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */,
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
-				A7EBD22F1F3ED8790057E844 /* Color.swift in Sources */,
+				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,
 				B38735E21F418E51000DC81C /* YMD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

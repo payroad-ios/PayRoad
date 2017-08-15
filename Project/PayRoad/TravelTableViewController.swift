@@ -24,6 +24,8 @@ class TravelTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = ColorStore.unselectGray
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
     }
@@ -55,5 +57,9 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travels.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

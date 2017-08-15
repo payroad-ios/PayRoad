@@ -15,7 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+//        application.statusBarStyle = .lightContent
+        
+        //UINavigationBar customize
         UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = ColorStore.mainSkyBlue
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        
         return true
     }
 
