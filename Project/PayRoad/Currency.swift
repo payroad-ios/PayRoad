@@ -12,6 +12,7 @@ class Currency: Object {
     dynamic var id = UUID().uuidString
     dynamic var code = ""
     dynamic var rate: Double = 1.0
+    dynamic var budget: Double = 0.0
     
     let travel = LinkingObjects(fromType: Travel.self, property: "currencies")
     
