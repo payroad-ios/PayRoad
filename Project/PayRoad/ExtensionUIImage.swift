@@ -1,12 +1,11 @@
 //
-//  UIImageEncoding.swift
+//  ExtensionUIImage.swift
 //  PayRoad
 //
 //  Created by Yoo Seok Kim on 2017. 8. 13..
 //  Copyright © 2017년 REFUEL. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIImage {
