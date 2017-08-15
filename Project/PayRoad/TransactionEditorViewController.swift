@@ -22,7 +22,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     var travel: Travel!
     var currency: Currency!
     var originTransaction: Transaction!
-    var standardDate = Date()
     
     var mode: Mode = .new
     
@@ -32,6 +31,16 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         pickerView.dataSource = self
         return pickerView
     }()
+    
+    //User Input Data
+    var standardDate: Date? = nil
+    var inputCategory: CategoryTEST? = nil
+    var inputImages: [UIImage]? = nil
+    var isCash = true {
+        didSet {
+            payTypeToggleButton.isSelected = !isCash
+        }
+    }
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -54,9 +63,11 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         payTypeToggleButton.setTitle("현금", for: .normal)
         payTypeToggleButton.setTitle("카드", for: .selected)
         
+        currencyTextField.borderStyle = .none
         categoryCollectionViewBG.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         categoryCollectionViewBG.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
-        dateEditTextField.text = DateFormatter.string(for: standardDate, timeZone: nil)
+        dateEditTextField.text = DateFormatter.string(for: standardDate ?? Date(), timeZone: nil)
+        dateEditTextField.inputDatePicker(mode: .dateAndTime, date: standardDate)
     }
     
     override func viewDidLoad() {
@@ -91,8 +102,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     }
     
     func togglePayTypeButtonDidTap(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        print("터치")
+        isCash = !isCash
+        print("\(isCash ? "현금" : "카드") 선택됨")
     }
 
     func pickerDonePressed() {
@@ -132,11 +143,14 @@ extension TransactionEditorViewController {
             let selector = #selector(saveButtonDidTap)
             saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
             self.navigationItem.rightBarButtonItem = saveBarButtonItem
+            
         case .edit:
             self.navigationItem.title = "항목 수정"
             nameTextField?.text = originTransaction.name
             amountTextField?.text = String(originTransaction.amount)
             currencyTextField?.text = originTransaction.currency?.code
+            contentTextView.text = originTransaction.content
+            isCash = originTransaction.isCash
             
             if let photoURL = originTransaction.photos.first?.fileURL,
                 let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
@@ -215,6 +229,7 @@ extension TransactionEditorViewController {
     func transactionFromUI(transaction: inout Transaction) {
         
         guard let name = nameTextField.text,
+            let content = contentTextView.text,
             let amountText = amountTextField.text,
             let amount = Double(amountText)
         else {
@@ -224,7 +239,10 @@ extension TransactionEditorViewController {
         
         transaction.name = name
         transaction.amount = amount
+        transaction.content = content
         transaction.currency = currency
+        transaction.isCash = isCash
+//        transaction.dateInRegion = date ?? Date()
     }
 }
 
@@ -233,11 +251,19 @@ extension TransactionEditorViewController {
 extension TransactionEditorViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
+        let category = CategoryStore.shard.categorys[indexPath.row]
+        cell.categoryImage.image = category.image
+        cell.categoryName.text = category.name
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return CategoryStore.shard.categorys.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(CategoryStore.shard.categorys[indexPath.row].index)
+        print(CategoryStore.shard.categorys[indexPath.row].name)
     }
 }
 

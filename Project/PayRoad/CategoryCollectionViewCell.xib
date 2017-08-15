@@ -21,14 +21,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_Map" translatesAutoresizingMaskIntoConstraints="NO" id="IQ1-3k-RWy">
-                        <rect key="frame" x="22" y="7" width="66" height="66"/>
+                        <rect key="frame" x="22" y="6" width="66" height="66"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="IQ1-3k-RWy" secondAttribute="height" multiplier="1:1" id="JiI-Rh-Ql5"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6WC-PR-tg1">
-                        <rect key="frame" x="16.5" y="77" width="77" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="16.5" y="76" width="77" height="18"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Thin" family="Apple SD Gothic Neo" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,7 +37,7 @@
             <constraints>
                 <constraint firstItem="IQ1-3k-RWy" firstAttribute="centerX" secondItem="NaX-es-MwN" secondAttribute="centerX" id="OVP-Uy-x4W"/>
                 <constraint firstItem="6WC-PR-tg1" firstAttribute="width" secondItem="NaX-es-MwN" secondAttribute="width" multiplier="0.7" id="QOG-Mb-jns"/>
-                <constraint firstItem="IQ1-3k-RWy" firstAttribute="top" secondItem="NaX-es-MwN" secondAttribute="top" constant="7" id="dDd-No-GmV"/>
+                <constraint firstItem="IQ1-3k-RWy" firstAttribute="top" secondItem="NaX-es-MwN" secondAttribute="top" constant="6" id="dDd-No-GmV"/>
                 <constraint firstItem="6WC-PR-tg1" firstAttribute="centerX" secondItem="NaX-es-MwN" secondAttribute="centerX" id="hfQ-8h-3Zm"/>
                 <constraint firstItem="6WC-PR-tg1" firstAttribute="top" secondItem="IQ1-3k-RWy" secondAttribute="bottom" constant="4" id="pq5-Wo-cZN"/>
                 <constraint firstItem="IQ1-3k-RWy" firstAttribute="width" secondItem="NaX-es-MwN" secondAttribute="width" multiplier="0.6" id="uv8-JT-u3d"/>

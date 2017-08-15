@@ -20,7 +20,7 @@ extension DateFormatter {
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
         formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
+        formatter.timeStyle = .short
         
         return formatter.string(from: date)
     }

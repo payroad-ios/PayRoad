@@ -13,11 +13,19 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var categoryName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.lightGray
-        
-        categoryImage.layer.cornerRadius = categoryImage.frame.height / 4
-        categoryImage.layer.borderColor = ColorStore.unselectGray.cgColor
-        categoryImage.layer.borderWidth = 1
-
+        categoryImage.tintColor = ColorStore.unselectGray
+        categoryName.textColor = ColorStore.unselectGray
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        categoryImage.image = categoryImage.image!.withRenderingMode(.alwaysTemplate)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            categoryImage.tintColor = isSelected ? ColorStore.basicBlack : ColorStore.unselectGray
+            categoryName.textColor = isSelected ? ColorStore.basicBlack : ColorStore.unselectGray
+        }
     }
 }

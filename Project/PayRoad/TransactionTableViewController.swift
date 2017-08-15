@@ -17,7 +17,8 @@ class TransactionTableViewController: UIViewController {
     var travel: Travel!
     var transactions: Results<Transaction>!
 
-    var notificationToken: NotificationToken? = nil
+    var transactionsNotificationToken: NotificationToken? = nil
+    var travelNotificationToken: NotificationToken? = nil
     
     var travelPeriodDates = [YMD]()
     var dateDictionary = [YMD: [Transaction]]()
@@ -57,6 +58,7 @@ class TransactionTableViewController: UIViewController {
         pullToAddLabel.textColor = ColorStore.basicBlack
         pullToAddLabel.backgroundColor = ColorStore.lightestGray
         pullToAddLabel.textAlignment = .center
+        pullToAddLabel.clipsToBounds = true
         tableView.addSubview(pullToAddLabel)
         
         collectionView.delegate = self
@@ -66,13 +68,20 @@ class TransactionTableViewController: UIViewController {
         allListButton.isSelected = true
         allListButton.setTitleColor(ColorStore.darkGray, for: .normal)
         allListButton.setTitleColor(ColorStore.darkGray, for: .selected)
-        allListButton.backgroundColor = UIColor.white
+        allListButton.backgroundColor = ColorStore.pastelYellow
         extractDatePeriod()
         
-        notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+        transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
             self?.filterTransaction(selected: self?.currentSelectedDate)
         }
+        
+        
+        //NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
+//        travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
+//            self?.extractDatePeriod()
+//            self?.collectionView.reloadData()
+//        }
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -206,6 +215,11 @@ class TransactionTableViewController: UIViewController {
             totalAmountLabel.text = "\(String(format: "%.2f", currencyAmount)) \(currency.code)"
         }
     }
+    
+    deinit {
+        transactionsNotificationToken?.stop()
+        travelNotificationToken?.stop()
+    }
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -284,7 +298,8 @@ extension TransactionTableViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateSelectCollectionViewCell
-        cell.dayLabel.text = "\(travelPeriodDates[indexPath.row].day)"
+        let travelPeriodDate = travelPeriodDates[indexPath.row]
+        cell.dayLabel.text = "\(travelPeriodDate.day)\n\(travelPeriodDate.monthName)"
         return cell
     }
     

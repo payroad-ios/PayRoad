@@ -36,7 +36,6 @@ class TravelTableViewController: UIViewController {
             let transactionTableViewController = segue.destination as? TransactionTableViewController {
             transactionTableViewController.travel = travels[indexPath.row]
         }
-        
     }
     
     deinit {
