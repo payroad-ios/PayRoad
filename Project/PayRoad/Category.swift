@@ -10,5 +10,5 @@ import RealmSwift
 class Category: Object {
     dynamic var id = UUID().uuidString
     dynamic var name = ""
-    dynamic var photo: Photo?
+    dynamic var assetName = ""
 }
