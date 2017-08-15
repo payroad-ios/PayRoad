@@ -77,7 +77,7 @@ extension CurrencyEditorViewController {
         case .new:
             let saveBarButtonItem: UIBarButtonItem
             let selector = #selector(saveButtonDidTap)
-            saveBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: selector)
+            saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
             self.navigationItem.rightBarButtonItem = saveBarButtonItem
         case .edit:
             self.navigationItem.title = "통화 수정"
@@ -86,7 +86,7 @@ extension CurrencyEditorViewController {
             
             let editBarButtonItem: UIBarButtonItem
             let selector = #selector(editButtonDidTap)
-            editBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: selector)
+            editBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
             self.navigationItem.rightBarButtonItem = editBarButtonItem
             
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
