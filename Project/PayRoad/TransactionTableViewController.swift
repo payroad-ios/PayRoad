@@ -34,6 +34,8 @@ class TransactionTableViewController: UIViewController {
         }
     }
     
+    var pullToAddLabel = UILabel()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var allListButton: UIButton!
@@ -51,6 +53,11 @@ class TransactionTableViewController: UIViewController {
         
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        pullToAddLabel.textColor = ColorStore.basicBlack
+        pullToAddLabel.backgroundColor = ColorStore.lightestGray
+        pullToAddLabel.textAlignment = .center
+        tableView.addSubview(pullToAddLabel)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -100,15 +107,6 @@ class TransactionTableViewController: UIViewController {
     
     //TODO: 스트링 길다. 나중에 자릅시다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addTransaction" {
-            guard let navigationController = segue.destination as? UINavigationController,
-                let addTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
-            else {
-                return
-            }
-            addTransactionTableViewController.travel = travel
-        }
-        
         if segue.identifier == "editTransaction" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                 let navigationController = segue.destination as? UINavigationController,
@@ -254,6 +252,25 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         return dynamicDateList.count
+    }
+}
+
+
+extension TransactionTableViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.contentOffset.y
+        pullToAddLabel.frame = CGRect(x: 0, y: height, width: view.frame.width, height: -height)
+        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "놓아서 새 항목 추가" : "당겨서 새 항목 추가"
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let transactionEditorViewController = UIStoryboard.loadViewController(from: .TransactionEditorView, ID: "TransactionEditorViewController") as! TransactionEditorViewController
+        let navigationController = UINavigationController(rootViewController: transactionEditorViewController)
+        
+        if scrollView.restorationIdentifier == "transactionTableView" && !(scrollView.contentOffset.y >= -50) && velocity.y >= -3.5 {
+            transactionEditorViewController.travel = travel
+            present(navigationController, animated: true, completion: nil)
+        }
     }
 }
 

@@ -12,7 +12,7 @@
         <!--새 항목-->
         <scene sceneID="lC7-eU-Hux">
             <objects>
-                <viewController id="8cC-mM-Tm3" customClass="TransactionEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionEditorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8cC-mM-Tm3" customClass="TransactionEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A3V-MI-uLo"/>
                         <viewControllerLayoutGuide type="bottom" id="mlY-GX-VH5"/>

@@ -20,6 +20,7 @@ struct ColorStore {
     static let unselectGray = UIColor.HexColor(rgbValue: 0xC7C8CA, alpha: 1)
     static let darkGray = UIColor.HexColor(rgbValue: 0x636363, alpha: 1)
     static let lightGray = UIColor.HexColor(rgbValue: 0xD8D8D8, alpha: 1)
+    static let lightestGray = UIColor.HexColor(rgbValue: 0xFAFAFA, alpha: 1)
     
     static let destructiveRed = UIColor.HexColor(rgbValue: 0xFC7474, alpha: 1)
     static let blackLayer = UIColor.black.withAlphaComponent(0.4)

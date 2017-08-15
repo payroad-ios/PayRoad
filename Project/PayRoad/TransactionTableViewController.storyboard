@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -58,7 +57,7 @@
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="dateSelectCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-lm-94X">
                                 <rect key="frame" x="60" y="0.0" width="315" height="60"/>
-                                <color key="backgroundColor" red="0.98044819078947365" green="0.98044819078947365" blue="0.98044819078947365" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Sub-GG-Ns8"/>
                                 </constraints>
@@ -165,18 +164,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="여행 이름" id="k9i-xs-t2o">
-                        <rightBarButtonItems>
-                            <barButtonItem image="Icon_Add" id="8kM-Su-BHv">
-                                <connections>
-                                    <segue destination="ylc-d5-iEM" kind="show" identifier="addTransaction" id="vld-HV-hgd"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="Icon_Setting" id="4P3-ku-1P4">
-                                <connections>
-                                    <action selector="editButtonDidTap:" destination="gj9-wY-KtZ" id="AlR-hT-pnR"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Menu" id="4P3-ku-1P4">
+                            <connections>
+                                <action selector="editButtonDidTap:" destination="gj9-wY-KtZ" id="AlR-hT-pnR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="allListButton" destination="WKm-Z2-jJ3" id="ogZ-DV-7Br"/>
@@ -221,17 +213,8 @@
             </objects>
             <point key="canvasLocation" x="65" y="170"/>
         </scene>
-        <!--TransactionEditorViewController-->
-        <scene sceneID="hMA-Mu-QZZ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="TransactionEditorViewController" id="ylc-d5-iEM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c0r-06-Gxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1884" y="170"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="Icon_Add" width="17" height="16"/>
-        <image name="Icon_Setting" width="20" height="20"/>
+        <image name="Icon_Menu" width="19" height="12"/>
     </resources>
 </document>
