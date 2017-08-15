@@ -10,18 +10,19 @@ import UIKit
 
 import RealmSwift
 
-class TransactionEditorViewController: UIViewController {
-    
-    enum Mode {
-        case new
-        case edit
-    }
+enum Mode {
+    case new
+    case edit
+}
+
+class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     let realm = try! Realm()
     
     var travel: Travel!
     var currency: Currency!
     var originTransaction: Transaction!
+    var standardDate = Date()
     
     var mode: Mode = .new
     
@@ -32,21 +33,53 @@ class TransactionEditorViewController: UIViewController {
         return pickerView
     }()
     
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var currencyTextField: UITextField!
     @IBOutlet weak var transactionImageView: UIImageView!
+    @IBOutlet weak var payTypeToggleButton: UIButton!
+    @IBOutlet weak var dateEditTextField: UITextField!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var categoryCollectionViewBG: UIView!
+    
+    override func loadView() {
+        super.loadView()
+        nameTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
+        contentTextView.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
+        dateEditTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
+        payTypeToggleButton.backgroundColor = ColorStore.mainSkyBlue
+        payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 3
+        payTypeToggleButton.setTitleColor(payTypeToggleButton.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
+        payTypeToggleButton.setTitle("현금", for: .normal)
+        payTypeToggleButton.setTitle("카드", for: .selected)
+        
+        categoryCollectionViewBG.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        categoryCollectionViewBG.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        dateEditTextField.text = DateFormatter.string(for: standardDate, timeZone: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.showsHorizontalScrollIndicator = false
+        
+        let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
+        categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
+        
+        payTypeToggleButton.addTarget(self, action: #selector(togglePayTypeButtonDidTap(_:)), for: .touchUpInside)
 
+        setupCurrencyPicker()
+        self.adjustViewMode()
+    }
+    
+    func setupCurrencyPicker() {
         //TODO: PickerView 없애면서 들어내야될 코드
         if travel.currencies.count == 1 {
             currency = travel.currencies.first!
             currencyTextField.text = currency.code
         }
-        
-        currencyTextField.inputView = pickerView
         
         let toolbar = UIToolbar()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
@@ -55,8 +88,11 @@ class TransactionEditorViewController: UIViewController {
         
         currencyTextField.inputAccessoryView = toolbar
         currencyTextField.inputView = pickerView
-        
-        self.adjustViewMode()
+    }
+    
+    func togglePayTypeButtonDidTap(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        print("터치")
     }
 
     func pickerDonePressed() {
@@ -191,6 +227,20 @@ extension TransactionEditorViewController {
         transaction.currency = currency
     }
 }
+
+
+
+extension TransactionEditorViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+}
+
 
 extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
