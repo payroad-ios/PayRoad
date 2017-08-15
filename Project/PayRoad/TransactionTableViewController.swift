@@ -164,13 +164,14 @@ class TransactionTableViewController: UIViewController {
     }
     
     func filterTransaction(selected: YMD?) {
+        defer {
+            tableView.reloadData()
+        }
         guard let date = selected else {
             dynamicDateList = originDateList
-            tableView.reloadData()
             return
         }
         dynamicDateList = [date]
-        tableView.reloadData()
     }
     
     func extractDatePeriod() {
@@ -202,47 +203,31 @@ class TransactionTableViewController: UIViewController {
             totalAmountLabel.text = "\(String(format: "%.2f", currencyAmount)) \(currency.code)"
         }
     }
-    
 }
 
 extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let dateString = dynamicDateList[section]
         
-        let transactions: [Transaction]?
-        
-        if let currentSelectedDate = currentSelectedDate {
-            transactions = dateDictionary[currentSelectedDate]
-        } else {
-            transactions = dateDictionary[originDateList[section]]
+        guard let transactions = dateDictionary[dateString] else {
+            return 0
         }
         
-        if let transactions = transactions {
-            return transactions.count
-        }
-        
-        return 0
+        return transactions.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let currentSelectedDate = currentSelectedDate {
-            return currentSelectedDate.string()
-        }
-        
-        return originDateList[section].string()
+        return dynamicDateList[section].string()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let transactions: [Transaction]
+        let dateString = dynamicDateList[indexPath.section]
         
-        if let currentSelectedDate = currentSelectedDate {
-            transactions = dateDictionary[currentSelectedDate]!
-        } else {
-            transactions = dateDictionary[originDateList[indexPath.section]]!
+        guard let transaction = dateDictionary[dateString]?[indexPath.row] else {
+            return cell
         }
-        
-        let transaction: Transaction = transactions[indexPath.row]
         
         cell.textLabel?.text = transaction.name
         
@@ -259,9 +244,10 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return 1
         }
         
-        return originDateList.count
+        return dynamicDateList.count
     }
 }
+
 
 //MARK:- DateSelect CollectionView Delegate, DataSource
 
