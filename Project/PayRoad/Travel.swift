@@ -23,6 +23,7 @@ class Travel: Object {
     
     let transactions = List<Transaction>()
     let currencies = List<Currency>()
+    let budgets = List<Budget>()
     
     override static func primaryKey() -> String? {
         return "id"

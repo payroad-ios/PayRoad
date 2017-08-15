@@ -37,6 +37,8 @@
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
 		E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AB1F41CB3200BD36CC /* Photo.swift */; };
+		E50D13AE1F42D90900BD36CC /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AD1F42D90900BD36CC /* Budget.swift */; };
+		E50D13B01F42D91200BD36CC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AF1F42D91200BD36CC /* Category.swift */; };
 		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* UIImageEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */; };
@@ -77,6 +79,8 @@
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		E50D13AB1F41CB3200BD36CC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E50D13AD1F42D90900BD36CC /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		E50D13AF1F42D91200BD36CC /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* UIImageEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEncoding.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				A74507D91F39878B00DFFADF /* Travel.swift */,
+				E50D13AD1F42D90900BD36CC /* Budget.swift */,
+				E50D13AF1F42D91200BD36CC /* Category.swift */,
 				A74507D71F3984AB00DFFADF /* Transaction.swift */,
 				A74507DF1F398BB800DFFADF /* Currency.swift */,
 				B380C12E1F3D3109003857A2 /* DateInRegion.swift */,
@@ -356,6 +362,7 @@
 			files = (
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
+				E50D13AE1F42D90900BD36CC /* Budget.swift in Sources */,
 				A74507D61F397E4E00DFFADF /* TravelEditorViewController.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
@@ -369,6 +376,7 @@
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
 				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
 				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
+				E50D13B01F42D91200BD36CC /* Category.swift in Sources */,
 				E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */,
 				B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */,
 				B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */,
