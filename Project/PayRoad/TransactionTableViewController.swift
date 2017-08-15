@@ -125,7 +125,7 @@ class TransactionTableViewController: UIViewController {
             }
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = travel.transactions[indexPath.row]
+            editTransactionTableViewController.originTransaction = transactions[indexPath.row]
         }
     }
     
