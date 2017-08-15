@@ -49,13 +49,17 @@ class TransactionTableViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.separatorColor = ColorStore.placeHolderGray
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         
         allListButton.isSelected = true
-        allListButton.setTitleColor(UIColor.blue, for: .selected)
-        allListButton.setTitleColor(UIColor.black, for: .normal)
+        allListButton.setTitleColor(ColorStore.darkGray, for: .normal)
+        allListButton.setTitleColor(ColorStore.darkGray, for: .selected)
+        allListButton.backgroundColor = UIColor.white
         extractDatePeriod()
         
         notificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
@@ -183,6 +187,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBAction func allListButtonDidTap(_ sender: Any) {
         allListButton.isSelected = !allListButton.isSelected
+        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
         
         currentSelectedDate = nil
         let seletedIndexPath = collectionView.indexPathsForSelectedItems
@@ -217,7 +222,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dynamicDateList[section].string()
+        return "  \(dynamicDateList[section].string())"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -237,6 +242,10 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         cell.detailTextLabel?.attributedText = attributedString
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -264,6 +273,7 @@ extension TransactionTableViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         allListButton.isSelected = false
+        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
         currentSelectedDate = travelPeriodDates[indexPath.row]
     }
 }

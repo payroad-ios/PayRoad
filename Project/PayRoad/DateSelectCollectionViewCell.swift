@@ -13,12 +13,14 @@ class DateSelectCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = ColorStore.lightGray
+        self.backgroundColor = ColorStore.darkGray
+        dayLabel.textColor = ColorStore.pastelYellow
     }
     
     override var isSelected: Bool {
         didSet {
-            self.backgroundColor = isSelected ? ColorStore.skyBlue : ColorStore.lightGray
+            self.backgroundColor = isSelected ? ColorStore.pastelYellow : ColorStore.darkGray
+            self.dayLabel.textColor = isSelected ? ColorStore.darkGray : ColorStore.pastelYellow
         }
     }
 }
