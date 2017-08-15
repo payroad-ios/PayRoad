@@ -12,9 +12,10 @@ class Transaction: Object {
     dynamic var id = UUID().uuidString
     dynamic var name = ""
     dynamic var amount: Double = 0.0
+    dynamic var content: String = ""
     dynamic var currency: Currency?
     dynamic var dateInRegion: DateInRegion?
-    dynamic var content: String = ""
+    dynamic var category: Category?
     
     let photos = List<Photo>()
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
