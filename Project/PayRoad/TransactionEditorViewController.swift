@@ -217,6 +217,8 @@ extension TransactionEditorViewController {
                 originTransaction.name = transaction.name
                 originTransaction.amount = transaction.amount
                 originTransaction.currency = transaction.currency
+                originTransaction.content = transaction.content
+                originTransaction.isCash = transaction.isCash
                 originTransaction.photos.first?.id = urlString
                 originTransaction.photos.first?.fileType = "jpg"
                 print("트랜젝션 수정")
