@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -67,12 +67,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="새 여행" id="RG7-3j-DYp">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rEe-qe-gYE">
+                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="rEe-qe-gYE">
                             <connections>
                                 <action selector="cancelButtonDidTap:" destination="zEU-DO-42O" id="Q0b-pf-YLH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="9o9-hC-WxP"/>
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Check" id="9o9-hC-WxP"/>
                     </navigationItem>
                     <connections>
                         <outlet property="endDateTextField" destination="eO1-9n-Yp5" id="r9Y-9Z-Oya"/>
@@ -103,4 +103,8 @@
             <point key="canvasLocation" x="1998" y="690"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
+        <image name="Icon_Check" width="18" height="14"/>
+    </resources>
 </document>

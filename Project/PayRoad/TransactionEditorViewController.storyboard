@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -76,12 +76,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="새 항목" id="SRZ-Ke-tst">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="RkS-vk-QQw">
+                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="RkS-vk-QQw">
                             <connections>
                                 <action selector="cancelButtonDidTap:" destination="8cC-mM-Tm3" id="LAy-N0-cRo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="QCy-aZ-DNJ"/>
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Check" id="QCy-aZ-DNJ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="amountTextField" destination="cBu-pu-8GF" id="kJP-Bp-ioi"/>
@@ -118,4 +118,8 @@
             <point key="canvasLocation" x="1884" y="170"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
+        <image name="Icon_Check" width="18" height="14"/>
+    </resources>
 </document>

@@ -166,12 +166,12 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="여행 이름" id="k9i-xs-t2o">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="8kM-Su-BHv">
+                            <barButtonItem image="Icon_Add" id="8kM-Su-BHv">
                                 <connections>
                                     <segue destination="ylc-d5-iEM" kind="show" identifier="addTransaction" id="vld-HV-hgd"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="edit" id="4P3-ku-1P4">
+                            <barButtonItem image="Icon_Setting" id="4P3-ku-1P4">
                                 <connections>
                                     <action selector="editButtonDidTap:" destination="gj9-wY-KtZ" id="AlR-hT-pnR"/>
                                 </connections>
@@ -230,4 +230,8 @@
             <point key="canvasLocation" x="1884" y="170"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Add" width="17" height="16"/>
+        <image name="Icon_Setting" width="20" height="20"/>
+    </resources>
 </document>
