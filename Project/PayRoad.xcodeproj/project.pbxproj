@@ -32,6 +32,7 @@
 		A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */; };
 		A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */; };
 		A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */; };
+		A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */; };
 		A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */; };
 		A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* ColorStore.swift */; };
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
@@ -77,6 +78,7 @@
 		A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDataFormatter.swift; sourceTree = "<group>"; };
 		A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableInputTextField.swift; sourceTree = "<group>"; };
 		A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7EBD22E1F3ED8790057E844 /* ColorStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
+				A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */,
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */,
 				E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */,
@@ -371,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
+				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
 				A74507D61F397E4E00DFFADF /* TravelEditorViewController.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
