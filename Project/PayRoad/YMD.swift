@@ -24,10 +24,33 @@ struct YMD {
         return calendar.date(from: dateComponents)!
     }
     
+    var dayName: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        return dateFormatter.string(from: self.date)
+    }
+    
     var monthName: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"
         return dateFormatter.string(from: self.date)
+    }
+    
+    init(year: Int, month: Int, day: Int) {
+        self.year = year
+        self.month = month
+        self.day = day
+    }
+    
+    init(date: Date, timeZone: TimeZone = TimeZone.current) {
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        self.init(year: year, month: month, day: day)
     }
     
     public func string() -> String {

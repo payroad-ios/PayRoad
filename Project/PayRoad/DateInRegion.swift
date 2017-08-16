@@ -19,14 +19,7 @@ class DateInRegion: Object {
     }
     
     var ymd: YMD {
-        var calendar = Calendar.current
-        calendar.timeZone = self.timeZone
-        
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        
-        return YMD(year: year, month: month, day: day)
+        return YMD(date: self.date, timeZone: self.timeZone)
     }
     
     override static func ignoredProperties() -> [String] {
