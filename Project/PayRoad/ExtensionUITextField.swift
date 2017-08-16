@@ -9,12 +9,26 @@
 import UIKit
 
 extension UITextField {
-    func inputDatePicker() {
+    func inputDatePicker(mode: UIDatePickerMode, date: Date? = nil, timeZone: TimeZone? = nil) {
         let pickerView: UIDatePicker = {
             let pickerView = UIDatePicker()
-            pickerView.datePickerMode = .date
+            pickerView.datePickerMode = mode
+            pickerView.timeZone = timeZone ?? .current
+            guard let userDate = date else { return pickerView }
+            pickerView.date = userDate
             return pickerView
         }()
+        
+        switch mode {
+        case .countDownTimer:
+            self.tag = 8000
+        case .date:
+            self.tag = 8001
+        case .dateAndTime:
+            self.tag = 8002
+        case .time:
+            self.tag = 8003
+        }
         
         let toolBar: UIToolbar = {
             let toolBar = UIToolbar()
@@ -32,7 +46,15 @@ extension UITextField {
     @objc private func doneDidPressed(_ sender: UIBarButtonItem) {
         guard let targetTextField = sender.target as? UITextField,
             let inputDatePicker = targetTextField.inputView as? UIDatePicker else { return }
-        targetTextField.text = DateUtil.dateFormatter.string(from: inputDatePicker.date)
+        
+        switch targetTextField.tag {
+        case 8001:
+            targetTextField.text = DateUtil.dateFormatter.string(from: inputDatePicker.date)
+        case 8002:
+            targetTextField.text = DateFormatter.string(for: inputDatePicker.date, timeZone: nil)
+        default:
+            targetTextField.text = DateFormatter().string(from: inputDatePicker.date)
+        }
         endEditing(true)
     }
 }

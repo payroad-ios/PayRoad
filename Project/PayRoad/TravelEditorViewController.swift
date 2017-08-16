@@ -30,8 +30,8 @@ class TravelEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startDateTextField.inputDatePicker()
-        endDateTextField.inputDatePicker()
+        startDateTextField.inputDatePicker(mode: .date, date: originTravel?.starteDate)
+        endDateTextField.inputDatePicker(mode: .date, date: originTravel?.endDate)
         
         self.adjustViewMode()
     }
