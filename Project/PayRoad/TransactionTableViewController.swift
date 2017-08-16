@@ -120,13 +120,16 @@ class TransactionTableViewController: UIViewController {
             guard let indexPath = tableView.indexPathForSelectedRow,
                 let navigationController = segue.destination as? UINavigationController,
                 let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
-            else {
-                return
+                else {
+                    return
             }
+            let key = dynamicDateList[indexPath.section]
+            let selectedTransaction = dateDictionary[key]?[indexPath.row]
+            
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = sortedTransactions[indexPath.row]
-            editTransactionTableViewController.standardDate = sortedTransactions[indexPath.row].dateInRegion
+            editTransactionTableViewController.originTransaction = selectedTransaction
+            editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
         }
     }
     
