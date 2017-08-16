@@ -10,7 +10,7 @@ import UIKit
 
 import RealmSwift
 
-class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewControllerDelegate {
+class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewControllerDelegate, UITextFieldDelegate {
     
     enum Mode {
         case new
@@ -21,26 +21,69 @@ class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewCon
     
     var travel: Travel!
     var originCurrency: Currency!
+    var standardCurrency: Currency!
+    var editedCurrency: Currency!
+    
     var mode: Mode = .new
     
-    @IBOutlet weak var codeTextField: UITextField!
+    @IBOutlet weak var currencySelectButton: UIButton!
     @IBOutlet weak var rateTextField: UITextField!
+    @IBOutlet weak var lastUpdateDateLabel: UILabel!
+    @IBOutlet weak var budgetTextField: UITextField!
+    @IBOutlet weak var updateRateButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.standardCurrency = travel.currencies.first!
+        rateTextField.delegate = self
+        budgetTextField.delegate = self
+        
         self.adjustViewMode()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField === rateTextField {
+            rateTextField.text = String(editedCurrency.rate)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField === rateTextField {
+            editedCurrency.rate = Double(textField.text ?? "0") ?? 0
+            let standard = travel.currencies.first!.code
+            let code = currencySelectButton.title(for: .normal)!
+            
+            self.rateTextField.text = "1 \(code)당, \(editedCurrency.rate) \(standard)"
+        }
+        textField.endEditing(true)
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    func currencySelectResponse(code: String) {
-        codeTextField.text = code
+    @IBAction func updateRateButtonDidTap(_ sender: Any) {
+        guard let code = currencySelectButton.title(for: .normal) else {
+            return
+        }
         
-        exchangeRateFromAPI(standard: travel.currencies.first!.code, compare: code) { [unowned self] rate in
+        currencySelectResponse(code: code)
+    }
+    
+    func currencySelectResponse(code: String) {
+        currencySelectButton.setTitle(code, for: .normal)
+        let standard = travel.currencies.first!.code
+        exchangeRateFromAPI(standard: standard, compare: code) { [unowned self] rate in
             OperationQueue.main.addOperation {
-                self.rateTextField.text = rate
+                self.rateTextField.isEnabled = true
+                self.updateRateButton.isEnabled = true
+                self.rateTextField.textColor = self.rateTextField.textColor?.withAlphaComponent(0.6)
+                self.rateTextField.text = "1 \(code)당, \(rate) \(standard)"
+                self.lastUpdateDateLabel.text = DateFormatter.string(for: Date(), timeZone: TimeZone.current)
+                
+                self.editedCurrency.code = code
+                self.editedCurrency.rate = Double(rate) ?? 0
             }
         }
     }
@@ -55,8 +98,8 @@ class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewCon
                 let results = query["results"] as? [String: Any],
                 let result = results["rate"] as? [String: String],
                 let rate = result["Rate"]
-            else {
-                return
+                else {
+                    return
             }
             completion(rate)
         }
@@ -73,32 +116,34 @@ class CurrencyEditorViewController: UIViewController, CurrencySelectTableViewCon
 
 extension CurrencyEditorViewController {
     fileprivate func adjustViewMode() {
+        self.editedCurrency = Currency()
+        if let originRate = originCurrency?.rate {
+            editedCurrency.rate = originRate
+        }
+        
         switch self.mode {
         case .new:
-            let saveBarButtonItem: UIBarButtonItem
-            let selector = #selector(saveButtonDidTap)
-            saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
+            let saveBarButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(saveButtonDidTap))
             self.navigationItem.rightBarButtonItem = saveBarButtonItem
-        case .edit:
-            self.navigationItem.title = "통화 수정"
-            codeTextField?.text = originCurrency.code
-            rateTextField?.text = String(originCurrency.rate)
             
-            let editBarButtonItem: UIBarButtonItem
-            let selector = #selector(editButtonDidTap)
-            editBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
+            self.rateTextField.isEnabled = false
+            self.updateRateButton.isEnabled = false
+        case .edit:
+            self.navigationItem.title = "예산 수정"
+            let editBarButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(editButtonDidTap))
             self.navigationItem.rightBarButtonItem = editBarButtonItem
             
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
-            button.setTitle("통화 삭제", for: .normal)
-            button.setTitleColor(.red, for: .normal)
-            button.setTitleColor(UIColor.red.withAlphaComponent(0.3) , for: .highlighted)
+            self.currencySelectButton.setTitle(originCurrency.code, for: .normal)
+            self.currencySelectButton.isEnabled = false
             
-            let buttonX = view.frame.width / 2
-            let buttonY = view.frame.height / 2
-            button.center = CGPoint(x: buttonX, y: buttonY)
-            button.addTarget(self, action: #selector(deleteCurrencyButtonDidTap), for: .touchUpInside)
-            self.view.addSubview(button)
+            //self.rateTextField.isEnabled = false
+            self.budgetTextField.text = String(originCurrency.budget)
+            
+            if originCurrency.code == standardCurrency.code {
+                rateTextField?.text = "기준 통화"
+            } else {
+                rateTextField?.text = "1 \(originCurrency.code)당 \(originCurrency.rate)\(standardCurrency.code)"
+            }
         }
     }
     
@@ -132,6 +177,7 @@ extension CurrencyEditorViewController {
             try realm.write {
                 originCurrency.code = currency.code
                 originCurrency.rate = currency.rate
+                originCurrency.budget = currency.budget
                 print("통화 수정")
             }
         } catch {
@@ -141,16 +187,18 @@ extension CurrencyEditorViewController {
     
     func currentyFromUI(currency: inout Currency) {
         
-        guard let code = codeTextField?.text,
-            let rateText = rateTextField.text,
-            let rate = Double(rateText)
+        guard let code = currencySelectButton.title(for: .normal),
+            let budgetText = budgetTextField.text,
+            let budget = Double(budgetText)
         else {
-            print("fail to get currency from UI")
-            return
+                print("fail to get currency from UI")
+                return
         }
         
         currency.code = code
-        currency.rate = rate
+        
+        currency.rate = editedCurrency.rate
+        currency.budget = budget
     }
     
     func deleteCurrencyButtonDidTap() {

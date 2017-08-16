@@ -43,6 +43,7 @@
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
 		E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AB1F41CB3200BD36CC /* Photo.swift */; };
 		E50D13B01F42D91200BD36CC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AF1F42D91200BD36CC /* Category.swift */; };
+		E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */; };
 		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */; };
@@ -89,6 +90,7 @@
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		E50D13AB1F41CB3200BD36CC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E50D13AF1F42D91200BD36CC /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyBudgetTableViewCell.swift; sourceTree = "<group>"; };
 		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */,
 				B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */,
 				B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */,
+				E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */,
 			);
 			name = Currency;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
 				A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */,
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
+				E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */,
 				A74507DA1F39878B00DFFADF /* Travel.swift in Sources */,
 				E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */,
 				A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */,
