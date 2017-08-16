@@ -13,7 +13,7 @@ extension UITextField {
         let pickerView: UIDatePicker = {
             let pickerView = UIDatePicker()
             pickerView.datePickerMode = mode
-            pickerView.timeZone = timeZone
+            pickerView.timeZone = timeZone ?? .current
             guard let userDate = date else { return pickerView }
             pickerView.date = userDate
             return pickerView
