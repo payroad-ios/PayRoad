@@ -15,7 +15,7 @@ class TransactionTableViewController: UIViewController {
     let realm = try! Realm()
     
     var travel: Travel!
-    var transactions: Results<Transaction>!
+    var sortedTransactions: Results<Transaction>!
 
     var transactionsNotificationToken: NotificationToken? = nil
     var travelNotificationToken: NotificationToken? = nil
@@ -47,7 +47,7 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         
         title = travel.name
-        transactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
+        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -125,7 +125,7 @@ class TransactionTableViewController: UIViewController {
             }
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = transactions[indexPath.row]
+            editTransactionTableViewController.originTransaction = sortedTransactions[indexPath.row]
         }
     }
     
@@ -136,7 +136,7 @@ class TransactionTableViewController: UIViewController {
         totalAmountByCurrency = [Currency: Double]()
         totalAmountOfFirstCurrency = 0.0
         
-        for transaction in transactions {
+        for transaction in sortedTransactions {
             
             guard let dateInRegion = transaction.dateInRegion else {
                 return
