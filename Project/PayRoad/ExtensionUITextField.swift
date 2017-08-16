@@ -9,10 +9,11 @@
 import UIKit
 
 extension UITextField {
-    func inputDatePicker(mode: UIDatePickerMode, date: Date? = nil) {
+    func inputDatePicker(mode: UIDatePickerMode, date: Date? = nil, timeZone: TimeZone? = nil) {
         let pickerView: UIDatePicker = {
             let pickerView = UIDatePicker()
             pickerView.datePickerMode = mode
+            pickerView.timeZone = timeZone
             guard let userDate = date else { return pickerView }
             pickerView.date = userDate
             return pickerView

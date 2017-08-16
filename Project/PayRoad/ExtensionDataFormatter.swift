@@ -16,7 +16,7 @@ extension DateFormatter {
         return dateFormatter.string(from: date)
     }
     
-    static func string(for date: Date, timeZone: TimeZone?) -> String {
+    static func string(for date: Date, timeZone: TimeZone? = nil) -> String {
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
         formatter.dateStyle = .medium

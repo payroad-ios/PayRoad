@@ -126,6 +126,7 @@ class TransactionTableViewController: UIViewController {
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
             editTransactionTableViewController.originTransaction = sortedTransactions[indexPath.row]
+            editTransactionTableViewController.standardDate = sortedTransactions[indexPath.row].dateInRegion
         }
     }
     
@@ -193,7 +194,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     @IBAction func allListButtonDidTap(_ sender: Any) {
-        allListButton.isSelected = !allListButton.isSelected
+        allListButton.isSelected = true
         allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
         
         currentSelectedDate = nil
@@ -282,7 +283,15 @@ extension TransactionTableViewController {
         let navigationController = UINavigationController(rootViewController: transactionEditorViewController)
         
         if scrollView.restorationIdentifier == "transactionTableView" && !(scrollView.contentOffset.y >= -50) && velocity.y >= -3.5 {
+            let dateInRegion = DateInRegion()
+            if let selectedDate = currentSelectedDate {
+                dateInRegion.date = selectedDate.compareRangeOfDate(date: Date()) ? Date() : selectedDate.date
+            } else {
+                dateInRegion.date = Date()
+            }
+
             transactionEditorViewController.travel = travel
+            transactionEditorViewController.standardDate = dateInRegion
             present(navigationController, animated: true, completion: nil)
         }
     }

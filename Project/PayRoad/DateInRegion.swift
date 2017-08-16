@@ -11,7 +11,7 @@ import RealmSwift
 class DateInRegion: Object {
     
     dynamic var date = Date()
-    dynamic var _timeZone: String = ""
+    private dynamic var _timeZone: String = TimeZone.current.identifier
     
     var timeZone: TimeZone {
         get { return TimeZone(identifier: _timeZone) ?? .current }

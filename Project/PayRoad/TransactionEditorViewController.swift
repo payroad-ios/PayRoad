@@ -33,7 +33,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     }()
     
     //User Input Data
-    var standardDate: Date? = nil
+    var standardDate: DateInRegion? = nil
     var inputCategory: CategoryTEST? = nil
     var inputImages: [UIImage]? = nil
     var isCash = true {
@@ -66,8 +66,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         currencyTextField.borderStyle = .none
         categoryCollectionViewBG.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         categoryCollectionViewBG.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
-        dateEditTextField.text = DateFormatter.string(for: standardDate ?? Date(), timeZone: nil)
-        dateEditTextField.inputDatePicker(mode: .dateAndTime, date: standardDate)
+        dateEditTextField.text = DateFormatter.string(for: standardDate?.date ?? Date(), timeZone: standardDate?.timeZone)
+        dateEditTextField.inputDatePicker(mode: .dateAndTime, date: standardDate?.date, timeZone: standardDate?.timeZone)
     }
     
     override func viewDidLoad() {
@@ -113,7 +113,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 }
 
 extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -182,11 +181,6 @@ extension TransactionEditorViewController {
             transaction.photos.append(photo)
         }
         
-        let dateInRegion = DateInRegion()
-        dateInRegion.date = Date()
-        dateInRegion.timeZone = TimeZone.current
-        transaction.dateInRegion = dateInRegion
-        
         do {
             try realm.write {
                 travel.transactions.append(transaction)
@@ -219,6 +213,7 @@ extension TransactionEditorViewController {
                 originTransaction.currency = transaction.currency
                 originTransaction.content = transaction.content
                 originTransaction.isCash = transaction.isCash
+                originTransaction.dateInRegion = transaction.dateInRegion
                 originTransaction.photos.first?.id = urlString
                 originTransaction.photos.first?.fileType = "jpg"
                 print("트랜젝션 수정")
@@ -239,12 +234,17 @@ extension TransactionEditorViewController {
             return
         }
         
+        let datePicker = dateEditTextField.inputView as! UIDatePicker
+        let dateInRegion = DateInRegion()
+        dateInRegion.date = datePicker.date
+        dateInRegion.timeZone = standardDate?.timeZone ?? .current
+        
         transaction.name = name
         transaction.amount = amount
         transaction.content = content
         transaction.currency = currency
         transaction.isCash = isCash
-//        transaction.dateInRegion = date ?? Date()
+        transaction.dateInRegion = dateInRegion
     }
 }
 

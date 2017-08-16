@@ -31,10 +31,10 @@ struct YMD {
     }
     
     public func string() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter.string(from: self.date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        return dateFormatter.string(from: self.date)
     }
     
     public mutating func add(day: Int) {
@@ -43,6 +43,12 @@ struct YMD {
         self.year = calendar.component(.year, from: date)
         self.month = calendar.component(.month, from: date)
         self.day = calendar.component(.day, from: date)
+    }
+    
+    func compareRangeOfDate(date: Date) -> Bool {
+        let calendar = Calendar.current
+        let isDate = calendar.isDate(self.date, inSameDayAs: date)
+        return isDate
     }
 }
 
