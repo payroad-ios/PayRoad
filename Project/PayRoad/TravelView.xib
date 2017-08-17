@@ -80,11 +80,11 @@
                         <constraint firstItem="ESn-Rg-CUR" firstAttribute="trailing" secondItem="aPn-yc-XHQ" secondAttribute="trailing" id="McW-96-6dL"/>
                         <constraint firstItem="ESn-Rg-CUR" firstAttribute="leading" secondItem="aPn-yc-XHQ" secondAttribute="leading" id="QGs-s5-HAk"/>
                         <constraint firstItem="iaO-04-fBb" firstAttribute="top" secondItem="aXU-Gt-Sx4" secondAttribute="top" constant="20" id="TUJ-Qc-oyr"/>
-                        <constraint firstItem="aPn-yc-XHQ" firstAttribute="top" secondItem="iaO-04-fBb" secondAttribute="bottom" id="YKv-Q0-sSa"/>
                         <constraint firstItem="BfQ-kh-ffh" firstAttribute="centerX" secondItem="aXU-Gt-Sx4" secondAttribute="centerX" id="Zgq-1b-6oq"/>
                         <constraint firstAttribute="trailing" secondItem="iaO-04-fBb" secondAttribute="trailing" constant="10" id="fFU-sO-fML"/>
                         <constraint firstItem="aPn-yc-XHQ" firstAttribute="leading" secondItem="iaO-04-fBb" secondAttribute="leading" id="kI8-Cd-svJ"/>
                         <constraint firstItem="ESn-Rg-CUR" firstAttribute="top" secondItem="BfQ-kh-ffh" secondAttribute="bottom" constant="14" id="n35-2c-dax"/>
+                        <constraint firstItem="aPn-yc-XHQ" firstAttribute="top" secondItem="aXU-Gt-Sx4" secondAttribute="top" constant="54" id="noy-Wo-HeV"/>
                         <constraint firstItem="BfQ-kh-ffh" firstAttribute="width" secondItem="aXU-Gt-Sx4" secondAttribute="width" multiplier="0.1" id="qRs-A0-a8i"/>
                         <constraint firstItem="BfQ-kh-ffh" firstAttribute="top" secondItem="aPn-yc-XHQ" secondAttribute="bottom" constant="9.5" id="xkC-U6-Pj5"/>
                     </constraints>
