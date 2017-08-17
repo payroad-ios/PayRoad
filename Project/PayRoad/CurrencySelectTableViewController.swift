@@ -8,50 +8,107 @@
 
 import UIKit
 
+struct ISOCurrency {
+    var code: String
+    var name: String
+}
+
 protocol CurrencySelectTableViewControllerDelegate {
     
     func currencySelectResponse(code: String)
 }
 
-class CurrencySelectTableViewController: UITableViewController, UISearchBarDelegate {
+class CurrencySelectTableViewController: UIViewController {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     var delegate: CurrencySelectTableViewControllerDelegate?
+    
+    var ISOCurrencies = [ISOCurrency]()
+    var filteredCurrencies = [ISOCurrency]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "화폐"
+        
+        self.searchBar.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        for currencyCode in Locale.commonISOCurrencyCodes {
+            if let currencyName = Locale.current.localizedString(forCurrencyCode: currencyCode) {
+                let currency = ISOCurrency(code: currencyCode, name: currencyName)
+                ISOCurrencies.append(currency)
+            }
+        }
+        
+        filteredCurrencies = ISOCurrencies
+        tableView.reloadData()
     }
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
 
-extension CurrencySelectTableViewController {
+extension CurrencySelectTableViewController: UITableViewDelegate, UITableViewDataSource {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Locale.commonISOCurrencyCodes.count
+        return filteredCurrencies.count
+
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencyItemCell", for: indexPath)
         
-        let currencyCode = Locale.commonISOCurrencyCodes[indexPath.row]
-        cell.textLabel?.text = Locale.current.localizedString(forCurrencyCode: currencyCode)
-        cell.detailTextLabel?.text = currencyCode
+        let currency = filteredCurrencies[indexPath.row]
+        cell.textLabel?.text = currency.name
+        cell.detailTextLabel?.text = currency.code
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let code = Locale.commonISOCurrencyCodes[indexPath.row]
         self.delegate?.currencySelectResponse(code: code)
         self.navigationController?.popViewController(animated: true)
         
+    }
+}
+
+// MARK: UISearchBarDelegate
+
+extension CurrencySelectTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterCurrencyForSearchText(searchText)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = false
+        self.searchBar.text = ""
+        self.searchBar.resignFirstResponder()
+        filteredCurrencies = ISOCurrencies
+        tableView.reloadData()
+    }
+    
+    func filterCurrencyForSearchText(_ searchText: String) {
+        filteredCurrencies = ISOCurrencies.filter({(currency: ISOCurrency) -> Bool in
+            if searchText.isEmpty {
+                return true
+            } else {
+                return currency.code.lowercased().contains(searchText.lowercased()) || currency.name.lowercased().contains(searchText.lowercased())
+            }
+        })
+        tableView.reloadData()
     }
 }

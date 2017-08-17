@@ -10,6 +10,12 @@ import UIKit
 
 import RealmSwift
 
+enum PaymentType {
+    case all
+    case cash
+    case card
+}
+
 class TransactionTableViewController: UIViewController {
     
     let realm = try! Realm()
@@ -25,9 +31,11 @@ class TransactionTableViewController: UIViewController {
     var originDateList = [YMD]()
     var dynamicDateList = [YMD]()
     
-    var totalAmountByCurrency = [Currency: Double]()
-    var totalAmountOfFirstCurrency = 0.0
-    var totalAmountIndex = 0
+    var currentPaymentType = PaymentType.all
+    var totalSpendingIndex = 0
+    var totalSpendingByYMD = [YMD: Double]()
+    var totalSpendingByCurrency = [Currency: Double]()
+    var totalSpendingOfFirstCurrency = 0.0
     
     var currentSelectedDate: YMD? {
         didSet {
@@ -40,20 +48,26 @@ class TransactionTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var allListButton: UIButton!
-    @IBOutlet weak var totalAmountTitleLabel: UILabel!
-    @IBOutlet weak var totalAmountLabel: UILabel!
+    
+    @IBOutlet weak var paymentTypeButton: UIButton!
+    @IBOutlet weak var spendingLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var percentageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = travel.name
-        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
+        sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let nibCell = UINib(nibName: "TransactionTableViewCell", bundle: nil)
+        tableView.register(nibCell, forCellReuseIdentifier: "transactionTableViewCell")
         
         pullToAddLabel.textColor = ColorStore.basicBlack
         pullToAddLabel.backgroundColor = ColorStore.lightestGray
@@ -74,6 +88,7 @@ class TransactionTableViewController: UIViewController {
         transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
             self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.displayTotalSpendingCurrency()
         }
         
         
@@ -120,13 +135,16 @@ class TransactionTableViewController: UIViewController {
             guard let indexPath = tableView.indexPathForSelectedRow,
                 let navigationController = segue.destination as? UINavigationController,
                 let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
-            else {
-                return
+                else {
+                    return
             }
+            let key = dynamicDateList[indexPath.section]
+            let selectedTransaction = dateDictionary[key]?[indexPath.row]
+            
             editTransactionTableViewController.mode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = sortedTransactions[indexPath.row]
-            editTransactionTableViewController.standardDate = sortedTransactions[indexPath.row].dateInRegion
+            editTransactionTableViewController.originTransaction = selectedTransaction
+            editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
         }
     }
     
@@ -134,45 +152,46 @@ class TransactionTableViewController: UIViewController {
         dateDictionary = [YMD: [Transaction]]()
         originDateList = [YMD]()
         
-        totalAmountByCurrency = [Currency: Double]()
-        totalAmountOfFirstCurrency = 0.0
+        totalSpendingByYMD = [YMD: Double]()
+        totalSpendingByCurrency = [Currency: Double]()
+        totalSpendingOfFirstCurrency = 0.0
         
         for transaction in sortedTransactions {
             
-            guard let dateInRegion = transaction.dateInRegion else {
-                return
+            guard let ymd = transaction.dateInRegion?.ymd,
+                let currency = transaction.currency else { return }
+            
+            if dateDictionary[ymd] == nil {
+                dateDictionary[ymd] = []
             }
             
-            if dateDictionary[dateInRegion.ymd] == nil {
-                dateDictionary[dateInRegion.ymd] = []
+            if !originDateList.contains(ymd) {
+                originDateList.append(ymd)
             }
             
-            if !originDateList.contains(dateInRegion.ymd) {
-                originDateList.append(dateInRegion.ymd)
-            }
+            dateDictionary[ymd]?.append(transaction)
             
-            dateDictionary[dateInRegion.ymd]?.append(transaction)
-            
-            guard let currency = transaction.currency else {
-                return
-            }
-            
-            if var totalAmount = totalAmountByCurrency[currency] {
+            if var totalAmount = totalSpendingByCurrency[currency] {
                 totalAmount += transaction.amount
-                totalAmountByCurrency[currency] = totalAmount
+                totalSpendingByCurrency[currency] = totalAmount
             } else {
-                totalAmountByCurrency[currency] = transaction.amount
+                totalSpendingByCurrency[currency] = transaction.amount
             }
             
-            totalAmountOfFirstCurrency += transaction.amount / currency.rate
+            if var totalAmount = totalSpendingByYMD[ymd] {
+                totalAmount += transaction.amount / currency.rate
+                totalSpendingByYMD[ymd] = totalAmount
+            } else {
+                totalSpendingByYMD[ymd] = transaction.amount / currency.rate
+            }
+            
         }
         
         originDateList.sort(by: >)
         
-        // MARK: 여행가계부 앱을 참고하여 소숫점 두 자리까지만 표기
-        totalAmountIndex = 0
-        totalAmountTitleLabel.text = "총 지출 금액"
-        totalAmountLabel.text = "\(String(format: "%.2f", totalAmountOfFirstCurrency)) \(travel.currencies.first!.code)"
+        for amount in totalSpendingByYMD.values {
+            totalSpendingOfFirstCurrency += amount
+        }
     }
     
     func filterTransaction(selected: YMD?) {
@@ -203,18 +222,54 @@ class TransactionTableViewController: UIViewController {
         collectionView.deselectItem(at: indexPath, animated: false)
     }
     
-    @IBAction func changeTotalAmountCurrency(_ sender: UITapGestureRecognizer) {
-        if totalAmountByCurrency.count == totalAmountIndex {
-            totalAmountIndex = 0
-            totalAmountTitleLabel.text = "총 지출 금액"
-            totalAmountLabel.text = "\(String(format: "%.2f", totalAmountOfFirstCurrency)) \(travel.currencies.first!.code)"
-        } else {
-            totalAmountIndex += 1
-            let currency = Array(totalAmountByCurrency.keys)[totalAmountIndex - 1]
-            guard let currencyAmount = totalAmountByCurrency[currency] else { return }
-            totalAmountTitleLabel.text = "\(currency.code) 지출 금액"
-            totalAmountLabel.text = "\(String(format: "%.2f", currencyAmount)) \(currency.code)"
+    @IBAction func paymentTypeButtonDidTap(_ sender: Any) {
+        switch currentPaymentType {
+        case .all:
+            currentPaymentType = .cash
+            paymentTypeButton.setTitle("현금", for: .normal)
+            sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
+        case .cash:
+            currentPaymentType = .card
+            paymentTypeButton.setTitle("카드", for: .normal)
+            sortedTransactions = travel.transactions.filter("isCash == false").sorted(byKeyPath: "dateInRegion.date", ascending: false)
+        case .card:
+            currentPaymentType = .all
+            paymentTypeButton.setTitle("전체", for: .normal)
+            sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         }
+        
+        initDataStructures()
+        filterTransaction(selected: currentSelectedDate)
+        displayTotalSpendingCurrency()
+    }
+    
+    @IBAction func totalSpendingViewDidTap(_ sender: Any) {
+        totalSpendingIndex += 1
+        displayTotalSpendingCurrency()
+    }
+    
+    func displayTotalSpendingCurrency() {
+        if totalSpendingIndex >= travel.currencies.count {
+            totalSpendingIndex = 0
+        }
+        
+        let currency = travel.currencies[totalSpendingIndex]
+        var spendingRate = 0.0
+        
+        if let amountByCurrency = totalSpendingByCurrency[currency] {
+            spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
+            balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
+            spendingRate = amountByCurrency / currency.budget
+        } else {
+            spendingLabel.text = "0 \(currency.code)"
+            balanceLabel.text = "\(currency.budget) \(currency.code)"
+        }
+        
+        if spendingRate < 0 || spendingRate > 1 {
+            spendingRate = 1
+        }
+        
+        percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
     }
     
     deinit {
@@ -235,11 +290,17 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let ymd = dynamicDateList[section]
+        
+        if let totalAmount = totalSpendingByYMD[ymd] {
+            return "  \(dynamicDateList[section].string()) (\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code))"
+        }
+        
         return "  \(dynamicDateList[section].string())"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "transactionTableViewCell", for: indexPath) as! TransactionTableViewCell
         
         let dateString = dynamicDateList[indexPath.section]
         
@@ -247,18 +308,34 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        cell.textLabel?.text = transaction.name
+        if let thumbnailURL = transaction.photos.first?.fileURL {
+            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        }
         
-        //TODO: 하나의 Label에 String 속성 변경하는 코드 (통화 3글자 색상 변경) -> 이 코드는 UITableViewCell이 별도의 클래스로 지정될 때 그 클래스의 내부에 선언
-        let attributedString = NSMutableAttributedString(string: "\(transaction.currency?.code ?? "") \(transaction.amount)")
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSRange(location: 0, length: 3))
-        cell.detailTextLabel?.attributedText = attributedString
+        cell.transactionNameLabel.text = transaction.name
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        
+        if transaction.isCash {
+            
+        } else {
+            
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "editTransaction", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
+    //for remove seperate line
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -269,7 +346,6 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         return dynamicDateList.count
     }
 }
-
 
 extension TransactionTableViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -296,7 +372,6 @@ extension TransactionTableViewController {
         }
     }
 }
-
 
 //MARK:- DateSelect CollectionView Delegate, DataSource
 

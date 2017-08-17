@@ -58,14 +58,29 @@ class CurrencyTableViewController: UIViewController {
 
 extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencyCell", for: indexPath)
-        cell.textLabel?.text = travel.currencies[indexPath.row].code
-        cell.detailTextLabel?.text = String(travel.currencies[indexPath.row].rate)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencyBudgetTableViewCell", for: indexPath) as! CurrencyBudgetTableViewCell
         
+        let currency = travel.currencies[indexPath.row]
+        cell.currencyCodeLabel?.text = currency.code
+        cell.currencyLocaleLabel?.text = Locale.current.localizedString(forCurrencyCode: currency.code)
+        cell.budgetAmountLabel?.text = String(currency.budget)
+        
+        if currency.rate == 1.0 {
+            cell.rateLabel?.text = "기준"
+        } else {
+            let basicCurrencyCode = travel.currencies.first!.code
+            cell.rateLabel?.text = "1\(currency.code)당 \(currency.rate)\(basicCurrencyCode)"
+        }
+            
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travel.currencies.count
+    }
+    
+    //for remove seperate line
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
 }

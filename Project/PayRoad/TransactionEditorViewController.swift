@@ -210,8 +210,14 @@ extension TransactionEditorViewController {
                 originTransaction.content = transaction.content
                 originTransaction.isCash = transaction.isCash
                 originTransaction.dateInRegion = transaction.dateInRegion
-                originTransaction.photos.first?.id = urlString
-                originTransaction.photos.first?.fileType = "jpg"
+                
+                let urlString = UUID().uuidString
+                
+                if let image = transactionImageView.image {
+                    FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
+                    originTransaction.photos.first?.id = urlString
+                    originTransaction.photos.first?.fileType = "jpg"
+                }
                 print("트랜젝션 수정")
             }
         } catch {

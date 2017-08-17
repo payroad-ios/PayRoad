@@ -47,8 +47,11 @@
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
 		E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AB1F41CB3200BD36CC /* Photo.swift */; };
 		E50D13B01F42D91200BD36CC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AF1F42D91200BD36CC /* Category.swift */; };
+		E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */; };
 		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
+		E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */; };
+		E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,8 +100,11 @@
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		E50D13AB1F41CB3200BD36CC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E50D13AF1F42D91200BD36CC /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyBudgetTableViewCell.swift; sourceTree = "<group>"; };
 		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
+		E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +206,7 @@
 				A74507E81F39966600DFFADF /* TransactionEditorViewController.swift */,
 				A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */,
 				A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */,
+				E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -213,6 +220,7 @@
 				A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */,
 				B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */,
 				B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */,
+				E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */,
 			);
 			name = Currency;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				E50D13A91F41C56E00BD36CC /* FileUtil.swift */,
 				A7EBD22E1F3ED8790057E844 /* ColorStore.swift */,
 				A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */,
+				E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -320,6 +329,7 @@
 				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
 				A7B4F6F11F444DD70049D812 /* TravelView.xib in Resources */,
 				A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */,
+				E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
 				A74507E71F3991E700DFFADF /* CurrencyTableViewController.storyboard in Resources */,
 				A74507DC1F39887B00DFFADF /* TransactionTableViewController.storyboard in Resources */,
@@ -401,6 +411,8 @@
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
 				A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */,
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
+				E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */,
+				E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */,
 				A74507DA1F39878B00DFFADF /* Travel.swift in Sources */,
 				A7B4F6EC1F4434D30049D812 /* TravelTableViewCell.swift in Sources */,
 				E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */,
