@@ -312,8 +312,8 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
         }
         
-        cell.TransactionNameLabel.text = transaction.name
-        cell.TransactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        cell.transactionNameLabel.text = transaction.name
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
         
         if transaction.isCash {
             
@@ -325,6 +325,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "editTransaction", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

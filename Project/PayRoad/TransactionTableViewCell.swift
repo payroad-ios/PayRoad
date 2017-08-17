@@ -11,6 +11,6 @@ import UIKit
 class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var categoryImageView: UIImageView!
-    @IBOutlet weak var TransactionNameLabel: UILabel!
-    @IBOutlet weak var TransactionAmountLabel: UILabel!
+    @IBOutlet weak var transactionNameLabel: UILabel!
+    @IBOutlet weak var transactionAmountLabel: UILabel!
 }
