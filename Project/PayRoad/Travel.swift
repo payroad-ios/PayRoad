@@ -13,6 +13,7 @@ class Travel: Object {
     dynamic var name = ""
     dynamic var starteDate = Date()
     dynamic var endDate = Date()
+    dynamic var photo: Photo?
     
     dynamic var startYear = 0
     dynamic var startMonth = 0

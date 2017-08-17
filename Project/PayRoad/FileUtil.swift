@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum PhotoFormat: String {
+    case jpg = "jpg"
+    case png = "png"
+}
+
 struct FileUtil {
     private static func filePathForDocumentDir(_ filename: String) -> String? {
         guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -28,6 +33,15 @@ struct FileUtil {
         let imageData = image.data()
         
         try? imageData.write(to: URL(fileURLWithPath: imagePath), options: [.atomic])
+    }
+    
+    static func saveNewImage(image: UIImage, format: PhotoFormat = .jpg) -> Photo {
+        let photo = Photo()
+        photo.id = UUID().uuidString
+        photo.fileType = format.rawValue
+
+        FileUtil.saveImageToDocumentDir(image, filePath: photo.fileURL)
+        return photo
     }
     
     static func loadImageFromDocumentDir(filePath: String) -> UIImage? {
