@@ -21,9 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="travelCell" rowHeight="140" id="8vu-1n-wAi" customClass="TravelTableViewCell" customModule="PayRoad" customModuleProvider="target">
@@ -54,6 +53,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="8GV-yg-0eI" secondAttribute="bottom" id="RXw-to-yTz"/>
+                            <constraint firstItem="8GV-yg-0eI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="YvD-Sf-BQn"/>
+                            <constraint firstItem="8GV-yg-0eI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dUC-TB-ZJv"/>
+                            <constraint firstAttribute="trailing" secondItem="8GV-yg-0eI" secondAttribute="trailing" id="qXF-s5-aKI"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PayRoad" id="4dE-vc-FwP">
                         <barButtonItem key="rightBarButtonItem" image="Icon_Add" id="kIF-rI-xH4">
