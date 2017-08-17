@@ -18,6 +18,8 @@ class TravelTableViewController: UIViewController {
     }()
     var notificationToken: NotificationToken? = nil
     
+    let tempBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -47,8 +49,19 @@ class TravelTableViewController: UIViewController {
 extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = travels[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "travelCell", for: indexPath) as! TravelTableViewCell
+        
+        let travel = travels[indexPath.row]
+        cell.travelView.travelNameLabel.text = travel.name
+        cell.travelView.fillDatePeriodLabel(startDate: travel.starteDate, endDate: travel.endDate)
+        
+        guard let fileURL = travel.photo?.fileURL else {
+            return cell
+        }
+        cell.travelView.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
+        
+        //image Random Setting
+//        cell.travelView.backgroundImage.image = tempBackgroundBGArray[Int(arc4random_uniform(UInt32(tempBackgroundBGArray.count)))]
         
         return cell
     }

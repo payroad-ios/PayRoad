@@ -21,18 +21,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="8vu-1n-wAi">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="travelCell" rowHeight="140" id="8vu-1n-wAi" customClass="TravelTableViewCell" customModule="PayRoad" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8vu-1n-wAi" id="4zR-6o-9eg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oft-Yu-iBy" customClass="TravelView" customModule="PayRoad" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Oft-Yu-iBy" firstAttribute="top" secondItem="4zR-6o-9eg" secondAttribute="top" id="3zD-yd-1Nv"/>
+                                                <constraint firstAttribute="trailing" secondItem="Oft-Yu-iBy" secondAttribute="trailing" id="wE4-CT-E3o"/>
+                                                <constraint firstItem="Oft-Yu-iBy" firstAttribute="leading" secondItem="4zR-6o-9eg" secondAttribute="leading" id="wd0-rf-vwy"/>
+                                                <constraint firstAttribute="bottom" secondItem="Oft-Yu-iBy" secondAttribute="bottom" id="z2K-8T-UZ9"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="travelView" destination="Oft-Yu-iBy" id="xby-xM-fsB"/>
                                             <segue destination="50m-xi-2PA" kind="show" identifier="showTransactions" id="3hQ-i7-iBf"/>
                                         </connections>
                                     </tableViewCell>
@@ -40,12 +54,6 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="8GV-yg-0eI" secondAttribute="trailing" id="Ix3-3m-XhL"/>
-                            <constraint firstAttribute="bottom" secondItem="8GV-yg-0eI" secondAttribute="bottom" id="Nhk-f6-bIV"/>
-                            <constraint firstItem="8GV-yg-0eI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="m3q-7a-DTW"/>
-                            <constraint firstItem="8GV-yg-0eI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="xTc-GH-nHX"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PayRoad" id="4dE-vc-FwP">
                         <barButtonItem key="rightBarButtonItem" image="Icon_Add" id="kIF-rI-xH4">
@@ -60,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="916" y="691"/>
+            <point key="canvasLocation" x="916" y="690.40479760119945"/>
         </scene>
         <!--TransactionTableViewController-->
         <scene sceneID="sSH-nq-gSe">
