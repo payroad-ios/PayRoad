@@ -70,6 +70,8 @@ class TransactionTableViewController: UIViewController {
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
+        tableView.tableFooterView = UIView()
+        
         let nibCell = UINib(nibName: "TransactionTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "transactionTableViewCell")
         
@@ -362,11 +364,6 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90.0
-    }
-    
-    //for remove seperate line
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
