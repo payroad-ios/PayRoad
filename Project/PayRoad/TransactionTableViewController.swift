@@ -183,10 +183,10 @@ class TransactionTableViewController: UIViewController {
             }
             
             if var totalAmount = totalSpendingByYMD[ymd] {
-                totalAmount += transaction.amount / currency.rate
+                totalAmount += transaction.amount * currency.rate
                 totalSpendingByYMD[ymd] = totalAmount
             } else {
-                totalSpendingByYMD[ymd] = transaction.amount / currency.rate
+                totalSpendingByYMD[ymd] = transaction.amount * currency.rate
             }
             
         }
