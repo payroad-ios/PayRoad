@@ -291,10 +291,6 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         return transactions.count
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return " "
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableViewSectionHeight
     }
