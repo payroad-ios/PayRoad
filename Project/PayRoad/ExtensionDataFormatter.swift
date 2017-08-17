@@ -9,19 +9,18 @@
 import UIKit
 
 extension DateFormatter {
-    static func stringToDay(for date: Date) -> String {
+    static func string(for date: Date, timeZone: TimeZone? = nil) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd"
+        dateFormatter.timeZone = timeZone ?? .current
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
         
         return dateFormatter.string(from: date)
     }
     
-    static func string(for date: Date, timeZone: TimeZone? = nil) -> String {
-        let formatter = DateFormatter()
-        formatter.timeZone = timeZone
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        
-        return formatter.string(from: date)
+    static func string(format: String, for date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
     }
 }

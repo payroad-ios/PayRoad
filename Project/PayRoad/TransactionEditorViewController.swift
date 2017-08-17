@@ -172,12 +172,7 @@ extension TransactionEditorViewController {
         transactionFromUI(transaction: &transaction)
         
         if let image = transactionImageView.image {
-            let photo = Photo()
-            
-            photo.id = UUID().uuidString
-            photo.fileType = "jpg"
-            
-            FileUtil.saveImageToDocumentDir(image, filePath: photo.fileURL)
+            let photo = FileUtil.saveNewImage(image: image)
             transaction.photos.append(photo)
         }
         
@@ -199,6 +194,13 @@ extension TransactionEditorViewController {
         
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
+
+        let urlString = UUID().uuidString
+        
+        //image 부분 수정 필요
+        if let image = transactionImageView.image {
+            FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
+        }
         
         do {
             try realm.write {
