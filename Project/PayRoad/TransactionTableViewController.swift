@@ -47,6 +47,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var spendingProgressView: UIProgressView!
     @IBOutlet weak var allListButton: UIButton!
     
     @IBOutlet weak var paymentTypeButton: UIButton!
@@ -255,12 +256,12 @@ class TransactionTableViewController: UIViewController {
         }
         
         let currency = travel.currencies[totalSpendingIndex]
-        var spendingRate = 0.0
+        var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
             spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
             balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
-            spendingRate = amountByCurrency / currency.budget
+            spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
             balanceLabel.text = "\(currency.budget) \(currency.code)"
@@ -270,6 +271,7 @@ class TransactionTableViewController: UIViewController {
             spendingRate = 1
         }
         
+        spendingProgressView.setProgress(spendingRate, animated: true)
         percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
     }
     
