@@ -66,6 +66,9 @@ class TransactionTableViewController: UIViewController {
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
+        let nibCell = UINib(nibName: "TransactionTableViewCell", bundle: nil)
+        tableView.register(nibCell, forCellReuseIdentifier: "transactionTableViewCell")
+        
         pullToAddLabel.textColor = ColorStore.basicBlack
         pullToAddLabel.backgroundColor = ColorStore.lightestGray
         pullToAddLabel.textAlignment = .center
@@ -297,7 +300,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "transactionTableViewCell", for: indexPath) as! TransactionTableViewCell
         
         let dateString = dynamicDateList[indexPath.section]
         
@@ -305,18 +308,33 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        cell.textLabel?.text = transaction.name
+        if let thumbnailURL = transaction.photos.first?.fileURL {
+            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        }
         
-        //TODO: 하나의 Label에 String 속성 변경하는 코드 (통화 3글자 색상 변경) -> 이 코드는 UITableViewCell이 별도의 클래스로 지정될 때 그 클래스의 내부에 선언
-        let attributedString = NSMutableAttributedString(string: "\(transaction.currency?.code ?? "") \(transaction.amount)")
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.gray, range: NSRange(location: 0, length: 3))
-        cell.detailTextLabel?.attributedText = attributedString
+        cell.TransactionNameLabel.text = transaction.name
+        cell.TransactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        
+        if transaction.isCash {
+            
+        } else {
+            
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
+    //for remove seperate line
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
