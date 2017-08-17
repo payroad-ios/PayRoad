@@ -13,7 +13,6 @@
 		A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */; };
 		A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A74507C11F3976C300DFFADF /* Assets.xcassets */; };
 		A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507C31F3976C300DFFADF /* LaunchScreen.storyboard */; };
-		A74507D61F397E4E00DFFADF /* TravelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D51F397E4E00DFFADF /* TravelEditorViewController.swift */; };
 		A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D71F3984AB00DFFADF /* Transaction.swift */; };
 		A74507DA1F39878B00DFFADF /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507D91F39878B00DFFADF /* Travel.swift */; };
 		A74507DC1F39887B00DFFADF /* TransactionTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */; };
@@ -28,11 +27,16 @@
 		A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */; };
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
+		A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */; };
 		A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */; };
 		A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */; };
 		A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */; };
 		A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */; };
 		A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */; };
+		A7B4F6EC1F4434D30049D812 /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6EB1F4434D30049D812 /* TravelTableViewCell.swift */; };
+		A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */; };
+		A7B4F6F11F444DD70049D812 /* TravelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7B4F6F01F444DD70049D812 /* TravelView.xib */; };
+		A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6F21F444EA80049D812 /* TravelView.swift */; };
 		A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */; };
 		A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* ColorStore.swift */; };
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
@@ -59,7 +63,6 @@
 		A74507C11F3976C300DFFADF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A74507C41F3976C300DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A74507C61F3976C300DFFADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A74507D51F397E4E00DFFADF /* TravelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelEditorViewController.swift; sourceTree = "<group>"; };
 		A74507D71F3984AB00DFFADF /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		A74507D91F39878B00DFFADF /* Travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		A74507DB1F39887B00DFFADF /* TransactionTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionTableViewController.storyboard; sourceTree = "<group>"; };
@@ -74,11 +77,16 @@
 		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
+		A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelEditorViewController.swift; sourceTree = "<group>"; };
 		A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDataFormatter.swift; sourceTree = "<group>"; };
 		A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableInputTextField.swift; sourceTree = "<group>"; };
+		A7B4F6EB1F4434D30049D812 /* TravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
+		A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		A7B4F6F01F444DD70049D812 /* TravelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TravelView.xib; sourceTree = "<group>"; };
+		A7B4F6F21F444EA80049D812 /* TravelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
 		A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7EBD22E1F3ED8790057E844 /* ColorStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
@@ -141,6 +149,7 @@
 				A74507EB1F399CE600DFFADF /* Transaction */,
 				A74507EC1F399CF200DFFADF /* Currency */,
 				A74507F71F3A217400DFFADF /* Extension */,
+				A7B4F6EF1F444DC40049D812 /* View */,
 				A74507CD1F3976FF00DFFADF /* Resource */,
 			);
 			path = PayRoad;
@@ -174,8 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */,
+				A7B4F6EB1F4434D30049D812 /* TravelTableViewCell.swift */,
 				A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */,
-				A74507D51F397E4E00DFFADF /* TravelEditorViewController.swift */,
+				A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */,
 				A74507EF1F39B29000DFFADF /* TravelEditorViewController.storyboard */,
 			);
 			name = Travel;
@@ -214,6 +224,7 @@
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
+				A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */,
 				A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */,
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */,
@@ -224,6 +235,15 @@
 				A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		A7B4F6EF1F444DC40049D812 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A7B4F6F21F444EA80049D812 /* TravelView.swift */,
+				A7B4F6F01F444DD70049D812 /* TravelView.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		CDA36D981A0D25526FB5B498 /* Pods */ = {
@@ -298,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
+				A7B4F6F11F444DD70049D812 /* TravelView.xib in Resources */,
 				A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
 				A74507E71F3991E700DFFADF /* CurrencyTableViewController.storyboard in Resources */,
@@ -374,13 +395,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
+				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
-				A74507D61F397E4E00DFFADF /* TravelEditorViewController.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
 				A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */,
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
 				A74507DA1F39878B00DFFADF /* Travel.swift in Sources */,
+				A7B4F6EC1F4434D30049D812 /* TravelTableViewCell.swift in Sources */,
 				E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */,
 				A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */,
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
@@ -397,6 +419,8 @@
 				B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */,
 				B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */,
 				E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */,
+				A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */,
+				A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */,
 				E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */,
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
 				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,
@@ -548,7 +572,9 @@
 			baseConfigurationReference = 7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PayRoad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -561,7 +587,9 @@
 			baseConfigurationReference = 53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PayRoad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
