@@ -70,6 +70,8 @@ class TransactionTableViewController: UIViewController {
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
+        tableView.tableFooterView = UIView()
+        
         let nibCell = UINib(nibName: "TransactionTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "transactionTableViewCell")
         
