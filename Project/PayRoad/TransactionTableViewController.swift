@@ -20,6 +20,8 @@ class TransactionTableViewController: UIViewController {
     
     let realm = try! Realm()
     
+    let tableViewSectionHeight = CGFloat(30)
+    
     var travel: Travel!
     var sortedTransactions: Results<Transaction>!
 
@@ -290,13 +292,42 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let ymd = dynamicDateList[section]
+        return " "
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tableViewSectionHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeight = tableViewSectionHeight
+        let trailingSpace = CGFloat(4)
+        let fontSize = CGFloat(14)
         
+        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: sectionHeight))
+        let ymdLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width - (trailingSpace * 2), height: sectionHeight))
+        let totalAmountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width  - (trailingSpace * 2), height: sectionHeight))
+        
+        sectionView.backgroundColor = ColorStore.lightGray
+        
+        ymdLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
+        ymdLabel.font = ymdLabel.font.withSize(fontSize)
+        
+        totalAmountLabel.textAlignment = .right
+        totalAmountLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
+        totalAmountLabel.font = totalAmountLabel.font.withSize(fontSize)
+        
+        ymdLabel.text = " \(dynamicDateList[section].string())"
+        
+        let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            return "  \(dynamicDateList[section].string()) (\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code))"
+            totalAmountLabel.text = "\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code)"
         }
         
-        return "  \(dynamicDateList[section].string())"
+        sectionView.addSubview(ymdLabel)
+        sectionView.addSubview(totalAmountLabel)
+        
+        return sectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
