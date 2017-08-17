@@ -78,4 +78,9 @@ extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travel.currencies.count
     }
+    
+    //for remove seperate line
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
+    }
 }
