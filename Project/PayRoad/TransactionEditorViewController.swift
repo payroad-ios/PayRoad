@@ -282,7 +282,7 @@ extension TransactionEditorViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(CategoryStore.shard.categorys[indexPath.row].index)
+        //TODO: 선택한 카테고리 반영
         print(CategoryStore.shard.categorys[indexPath.row].name)
     }
 }
