@@ -143,8 +143,8 @@ extension TravelEditorViewController {
             travelPreview.fillDatePeriodLabel(startDate: startDate, endDate: endDate)
             
             
-            if let fileURL = originTravel.photo?.fileURL {
-                travelPreview.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
+            if let filePath = originTravel.photo?.filePath {
+                travelPreview.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
             }
             
             deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
@@ -211,9 +211,13 @@ extension TravelEditorViewController {
         travel.starteDate = startDate
         travel.endDate = endDate
         
+        
+        //TODO: 커버사진 저장 코드 수정 보완해야함
+        let photoUtil = PhotoUtil(travelID: "")
+        
         if isModifyPhoto {
             guard let image = travelPreview.backgroundImage.image else { return }
-            let photo = FileUtil.saveNewImage(image: image)
+            let photo = photoUtil.saveCoverPhoto(photo: image)
             travel.photo = photo
             
             //TODO: 기존 저장된 photo 삭제 메서드 추가
@@ -229,10 +233,11 @@ extension TravelEditorViewController {
     }
     
     func deleteTravelButtonDidTap() {
+        FileUtil.removeAllData(travelID: originTravel.id)
+
         try! realm.write {
             self.realm.delete(originTravel)
         }
-        
         let navigationController = presentingViewController as? UINavigationController
         self.dismiss(animated: true) {
             navigationController?.popToRootViewController(animated: true)

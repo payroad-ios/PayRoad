@@ -56,10 +56,10 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell.travelView.travelNameLabel.text = travel.name
         cell.travelView.fillDatePeriodLabel(startDate: travel.starteDate, endDate: travel.endDate)
         
-        guard let fileURL = travel.photo?.fileURL else {
+        guard let filePath = travel.photo?.filePath else {
             return cell
         }
-        cell.travelView.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
+        cell.travelView.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
         
         //image Random Setting
 //        cell.travelView.backgroundImage.image = tempBackgroundBGArray[Int(arc4random_uniform(UInt32(tempBackgroundBGArray.count)))]

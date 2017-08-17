@@ -31,6 +31,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         pickerView.dataSource = self
         return pickerView
     }()
+    var photoUtil: PhotoUtil!
     
     //User Input Data
     var standardDate: DateInRegion? = nil
@@ -72,6 +73,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoUtil = PhotoUtil(travelID: travel.id)
+        
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
@@ -151,8 +154,8 @@ extension TransactionEditorViewController {
             contentTextView.text = originTransaction.content
             isCash = originTransaction.isCash
             
-            if let photoURL = originTransaction.photos.first?.fileURL,
-                let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
+            if let filePath = originTransaction.photos.first?.filePath,
+                let image = PhotoUtil.loadPhotoFrom(filePath: filePath) {
                 transactionImageView.image = image
             }
             
@@ -172,7 +175,7 @@ extension TransactionEditorViewController {
         transactionFromUI(transaction: &transaction)
         
         if let image = transactionImageView.image {
-            let photo = FileUtil.saveNewImage(image: image)
+            let photo = photoUtil.saveTransactionPhoto(transactionID: transaction.id, photo: image)
             transaction.photos.append(photo)
         }
         
@@ -194,15 +197,19 @@ extension TransactionEditorViewController {
         
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
-
-        let urlString = UUID().uuidString
         
         //image 부분 수정 필요
-        if let image = transactionImageView.image {
-            FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
+        var photo = Photo()
+        if let image = transactionImageView.image,
+            let originPhoto = originTransaction.photos.first {
+            photo = photoUtil.saveTransactionPhoto(transactionID: transaction.id, photo: image)
+            PhotoUtil.deletePhoto(filePath: originPhoto.filePath)
         }
         
         do {
+            try realm.write {
+                self.realm.delete(originTransaction.photos)
+            }
             try realm.write {
                 originTransaction.name = transaction.name
                 originTransaction.amount = transaction.amount
@@ -210,14 +217,7 @@ extension TransactionEditorViewController {
                 originTransaction.content = transaction.content
                 originTransaction.isCash = transaction.isCash
                 originTransaction.dateInRegion = transaction.dateInRegion
-                
-                let urlString = UUID().uuidString
-                
-                if let image = transactionImageView.image {
-                    FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-                    originTransaction.photos.first?.id = urlString
-                    originTransaction.photos.first?.fileType = "jpg"
-                }
+                originTransaction.photos.append(photo)
                 print("트랜젝션 수정")
             }
         } catch {
@@ -293,12 +293,6 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
-        
-        if mode == .edit,
-            let photo = originTransaction.photos.first {
-            FileUtil.removeImageOnDocumentDir(filePath: photo.fileURL)
-            transactionImageView.image = nil
-        }
         
         imagePickerController.sourceType = .photoLibrary
         

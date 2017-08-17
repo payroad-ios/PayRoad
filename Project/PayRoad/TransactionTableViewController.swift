@@ -339,8 +339,8 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        if let thumbnailURL = transaction.photos.first?.fileURL {
-            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        if let thumbnailURL = transaction.photos.first?.filePath {
+            cell.thumbnailImageView.image = PhotoUtil.loadPhotoFrom(filePath: thumbnailURL)
         }
         
         cell.transactionNameLabel.text = transaction.name
