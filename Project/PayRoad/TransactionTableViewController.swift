@@ -49,12 +49,14 @@ class TransactionTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var spendingProgressView: UIProgressView!
     @IBOutlet weak var allListButton: UIButton!
     
     @IBOutlet weak var paymentTypeButton: UIButton!
     @IBOutlet weak var spendingLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
+    @IBOutlet weak var noticeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -256,12 +258,12 @@ class TransactionTableViewController: UIViewController {
         }
         
         let currency = travel.currencies[totalSpendingIndex]
-        var spendingRate = 0.0
+        var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
             spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
             balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
-            spendingRate = amountByCurrency / currency.budget
+            spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
             balanceLabel.text = "\(currency.budget) \(currency.code)"
@@ -271,6 +273,7 @@ class TransactionTableViewController: UIViewController {
             spendingRate = 1
         }
         
+        spendingProgressView.setProgress(spendingRate, animated: true)
         percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
     }
     
@@ -285,9 +288,10 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         let dateString = dynamicDateList[section]
         
         guard let transactions = dateDictionary[dateString] else {
+            noticeLabel.isHidden = false
             return 0
         }
-        
+        noticeLabel.isHidden = true
         return transactions.count
     }
     
@@ -379,6 +383,7 @@ extension TransactionTableViewController {
         let height = scrollView.contentOffset.y
         pullToAddLabel.frame = CGRect(x: 0, y: height, width: view.frame.width, height: -height)
         pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "놓아서 새 항목 추가" : "당겨서 새 항목 추가"
+        noticeLabel.alpha = 1 - (-scrollView.contentOffset.y / 50)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

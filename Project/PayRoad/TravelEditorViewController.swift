@@ -58,7 +58,7 @@ class TravelEditorViewController: UIViewController {
     
     
     func nameTextApply(_ sender: UITextField) {
-        travelPreview.travelNameLabel.text = sender.text == "" ? " " : sender.text
+        travelPreview.travelNameLabel.text = sender.text
     }
     
     func startDateTextApply(_ sender: UITextField) {
@@ -76,8 +76,11 @@ class TravelEditorViewController: UIViewController {
     }
     
     @IBAction func setupCurrencyBudgetButtonDidTap(_ sender: Any) {
-        //TODO: CurrencyTableViewController Present Code
-//        let storyboard = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "")
+        let currencyTableViewStoryboard = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
+        let navigationController = UINavigationController(rootViewController: currencyTableViewStoryboard)
+        
+//        currencyTableViewStoryboard.travel = 
+//        present(navigationController, animated: true, completion: nil)
     }
     
     func presentSelectImagePickerActionSheet() {

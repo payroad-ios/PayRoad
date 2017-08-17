@@ -75,8 +75,8 @@ extension CurrencySelectTableViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let code = Locale.commonISOCurrencyCodes[indexPath.row]
-        self.delegate?.currencySelectResponse(code: code)
+        let currency = filteredCurrencies[indexPath.row]
+        self.delegate?.currencySelectResponse(code: currency.code)
         self.navigationController?.popViewController(animated: true)
         
     }
