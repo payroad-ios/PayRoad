@@ -22,6 +22,7 @@ class CurrencyTableViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.currencies)
     }
@@ -77,10 +78,5 @@ extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travel.currencies.count
-    }
-    
-    //for remove seperate line
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
     }
 }

@@ -28,6 +28,7 @@ class TravelTableViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.tableFooterView = UIView()
         
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
     }
@@ -73,10 +74,5 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    //for remove seperate line
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
     }
 }
