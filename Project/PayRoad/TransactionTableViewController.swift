@@ -364,11 +364,6 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         return 90.0
     }
     
-    //for remove seperate line
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.001
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         if currentSelectedDate != nil {
             return 1
