@@ -9,16 +9,21 @@
 import RealmSwift
 
 class Photo: Object {
+    dynamic var travelID = ""
+    dynamic var preID = ""
+    dynamic var photoID = UUID().uuidString
+    dynamic var fileType = "jpg"
     
-    dynamic var id = UUID().uuidString
-    dynamic var fileType = ""
+    var fileName: String {
+        return "\(preID)\(photoID).\(fileType)"
+    }
     
-    var fileURL: String {
-        return "\(id).\(fileType)"
+    var filePath: String {
+        return "\(travelID)/image/\(fileName)"
     }
     
     override static func ignoredProperties() -> [String] {
-        return ["fileURL"]
+        return ["fileURL", "fileName"]
     }
     
     let transaction = LinkingObjects(fromType: Transaction.self, property: "photos")
