@@ -28,6 +28,7 @@
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
 		A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */; };
+		A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */; };
 		A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */; };
 		A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */; };
 		A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */; };
@@ -81,6 +82,7 @@
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
 		A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelEditorViewController.swift; sourceTree = "<group>"; };
+		A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIAlertController.swift; sourceTree = "<group>"; };
 		A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDataFormatter.swift; sourceTree = "<group>"; };
 		A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
+				A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
 				A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */,
@@ -422,6 +425,7 @@
 				A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */,
 				E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
+				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
 				A74507E01F398BB800DFFADF /* Currency.swift in Sources */,
