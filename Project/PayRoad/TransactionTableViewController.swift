@@ -47,6 +47,8 @@ class TransactionTableViewController: UIViewController {
     
     var pullToAddLabel = UILabel()
     
+    let sideBar = UINib(nibName: "SideBar", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var spendingProgressView: UIProgressView!
@@ -60,6 +62,11 @@ class TransactionTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sideBar.setUpView()
+        
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(sideBar)
         
         title = travel.name
         sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
@@ -94,7 +101,6 @@ class TransactionTableViewController: UIViewController {
             self?.filterTransaction(selected: self?.currentSelectedDate)
             self?.displayTotalSpendingCurrency()
         }
-        
         
         //NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
 //        travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
@@ -251,6 +257,22 @@ class TransactionTableViewController: UIViewController {
     @IBAction func totalSpendingViewDidTap(_ sender: Any) {
         totalSpendingIndex += 1
         displayTotalSpendingCurrency()
+    }
+    
+    @IBAction func showSideBar(_ sender: Any) {
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.sideBar.frame = CGRect(x: 0,
+                                                    y: 0,
+                                                    width: self.sideBar.frame.width,
+                                                    height: self.sideBar.frame.height)
+                        },
+                       completion: { (result) in
+                        guard result == true else {
+                            return
+                        }
+                        self.sideBar.isUserInteractionEnabled = true
+        })
     }
     
     func displayTotalSpendingCurrency() {
