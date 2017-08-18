@@ -12,11 +12,6 @@ import RealmSwift
 
 class CurrencyEditorViewController: UIViewController {
     
-    enum Mode {
-        case new
-        case edit
-    }
-    
     let realm = try! Realm()
     
     var travel: Travel!
@@ -40,7 +35,7 @@ class CurrencyEditorViewController: UIViewController {
         budgetTextField.delegate = self
         rateTextField.addTarget(self, action: #selector(editingChangedRate(_:)), for: .editingChanged)
         budgetTextField.addTarget(self, action: #selector(editingChangedBudget(_:)), for: .editingChanged)
-        self.adjustViewMode()
+        adjustViewMode()
     }
     
     func editingChangedRate(_ sender: UITextField) {
@@ -61,6 +56,19 @@ class CurrencyEditorViewController: UIViewController {
         }
         
         editedCurrency.budget = budget
+    }
+    
+    func checkIsExistInputField() -> Bool {
+        guard !(editedCurrency.code == "") else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "화폐를 선택해주세요.")
+            return false
+        }
+        
+        guard !(budgetTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "예산을 입력해주세요..")
+            return false
+        }
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,8 +108,8 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
         if textField === rateTextField {
             let standard = travel.currencies.first!.code
             let code = currencySelectButton.title(for: .normal)!
-            
             textField.text = "1 \(code)당, \(editedCurrency.rate) \(standard)"
+            
         } else if textField === budgetTextField {
             textField.text = String(editedCurrency.budget)
         }
@@ -124,6 +132,7 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
                 
                 self.editedCurrency.code = code
                 self.editedCurrency.rate = Double(rate) ?? 0
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
         }
     }
@@ -144,12 +153,13 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
             completion(rate)
         }
         task.resume()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 }
 
 extension CurrencyEditorViewController {
     fileprivate func adjustViewMode() {
-        self.editedCurrency = Currency()
+        editedCurrency = Currency()
         
         if originCurrency != nil {
             editedCurrency.code = originCurrency.code
@@ -186,41 +196,39 @@ extension CurrencyEditorViewController {
     }
     
     func saveButtonDidTap() {
-        defer {
+        if checkIsExistInputField() {
+            let currency = Currency()
+            currency.id = travel.id + "-" + editedCurrency.code
+            currency.code = editedCurrency.code
+            currency.rate = editedCurrency.rate
+            currency.budget = editedCurrency.budget
+            
+            do {
+                try realm.write {
+                    travel.currencies.append(currency)
+                    print("Currency 추가")
+                }
+            } catch {
+                print(error)
+            }
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
-        }
-        
-        let currency = Currency()
-        currency.id = travel.id + "-" + editedCurrency.code
-        currency.code = editedCurrency.code
-        currency.rate = editedCurrency.rate
-        currency.budget = editedCurrency.budget
-        
-        do {
-            try realm.write {
-                travel.currencies.append(currency)
-                print("Currency 추가")
-            }
-        } catch {
-            print(error)
         }
     }
     
     func editButtonDidTap() {
-        defer {
+        if checkIsExistInputField() {
+            do {
+                try realm.write {
+                    originCurrency.rate = editedCurrency.rate
+                    originCurrency.budget = editedCurrency.budget
+                    print("통화 수정")
+                }
+            } catch {
+                print(error)
+            }
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
-        }
-        
-        do {
-            try realm.write {
-                originCurrency.rate = editedCurrency.rate
-                originCurrency.budget = editedCurrency.budget
-                print("통화 수정")
-            }
-        } catch {
-            print(error)
         }
     }
     

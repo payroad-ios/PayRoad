@@ -98,6 +98,7 @@ class TransactionTableViewController: UIViewController {
         
         //NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
 //        travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
+//            title = travel.name
 //            self?.extractDatePeriod()
 //            self?.collectionView.reloadData()
 //        }
