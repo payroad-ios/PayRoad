@@ -105,6 +105,18 @@ class TravelEditorViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func checkIsExistInputField() -> Bool {
+        guard !(titleTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "제목을 입력해 주세요.")
+            return false
+        }
+        
+        guard !(startDateTextField.text!.isEmpty || endDateTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "기간을 지정해 주세요.")
+            return false
+        }
+        return true
+    }
 }
 
 extension TravelEditorViewController {
@@ -152,47 +164,43 @@ extension TravelEditorViewController {
     }
     
     func saveButtonDidTap() {
-        defer {
+        if checkIsExistInputField() {
+            var travel = Travel()
+            travelFromUI(travel: &travel)
+            
+            if let currencyCode = Locale.current.currencyCode {
+                let currency = Currency()
+                currency.id = travel.id + "-" + currencyCode
+                currency.code = currencyCode
+                currency.rate = 1.0
+                travel.currencies.append(currency)
+            }
+            
+            try? realm.write {
+                realm.add(travel)
+            }
             dismiss(animated: true, completion: nil)
-        }
-        
-        var travel = Travel()
-        travelFromUI(travel: &travel)
-        
-        
-        
-        if let currencyCode = Locale.current.currencyCode {
-            let currency = Currency()
-            currency.id = travel.id + "-" + currencyCode
-            currency.code = currencyCode
-            currency.rate = 1.0
-            travel.currencies.append(currency)
-        }
-        
-        try? realm.write {
-            realm.add(travel)
         }
     }
     
     func editButtonDidTap() {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        var travel = Travel()
-        travelFromUI(travel: &travel)
-        
-        try! realm.write {
-            originTravel?.name = travel.name
-            originTravel?.starteDate = travel.starteDate
-            originTravel?.endDate = travel.endDate
+        if checkIsExistInputField() {
+            var travel = Travel()
+            travelFromUI(travel: &travel)
             
-            originTravel?.startYear = travel.startYear
-            originTravel?.startMonth = travel.startMonth
-            originTravel?.startDay = travel.startDay
-            originTravel?.endYear = travel.endYear
-            originTravel?.endMonth = travel.endMonth
-            originTravel?.endDay = travel.endDay
+            try! realm.write {
+                originTravel?.name = travel.name
+                originTravel?.starteDate = travel.starteDate
+                originTravel?.endDate = travel.endDate
+                
+                originTravel?.startYear = travel.startYear
+                originTravel?.startMonth = travel.startMonth
+                originTravel?.startDay = travel.startDay
+                originTravel?.endYear = travel.endYear
+                originTravel?.endMonth = travel.endMonth
+                originTravel?.endDay = travel.endDay
+            }
+            dismiss(animated: true, completion: nil)
         }
     }
     
@@ -230,13 +238,15 @@ extension TravelEditorViewController {
     }
     
     func deleteTravelButtonDidTap() {
-        try! realm.write {
-            self.realm.delete(originTravel)
-        }
-        
-        let navigationController = presentingViewController as? UINavigationController
-        self.dismiss(animated: true) {
-            navigationController?.popToRootViewController(animated: true)
+        UIAlertController.confirmStyleAlert(target: self, title: "여행 삭제", message: "이 여행을 정말로 삭제하시겠습니까?", buttonTitle: nil) { (_) in
+            try! self.realm.write {
+                self.realm.delete(self.originTravel)
+            }
+            
+            let navigationController = self.presentingViewController as? UINavigationController
+            self.dismiss(animated: true) {
+                navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
 }

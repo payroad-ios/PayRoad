@@ -113,6 +113,24 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func checkIsExistInputField() -> Bool {
+        guard !(amountTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "사용 금액을 입력해주세요.")
+            return false
+        }
+        
+        guard !(currency == nil) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "화폐를 선택해주세요.")
+            return false
+        }
+        
+        guard !(nameTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "항목명을 입력해주세요.")
+            return false
+        }
+        return true
+    }
 }
 
 extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -164,64 +182,62 @@ extension TransactionEditorViewController {
     }
     
     func saveButtonDidTap() {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        var transaction = Transaction()
-        transactionFromUI(transaction: &transaction)
-        
-        if let image = transactionImageView.image {
-            let photo = FileUtil.saveNewImage(image: image)
-            transaction.photos.append(photo)
-        }
-        
-        do {
-            try realm.write {
-                travel.transactions.append(transaction)
-                print("트랜젝션 추가")
+        if checkIsExistInputField() {
+            var transaction = Transaction()
+            transactionFromUI(transaction: &transaction)
+            
+            if let image = transactionImageView.image {
+                let photo = FileUtil.saveNewImage(image: image)
+                transaction.photos.append(photo)
             }
-        } catch {
-            // Alert 위해 남겨둠
-            print(error)
+            
+            do {
+                try realm.write {
+                    travel.transactions.append(transaction)
+                    print("트랜젝션 추가")
+                }
+            } catch {
+                // Alert 위해 남겨둠
+                print(error)
+            }
+            dismiss(animated: true, completion: nil)
         }
     }
     
     func editButtonDidTap() {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        var transaction = Transaction()
-        transactionFromUI(transaction: &transaction)
-
-        let urlString = UUID().uuidString
-        
-        //image 부분 수정 필요
-        if let image = transactionImageView.image {
-            FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-        }
-        
-        do {
-            try realm.write {
-                originTransaction.name = transaction.name
-                originTransaction.amount = transaction.amount
-                originTransaction.currency = transaction.currency
-                originTransaction.content = transaction.content
-                originTransaction.isCash = transaction.isCash
-                originTransaction.dateInRegion = transaction.dateInRegion
-                
-                let urlString = UUID().uuidString
-                
-                if let image = transactionImageView.image {
-                    FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-                    originTransaction.photos.first?.id = urlString
-                    originTransaction.photos.first?.fileType = "jpg"
-                }
-                print("트랜젝션 수정")
+        if checkIsExistInputField() {
+            var transaction = Transaction()
+            transactionFromUI(transaction: &transaction)
+            
+            let urlString = UUID().uuidString
+            
+            //image 부분 수정 필요
+            if let image = transactionImageView.image {
+                FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
             }
-        } catch {
-            print(error)
+            
+            do {
+                try realm.write {
+                    originTransaction.name = transaction.name
+                    originTransaction.amount = transaction.amount
+                    originTransaction.currency = transaction.currency
+                    originTransaction.content = transaction.content
+                    originTransaction.isCash = transaction.isCash
+                    originTransaction.dateInRegion = transaction.dateInRegion
+                    
+                    let urlString = UUID().uuidString
+                    
+                    if let image = transactionImageView.image {
+                        FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
+                        originTransaction.photos.first?.id = urlString
+                        originTransaction.photos.first?.fileType = "jpg"
+                    }
+                    print("트랜젝션 수정")
+                }
+            } catch {
+                print(error)
+            }
+            dismiss(animated: true, completion: nil)
         }
     }
     
@@ -266,7 +282,7 @@ extension TransactionEditorViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(CategoryStore.shard.categorys[indexPath.row].index)
+        //TODO: 선택한 카테고리 반영
         print(CategoryStore.shard.categorys[indexPath.row].name)
     }
 }
