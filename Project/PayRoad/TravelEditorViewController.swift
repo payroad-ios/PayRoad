@@ -163,6 +163,7 @@ extension TravelEditorViewController {
         
         if let currencyCode = Locale.current.currencyCode {
             let currency = Currency()
+            currency.id = travel.id + "-" + currencyCode
             currency.code = currencyCode
             currency.rate = 1.0
             travel.currencies.append(currency)
