@@ -66,8 +66,8 @@ struct PhotoUtil {
         photoModel.travelID = travelID
         photoModel.preID = transactionID.substring(to: 8)
         
-        let filePath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
-        let isSuccess = writePhotoToDocument(photo: photo, filePath: filePath, fileName: photoModel.fileName)
+        let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
+        let isSuccess = writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
         print(isSuccess ? "저장 성공" : "저장 실패")
         return photoModel
     }
@@ -76,17 +76,17 @@ struct PhotoUtil {
         let photoModel = Photo()
         photoModel.travelID = travelID
         
-        let filePath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
-        let isSuccess = writePhotoToDocument(photo: photo, filePath: filePath, fileName: photoModel.fileName)
+        let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
+        let isSuccess = writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
         print(isSuccess ? "저장 성공" : "저장 실패")
         return photoModel
     }
     
-    private func writePhotoToDocument(photo: UIImage, filePath: String, fileName: String) -> Bool {
+    private func writePhotoToDocument(photo: UIImage, directoryPath: String, fileName: String) -> Bool {
         let imageData = photo.data()
-        let url = URL(fileURLWithPath: filePath + "/" + fileName)
+        let url = URL(fileURLWithPath: directoryPath + "/" + fileName)
         do {
-            try FileManager.default.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
             try imageData.write(to: url, options: [.atomic])
         } catch {
             return false
