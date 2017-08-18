@@ -192,6 +192,7 @@ extension CurrencyEditorViewController {
         }
         
         let currency = Currency()
+        currency.id = travel.id + "-" + editedCurrency.code
         currency.code = editedCurrency.code
         currency.rate = editedCurrency.rate
         currency.budget = editedCurrency.budget
@@ -214,7 +215,6 @@ extension CurrencyEditorViewController {
         
         do {
             try realm.write {
-                originCurrency.code = editedCurrency.code
                 originCurrency.rate = editedCurrency.rate
                 originCurrency.budget = editedCurrency.budget
                 print("통화 수정")
