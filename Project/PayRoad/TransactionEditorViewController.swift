@@ -10,11 +10,6 @@ import UIKit
 
 import RealmSwift
 
-enum Mode {
-    case new
-    case edit
-}
-
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     let realm = try! Realm()
     
@@ -22,7 +17,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     var currency: Currency!
     var originTransaction: Transaction!
     
-    var mode: Mode = .new
+    var editorMode: EditorMode = .new
     
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -75,6 +70,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
+        currencyTextField.delegate = self
         
         multiImagePickerView.delegate = self
         
@@ -84,20 +80,15 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         payTypeToggleButton.addTarget(self, action: #selector(togglePayTypeButtonDidTap(_:)), for: .touchUpInside)
 
         setupCurrencyPicker()
-        self.adjustViewMode()
+        adjustViewMode()
     }
     
     func setupCurrencyPicker() {
-        //TODO: PickerView 없애면서 들어내야될 코드
-        if travel.currencies.count == 1 {
-            currency = travel.currencies.first!
-            currencyTextField.text = currency.code
-        }
-        
         let toolbar = UIToolbar()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.sizeToFit()
-        toolbar.setItems([doneButton], animated: false)
+        toolbar.setItems([space, doneButton], animated: false)
         
         currencyTextField.inputAccessoryView = toolbar
         currencyTextField.inputView = pickerView
@@ -107,13 +98,32 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         isCash = !isCash
         print("\(isCash ? "현금" : "카드") 선택됨")
     }
-
+    
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
 
     @IBAction func cancelButtonDidTap(_ sender: Any) {
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func checkIsExistInputField() -> Bool {
+        guard !(amountTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "사용 금액을 입력해주세요.")
+            return false
+        }
+        
+        guard !(currency == nil) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "화폐를 선택해주세요.")
+            return false
+        }
+        
+        guard !(nameTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "항목명을 입력해주세요.")
+            return false
+        }
+        return true
     }
 }
 
@@ -138,14 +148,21 @@ extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDat
 
 extension TransactionEditorViewController {
     fileprivate func adjustViewMode() {
-        switch self.mode {
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        switch self.editorMode {
         case .new:
-            let saveBarButtonItem: UIBarButtonItem
-            let selector = #selector(saveButtonDidTap)
-            saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = saveBarButtonItem
-             
+            barButtonItem.action = #selector(saveButtonDidTap)
+            
+            //TODO: PickerView 없애면서 들어내야될 코드
+            if let lastCurrency = travel.transactions.last?.currency {
+                currency = lastCurrency
+                currencyTextField.text = lastCurrency.code
+            } else {
+                currency = travel.currencies.first!
+                currencyTextField.text = currency?.code
+            }
         case .edit:
+            barButtonItem.action = #selector(editButtonDidTap)
             self.navigationItem.title = "항목 수정"
             nameTextField?.text = originTransaction.name
             amountTextField?.text = String(originTransaction.amount)
@@ -160,70 +177,67 @@ extension TransactionEditorViewController {
             }
             multiImagePickerView.visibleImages = photos
             
-            let editBarButtonItem: UIBarButtonItem
-            let selector = #selector(editButtonDidTap)
-            editBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = editBarButtonItem
+            currency = originTransaction.currency
         }
+        let index = travel.currencies.index(of: currency)
+        pickerView.selectRow(index!, inComponent: 0, animated: true)
+        
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     func saveButtonDidTap() {
-        defer {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        var transaction = Transaction()
-        transactionFromUI(transaction: &transaction)
-        
-        
+        if checkIsExistInputField() {
+            var transaction = Transaction()
+            transactionFromUI(transaction: &transaction)
+            
         for image in multiImagePickerView.visibleImages {
-            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
-            transaction.photos.append(photo)
+        let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
+        transaction.photos.append(photo)
         }
         
-        do {
-            try realm.write {
-                travel.transactions.append(transaction)
-                print("트랜젝션 추가")
+            do {
+                try realm.write {
+                    travel.transactions.append(transaction)
+                    print("트랜젝션 추가")
+                }
+            } catch {
+                // Alert 위해 남겨둠
+                print(error)
             }
-        } catch {
-            // Alert 위해 남겨둠
-            print(error)
+            view.endEditing(true)
+            dismiss(animated: true, completion: nil)
         }
     }
     
     func editButtonDidTap() {
-        defer {
+        if checkIsExistInputField() {
+            var transaction = Transaction()
+            transactionFromUI(transaction: &transaction)
+            
+    //image 부분 수정 필요
+    //        var photo = Photo()
+    //        if let image = transactionImageView.image,
+    //            let originPhoto = originTransaction.photos.first {
+    //            photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
+    //            PhotoUtil.deletePhoto(filePath: originPhoto.filePath)
+    //        }
+            
+            do {
+                try realm.write {
+                    originTransaction.name = transaction.name
+                    originTransaction.amount = transaction.amount
+                    originTransaction.currency = transaction.currency
+                    originTransaction.content = transaction.content
+                    originTransaction.isCash = transaction.isCash
+                    originTransaction.dateInRegion = transaction.dateInRegion
+
+                    print("트랜젝션 수정")
+                }
+            } catch {
+                print(error)
+            }
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
-        }
-        
-        var transaction = Transaction()
-        transactionFromUI(transaction: &transaction)
-        
-        //image 부분 수정 필요
-//        var photo = Photo()
-//        if let image = transactionImageView.image,
-//            let originPhoto = originTransaction.photos.first {
-//            photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
-//            PhotoUtil.deletePhoto(filePath: originPhoto.filePath)
-//        }
-        
-        do {
-            try realm.write {
-                self.realm.delete(originTransaction.photos)
-            }
-            try realm.write {
-                originTransaction.name = transaction.name
-                originTransaction.amount = transaction.amount
-                originTransaction.currency = transaction.currency
-                originTransaction.content = transaction.content
-                originTransaction.isCash = transaction.isCash
-                originTransaction.dateInRegion = transaction.dateInRegion
-//                originTransaction.photos.append(photo)
-                print("트랜젝션 수정")
-            }
-        } catch {
-            print(error)
         }
     }
     
@@ -268,7 +282,7 @@ extension TransactionEditorViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(CategoryStore.shard.categorys[indexPath.row].index)
+        //TODO: 선택한 카테고리 반영
         print(CategoryStore.shard.categorys[indexPath.row].name)
     }
 }
