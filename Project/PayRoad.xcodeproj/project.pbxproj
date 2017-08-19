@@ -43,6 +43,7 @@
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
 		B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380C12E1F3D3109003857A2 /* DateInRegion.swift */; };
 		B38735E21F418E51000DC81C /* YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E11F418E51000DC81C /* YMD.swift */; };
+		B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E71F45C5CE000DC81C /* RealmInitializer.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -97,6 +98,7 @@
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		B380C12E1F3D3109003857A2 /* DateInRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInRegion.swift; sourceTree = "<group>"; };
 		B38735E11F418E51000DC81C /* YMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMD.swift; sourceTree = "<group>"; };
+		B38735E71F45C5CE000DC81C /* RealmInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmInitializer.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
+				B38735E71F45C5CE000DC81C /* RealmInitializer.swift */,
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
 				A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
@@ -411,6 +414,7 @@
 				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
+				B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
 				A7B4F6E41F437A1F0049D812 /* CategoryCollectionViewCell.swift in Sources */,
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
