@@ -24,13 +24,17 @@ class TravelTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.tableFooterView = UIView()
         
-        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
+        notificationToken = travels.addNotificationBlock({ (changes: RealmCollectionChange) in
+            self.tableView.reloadData()
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,7 +58,7 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         
         let travel = travels[indexPath.row]
         cell.travelView.travelNameLabel.text = travel.name
-        cell.travelView.fillDatePeriodLabel(startDate: travel.starteDate, endDate: travel.endDate)
+        cell.travelView.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
         
         guard let fileURL = travel.photo?.fileURL else {
             return cell

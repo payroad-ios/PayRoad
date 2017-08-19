@@ -27,6 +27,7 @@
 		A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */; };
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
+		A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763AD111F4830A100D43E06 /* EnumGroup.swift */; };
 		A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */; };
 		A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */; };
 		A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */; };
@@ -50,7 +51,6 @@
 		E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AB1F41CB3200BD36CC /* Photo.swift */; };
 		E50D13B01F42D91200BD36CC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13AF1F42D91200BD36CC /* Category.swift */; };
 		E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */; };
-		E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
 		E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */; };
 		E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */; };
@@ -82,6 +82,7 @@
 		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
+		A763AD111F4830A100D43E06 /* EnumGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumGroup.swift; sourceTree = "<group>"; };
 		A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelEditorViewController.swift; sourceTree = "<group>"; };
 		A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIAlertController.swift; sourceTree = "<group>"; };
 		A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		E50D13AB1F41CB3200BD36CC /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E50D13AF1F42D91200BD36CC /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyBudgetTableViewCell.swift; sourceTree = "<group>"; };
-		E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
@@ -238,11 +238,11 @@
 				A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
+				A763AD111F4830A100D43E06 /* EnumGroup.swift */,
 				A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */,
 				A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */,
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */,
-				E5B26E571F3AC8CF00D63AAB /* RealmHelper.swift */,
 				E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */,
 				E50D13A91F41C56E00BD36CC /* FileUtil.swift */,
 				A7EBD22E1F3ED8790057E844 /* ColorStore.swift */,
@@ -429,6 +429,7 @@
 				A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */,
 				E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
+				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
@@ -441,7 +442,6 @@
 				E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */,
 				A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */,
 				A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */,
-				E5B26E581F3AC8CF00D63AAB /* RealmHelper.swift in Sources */,
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
 				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,
 				B38735E21F418E51000DC81C /* YMD.swift in Sources */,

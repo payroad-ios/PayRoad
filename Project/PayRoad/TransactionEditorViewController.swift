@@ -10,11 +10,6 @@ import UIKit
 
 import RealmSwift
 
-enum Mode {
-    case new
-    case edit
-}
-
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     let realm = try! Realm()
@@ -23,7 +18,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     var currency: Currency!
     var originTransaction: Transaction!
     
-    var mode: Mode = .new
+    var editorMode: EditorMode = .new
     
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -75,6 +70,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
+        currencyTextField.delegate = self
         
         let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
@@ -82,20 +78,15 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         payTypeToggleButton.addTarget(self, action: #selector(togglePayTypeButtonDidTap(_:)), for: .touchUpInside)
 
         setupCurrencyPicker()
-        self.adjustViewMode()
+        adjustViewMode()
     }
     
     func setupCurrencyPicker() {
-        //TODO: PickerView 없애면서 들어내야될 코드
-        if travel.currencies.count == 1 {
-            currency = travel.currencies.first!
-            currencyTextField.text = currency.code
-        }
-        
         let toolbar = UIToolbar()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(pickerDonePressed))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.sizeToFit()
-        toolbar.setItems([doneButton], animated: false)
+        toolbar.setItems([space, doneButton], animated: false)
         
         currencyTextField.inputAccessoryView = toolbar
         currencyTextField.inputView = pickerView
@@ -105,12 +96,13 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         isCash = !isCash
         print("\(isCash ? "현금" : "카드") 선택됨")
     }
-
+    
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
 
     @IBAction func cancelButtonDidTap(_ sender: Any) {
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -154,14 +146,21 @@ extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDat
 
 extension TransactionEditorViewController {
     fileprivate func adjustViewMode() {
-        switch self.mode {
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        switch self.editorMode {
         case .new:
-            let saveBarButtonItem: UIBarButtonItem
-            let selector = #selector(saveButtonDidTap)
-            saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = saveBarButtonItem
+            barButtonItem.action = #selector(saveButtonDidTap)
             
+            //TODO: PickerView 없애면서 들어내야될 코드
+            if let lastCurrency = travel.transactions.last?.currency {
+                currency = lastCurrency
+                currencyTextField.text = lastCurrency.code
+            } else {
+                currency = travel.currencies.first!
+                currencyTextField.text = currency?.code
+            }
         case .edit:
+            barButtonItem.action = #selector(editButtonDidTap)
             self.navigationItem.title = "항목 수정"
             nameTextField?.text = originTransaction.name
             amountTextField?.text = String(originTransaction.amount)
@@ -174,11 +173,12 @@ extension TransactionEditorViewController {
                 transactionImageView.image = image
             }
             
-            let editBarButtonItem: UIBarButtonItem
-            let selector = #selector(editButtonDidTap)
-            editBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = editBarButtonItem
+            currency = originTransaction.currency
         }
+        let index = travel.currencies.index(of: currency)
+        pickerView.selectRow(index!, inComponent: 0, animated: true)
+        
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     func saveButtonDidTap() {
@@ -200,6 +200,7 @@ extension TransactionEditorViewController {
                 // Alert 위해 남겨둠
                 print(error)
             }
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -237,6 +238,7 @@ extension TransactionEditorViewController {
             } catch {
                 print(error)
             }
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -310,7 +312,7 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
         
-        if mode == .edit,
+        if editorMode == .edit,
             let photo = originTransaction.photos.first {
             FileUtil.removeImageOnDocumentDir(filePath: photo.fileURL)
             transactionImageView.image = nil

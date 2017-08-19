@@ -10,20 +10,18 @@ import UIKit
 
 import RealmSwift
 
-class TravelEditorViewController: UIViewController {
-    
-    enum Mode {
-        case new
-        case edit
-    }
-    
-    // MARK: - Properties
-    
+class TravelEditorViewController: UIViewController {    
     let realm = try! Realm()
-    var mode: Mode = .new
-    var originTravel: Travel!
+    var editorMode: EditorMode = .new
+    var travel = Travel()
     var isModifyPhoto = false
-    let imagePicker = UIImagePickerController()
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        return imagePicker
+    }()
     
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -39,11 +37,8 @@ class TravelEditorViewController: UIViewController {
         setupCurrencyBudgetButton.layer.cornerRadius = setupCurrencyBudgetButton.frame.height / 5
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
 
-        startDateTextField.inputDatePicker(mode: .date, date: originTravel?.starteDate)
-        endDateTextField.inputDatePicker(mode: .date, date: originTravel?.endDate)
-        
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
+        startDateTextField.inputDatePicker(mode: .date, date: travel.startDateInRegion?.date)
+        endDateTextField.inputDatePicker(mode: .date, date: travel.endDateInRegion?.date)
         
         let travelPreviewTapGuesture = UITapGestureRecognizer()
         travelPreviewTapGuesture.addTarget(self, action: #selector(presentImagePicker))
@@ -79,8 +74,8 @@ class TravelEditorViewController: UIViewController {
         let currencyTableViewStoryboard = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
         let navigationController = UINavigationController(rootViewController: currencyTableViewStoryboard)
         
-//        currencyTableViewStoryboard.travel = 
-//        present(navigationController, animated: true, completion: nil)
+        currencyTableViewStoryboard.travel = travel
+        present(navigationController, animated: true, completion: nil)
     }
     
     func presentSelectImagePickerActionSheet() {
@@ -102,6 +97,7 @@ class TravelEditorViewController: UIViewController {
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     
@@ -121,51 +117,38 @@ class TravelEditorViewController: UIViewController {
 
 extension TravelEditorViewController {
     fileprivate func adjustViewMode() {
-        switch self.mode {
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        
+        switch self.editorMode {
         case .new:
-            let saveBarButtonItem: UIBarButtonItem
-            let selector = #selector(saveButtonDidTap)
-            saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = saveBarButtonItem
-            
+            travel = Travel()
+            barButtonItem.action = #selector(saveButtonDidTap)
             deleteTravelButton.isHidden = true
             
         case .edit:
-            self.navigationItem.title = self.originTravel?.name
-            
-            let editBarButtonItem: UIBarButtonItem
-            let selector = #selector(editButtonDidTap)
-            editBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
-            self.navigationItem.rightBarButtonItem = editBarButtonItem
+            barButtonItem.action = #selector(editButtonDidTap)
+            self.navigationItem.title = self.travel.name
             
             deleteTravelButton.isHidden = false
             
-            guard let startDate = originTravel?.starteDate,
-                let endDate = originTravel?.endDate
-            else {
-                return
-            }
+            titleTextField?.text = travel.name
+            startDateTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
+            endDateTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
             
+            travelPreview.travelNameLabel.text = travel.name
+            travelPreview.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
             
-            titleTextField?.text = originTravel?.name
-            startDateTextField?.text = DateUtil.dateFormatter.string(from: startDate)
-            endDateTextField?.text = DateUtil.dateFormatter.string(from: endDate)
-            
-            travelPreview.travelNameLabel.text = originTravel?.name
-            travelPreview.fillDatePeriodLabel(startDate: startDate, endDate: endDate)
-            
-            
-            if let fileURL = originTravel.photo?.fileURL {
+            if let fileURL = travel.photo?.fileURL {
                 travelPreview.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
             }
             
             deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
         }
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     func saveButtonDidTap() {
         if checkIsExistInputField() {
-            var travel = Travel()
             travelFromUI(travel: &travel)
             
             if let currencyCode = Locale.current.currencyCode {
@@ -179,27 +162,17 @@ extension TravelEditorViewController {
             try? realm.write {
                 realm.add(travel)
             }
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
     
     func editButtonDidTap() {
         if checkIsExistInputField() {
-            var travel = Travel()
-            travelFromUI(travel: &travel)
-            
             try! realm.write {
-                originTravel?.name = travel.name
-                originTravel?.starteDate = travel.starteDate
-                originTravel?.endDate = travel.endDate
-                
-                originTravel?.startYear = travel.startYear
-                originTravel?.startMonth = travel.startMonth
-                originTravel?.startDay = travel.startDay
-                originTravel?.endYear = travel.endYear
-                originTravel?.endMonth = travel.endMonth
-                originTravel?.endDay = travel.endDay
+                travelFromUI(travel: &travel)
             }
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -217,8 +190,14 @@ extension TravelEditorViewController {
         }
         
         travel.name = name
-        travel.starteDate = startDate
-        travel.endDate = endDate
+        
+        if editorMode == .new {
+            travel.startDateInRegion = DateInRegion()
+            travel.endDateInRegion = DateInRegion()
+        }
+        
+        travel.startDateInRegion?.date = startDate
+        travel.endDateInRegion?.date = endDate
         
         if isModifyPhoto {
             guard let image = travelPreview.backgroundImage.image else { return }
@@ -227,20 +206,14 @@ extension TravelEditorViewController {
             
             //TODO: 기존 저장된 photo 삭제 메서드 추가
         }
-        
-        let calendar = Calendar.current
-        travel.startYear = calendar.component(.year, from: startDate)
-        travel.startMonth = calendar.component(.month, from: startDate)
-        travel.startDay = calendar.component(.day, from: startDate)
-        travel.endYear = calendar.component(.year, from: endDate)
-        travel.endMonth = calendar.component(.month, from: endDate)
-        travel.endDay = calendar.component(.day, from: endDate)
     }
     
     func deleteTravelButtonDidTap() {
         UIAlertController.confirmStyleAlert(target: self, title: "여행 삭제", message: "이 여행을 정말로 삭제하시겠습니까?", buttonTitle: nil) { (_) in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil, userInfo: nil)
+            
             try! self.realm.write {
-                self.realm.delete(self.originTravel)
+                self.realm.delete(self.travel)
             }
             
             let navigationController = self.presentingViewController as? UINavigationController
