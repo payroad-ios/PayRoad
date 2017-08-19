@@ -63,7 +63,6 @@ class TransactionTableViewController: UIViewController {
         
         title = travel.name
         sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -339,8 +338,8 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        if let thumbnailURL = transaction.photos.first?.filePath {
-            cell.thumbnailImageView.image = PhotoUtil.loadPhotoFrom(filePath: thumbnailURL)
+        if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
+            cell.thumbnailImageView.image = thumbnailImage
         }
         
         cell.transactionNameLabel.text = transaction.name

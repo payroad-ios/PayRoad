@@ -16,7 +16,6 @@ enum Mode {
 }
 
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
-    
     let realm = try! Realm()
     
     var travel: Travel!
@@ -31,7 +30,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         pickerView.dataSource = self
         return pickerView
     }()
-    var photoUtil: PhotoUtil!
     
     //User Input Data
     var standardDate: DateInRegion? = nil
@@ -47,11 +45,11 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var currencyTextField: UITextField!
-    @IBOutlet weak var transactionImageView: UIImageView!
     @IBOutlet weak var payTypeToggleButton: UIButton!
     @IBOutlet weak var dateEditTextField: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
+    @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
     
     override func loadView() {
         super.loadView()
@@ -73,11 +71,12 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoUtil = PhotoUtil(travelID: travel.id)
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
+        
+        multiImagePickerView.delegate = self
         
         let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
@@ -145,7 +144,7 @@ extension TransactionEditorViewController {
             let selector = #selector(saveButtonDidTap)
             saveBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: selector)
             self.navigationItem.rightBarButtonItem = saveBarButtonItem
-            
+             
         case .edit:
             self.navigationItem.title = "항목 수정"
             nameTextField?.text = originTransaction.name
@@ -154,10 +153,12 @@ extension TransactionEditorViewController {
             contentTextView.text = originTransaction.content
             isCash = originTransaction.isCash
             
-            if let filePath = originTransaction.photos.first?.filePath,
-                let image = PhotoUtil.loadPhotoFrom(filePath: filePath) {
-                transactionImageView.image = image
+            var photos = [UIImage]()
+            for item in originTransaction.photos {
+                let image = PhotoUtil.loadPhotoFrom(filePath: item.filePath)
+                photos.append(image!)
             }
+            multiImagePickerView.visibleImages = photos
             
             let editBarButtonItem: UIBarButtonItem
             let selector = #selector(editButtonDidTap)
@@ -174,8 +175,9 @@ extension TransactionEditorViewController {
         var transaction = Transaction()
         transactionFromUI(transaction: &transaction)
         
-        if let image = transactionImageView.image {
-            let photo = photoUtil.saveTransactionPhoto(transactionID: transaction.id, photo: image)
+        
+        for image in multiImagePickerView.visibleImages {
+            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
             transaction.photos.append(photo)
         }
         
@@ -199,12 +201,12 @@ extension TransactionEditorViewController {
         transactionFromUI(transaction: &transaction)
         
         //image 부분 수정 필요
-        var photo = Photo()
-        if let image = transactionImageView.image,
-            let originPhoto = originTransaction.photos.first {
-            photo = photoUtil.saveTransactionPhoto(transactionID: transaction.id, photo: image)
-            PhotoUtil.deletePhoto(filePath: originPhoto.filePath)
-        }
+//        var photo = Photo()
+//        if let image = transactionImageView.image,
+//            let originPhoto = originTransaction.photos.first {
+//            photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image)
+//            PhotoUtil.deletePhoto(filePath: originPhoto.filePath)
+//        }
         
         do {
             try realm.write {
@@ -217,7 +219,7 @@ extension TransactionEditorViewController {
                 originTransaction.content = transaction.content
                 originTransaction.isCash = transaction.isCash
                 originTransaction.dateInRegion = transaction.dateInRegion
-                originTransaction.photos.append(photo)
+//                originTransaction.photos.append(photo)
                 print("트랜젝션 수정")
             }
         } catch {
@@ -280,7 +282,8 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         }
         
         // Set photoImageView to display the selected image.
-        transactionImageView.image = selectedImage
+        multiImagePickerView.visibleImages.append(selectedImage)
+        multiImagePickerView.collectionView.reloadData()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)

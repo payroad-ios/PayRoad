@@ -213,11 +213,11 @@ extension TravelEditorViewController {
         
         
         //TODO: 커버사진 저장 코드 수정 보완해야함
-        let photoUtil = PhotoUtil(travelID: "")
+//        let photoUtil = PhotoUtil()
         
         if isModifyPhoto {
             guard let image = travelPreview.backgroundImage.image else { return }
-            let photo = photoUtil.saveCoverPhoto(photo: image)
+            let photo = PhotoUtil.saveCoverPhoto(travelID: travel.id, photo: image)
             travel.photo = photo
             
             //TODO: 기존 저장된 photo 삭제 메서드 추가

@@ -31,6 +31,14 @@ class TravelTableViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, results: travels)
+        
+        //Practice
+        
+        if let resourcePath = Bundle.main.resourcePath {
+            let imgName = "dog.png"
+            let path = resourcePath + "/" + imgName
+            print(path)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

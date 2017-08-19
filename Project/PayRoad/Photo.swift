@@ -28,3 +28,9 @@ class Photo: Object {
     
     let transaction = LinkingObjects(fromType: Transaction.self, property: "photos")
 }
+
+extension Photo {
+    func fetchPhoto() -> UIImage? {
+        return PhotoUtil.loadPhotoFrom(filePath: filePath)
+    }
+}

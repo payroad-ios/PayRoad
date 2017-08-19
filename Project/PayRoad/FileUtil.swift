@@ -55,34 +55,28 @@ struct FileUtil {
 }
 
 struct PhotoUtil {
-    private let travelID: String
-    
-    init(travelID: String) {
-        self.travelID = travelID
-    }
-    
-    func saveTransactionPhoto(transactionID: String, photo: UIImage) -> Photo {
+    static func saveTransactionPhoto(travelID: String, transactionID: String, photo: UIImage) -> Photo {
         let photoModel = Photo()
         photoModel.travelID = travelID
         photoModel.preID = transactionID.substring(to: 8)
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
-        let isSuccess = writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+        let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
         print(isSuccess ? "저장 성공" : "저장 실패")
         return photoModel
     }
     
-    func saveCoverPhoto(photo: UIImage) -> Photo {
+    static func saveCoverPhoto(travelID: String, photo: UIImage) -> Photo {
         let photoModel = Photo()
         photoModel.travelID = travelID
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
-        let isSuccess = writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+        let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
         print(isSuccess ? "저장 성공" : "저장 실패")
         return photoModel
     }
     
-    private func writePhotoToDocument(photo: UIImage, directoryPath: String, fileName: String) -> Bool {
+    private static func writePhotoToDocument(photo: UIImage, directoryPath: String, fileName: String) -> Bool {
         let imageData = photo.data()
         let url = URL(fileURLWithPath: directoryPath + "/" + fileName)
         do {
