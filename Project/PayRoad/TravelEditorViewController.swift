@@ -117,16 +117,23 @@ class TravelEditorViewController: UIViewController {
 
 extension TravelEditorViewController {
     fileprivate func adjustViewMode() {
-        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(writeButtonDidTap))
         
         switch self.editorMode {
         case .new:
-            travel = Travel()
-            barButtonItem.action = #selector(saveButtonDidTap)
             deleteTravelButton.isHidden = true
             
+            try? realm.write {
+                if let currencyCode = Locale.current.currencyCode {
+                    let currency = Currency()
+                    currency.id = travel.id + "-" + currencyCode
+                    currency.code = currencyCode
+                    currency.rate = 1.0
+                    travel.currencies.append(currency)
+                }
+            }
+            
         case .edit:
-            barButtonItem.action = #selector(editButtonDidTap)
             self.navigationItem.title = self.travel.name
             
             deleteTravelButton.isHidden = false
@@ -147,30 +154,12 @@ extension TravelEditorViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    func saveButtonDidTap() {
+    func writeButtonDidTap() {
         if checkIsExistInputField() {
             travelFromUI(travel: &travel)
             
-            if let currencyCode = Locale.current.currencyCode {
-                let currency = Currency()
-                currency.id = travel.id + "-" + currencyCode
-                currency.code = currencyCode
-                currency.rate = 1.0
-                travel.currencies.append(currency)
-            }
-            
             try? realm.write {
                 realm.add(travel)
-            }
-            view.endEditing(true)
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func editButtonDidTap() {
-        if checkIsExistInputField() {
-            try! realm.write {
-                travelFromUI(travel: &travel)
             }
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
