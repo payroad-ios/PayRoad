@@ -41,12 +41,21 @@ struct FileUtil {
         return fileURL.path
     }
     
+    static func removeData(filePath: String) -> Bool {
+        guard let directoryPath = getFileURLPathFrom(filePath) else {
+            return false
+        }
+        return removeItem(atPath: directoryPath)
+    }
+    
     static func removeAllData(travelID: String) -> Bool {
         let directoryPath = generateDirectoryPath(travelID: travelID)
-        
+        return removeItem(atPath: directoryPath)
+    }
+    
+    private static func removeItem(atPath: String) -> Bool {
         do {
-            print("디렉토리", directoryPath)
-            try FileManager.default.removeItem(atPath: directoryPath)
+            try FileManager.default.removeItem(atPath: atPath)
         } catch {
             return false
         }
@@ -61,8 +70,11 @@ struct PhotoUtil {
         photoModel.preID = transactionID.substring(to: 8)
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
-        let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
-        print(isSuccess ? "저장 성공" : "저장 실패")
+        
+        OperationQueue.main.addOperation {
+            let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+            print(isSuccess ? "저장 성공" : "저장 실패")
+        }
         return photoModel
     }
     
