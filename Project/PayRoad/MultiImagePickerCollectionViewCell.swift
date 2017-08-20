@@ -17,6 +17,22 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = ColorStore.pastelRed
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    override func layoutSubviews() {
+        countLabel.text = countLabel.text == "1" ? "대표" : countLabel.text
+        countLabel.font = countLabel.font.withSize(12)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -25,6 +41,7 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             layer.borderWidth = isSelected ? 5 : 0
+            countLabel.isHidden = isSelected ? false : true
         }
     }
     
@@ -35,14 +52,21 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
     
     
     func setupViews() {
+        let margin: CGFloat = 3
         backgroundColor = ColorStore.unselectGray
         addSubview(photoImageView)
+        addSubview(countLabel)
         photoImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         photoImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         photoImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        layer.borderColor = UIColor.yellow.cgColor
+        countLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: margin).isActive = true
+        countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin).isActive = true
+        countLabel.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        countLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        layer.borderColor = ColorStore.pastelRed.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {

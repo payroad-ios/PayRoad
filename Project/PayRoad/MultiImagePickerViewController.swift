@@ -10,15 +10,18 @@ import UIKit
 
 protocol MultiImagePickerDelegate {
     func multiImagePicker(selectedImages: [UIImage])
+    var isChanged: Bool { get set }
 }
     
 class MultiImagePickerCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    let spaceSize: CGFloat = 2
+    let margin: CGFloat = 2
     let cellID = "Cell"
     var delegate: MultiImagePickerDelegate?
     
-    var selectedImage = [Int: UIImage]()
-    var userPhotoAlbum =  UserPhotoAlbum()
+    var selectedImages = [[Int: UIImage]]()
+    var userPhotoAlbum = UserPhotoAlbum()
+    
+    var orderIndexPaths = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +51,26 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
         navigationItem.rightBarButtonItems = [confirmBarButton]
     }
     
+    func removeDeselectItem(at index: Int) {
+        let inputIndexPath = orderIndexPaths[index]
+        collectionView!.deselectItem(at: inputIndexPath, animated: true)
+        
+        selectedImages.remove(at: index)
+        orderIndexPaths.remove(at: index)
+        for (index, item) in orderIndexPaths.enumerated() {
+            let cell = collectionView?.cellForItem(at: item) as! MultiImagePickerCollectionViewCell
+            cell.countLabel.text = String(index + 1)
+        }
+    }
+    
     func cancelButtonDidTap() {
-        print("취소")
         dismiss(animated: true, completion: nil)
     }
     
     func confirmButtonDidTap() {
-        let selectedArray = Array(selectedImage.values)
+        let selectedArray = selectedImages.map { [UIImage]($0.values) }.flatMap { $0 }
         delegate?.multiImagePicker(selectedImages: selectedArray)
-        
-        print("확인")
+        delegate?.isChanged = true
         dismiss(animated: true, completion: nil)
     }
     
@@ -72,46 +85,48 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MultiImagePickerCollectionViewCell
         
-        userPhotoAlbum.requestImage(at: indexPath.row) { (image) in
+        userPhotoAlbum.requestImage(at: indexPath.row, imageSize: .thumbnail) { (image) in
             cell.photoImageView.image = image
         }
-        
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !(collectionView.indexPathsForSelectedItems!.count > 5) else {
             collectionView.deselectItem(at: indexPath, animated: true)
-            //TODO: 5개 초과 AlertController 추가
+            UIAlertController.oneButtonAlert(target: self, title: "사진 앨범", message: "사진은 최대 5장까지 선택 가능합니다.")
             return
         }
         
-        userPhotoAlbum.requestImage(at: indexPath.row) { (image) in
-            self.selectedImage[indexPath.row] = image
+        let cell = collectionView.cellForItem(at: indexPath) as! MultiImagePickerCollectionViewCell
+        orderIndexPaths.append(indexPath)
+        userPhotoAlbum.requestImage(at: indexPath.row, imageSize: .original) { (image) in
+            let resultDictionary = [indexPath.row: image]
+            self.selectedImages.append(resultDictionary)
         }
+        cell.countLabel.text = String(selectedImages.count)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        selectedImage.removeValue(forKey: indexPath.row)
+        let imageIndex = selectedImages.index { [Int]($0.keys).contains(indexPath.row) }
+        removeDeselectItem(at: imageIndex!)
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (view.frame.width / 3) - (spaceSize + 1)
+        let size = (view.frame.width / 3) - (margin + 1)
         return CGSize(width: size, height: size)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return spaceSize
+        return margin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return spaceSize
+        return margin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: spaceSize, left: spaceSize, bottom: spaceSize, right: spaceSize)
+        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
 
     // MARK: UICollectionViewDelegate

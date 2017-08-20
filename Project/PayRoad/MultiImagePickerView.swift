@@ -10,11 +10,13 @@ import UIKit
 
 @IBDesignable class MultiImagePickerView: UIView, MultiImagePickerDelegate {
     
-    let multiImagePickerCollectionViewController = MultiImagePickerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    lazy var multiImagePickerCollectionViewController = MultiImagePickerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     var delegate: UIViewController!
-    let spaceSize: CGFloat = 5
+    let margin: CGFloat = 5
     var visibleImages = [UIImage]()
+    var isChanged: Bool = false
     
+    @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
@@ -29,6 +31,7 @@ import UIKit
         
         collectionView.delegate = self
         collectionView.dataSource = self
+
         multiImagePickerCollectionViewController.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
     }
@@ -36,12 +39,6 @@ import UIKit
     func multiImagePicker(selectedImages: [UIImage]) {
         visibleImages = selectedImages
         collectionView.reloadData()
-    }
-    
-    @IBAction func tempPresentPickerButton(_ sender: Any) {
-        
-        let navigationController = UINavigationController(rootViewController: multiImagePickerCollectionViewController)
-        delegate.present(navigationController, animated: true, completion: nil)
     }
     
     private func setUpView() {
@@ -54,6 +51,8 @@ import UIKit
         ]
         
         addSubview(view)
+        addImageButton.layer.cornerRadius = addImageButton.frame.height / 6
+        collectionView.backgroundColor = ColorStore.lightestGray
     }
     
     private func viewFromNibForClass() -> UIView {
@@ -61,6 +60,25 @@ import UIKit
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         return view
+    }
+    
+    func deleteSelectedImage(_ sender: UIButton) {
+        print(visibleImages)
+        let cell = sender.superview as! SelectedImageCollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        visibleImages.remove(at: indexPath.row)
+        collectionView.deleteItems(at: [indexPath])
+        isChanged = true
+
+        guard !multiImagePickerCollectionViewController.orderIndexPaths.isEmpty else {
+            return
+        }
+        multiImagePickerCollectionViewController.removeDeselectItem(at: indexPath.row)
+    }
+    
+    @IBAction func addImageButtonDidTap(_ sender: UIButton) {
+        let navigationController = UINavigationController(rootViewController: multiImagePickerCollectionViewController)
+        delegate.present(navigationController, animated: true, completion: nil)
     }
 }
 
@@ -71,6 +89,7 @@ extension MultiImagePickerView: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectedImageCollectionViewCell
         
         cell.photoImageView.image = visibleImages[indexPath.row]
+        cell.deleteButton.addTarget(self, action: #selector(deleteSelectedImage(_:)), for: .touchUpInside)
         
         return cell
     }
@@ -87,19 +106,19 @@ extension MultiImagePickerView: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension MultiImagePickerView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (frame.width / 6) - 1
-        return CGSize(width: size, height: size)
+        let size = (frame.width / 4) - 1
+        return CGSize(width: size * 1.3, height: size)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return spaceSize
+        return margin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return spaceSize
+        return margin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: spaceSize, left: spaceSize, bottom: spaceSize, right: spaceSize)
+        return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
 }

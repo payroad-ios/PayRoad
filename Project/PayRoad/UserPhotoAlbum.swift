@@ -9,9 +9,20 @@
 import Photos
 
 class UserPhotoAlbum {
-    let targetImageSize = CGSize(width: 200, height: 200)
-    let imageManager = PHImageManager.default()
+    enum ImageSize {
+        case thumbnail
+        case original
+        func convert() -> CGSize {
+            switch self {
+            case .thumbnail:
+                return CGSize(width: 200, height: 200)
+            case .original:
+                return PHImageManagerMaximumSize
+            }
+        }
+    }
     
+    let imageManager = PHImageManager.default()
     let requestOptions: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.isSynchronous = true
@@ -36,14 +47,13 @@ class UserPhotoAlbum {
             if status == .authorized {
                 handler()
             } else if status == .denied {
-                print("실패")
-                //TODO: 실패 Alert 출력
+                UIAlertController.oneButtonAlert(target: target, title: "사진 앨범", message: "사진 앨범에 접근할 수 있는 권한이 없습니다.")
             }
         }
     }
     
-    func requestImage(at: Int, handler: @escaping (UIImage) -> Void) {
-        self.imageManager.requestImage(for: self.fetchResult.object(at: at), targetSize: self.targetImageSize, contentMode: .aspectFill, options: self.requestOptions, resultHandler: { (image, error) in
+    func requestImage(at: Int, imageSize: ImageSize, handler: @escaping (UIImage) -> Void) {
+        self.imageManager.requestImage(for: self.fetchResult.object(at: at), targetSize: imageSize.convert(), contentMode: .aspectFit, options: self.requestOptions, resultHandler: { (image, error) in
             handler(image!)
         })
     }
