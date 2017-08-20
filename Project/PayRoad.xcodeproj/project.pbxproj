@@ -45,6 +45,7 @@
 		B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380C12E1F3D3109003857A2 /* DateInRegion.swift */; };
 		B38735E21F418E51000DC81C /* YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E11F418E51000DC81C /* YMD.swift */; };
 		B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E71F45C5CE000DC81C /* RealmInitializer.swift */; };
+		B38736561F499B0E000DC81C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736551F499B0E000DC81C /* Constants.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -100,6 +101,7 @@
 		B380C12E1F3D3109003857A2 /* DateInRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateInRegion.swift; sourceTree = "<group>"; };
 		B38735E11F418E51000DC81C /* YMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMD.swift; sourceTree = "<group>"; };
 		B38735E71F45C5CE000DC81C /* RealmInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmInitializer.swift; sourceTree = "<group>"; };
+		B38736551F499B0E000DC81C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A74507BA1F3976C300DFFADF /* AppDelegate.swift */,
+				B38736551F499B0E000DC81C /* Constants.swift */,
 				A74507D41F397C6B00DFFADF /* Model */,
 				A74507EA1F399CDB00DFFADF /* Travel */,
 				A74507EB1F399CE600DFFADF /* Transaction */,
@@ -394,9 +397,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -445,6 +453,7 @@
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
 				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,
 				B38735E21F418E51000DC81C /* YMD.swift in Sources */,
+				B38736561F499B0E000DC81C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
