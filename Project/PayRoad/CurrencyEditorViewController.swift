@@ -76,6 +76,7 @@ class CurrencyEditorViewController: UIViewController {
         if segue.identifier == "selectCurrencyCode" {
             let currencySelectTableViewController = segue.destination as! CurrencySelectTableViewController
             currencySelectTableViewController.delegate = self
+            currencySelectTableViewController.travel = travel
         }
     }
     
