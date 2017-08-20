@@ -33,4 +33,8 @@ extension Photo {
     func fetchPhoto() -> UIImage? {
         return PhotoUtil.loadPhotoFrom(filePath: filePath)
     }
+    
+    func fetchPhotoFromAssets() -> UIImage? {
+        return UIImage(named: fileName)
+    }
 }
