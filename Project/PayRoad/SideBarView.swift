@@ -12,27 +12,56 @@ class SideBarView: UIView {
     @IBOutlet weak var goMainButton: UIButton!
     
     @IBAction func hideSideBar(_ sender: Any) {
-        UIView.animate(withDuration: 0.5) { [unowned self] in
-            self.frame = self.defaultCGRect()
+        guard let navigationController = UIApplication.shared.windows.first!.rootViewController as? UINavigationController else {
+            return
         }
         
-        self.isUserInteractionEnabled = false
+        hide() {
+            navigationController.viewControllers.first?.view.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func gotoMainView() {
         guard let navigationController = UIApplication.shared.windows.first!.rootViewController as? UINavigationController else {
-            print("return")
             return
         }
         
-        UIView.animate(withDuration: 0.5,
-                       animations: { [unowned self] in
-                        self.frame =  self.defaultCGRect() },
-                       completion: { (result) in
-                        guard result == true else { return }
-                        navigationController.popToRootViewController(animated: true)
+        hide() {
+            navigationController.popToRootViewController(animated: true)
+            navigationController.viewControllers.first?.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    func show(completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 0.5, animations: { [unowned self] in
+            self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        }, completion: { [unowned self] (result) in
+            self.isUserInteractionEnabled = true
+            
+            guard result == true,
+                let unwrappedCompletion = completion
+            else {
+                return
+            }
+            
+            unwrappedCompletion()
         })
-        self.isUserInteractionEnabled = false
+    }
+    
+    func hide(completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 0.5, animations: { [unowned self] in
+            self.frame =  self.defaultCGRect()
+        }, completion: { (result) in
+            self.isUserInteractionEnabled = false
+            
+            guard result == true,
+                let unwrappedCompletion = completion
+            else {
+                return
+            }
+            
+            unwrappedCompletion()
+        })
     }
     
     func setUpView() {

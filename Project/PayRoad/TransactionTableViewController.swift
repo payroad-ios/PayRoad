@@ -41,7 +41,7 @@ class TransactionTableViewController: UIViewController {
     
     var pullToAddLabel = UILabel()
     
-    let sideBar = UINib(nibName: "SideBar", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
+    let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -263,19 +263,11 @@ class TransactionTableViewController: UIViewController {
     }
     
     @IBAction func showSideBar(_ sender: Any) {
-        UIView.animate(withDuration: 0.5,
-                       animations: {
-                        self.sideBar.frame = CGRect(x: 0,
-                                                    y: 0,
-                                                    width: self.sideBar.frame.width,
-                                                    height: self.sideBar.frame.height)
-                        },
-                       completion: { (result) in
-                        guard result == true else {
-                            return
-                        }
-                        self.sideBar.isUserInteractionEnabled = true
-        })
+        self.view.isUserInteractionEnabled = false
+        
+        sideBar.show() {
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     func displayTotalSpendingCurrency() {
