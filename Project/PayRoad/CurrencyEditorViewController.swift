@@ -76,6 +76,7 @@ class CurrencyEditorViewController: UIViewController {
         if segue.identifier == "selectCurrencyCode" {
             let currencySelectTableViewController = segue.destination as! CurrencySelectTableViewController
             currencySelectTableViewController.delegate = self
+            currencySelectTableViewController.travel = travel
         }
     }
     
@@ -146,7 +147,7 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
     }
     
     func rotateView(targetView: UIView) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.03, delay: 0.0, options: .curveLinear, animations: {
             targetView.transform = targetView.transform.rotated(by: CGFloat.pi / 10)
         }) { [unowned self] (finished) in
             guard self.isUpdating == true else {
