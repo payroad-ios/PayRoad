@@ -118,11 +118,13 @@ class TravelEditorViewController: UIViewController {
 extension TravelEditorViewController {
     fileprivate func adjustViewMode() {
         let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(writeButtonDidTap))
-        
+        navigationItem.rightBarButtonItem = barButtonItem
+
         switch self.editorMode {
             case .new:
                 deleteTravelButton.isHidden = true
                 
+                //TODO: 에러 해결해야 할 것
                 try? realm.write {
                     if let currencyCode = Locale.current.currencyCode {
                         let currency = Currency()
@@ -152,23 +154,21 @@ extension TravelEditorViewController {
                 deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
             }
         }
-        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     func writeButtonDidTap() {
         if checkIsExistInputField() {
-            travelFromUI(travel: &travel)
-            
             try? realm.write {
-                realm.add(travel)
+                travelFromUI(travel: &travel)
+                realm.add(travel, update: true)
             }
+            
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
     
     func travelFromUI(travel: inout Travel) {
-        
         guard let name = titleTextField?.text,
             let startDateText = startDateTextField?.text,
             let startDate = DateUtil.dateFormatter.date(from: startDateText),
@@ -179,16 +179,14 @@ extension TravelEditorViewController {
             return
         }
         
-        travel.name = name
-        
         if editorMode == .new {
             travel.startDateInRegion = DateInRegion()
             travel.endDateInRegion = DateInRegion()
         }
         
+        travel.name = name
         travel.startDateInRegion?.date = startDate
         travel.endDateInRegion?.date = endDate
-        
         
         //TODO: 커버사진 저장 코드 수정 보완해야함
 //        let photoUtil = PhotoUtil()

@@ -133,6 +133,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     func stopNotificationToken() {
+        transactionsNotificationToken?.stop()
         travelNotificationToken?.stop()
     }
     
@@ -150,7 +151,7 @@ class TransactionTableViewController: UIViewController {
             
             editTransactionTableViewController.editorMode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = selectedTransaction
+            editTransactionTableViewController.transaction = selectedTransaction!
             editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
         }
     }
@@ -282,8 +283,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     deinit {
-        transactionsNotificationToken?.stop()
-        travelNotificationToken?.stop()
+        stopNotificationToken()
     }
 }
 

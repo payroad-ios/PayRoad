@@ -13,4 +13,9 @@ class TransactionTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var transactionNameLabel: UILabel!
     @IBOutlet weak var transactionAmountLabel: UILabel!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = nil
+    }
 }

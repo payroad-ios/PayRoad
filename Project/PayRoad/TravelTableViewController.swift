@@ -35,14 +35,6 @@ class TravelTableViewController: UIViewController {
         notificationToken = travels.addNotificationBlock({ (changes: RealmCollectionChange) in
             self.tableView.reloadData()
         })
-        
-        //Practice
-        
-        if let resourcePath = Bundle.main.resourcePath {
-            let imgName = "dog.png"
-            let path = resourcePath + "/" + imgName
-            print(path)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
