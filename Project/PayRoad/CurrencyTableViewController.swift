@@ -24,7 +24,9 @@ class CurrencyTableViewController: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         
-        notificationToken = RealmHelper.tableViewNotificationToken(for: tableView, list: travel.currencies)
+        notificationToken = travel.currencies.addNotificationBlock({ (changes: RealmCollectionChange) in
+            self.tableView.reloadData()
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,7 +48,7 @@ class CurrencyTableViewController: UIViewController {
                 return
             }
             
-            editCurrencyTableViewController.mode = .edit
+            editCurrencyTableViewController.editorMode = .edit
             editCurrencyTableViewController.travel = travel
             editCurrencyTableViewController.originCurrency = travel.currencies[indexPath.row]
         }

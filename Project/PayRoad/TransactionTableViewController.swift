@@ -10,12 +10,6 @@ import UIKit
 
 import RealmSwift
 
-enum PaymentType {
-    case all
-    case cash
-    case card
-}
-
 class TransactionTableViewController: UIViewController {
     
     let realm = try! Realm()
@@ -62,6 +56,7 @@ class TransactionTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         sideBar.setUpView()
         
@@ -69,13 +64,14 @@ class TransactionTableViewController: UIViewController {
         window.addSubview(sideBar)
         
         title = travel.name
-        sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
+        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.separatorColor = ColorStore.placeHolderGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.showsVerticalScrollIndicator = false
         
         let nibCell = UINib(nibName: "TransactionTableViewCell", bundle: nil)
         tableView.register(nibCell, forCellReuseIdentifier: "transactionTableViewCell")
@@ -102,12 +98,14 @@ class TransactionTableViewController: UIViewController {
             self?.displayTotalSpendingCurrency()
         }
         
-        //NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
-//        travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
-//            title = travel.name
-//            self?.extractDatePeriod()
-//            self?.collectionView.reloadData()
-//        }
+//        NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
+        travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
+            self?.title = self?.travel.name
+            self?.extractDatePeriod()
+            self?.collectionView.reloadData()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -116,8 +114,9 @@ class TransactionTableViewController: UIViewController {
             print("여행 수정")
             
             let travelEditorViewController = UIStoryboard.loadViewController(from: .TravelEditorView, ID: "TravelEditorViewController") as! TravelEditorViewController
-            travelEditorViewController.originTravel = self.travel
-            travelEditorViewController.mode = .edit
+            travelEditorViewController.travel = self.travel
+            
+            travelEditorViewController.editorMode = .edit
             
             let navigationController = UINavigationController(rootViewController: travelEditorViewController)
             
@@ -140,6 +139,10 @@ class TransactionTableViewController: UIViewController {
         present(moreOptionAlertController, animated: true, completion: nil)
     }
     
+    func stopNotificationToken() {
+        travelNotificationToken?.stop()
+    }
+    
     //TODO: 스트링 길다. 나중에 자릅시다.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editTransaction" {
@@ -152,7 +155,7 @@ class TransactionTableViewController: UIViewController {
             let key = dynamicDateList[indexPath.section]
             let selectedTransaction = dateDictionary[key]?[indexPath.row]
             
-            editTransactionTableViewController.mode = .edit
+            editTransactionTableViewController.editorMode = .edit
             editTransactionTableViewController.travel = travel
             editTransactionTableViewController.originTransaction = selectedTransaction
             editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
@@ -217,8 +220,8 @@ class TransactionTableViewController: UIViewController {
     }
     
     func extractDatePeriod() {
-        let startYMD = YMD(year: travel.startYear, month: travel.startMonth, day: travel.startDay)
-        let endYMD = YMD(year: travel.endYear, month: travel.endMonth, day: travel.endDay)
+        let startYMD = travel.startDateInRegion!.ymd
+        let endYMD = travel.endDateInRegion!.ymd
         let dates = DateUtil.generateYMDPeriod(from: startYMD, to: endYMD)
         travelPeriodDates = dates
     }
@@ -297,6 +300,7 @@ class TransactionTableViewController: UIViewController {
         }
         
         spendingProgressView.setProgress(spendingRate, animated: true)
+        //TODO: 소숫점 자릿수 정하기
         percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
     }
     

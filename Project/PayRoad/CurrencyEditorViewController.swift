@@ -19,7 +19,7 @@ class CurrencyEditorViewController: UIViewController {
     var standardCurrency: Currency!
     var editedCurrency: Currency!
     
-    var mode: Mode = .new
+    var editorMode: EditorMode = .new
     
     @IBOutlet weak var currencySelectButton: UIButton!
     @IBOutlet weak var rateTextField: UITextField!
@@ -175,18 +175,16 @@ extension CurrencyEditorViewController {
             editedCurrency.budget = originCurrency.budget
         }
         
-        switch self.mode {
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        switch self.editorMode {
         case .new:
-            let saveBarButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(saveButtonDidTap))
-            navigationItem.rightBarButtonItem = saveBarButtonItem
-            
+            barButtonItem.action = #selector(saveButtonDidTap)
             rateTextField.isEnabled = false
             updateRateButton.isEnabled = false
-        case .edit:
-            navigationItem.title = "예산 수정"
             
-            let editBarButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(editButtonDidTap))
-            navigationItem.rightBarButtonItem = editBarButtonItem
+        case .edit:
+            barButtonItem.action = #selector(editButtonDidTap)
+            navigationItem.title = "예산 수정"
             
             currencySelectButton.setTitle(originCurrency.code, for: .normal)
             currencySelectButton.backgroundColor = UIColor.gray
@@ -202,11 +200,13 @@ extension CurrencyEditorViewController {
                 rateTextField.text = "1 \(originCurrency.code)당 \(originCurrency.rate)\(standardCurrency.code)"
             }
         }
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     func saveButtonDidTap() {
         if checkIsExistInputField() {
             let currency = Currency()
+            currency.id = travel.id + "-" + editedCurrency.code
             currency.code = editedCurrency.code
             currency.rate = editedCurrency.rate
             currency.budget = editedCurrency.budget
@@ -228,7 +228,6 @@ extension CurrencyEditorViewController {
         if checkIsExistInputField() {
             do {
                 try realm.write {
-                    originCurrency.code = editedCurrency.code
                     originCurrency.rate = editedCurrency.rate
                     originCurrency.budget = editedCurrency.budget
                     print("통화 수정")
@@ -243,6 +242,7 @@ extension CurrencyEditorViewController {
     
     func deleteCurrencyButtonDidTap() {
         defer {
+            view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
         

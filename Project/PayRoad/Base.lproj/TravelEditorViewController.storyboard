@@ -89,9 +89,6 @@
                                         <state key="normal" title="여행 삭제">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="setupCurrencyBudgetButtonDidTap:" destination="zEU-DO-42O" eventType="touchUpInside" id="HgE-au-Lji"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>

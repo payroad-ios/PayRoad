@@ -15,7 +15,7 @@ class DateInRegion: Object {
     
     var timeZone: TimeZone {
         get { return TimeZone(identifier: _timeZone) ?? .current }
-        set { _timeZone = timeZone.identifier }
+        set { _timeZone = newValue.identifier }
     }
     
     var ymd: YMD {
