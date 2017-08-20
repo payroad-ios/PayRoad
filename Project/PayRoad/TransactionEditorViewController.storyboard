@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -107,6 +107,14 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPs-iw-6RH">
+                                        <rect key="frame" x="0.0" y="510" width="375" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="📍 내 위치 추가"/>
+                                        <connections>
+                                            <action selector="locationButtonDidTap:" destination="8cC-mM-Tm3" eventType="touchUpInside" id="BWI-pN-cJJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -134,6 +142,7 @@
                         <outlet property="contentTextView" destination="keC-in-GfN" id="m0W-7b-qBo"/>
                         <outlet property="currencyTextField" destination="DBv-UJ-QPz" id="AIU-R2-ElT"/>
                         <outlet property="dateEditTextField" destination="NoO-vt-9dj" id="7Ay-fZ-5zS"/>
+                        <outlet property="locationButton" destination="tPs-iw-6RH" id="IYh-ya-9Bj"/>
                         <outlet property="nameTextField" destination="oZS-VG-LuT" id="Tew-e4-SxZ"/>
                         <outlet property="payTypeToggleButton" destination="kme-S0-gUi" id="s5E-Lc-WBZ"/>
                         <outlet property="transactionImageView" destination="elh-QA-Ris" id="2qu-EC-ocC"/>
@@ -153,7 +162,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0bd-wK-JTh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B4n-EG-RkE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="B4n-EG-RkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

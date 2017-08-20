@@ -9,6 +9,7 @@
 import UIKit
 
 import RealmSwift
+import GooglePlacePicker
 
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
@@ -36,6 +37,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
             payTypeToggleButton.isSelected = !isCash
         }
     }
+    var currentPlace: GMSPlace?
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -46,6 +48,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dateEditTextField: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
+    @IBOutlet weak var locationButton: UIButton!
     
     override func loadView() {
         super.loadView()
@@ -123,6 +126,15 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    @IBAction func locationButtonDidTap(_ sender: Any) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        
+        present(placePicker, animated: true, completion: nil)
+    }
+    
 }
 
 extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -167,6 +179,7 @@ extension TransactionEditorViewController {
             currencyTextField?.text = originTransaction.currency?.code
             contentTextView.text = originTransaction.content
             isCash = originTransaction.isCash
+            locationButton.setTitle("📍 \(originTransaction.placeName)", for: .normal)
             
             if let photoURL = originTransaction.photos.first?.fileURL,
                 let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
@@ -189,6 +202,14 @@ extension TransactionEditorViewController {
             if let image = transactionImageView.image {
                 let photo = FileUtil.saveNewImage(image: image)
                 transaction.photos.append(photo)
+            }
+            
+            // 위치 및 장소 추가
+            if let currentPlace = currentPlace {
+                transaction.placeID = currentPlace.placeID
+                transaction.placeName = currentPlace.name
+                transaction.lat.value = currentPlace.coordinate.latitude
+                transaction.lng.value = currentPlace.coordinate.longitude
             }
             
             do {
@@ -233,6 +254,15 @@ extension TransactionEditorViewController {
                         originTransaction.photos.first?.id = urlString
                         originTransaction.photos.first?.fileType = "jpg"
                     }
+                    
+                    // 위치 및 장소 수정
+                    if let currentPlace = currentPlace {
+                        originTransaction.placeID = currentPlace.placeID
+                        originTransaction.placeName = currentPlace.name
+                        originTransaction.lat.value = currentPlace.coordinate.latitude
+                        originTransaction.lng.value = currentPlace.coordinate.longitude
+                    }
+                    
                     print("트랜젝션 수정")
                 }
             } catch {
@@ -323,5 +353,21 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate {
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        viewController.dismiss(animated: true, completion: nil)
+
+        currentPlace = place
+        locationButton.setTitle("📍 \(place.name)", for: .normal)
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
     }
 }
