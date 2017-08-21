@@ -140,6 +140,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     func stopNotificationToken() {
+        transactionsNotificationToken?.stop()
         travelNotificationToken?.stop()
     }
     
@@ -157,7 +158,7 @@ class TransactionTableViewController: UIViewController {
             
             editTransactionTableViewController.editorMode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = selectedTransaction
+            editTransactionTableViewController.transaction = selectedTransaction!
             editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
         }
     }
@@ -297,8 +298,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     deinit {
-        transactionsNotificationToken?.stop()
-        travelNotificationToken?.stop()
+        stopNotificationToken()
     }
 }
 
@@ -358,8 +358,8 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        if let thumbnailURL = transaction.photos.first?.fileURL {
-            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
+            cell.thumbnailImageView.image = thumbnailImage
         }
         
         cell.transactionNameLabel.text = transaction.name

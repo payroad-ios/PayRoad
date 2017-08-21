@@ -23,6 +23,8 @@ class TravelEditorViewController: UIViewController {
         return imagePicker
     }()
     
+    let defaultBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
+    
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
@@ -118,56 +120,59 @@ class TravelEditorViewController: UIViewController {
 extension TravelEditorViewController {
     fileprivate func adjustViewMode() {
         let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(writeButtonDidTap))
-        
-        switch self.editorMode {
-        case .new:
-            deleteTravelButton.isHidden = true
-            
-            try? realm.write {
-                if let currencyCode = Locale.current.currencyCode {
-                    let currency = Currency()
-                    currency.id = travel.id + "-" + currencyCode
-                    currency.code = currencyCode
-                    currency.rate = 1.0
-                    travel.currencies.append(currency)
-                }
-            }
-            
-        case .edit:
-            self.navigationItem.title = self.travel.name
-            
-            deleteTravelButton.isHidden = false
-            
-            titleTextField?.text = travel.name
-            startDateTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
-            endDateTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
-            
-            travelPreview.travelNameLabel.text = travel.name
-            travelPreview.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
-            
-            if let fileURL = travel.photo?.fileURL {
-                travelPreview.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
-            }
-            
-            deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
-        }
         navigationItem.rightBarButtonItem = barButtonItem
+
+        switch self.editorMode {
+            case .new:
+                deleteTravelButton.isHidden = true
+                travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
+                isModifyPhoto = true
+                
+                //TODO: 에러 해결해야 할 것
+                try? realm.write {
+                    if let currencyCode = Locale.current.currencyCode {
+                        let currency = Currency()
+                        currency.id = travel.id + "-" + currencyCode
+                        currency.code = currencyCode
+                        currency.rate = 1.0
+                        travel.currencies.append(currency)
+                    }
+                }
+                
+            case .edit:
+                self.navigationItem.title = self.travel.name
+                
+                deleteTravelButton.isHidden = false
+                isModifyPhoto = false
+                titleTextField?.text = travel.name
+                startDateTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
+                endDateTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
+                
+                travelPreview.travelNameLabel.text = travel.name
+                travelPreview.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
+                
+
+                if let filePath = travel.photo?.filePath {
+                    travelPreview.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
+                
+                deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
+            }
+        }
     }
     
     func writeButtonDidTap() {
         if checkIsExistInputField() {
-            travelFromUI(travel: &travel)
-            
             try? realm.write {
-                realm.add(travel)
+                travelFromUI(travel: &travel)
+                realm.add(travel, update: true)
             }
+            
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
     
     func travelFromUI(travel: inout Travel) {
-        
         guard let name = titleTextField?.text,
             let startDateText = startDateTextField?.text,
             let startDate = DateUtil.dateFormatter.date(from: startDateText),
@@ -178,28 +183,33 @@ extension TravelEditorViewController {
             return
         }
         
-        travel.name = name
-        
         if editorMode == .new {
             travel.startDateInRegion = DateInRegion()
             travel.endDateInRegion = DateInRegion()
         }
         
+        travel.name = name
         travel.startDateInRegion?.date = startDate
         travel.endDateInRegion?.date = endDate
         
+//        TODO: 커버사진 저장 코드 수정 보완해야함
         if isModifyPhoto {
-            guard let image = travelPreview.backgroundImage.image else { return }
-            let photo = FileUtil.saveNewImage(image: image)
-            travel.photo = photo
+            if let photo = travel.photo {
+                PhotoUtil.deletePhoto(filePath: photo.filePath)
+                realm.delete(photo)
+            }
             
-            //TODO: 기존 저장된 photo 삭제 메서드 추가
+            guard let image = travelPreview.backgroundImage.image else { return }
+            let photo = PhotoUtil.saveCoverPhoto(travelID: travel.id, photo: image)
+            travel.photo = photo
         }
     }
     
     func deleteTravelButtonDidTap() {
         UIAlertController.confirmStyleAlert(target: self, title: "여행 삭제", message: "이 여행을 정말로 삭제하시겠습니까?", buttonTitle: nil) { (_) in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil, userInfo: nil)
+        
+            FileUtil.removeAllData(travelID: self.travel.id)
             
             try! self.realm.write {
                 self.realm.delete(self.travel)

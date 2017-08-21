@@ -11,12 +11,11 @@ import UIKit
 import RealmSwift
 
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
-    
     let realm = try! Realm()
     
     var travel: Travel!
     var currency: Currency!
-    var originTransaction: Transaction!
+    var transaction = Transaction()
     
     var editorMode: EditorMode = .new
     
@@ -41,11 +40,11 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var currencyTextField: UITextField!
-    @IBOutlet weak var transactionImageView: UIImageView!
     @IBOutlet weak var payTypeToggleButton: UIButton!
     @IBOutlet weak var dateEditTextField: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
+    @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
     
     override func loadView() {
         super.loadView()
@@ -67,10 +66,13 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
         currencyTextField.delegate = self
+        
+        multiImagePickerView.delegate = self
         
         let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
@@ -146,10 +148,11 @@ extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDat
 
 extension TransactionEditorViewController {
     fileprivate func adjustViewMode() {
-        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(writeButtonDidTap))
+        navigationItem.rightBarButtonItem = barButtonItem
+        
         switch self.editorMode {
         case .new:
-            barButtonItem.action = #selector(saveButtonDidTap)
             
             //TODO: PickerView 없애면서 들어내야될 코드
             if let lastCurrency = travel.transactions.last?.currency {
@@ -159,92 +162,80 @@ extension TransactionEditorViewController {
                 currency = travel.currencies.first!
                 currencyTextField.text = currency?.code
             }
+            
         case .edit:
-            barButtonItem.action = #selector(editButtonDidTap)
             self.navigationItem.title = "항목 수정"
-            nameTextField?.text = originTransaction.name
-            amountTextField?.text = String(originTransaction.amount)
-            currencyTextField?.text = originTransaction.currency?.code
-            contentTextView.text = originTransaction.content
-            isCash = originTransaction.isCash
             
-            if let photoURL = originTransaction.photos.first?.fileURL,
-                let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
-                transactionImageView.image = image
+            nameTextField?.text = transaction.name
+            amountTextField?.text = String(transaction.amount)
+            currencyTextField?.text = transaction.currency?.code
+            contentTextView.text = transaction.content
+            isCash = transaction.isCash
+            currency = transaction.currency
+
+            var photos = [UIImage]()
+            transaction.photos.forEach {
+                guard let image = $0.fetchPhoto() else { return }
+                photos.append(image)
             }
+            multiImagePickerView.visibleImages = photos
             
-            currency = originTransaction.currency
         }
         let index = travel.currencies.index(of: currency)
         pickerView.selectRow(index!, inComponent: 0, animated: true)
-        
-        navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    func saveButtonDidTap() {
+    func writeButtonDidTap() {
         if checkIsExistInputField() {
-            var transaction = Transaction()
-            transactionFromUI(transaction: &transaction)
-            
-            if let image = transactionImageView.image {
-                let photo = FileUtil.saveNewImage(image: image)
-                transaction.photos.append(photo)
-            }
-            
             do {
                 try realm.write {
-                    travel.transactions.append(transaction)
-                    print("트랜젝션 추가")
+                    transactionFromUI(transaction: &transaction)
+
+                    if editorMode == .new {
+                        savePhotoTransaction(target: transaction)
+                        travel.transactions.append(transaction)
+                        
+                    } else if editorMode == .edit {
+                        if multiImagePickerView.isChanged {
+                            for item in transaction.photos {
+                                FileUtil.removeData(filePath: item.filePath)
+                                realm.delete(item)
+                            }
+                            savePhotoTransaction(target: transaction)
+                        }
+                        transaction.name = transaction.name
+                        transaction.amount = transaction.amount
+                        transaction.currency = transaction.currency
+                        transaction.content = transaction.content
+                        transaction.isCash = transaction.isCash
+                        transaction.dateInRegion = transaction.dateInRegion
+                        
+                    // 수정 시 update를 쓰기위한 코드. append로 할 경우 수정시에도 데이터가 더해짐. 아래 코드로 사용할 경우 해결이 되나, 역관계 성립이 안되어 Travel에 종속되지 않음.
+                    // 리스트에 종속시킴과 동시에 update 파라미터를 지원하는 메서드가 있으면 좋을 것.
+//                    realm.add(transaction, update: true)
+                    }
+                    
+                    print("트랜젝션 수정")
                 }
+                
             } catch {
                 // Alert 위해 남겨둠
                 print(error)
             }
+            
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
     
-    func editButtonDidTap() {
-        if checkIsExistInputField() {
-            var transaction = Transaction()
-            transactionFromUI(transaction: &transaction)
-            
-            let urlString = UUID().uuidString
-            
-            //image 부분 수정 필요
-            if let image = transactionImageView.image {
-                FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-            }
-            
-            do {
-                try realm.write {
-                    originTransaction.name = transaction.name
-                    originTransaction.amount = transaction.amount
-                    originTransaction.currency = transaction.currency
-                    originTransaction.content = transaction.content
-                    originTransaction.isCash = transaction.isCash
-                    originTransaction.dateInRegion = transaction.dateInRegion
-                    
-                    let urlString = UUID().uuidString
-                    
-                    if let image = transactionImageView.image {
-                        FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-                        originTransaction.photos.first?.id = urlString
-                        originTransaction.photos.first?.fileType = "jpg"
-                    }
-                    print("트랜젝션 수정")
-                }
-            } catch {
-                print(error)
-            }
-            view.endEditing(true)
-            dismiss(animated: true, completion: nil)
+    func savePhotoTransaction(target: Transaction) {
+        multiImagePickerView.visibleImages.forEach {
+            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: $0)
+            target.photos.append(photo)
         }
     }
-    
+
     func transactionFromUI(transaction: inout Transaction) {
-        
         guard let name = nameTextField.text,
             let content = contentTextView.text,
             let amountText = amountTextField.text,
@@ -255,16 +246,21 @@ extension TransactionEditorViewController {
         }
         
         let datePicker = dateEditTextField.inputView as! UIDatePicker
-        let dateInRegion = DateInRegion()
-        dateInRegion.date = datePicker.date
-        dateInRegion.timeZone = standardDate?.timeZone ?? .current
         
         transaction.name = name
         transaction.amount = amount
-        transaction.content = content
         transaction.currency = currency
+        transaction.content = content
         transaction.isCash = isCash
-        transaction.dateInRegion = dateInRegion
+        
+        if let dateInRegion = standardDate {
+            dateInRegion.date = datePicker.date
+            transaction.dateInRegion = dateInRegion
+        } else {
+            let dateInRegion = DateInRegion()
+            dateInRegion.date = datePicker.date
+            transaction.dateInRegion = dateInRegion
+        }
     }
 }
 
@@ -298,7 +294,8 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         }
         
         // Set photoImageView to display the selected image.
-        transactionImageView.image = selectedImage
+        multiImagePickerView.visibleImages.append(selectedImage)
+        multiImagePickerView.collectionView.reloadData()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
@@ -311,12 +308,6 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
-        
-        if editorMode == .edit,
-            let photo = originTransaction.photos.first {
-            FileUtil.removeImageOnDocumentDir(filePath: photo.fileURL)
-            transactionImageView.image = nil
-        }
         
         imagePickerController.sourceType = .photoLibrary
         
