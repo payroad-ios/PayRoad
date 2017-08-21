@@ -19,7 +19,7 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
     
     let countLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ColorStore.pastelRed
+        label.backgroundColor = ColorStore.destructiveRed
         label.textAlignment = .center
         label.textColor = UIColor.white
         label.isHidden = true
@@ -66,7 +66,7 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
         countLabel.widthAnchor.constraint(equalToConstant: 25).isActive = true
         countLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
-        layer.borderColor = ColorStore.pastelRed.cgColor
+        layer.borderColor = ColorStore.destructiveRed.cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
