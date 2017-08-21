@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import CoreLocation
 
 class Transaction: Object {
     dynamic var id = UUID().uuidString
@@ -18,15 +19,30 @@ class Transaction: Object {
     dynamic var dateInRegion: DateInRegion?
     dynamic var category: Category?
     
-    let lat = RealmOptional<Double>() // Latitude
-    let lng = RealmOptional<Double>() // Longitude
     dynamic var placeID: String? = nil // 장소 ID
     dynamic var placeName: String? = nil // 장소명
+    let lat = RealmOptional<Double>() // Latitude
+    let lng = RealmOptional<Double>() // Longitude
+    
+    var coordinate: CLLocationCoordinate2D? {
+        get {
+            guard let latitude = lat.value, let longitude = lng.value else { return nil }
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        set {
+            lat.value = newValue?.latitude
+            lng.value = newValue?.longitude
+        }
+    }
     
     let photos = List<Photo>()
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["coordinate"]
     }
 }

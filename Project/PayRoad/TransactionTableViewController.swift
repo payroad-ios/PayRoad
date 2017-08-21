@@ -124,10 +124,19 @@ class TransactionTableViewController: UIViewController {
             self.present(navigationController, animated: true, completion: nil)
         }
         
+        let transactionMap = UIAlertAction(title: "가계부 지도", style: .default) { [unowned self] _ in
+            let transactionMapViewController = UIStoryboard.loadViewController(from: .TransactionMapView, ID: "TransactionMapViewController") as! TransactionMapViewController
+            let navigationController = UINavigationController(rootViewController: transactionMapViewController)
+            transactionMapViewController.travel = self.travel
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         moreOptionAlertController.addAction(travelEdit)
         moreOptionAlertController.addAction(currencySetting)
+        moreOptionAlertController.addAction(transactionMap)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
     }

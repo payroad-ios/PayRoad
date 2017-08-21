@@ -46,6 +46,10 @@
 		B38735E21F418E51000DC81C /* YMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E11F418E51000DC81C /* YMD.swift */; };
 		B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38735E71F45C5CE000DC81C /* RealmInitializer.swift */; };
 		B38736561F499B0E000DC81C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736551F499B0E000DC81C /* Constants.swift */; };
+		B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736571F49B199000DC81C /* TransactionMapViewController.swift */; };
+		B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */; };
+		B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */; };
+		B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -102,6 +106,10 @@
 		B38735E11F418E51000DC81C /* YMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YMD.swift; sourceTree = "<group>"; };
 		B38735E71F45C5CE000DC81C /* RealmInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmInitializer.swift; sourceTree = "<group>"; };
 		B38736551F499B0E000DC81C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B38736571F49B199000DC81C /* TransactionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapViewController.swift; sourceTree = "<group>"; };
+		B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionMapViewController.storyboard; sourceTree = "<group>"; };
+		B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPopUpViewController.swift; sourceTree = "<group>"; };
+		B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionPopUpViewController.storyboard; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -214,6 +222,10 @@
 				A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */,
 				A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */,
 				E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */,
+				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
+				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
+				B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */,
+				B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -345,6 +357,8 @@
 				A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */,
 				A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */,
 				A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */,
+				B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */,
+				B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */,
 				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
 				B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */,
 			);
@@ -438,6 +452,7 @@
 				E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
 				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
+				B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,
@@ -445,6 +460,7 @@
 				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
 				E50D13B01F42D91200BD36CC /* Category.swift in Sources */,
 				E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */,
+				B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */,
 				B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */,
 				B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */,
 				E50D13AC1F41CB3200BD36CC /* Photo.swift in Sources */,

@@ -208,8 +208,7 @@ extension TransactionEditorViewController {
             if let currentPlace = currentPlace {
                 transaction.placeID = currentPlace.placeID
                 transaction.placeName = currentPlace.name
-                transaction.lat.value = currentPlace.coordinate.latitude
-                transaction.lng.value = currentPlace.coordinate.longitude
+                transaction.coordinate = currentPlace.coordinate
             }
             
             do {
@@ -259,8 +258,7 @@ extension TransactionEditorViewController {
                     if let currentPlace = currentPlace {
                         originTransaction.placeID = currentPlace.placeID
                         originTransaction.placeName = currentPlace.name
-                        originTransaction.lat.value = currentPlace.coordinate.latitude
-                        originTransaction.lng.value = currentPlace.coordinate.longitude
+                        originTransaction.coordinate = currentPlace.coordinate
                     }
                     
                     print("트랜젝션 수정")
