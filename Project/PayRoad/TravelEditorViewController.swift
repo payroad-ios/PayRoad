@@ -23,6 +23,8 @@ class TravelEditorViewController: UIViewController {
         return imagePicker
     }()
     
+    let defaultBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
+    
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
@@ -123,6 +125,8 @@ extension TravelEditorViewController {
         switch self.editorMode {
             case .new:
                 deleteTravelButton.isHidden = true
+                travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
+                isModifyPhoto = true
                 
                 //TODO: 에러 해결해야 할 것
                 try? realm.write {
@@ -139,7 +143,7 @@ extension TravelEditorViewController {
                 self.navigationItem.title = self.travel.name
                 
                 deleteTravelButton.isHidden = false
-                
+                isModifyPhoto = false
                 titleTextField?.text = travel.name
                 startDateTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
                 endDateTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
@@ -188,15 +192,16 @@ extension TravelEditorViewController {
         travel.startDateInRegion?.date = startDate
         travel.endDateInRegion?.date = endDate
         
-        //TODO: 커버사진 저장 코드 수정 보완해야함
-//        let photoUtil = PhotoUtil()
-        
+//        TODO: 커버사진 저장 코드 수정 보완해야함
         if isModifyPhoto {
+            if let photo = travel.photo {
+                PhotoUtil.deletePhoto(filePath: photo.filePath)
+                realm.delete(photo)
+            }
+            
             guard let image = travelPreview.backgroundImage.image else { return }
             let photo = PhotoUtil.saveCoverPhoto(travelID: travel.id, photo: image)
             travel.photo = photo
-            
-            //TODO: 기존 저장된 photo 삭제 메서드 추가
         }
     }
     

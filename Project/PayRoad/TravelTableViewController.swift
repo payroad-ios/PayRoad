@@ -17,9 +17,7 @@ class TravelTableViewController: UIViewController {
         return realm.objects(Travel.self)
     }()
     var notificationToken: NotificationToken? = nil
-    
-    let tempBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
-    
+        
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -60,13 +58,10 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell.travelView.travelNameLabel.text = travel.name
         cell.travelView.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
         
-        guard let filePath = travel.photo?.filePath else {
+        guard let photo = travel.photo else {
             return cell
         }
-        cell.travelView.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
-        
-        //image Random Setting
-//        cell.travelView.backgroundImage.image = tempBackgroundBGArray[Int(arc4random_uniform(UInt32(tempBackgroundBGArray.count)))]
+        cell.travelView.backgroundImage.image = photo.fetchPhoto()
         
         return cell
     }
