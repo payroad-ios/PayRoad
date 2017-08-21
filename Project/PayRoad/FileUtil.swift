@@ -41,6 +41,15 @@ struct FileUtil {
         return fileURL.path
     }
     
+    static func DataFrom(_ filePath: String) -> Data? {
+        guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let fileURL = documentURL.appendingPathComponent("travel", isDirectory: true).appendingPathComponent(filePath)
+        let fileData = try? Data(contentsOf: fileURL)
+        return fileData
+    }
+    
     static func removeData(filePath: String) -> Bool {
         guard let directoryPath = getFileURLPathFrom(filePath) else {
             return false
@@ -71,7 +80,7 @@ struct PhotoUtil {
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
         
-        OperationQueue.main.addOperation {
+        OperationQueue.current?.addOperation {
             let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
             print(isSuccess ? "저장 성공" : "저장 실패")
         }
@@ -101,13 +110,13 @@ struct PhotoUtil {
     }
     
     static func loadPhotoFrom(filePath: String) -> UIImage? {
-        guard let imageData = FileUtil.getFileURLPathFrom(filePath) else {
+        guard let data = FileUtil.DataFrom(filePath) else {
             return nil
         }
         
-        guard let image = UIImage(contentsOfFile: imageData)
+        guard let image = UIImage(data: data)
             else {
-                print("fail to load image \(imageData)")
+                print("fail to load image \(filePath)")
                 return nil
         }
         
