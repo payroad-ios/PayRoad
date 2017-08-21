@@ -20,4 +20,15 @@ extension UIView {
         upperlineView.backgroundColor = color
         addSubview(upperlineView)
     }
+    
+    func cornerRound(cornerOptions: UIRectCorner, cornerRadius: Int) {
+        let maskPath = UIBezierPath(roundedRect: self.bounds,
+                                    byRoundingCorners: cornerOptions,
+                                    cornerRadii:CGSize(width: cornerRadius, height: cornerRadius))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = self.bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
+    }
 }
