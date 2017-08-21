@@ -63,7 +63,6 @@ import UIKit
     }
     
     func deleteSelectedImage(_ sender: UIButton) {
-        print(visibleImages)
         let cell = sender.superview as! SelectedImageCollectionViewCell
         let indexPath = collectionView.indexPath(for: cell)!
         visibleImages.remove(at: indexPath.row)
@@ -81,8 +80,6 @@ import UIKit
         delegate.present(navigationController, animated: true, completion: nil)
     }
 }
-
-
 
 extension MultiImagePickerView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

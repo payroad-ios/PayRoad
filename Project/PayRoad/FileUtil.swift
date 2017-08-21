@@ -41,7 +41,7 @@ struct FileUtil {
         return fileURL.path
     }
     
-    static func DataFrom(_ filePath: String) -> Data? {
+    static func dataFrom(_ filePath: String) -> Data? {
         guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
@@ -110,7 +110,7 @@ struct PhotoUtil {
     }
     
     static func loadPhotoFrom(filePath: String) -> UIImage? {
-        guard let data = FileUtil.DataFrom(filePath) else {
+        guard let data = FileUtil.dataFrom(filePath) else {
             return nil
         }
         
