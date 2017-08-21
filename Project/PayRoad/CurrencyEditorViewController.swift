@@ -36,7 +36,15 @@ class CurrencyEditorViewController: UIViewController {
         budgetTextField.delegate = self
         rateTextField.addTarget(self, action: #selector(editingChangedRate(_:)), for: .editingChanged)
         budgetTextField.addTarget(self, action: #selector(editingChangedBudget(_:)), for: .editingChanged)
+        
         adjustViewMode()
+        
+        currencySelectButton.cornerRound(cornerOptions: [.bottomLeft, .topLeft], cornerRadius: 8)
+        rateTextField.borderStyle = .roundedRect
+        
+        rateTextField.layer.cornerRadius = 8
+        rateTextField.layer.borderColor = UIColor.gray.cgColor
+        rateTextField.layer.borderWidth = 1
     }
     
     func editingChangedRate(_ sender: UITextField) {
@@ -205,6 +213,7 @@ extension CurrencyEditorViewController {
             navigationItem.title = "예산 수정"
             
             currencySelectButton.setTitle(originCurrency.code, for: .normal)
+            currencySelectButton.backgroundColor = UIColor.gray
             currencySelectButton.isEnabled = false
             
             budgetTextField.text = String(originCurrency.budget)
