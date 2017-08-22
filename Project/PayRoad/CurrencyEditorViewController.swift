@@ -216,7 +216,7 @@ extension CurrencyEditorViewController {
             currencySelectButton.backgroundColor = UIColor.gray
             currencySelectButton.isEnabled = false
             
-            budgetTextField.text = String(originCurrency.budget)
+            budgetTextField.text = NumberStringUtil.roughString(number: originCurrency.budget)
             
             if originCurrency.code == standardCurrency.code {
                 rateTextField.text = "기준 통화"

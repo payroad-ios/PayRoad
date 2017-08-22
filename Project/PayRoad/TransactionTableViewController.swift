@@ -280,12 +280,13 @@ class TransactionTableViewController: UIViewController {
         var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
-            spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
-            balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
+            spendingLabel.text = "\(NumberStringUtil.roughString(number: amountByCurrency)) \(currency.code)"
+            let balance = currency.budget - amountByCurrency
+            balanceLabel.text = "\(NumberStringUtil.roughString(number: balance)) \(currency.code)"
             spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
-            balanceLabel.text = "\(currency.budget) \(currency.code)"
+            balanceLabel.text = "\(NumberStringUtil.roughString(number: currency.budget)) \(currency.code)"
         }
         
         if spendingRate < 0 || spendingRate > 1 {
@@ -294,7 +295,7 @@ class TransactionTableViewController: UIViewController {
         
         spendingProgressView.setProgress(spendingRate, animated: true)
         //TODO: 소숫점 자릿수 정하기
-        percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
+        percentageLabel.text = "\(NumberStringUtil.numberString(number: spendingRate * 100, dropPoint: 0))"
     }
     
     deinit {
@@ -340,7 +341,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         
         let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            totalAmountLabel.text = "\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code)"
+            totalAmountLabel.text = "\(NumberStringUtil.roughString(number: totalAmount)) \(travel.currencies.first!.code)"
         }
         
         sectionView.addSubview(ymdLabel)
@@ -363,7 +364,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(NumberStringUtil.roughString(number: transaction.amount) )"
         
         if transaction.isCash {
             

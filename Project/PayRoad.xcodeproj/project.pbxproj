@@ -61,6 +61,7 @@
 		E51756261F469EFF0018A03A /* SideBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E51756251F469EFF0018A03A /* SideBarView.xib */; };
 		E51756281F46C6640018A03A /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51756271F46C6630018A03A /* SideBarView.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
+		E5C7AAB01F4BFDB70059E0DB /* NumberStringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */; };
 		E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */; };
 		E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */; };
@@ -125,6 +126,7 @@
 		E51756251F469EFF0018A03A /* SideBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideBarView.xib; sourceTree = "<group>"; };
 		E51756271F46C6630018A03A /* SideBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberStringUtil.swift; sourceTree = "<group>"; };
 		E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
+				E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */,
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
 				A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
@@ -486,6 +489,7 @@
 				A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */,
 				A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */,
 				A7FED7D01F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift in Sources */,
+				E5C7AAB01F4BFDB70059E0DB /* NumberStringUtil.swift in Sources */,
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
 				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,
 				B38735E21F418E51000DC81C /* YMD.swift in Sources */,
