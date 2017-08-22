@@ -16,21 +16,15 @@ class TransactionTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        thumbnailImageView.image = nil
+        thumbnailImageView.image = #imageLiteral(resourceName: "Icon_ImageDefault")
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        print(#function, self.frame)
         thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.height / 2
         thumbnailImageView.layer.borderColor = ColorStore.lightGray.cgColor
         thumbnailImageView.layer.borderWidth = 0.5
         thumbnailImageView.clipsToBounds = true
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        print(#function, thumbnailImageView.frame)
     }
 }

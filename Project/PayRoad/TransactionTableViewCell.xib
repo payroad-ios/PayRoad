@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-NM-B5W">
-                        <rect key="frame" x="8" y="8" width="63.5" height="63.5"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Icon_ImageDefault" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-NM-B5W">
+                        <rect key="frame" x="8" y="8" width="63" height="63"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="hwv-NM-B5W" secondAttribute="height" multiplier="1:1" id="avi-78-6p2"/>
                         </constraints>
@@ -32,7 +32,7 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="El2-sY-brX">
-                        <rect key="frame" x="84.5" y="12" width="69" height="56"/>
+                        <rect key="frame" x="84" y="12" width="69" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="항목명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vR5-4h-v2J" customClass="CustomLabel" customModule="PayRoad" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="69" height="24"/>
@@ -94,5 +94,6 @@
     <resources>
         <image name="Category_Food" width="32" height="32"/>
         <image name="Category_Transport" width="32" height="32"/>
+        <image name="Icon_ImageDefault" width="64" height="64"/>
     </resources>
 </document>
