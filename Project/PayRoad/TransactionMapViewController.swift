@@ -95,12 +95,10 @@ extension TransactionMapViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TransactionMapCell", for: indexPath) as! TransactionMapCollectionViewCell
         
-        // cell style
         cell.layer.cornerRadius = 5.0
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 1.0
         
-        // cell content
         let transaction = sortedTransactions[indexPath.row]
         cell.nameLabel.text = transaction.name
         cell.dateLabel.text = transaction.dateInRegion?.string()
@@ -123,16 +121,7 @@ extension TransactionMapViewController: UICollectionViewDelegate, UICollectionVi
         mapView.selectedMarker = marker
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0 //set return 0 for no spacing you can check to change the return value
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.size.width - 40.0, height: 90.0)
+        return CGSize(width: self.view.frame.size.width - 20.0, height: 90.0)
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-    }
-    
 }
