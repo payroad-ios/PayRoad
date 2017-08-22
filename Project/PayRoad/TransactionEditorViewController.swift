@@ -28,13 +28,17 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     //User Input Data
     var standardDate: DateInRegion? = nil
-    var inputCategory: CategoryTEST? = nil
     var inputImages: [UIImage]? = nil
     var isCash = true {
         didSet {
             payTypeToggleButton.isSelected = !isCash
         }
     }
+    
+    var category: Category? = nil
+    lazy var categories: Results<Category> = { [unowned self] in
+        return self.realm.objects(Category.self)
+    }()
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -163,6 +167,10 @@ extension TransactionEditorViewController {
                 currencyTextField.text = currency?.code
             }
             
+            if let _category = realm.object(ofType: Category.self, forPrimaryKey: "category-etc") {
+                category = _category
+            }
+            
         case .edit:
             self.navigationItem.title = "항목 수정"
             
@@ -172,7 +180,12 @@ extension TransactionEditorViewController {
             contentTextView.text = transaction.content
             isCash = transaction.isCash
             currency = transaction.currency
-
+            category = transaction.category
+            
+            if let _category = transaction.category {
+                category = _category
+            }
+            
             var photos = [UIImage]()
             transaction.photos.forEach {
                 guard let image = $0.fetchPhoto() else { return }
@@ -183,6 +196,12 @@ extension TransactionEditorViewController {
         }
         let index = travel.currencies.index(of: currency)
         pickerView.selectRow(index!, inComponent: 0, animated: true)
+        
+        if let _category = category,
+            let categoryIndex = categories.index(of: _category) {
+            categoryCollectionView.selectItem(at: IndexPath(row: categoryIndex, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }
+        
     }
     
     func writeButtonDidTap() {
@@ -252,6 +271,7 @@ extension TransactionEditorViewController {
         transaction.currency = currency
         transaction.content = content
         transaction.isCash = isCash
+        transaction.category = category
         
         if let dateInRegion = standardDate {
             dateInRegion.date = datePicker.date
@@ -264,24 +284,25 @@ extension TransactionEditorViewController {
     }
 }
 
-
-
 extension TransactionEditorViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
-        let category = CategoryStore.shard.categorys[indexPath.row]
-        cell.categoryImage.image = category.image
+        let category = categories[indexPath.row]
+        
+        cell.categoryImage.image = UIImage(named: category.assetName)
         cell.categoryName.text = category.name
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CategoryStore.shard.categorys.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: 선택한 카테고리 반영
-        print(CategoryStore.shard.categorys[indexPath.row].name)
+        print(categories[indexPath.row].name)
+        
+        category = categories[indexPath.row]
     }
 }
 
