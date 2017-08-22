@@ -66,13 +66,13 @@ extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSourc
         let currency = travel.currencies[indexPath.row]
         cell.currencyCodeLabel?.text = currency.code
         cell.currencyLocaleLabel?.text = Locale.current.localizedString(forCurrencyCode: currency.code)
-        cell.budgetAmountLabel?.text = String(currency.budget)
+        cell.budgetAmountLabel?.text = NumberStringUtil.roughString(number: currency.budget)
         
         if currency.rate == 1.0 {
             cell.rateLabel?.text = "기준"
         } else {
             let basicCurrencyCode = travel.currencies.first!.code
-            cell.rateLabel?.text = "1\(currency.code)당 \(currency.rate)\(basicCurrencyCode)"
+            cell.rateLabel?.text = "1\(currency.code)당 \(NumberStringUtil.roughString(number: currency.rate))\(basicCurrencyCode)"
         }
             
         return cell
