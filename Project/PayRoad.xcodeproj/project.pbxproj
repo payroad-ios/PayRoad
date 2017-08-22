@@ -1,10 +1,10 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
+	// !$*UTF8*$!
+	{
+		archiveVersion = 1;
+		classes = {
+		};
+		objectVersion = 46;
+		objects = {
 
 /* Begin PBXBuildFile section */
 		37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */; };
@@ -68,6 +68,7 @@
 		E51756281F46C6640018A03A /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51756271F46C6630018A03A /* SideBarView.swift */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
 		E5C7AAB01F4BFDB70059E0DB /* NumberStringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */; };
+        E5C7AAB41F4C07E40059E0DB /* ExtensionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7AAB31F4C07E40059E0DB /* ExtensionObject.swift */; };
 		E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */; };
 		E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */; };
@@ -139,6 +140,7 @@
 		E51756271F46C6630018A03A /* SideBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberStringUtil.swift; sourceTree = "<group>"; };
+		E5C7AAB31F4C07E40059E0DB /* ExtensionObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionObject.swift; sourceTree = "<group>"; };
 		E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				B380C12E1F3D3109003857A2 /* DateInRegion.swift */,
 				B38735E11F418E51000DC81C /* YMD.swift */,
 				E50D13AB1F41CB3200BD36CC /* Photo.swift */,
+				E5C7AAB31F4C07E40059E0DB /* ExtensionObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
 				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7B0AA141F478BDC005DE60C /* MultiImagePickerViewController.swift in Sources */,
+				E5C7AAB41F4C07E40059E0DB /* ExtensionObject.swift in Sources */,
 				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
 				B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */,

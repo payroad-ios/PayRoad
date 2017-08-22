@@ -46,3 +46,14 @@ class Transaction: Object {
         return ["coordinate"]
     }
 }
+
+extension Transaction: CascadingDeletable {
+    func childrenToDelete() -> [AnyObject?] {
+        var objectList = [AnyObject?]()
+        
+        objectList.append(dateInRegion)
+        objectList.append(photos)
+        
+        return objectList
+    }
+}
