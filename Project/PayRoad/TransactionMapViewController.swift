@@ -9,35 +9,43 @@
 import UIKit
 
 import GoogleMaps
+import RealmSwift
 
 class TransactionMapViewController: UIViewController {
     
-    var mapView: GMSMapView!
-    var travel: Travel!
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    override func loadView() {
-        
-        let camera = GMSCameraPosition.camera(withLatitude: 51.5, longitude: -0.127, zoom: 13)
-        mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-
-        view = mapView
-        
-        mapView.delegate = self
-    }
+    var travel: Travel!
+    var sortedTransactions: Results<Transaction>!
+    var markers = [TransactionGMSMarker]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false).filter("lat != nil AND lng != nil")
+        
+        mapView.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        createMapView()
+        addMarker()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func createMapView() {
+        let camera = GMSCameraPosition.camera(withLatitude: 51.5, longitude: -0.127, zoom: 13)
+        mapView.camera = camera
+    }
+    
+    func addMarker() {
         var bounds = GMSCoordinateBounds()
         
-        for transaction in travel.transactions {
+        markers = [TransactionGMSMarker]()
+        
+        for transaction in sortedTransactions {
             guard let position = transaction.coordinate else { continue }
             
-            //let marker = GMSMarker()
             let marker = TransactionGMSMarker()
             marker.position = position
             marker.transaction = transaction
@@ -46,6 +54,7 @@ class TransactionMapViewController: UIViewController {
             marker.map = mapView
             
             bounds = bounds.includingCoordinate(marker.position)
+            markers.append(marker)
         }
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 50.0)
@@ -55,27 +64,75 @@ class TransactionMapViewController: UIViewController {
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 }
 
-extension TransactionMapViewController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let marker = marker as! TransactionGMSMarker
-        let storyboard = UIStoryboard(name: "TransactionPopUpViewController", bundle: nil)
-        let popUpViewController = storyboard.instantiateViewController(withIdentifier: "TransactionPopUpViewController") as! TransactionPopUpViewController
-        popUpViewController.transaction = marker.transaction
-        popUpViewController.modalPresentationStyle = .overCurrentContext
-        present(popUpViewController, animated: false)
-        
-        return true
-    }
-}
-
-// 테스트
 class TransactionGMSMarker: GMSMarker {
     var transaction: Transaction?
     
     override init() {
         super.init()
     }
+}
+
+extension TransactionMapViewController: GMSMapViewDelegate {
+//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+//        let marker = marker as! TransactionGMSMarker
+//        let storyboard = UIStoryboard(name: "TransactionPopUpViewController", bundle: nil)
+//        let popUpViewController = storyboard.instantiateViewController(withIdentifier: "TransactionPopUpViewController") as! TransactionPopUpViewController
+//        popUpViewController.transaction = marker.transaction
+//        popUpViewController.modalPresentationStyle = .overCurrentContext
+//        present(popUpViewController, animated: false)
+//        
+//        return true
+//    }
+}
+
+extension TransactionMapViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sortedTransactions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TransactionMapCell", for: indexPath) as! TransactionMapCollectionViewCell
+        
+        // cell style
+        cell.layer.cornerRadius = 5.0
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 1.0
+        
+        // cell content
+        let transaction = sortedTransactions[indexPath.row]
+        cell.nameLabel.text = transaction.name
+        cell.dateLabel.text = transaction.dateInRegion?.string()
+        cell.amountLabel.text = "\(transaction.amount) \(transaction.currency!.code)"
+        
+        return cell
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentCenteredPoint = CGPoint(x: collectionView.contentOffset.x + collectionView.bounds.width/2, y: collectionView.contentOffset.y + collectionView.bounds.height/2)
+        guard let indexPath = collectionView.indexPathForItem(at: currentCenteredPoint) else { return }
+        
+        let transaction = sortedTransactions[indexPath.row]
+        print(transaction.name)
+
+        let update = GMSCameraUpdate.setTarget(transaction.coordinate!)
+        mapView.animate(with: update)
+        
+        let marker = markers[indexPath.row]
+        mapView.selectedMarker = marker
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0 //set return 0 for no spacing you can check to change the return value
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.size.width - 40.0, height: 90.0)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
 }

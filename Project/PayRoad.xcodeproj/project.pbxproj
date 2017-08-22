@@ -50,6 +50,7 @@
 		B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */; };
 		B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */; };
 		B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */; };
+		B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -110,6 +111,7 @@
 		B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionMapViewController.storyboard; sourceTree = "<group>"; };
 		B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPopUpViewController.swift; sourceTree = "<group>"; };
 		B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionPopUpViewController.storyboard; sourceTree = "<group>"; };
+		B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */,
 				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
 				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
+				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
 				B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */,
 				B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */,
 			);
@@ -320,6 +323,7 @@
 				TargetAttributes = {
 					A74507B61F3976C300DFFADF = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = VD42G8XRH9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -452,6 +456,7 @@
 				E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
 				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
+				B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */,
 				B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
@@ -618,11 +623,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VD42G8XRH9;
 				INFOPLIST_FILE = PayRoad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad.frdy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -635,11 +640,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VD42G8XRH9;
 				INFOPLIST_FILE = PayRoad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad.frdy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
