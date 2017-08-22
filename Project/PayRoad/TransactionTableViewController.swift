@@ -299,7 +299,7 @@ class TransactionTableViewController: UIViewController {
         
         spendingProgressView.setProgress(spendingRate, animated: true)
         //TODO: 소숫점 자릿수 정하기
-        percentageLabel.text = "\(NumberStringUtil.numberString(number: spendingRate * 100, dropPoint: 0))"
+        percentageLabel.text = "\(NumberStringUtil.numberString(number: spendingRate * 100, dropPoint: 0))%"
     }
     
     deinit {
