@@ -365,10 +365,15 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         cell.transactionNameLabel.text = transaction.name
         cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
         
+        if let category = transaction.category,
+            let categoryImage = UIImage(named: category.assetName) {
+            cell.categoryImageView.image = categoryImage
+        }
+        
         if transaction.isCash {
-            
+            //cell.thumbnailImageView = ...
         } else {
-            
+            //cell.thumbnailImageView = ...
         }
         
         return cell
