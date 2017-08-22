@@ -9,9 +9,9 @@
 import UIKit
 
 extension UIImage {
-    func resizeImage(_ image: UIImage, size: CGSize) -> UIImage {
+    func resizeImage(size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        image.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        self.draw(in: CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return resizedImage!
@@ -23,7 +23,7 @@ extension UIImage {
         if (imageData?.count)! > 2097152 {
             let oldSize = self.size
             let newSize = CGSize(width: 800, height: oldSize.height / oldSize.width * 800)
-            let newImage = self.resizeImage(self, size: newSize)
+            let newImage = self.resizeImage(size: newSize)
             imageData = UIImageJPEGRepresentation(newImage, 0.7)
         }
         return imageData!

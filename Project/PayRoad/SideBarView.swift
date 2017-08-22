@@ -68,12 +68,12 @@ class SideBarView: UIView {
         self.isUserInteractionEnabled = false
         self.frame = self.defaultCGRect()
         
-        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 10)
+        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
         
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 1
+        self.layer.shadowColor = ColorStore.darkGray.cgColor
+        self.layer.shadowOpacity = 0.8
         self.layer.shadowOffset = CGSize.zero
-        self.layer.shadowRadius = 10
+        self.layer.shadowRadius = 7
     }
     
     func defaultCGRect() -> CGRect {

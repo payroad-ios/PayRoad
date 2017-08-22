@@ -39,12 +39,12 @@ class CurrencyEditorViewController: UIViewController {
         
         adjustViewMode()
         
-        currencySelectButton.cornerRound(cornerOptions: [.bottomLeft, .topLeft], cornerRadius: 8)
+        currencySelectButton.cornerRound(cornerOptions: [.bottomLeft, .topLeft], cornerRadius: 5)
         rateTextField.borderStyle = .roundedRect
         
-        rateTextField.layer.cornerRadius = 8
-        rateTextField.layer.borderColor = UIColor.gray.cgColor
-        rateTextField.layer.borderWidth = 1
+        rateTextField.layer.cornerRadius = 5
+        rateTextField.layer.borderColor = ColorStore.unselectGray.cgColor
+        rateTextField.layer.borderWidth = 0.5
     }
     
     func editingChangedRate(_ sender: UITextField) {
@@ -69,12 +69,12 @@ class CurrencyEditorViewController: UIViewController {
     
     func checkIsExistInputField() -> Bool {
         guard !(editedCurrency.code == "") else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "화폐를 선택해주세요.")
+            UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "화폐를 선택해주세요.")
             return false
         }
         
         guard !(budgetTextField.text!.isEmpty) else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "예산을 입력해주세요..")
+            UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "예산을 입력해주세요.")
             return false
         }
         return true

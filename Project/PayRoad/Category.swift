@@ -37,7 +37,7 @@ class CategoryStore {
     init() {
         for i in 0..<10 {
             if i % 2 == 0 {
-                let category = CategoryTEST(index: 0, name: "교통", image: #imageLiteral(resourceName: "Category_Transportation"))
+                let category = CategoryTEST(index: 0, name: "교통", image: #imageLiteral(resourceName: "Category_Transport"))
                 categorys.append(category)
                 
             } else {
