@@ -7,7 +7,10 @@
 //
 
 import UIKit
+
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UINavigationBar.appearance().barTintColor = 
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorStore.basicBlack]
         
+        GMSServices.provideAPIKey(kMapsAPIKey)
+        GMSPlacesClient.provideAPIKey(kPlacesAPIKey)
         
         return true
     }

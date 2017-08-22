@@ -9,6 +9,7 @@
 import UIKit
 
 import RealmSwift
+import GooglePlacePicker
 
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     let realm = try! Realm()
@@ -40,6 +41,10 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         return self.realm.objects(Category.self)
     }()
     
+    let locationManager = CLLocationManager()
+    var currentPlace: GMSPlace?
+    var currentLocation: CLLocation?
+    
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
@@ -49,6 +54,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
     @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
+    @IBOutlet weak var locationButton: UIButton!
     
     override func loadView() {
         super.loadView()
@@ -129,6 +135,14 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    @IBAction func locationButtonDidTap(_ sender: Any) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        
+        present(placePicker, animated: true, completion: nil)
+    }
 }
 
 extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -171,6 +185,16 @@ extension TransactionEditorViewController {
                 category = _category
             }
             
+            locationManager.requestWhenInUseAuthorization()
+            let status = CLLocationManager.authorizationStatus()
+            
+            if status == CLAuthorizationStatus.authorizedWhenInUse {
+                currentLocation = locationManager.location
+                if let currentLocation = currentLocation {
+                    locationButton.setTitle("📍 현 위치", for: .normal)
+                }
+            }
+            
         case .edit:
             self.navigationItem.title = "항목 수정"
             
@@ -181,6 +205,10 @@ extension TransactionEditorViewController {
             isCash = transaction.isCash
             currency = transaction.currency
             category = transaction.category
+            
+            if let placeName = transaction.placeName {
+                locationButton.setTitle("📍 \(placeName)", for: .normal)
+            }
             
             if let _category = transaction.category {
                 category = _category
@@ -212,6 +240,7 @@ extension TransactionEditorViewController {
 
                     if editorMode == .new {
                         savePhotoTransaction(target: transaction)
+                        saveLocationTransaction(target: transaction)
                         travel.transactions.append(transaction)
                         
                     } else if editorMode == .edit {
@@ -222,6 +251,9 @@ extension TransactionEditorViewController {
                             }
                             savePhotoTransaction(target: transaction)
                         }
+                        
+                        saveLocationTransaction(target: transaction)
+                        
                         transaction.name = transaction.name
                         transaction.amount = transaction.amount
                         transaction.currency = transaction.currency
@@ -251,6 +283,19 @@ extension TransactionEditorViewController {
         multiImagePickerView.visibleImages.forEach {
             let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: $0)
             target.photos.append(photo)
+        }
+    }
+    
+    func saveLocationTransaction(target: Transaction) {
+        if let currentPlace = currentPlace {
+            if currentPlace.types.contains("synthetic_geocode") {
+                // 장소 이름이 없는 경우 -> Select this location
+            }
+            target.placeID = currentPlace.placeID
+            target.placeName = currentPlace.name
+            target.coordinate = currentPlace.coordinate
+        } else if let currentLocation = currentLocation {
+            target.coordinate = currentLocation.coordinate
         }
     }
 
@@ -335,5 +380,21 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate {
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        viewController.dismiss(animated: true, completion: nil)
+        
+        currentPlace = place
+        locationButton.setTitle("📍 \(place.name)", for: .normal)
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
     }
 }

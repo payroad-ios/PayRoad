@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4la-Sh-xmH">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--가계부 지도-->
+        <scene sceneID="rdz-PQ-JrM">
+            <objects>
+                <viewController storyboardIdentifier="TransactionMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2b6-v4-4q4" customClass="TransactionMapViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wQ2-Kt-d9h"/>
+                        <viewControllerLayoutGuide type="bottom" id="xlC-zO-08W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7E1-Qb-0P8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-fk-e58" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B3d-wu-kGg">
+                                <rect key="frame" x="0.0" y="557" width="375" height="110"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="2QC-5p-Pqv"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="3GP-ev-ITe">
+                                    <size key="itemSize" width="340" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TransactionMapCell" id="Dmk-j8-l20" customClass="TransactionMapCollectionViewCell" customModule="PayRoad" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="10" width="340" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="340" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m71-5P-2OD">
+                                                    <rect key="frame" x="20" y="12" width="295" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLm-2j-0uN">
+                                                    <rect key="frame" x="20" y="35" width="300" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-6U-L7v">
+                                                    <rect key="frame" x="20" y="58" width="300" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="wLm-2j-0uN" id="Kd7-ya-3K2"/>
+                                            <outlet property="dateLabel" destination="Qfk-6U-L7v" id="aLe-qZ-3CB"/>
+                                            <outlet property="nameLabel" destination="m71-5P-2OD" id="TEj-nK-kaW"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="B3d-wu-kGg" firstAttribute="leading" secondItem="7E1-Qb-0P8" secondAttribute="leading" id="2i8-LO-ipe"/>
+                            <constraint firstAttribute="bottom" secondItem="M7g-fk-e58" secondAttribute="bottom" id="5R3-ZT-b4T"/>
+                            <constraint firstAttribute="trailing" secondItem="B3d-wu-kGg" secondAttribute="trailing" id="SIQ-3g-WDL"/>
+                            <constraint firstAttribute="trailing" secondItem="M7g-fk-e58" secondAttribute="trailing" id="df6-VP-px4"/>
+                            <constraint firstItem="M7g-fk-e58" firstAttribute="top" secondItem="7E1-Qb-0P8" secondAttribute="top" id="gIQ-qj-w9r"/>
+                            <constraint firstItem="M7g-fk-e58" firstAttribute="leading" secondItem="7E1-Qb-0P8" secondAttribute="leading" id="hUB-fx-J5A"/>
+                            <constraint firstItem="xlC-zO-08W" firstAttribute="top" secondItem="B3d-wu-kGg" secondAttribute="bottom" id="n84-L8-966"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="가계부 지도" id="FpE-tI-9Yh">
+                        <barButtonItem key="leftBarButtonItem" title="뒤로" id="3fb-ao-1td">
+                            <connections>
+                                <action selector="backButtonDidTap:" destination="2b6-v4-4q4" id="CxX-az-4Pc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="B3d-wu-kGg" id="s0M-Ht-YGk"/>
+                        <outlet property="mapView" destination="M7g-fk-e58" id="Th0-gP-a12"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xhh-U9-AGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="690.40479760119945"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dCc-nC-GZs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4la-Sh-xmH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zgY-ZH-kIr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2b6-v4-4q4" kind="relationship" relationship="rootViewController" id="U0M-ye-4O4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ruj-xA-3Q7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="261.60000000000002" y="691.304347826087"/>
+        </scene>
+    </scenes>
+</document>
