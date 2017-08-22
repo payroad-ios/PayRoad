@@ -41,6 +41,8 @@ class TransactionTableViewController: UIViewController {
     
     var pullToAddLabel = UILabel()
     
+    let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var spendingProgressView: UIProgressView!
@@ -56,13 +58,18 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        sideBar.setUpView()
+        
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(sideBar)
+
         title = travel.name
         sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.separatorColor = ColorStore.placeHolderGray
+        tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.showsVerticalScrollIndicator = false
         
@@ -80,9 +87,13 @@ class TransactionTableViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         
         allListButton.isSelected = true
-        allListButton.setTitleColor(ColorStore.darkGray, for: .normal)
-        allListButton.setTitleColor(ColorStore.darkGray, for: .selected)
-        allListButton.backgroundColor = ColorStore.pastelYellow
+        allListButton.setTitleColor(ColorStore.basicBlack, for: .normal)
+        allListButton.setTitleColor(UIColor.white, for: .selected)
+        allListButton.backgroundColor = ColorStore.mainSkyBlue
+        allListButton.layer.shadowColor = ColorStore.darkGray.cgColor
+        allListButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        allListButton.layer.shadowRadius = 3
+        allListButton.layer.shadowOpacity = 0.4
         extractDatePeriod()
         
         transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
@@ -142,6 +153,7 @@ class TransactionTableViewController: UIViewController {
     }
     
     func stopNotificationToken() {
+        transactionsNotificationToken?.stop()
         travelNotificationToken?.stop()
     }
     
@@ -159,7 +171,7 @@ class TransactionTableViewController: UIViewController {
             
             editTransactionTableViewController.editorMode = .edit
             editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = selectedTransaction
+            editTransactionTableViewController.transaction = selectedTransaction!
             editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
         }
     }
@@ -230,7 +242,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBAction func allListButtonDidTap(_ sender: Any) {
         allListButton.isSelected = true
-        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
+        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.mainSkyBlue : UIColor.white
         
         currentSelectedDate = nil
         let seletedIndexPath = collectionView.indexPathsForSelectedItems
@@ -242,15 +254,15 @@ class TransactionTableViewController: UIViewController {
         switch currentPaymentType {
         case .all:
             currentPaymentType = .cash
-            paymentTypeButton.setTitle("현금", for: .normal)
+            paymentTypeButton.setTitle("  현금", for: .normal)
             sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
         case .cash:
             currentPaymentType = .card
-            paymentTypeButton.setTitle("카드", for: .normal)
+            paymentTypeButton.setTitle("  카드", for: .normal)
             sortedTransactions = travel.transactions.filter("isCash == false").sorted(byKeyPath: "dateInRegion.date", ascending: false)
         case .card:
             currentPaymentType = .all
-            paymentTypeButton.setTitle("전체", for: .normal)
+            paymentTypeButton.setTitle("  전체", for: .normal)
             sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         }
         
@@ -264,6 +276,14 @@ class TransactionTableViewController: UIViewController {
         displayTotalSpendingCurrency()
     }
     
+    @IBAction func showSideBar(_ sender: Any) {
+        self.view.isUserInteractionEnabled = false
+        
+        sideBar.show() {
+            self.view.isUserInteractionEnabled = true
+        }
+    }
+    
     func displayTotalSpendingCurrency() {
         if totalSpendingIndex >= travel.currencies.count {
             totalSpendingIndex = 0
@@ -273,12 +293,13 @@ class TransactionTableViewController: UIViewController {
         var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
-            spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
-            balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
+            spendingLabel.text = "\(NumberStringUtil.roughString(number: amountByCurrency)) \(currency.code)"
+            let balance = currency.budget - amountByCurrency
+            balanceLabel.text = "\(NumberStringUtil.roughString(number: balance)) \(currency.code)"
             spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
-            balanceLabel.text = "\(currency.budget) \(currency.code)"
+            balanceLabel.text = "\(NumberStringUtil.roughString(number: currency.budget)) \(currency.code)"
         }
         
         if spendingRate < 0 || spendingRate > 1 {
@@ -287,12 +308,11 @@ class TransactionTableViewController: UIViewController {
         
         spendingProgressView.setProgress(spendingRate, animated: true)
         //TODO: 소숫점 자릿수 정하기
-        percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
+        percentageLabel.text = "\(NumberStringUtil.numberString(number: spendingRate * 100, dropPoint: 0))"
     }
     
     deinit {
-        transactionsNotificationToken?.stop()
-        travelNotificationToken?.stop()
+        stopNotificationToken()
     }
 }
 
@@ -315,26 +335,30 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeight = tableViewSectionHeight
         let trailingSpace = CGFloat(4)
-        let fontSize = CGFloat(14)
+        let fontSize = CGFloat(13)
         
         let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: sectionHeight))
         let ymdLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width - (trailingSpace * 2), height: sectionHeight))
         let totalAmountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width  - (trailingSpace * 2), height: sectionHeight))
         
-        sectionView.backgroundColor = ColorStore.lightGray
+        sectionView.backgroundColor = ColorStore.lightestGray
+        sectionView.addUpperline(color: ColorStore.lightGray, borderWidth: 1)
+        sectionView.addUnderline(color: ColorStore.lightGray, borderWidth: 1)
         
         ymdLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
         ymdLabel.font = ymdLabel.font.withSize(fontSize)
+        ymdLabel.textColor = ColorStore.basicBlack
         
         totalAmountLabel.textAlignment = .right
         totalAmountLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
         totalAmountLabel.font = totalAmountLabel.font.withSize(fontSize)
+        totalAmountLabel.textColor = ColorStore.basicBlack
         
         ymdLabel.text = " \(dynamicDateList[section].string())"
         
         let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            totalAmountLabel.text = "\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code)"
+            totalAmountLabel.text = "\(NumberStringUtil.roughString(number: totalAmount)) \(travel.currencies.first!.code)"
         }
         
         sectionView.addSubview(ymdLabel)
@@ -352,17 +376,22 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        if let thumbnailURL = transaction.photos.first?.fileURL {
-            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
+            cell.thumbnailImageView.image = thumbnailImage
         }
         
         cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(NumberStringUtil.roughString(number: transaction.amount) )"
+        
+        if let category = transaction.category,
+            let categoryImage = UIImage(named: category.assetName) {
+            cell.categoryImageView.image = categoryImage
+        }
         
         if transaction.isCash {
-            
+            //cell.thumbnailImageView = ...
         } else {
-            
+            //cell.thumbnailImageView = ...
         }
         
         return cell
@@ -374,7 +403,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90.0
+        return 80
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

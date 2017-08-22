@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Xt7-A5-Eec" customClass="SideBarView" customModule="PayRoad" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z00-Mp-7kM" userLabel="MenuView">
+                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="667"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbH-Oa-JG3">
+                            <rect key="frame" x="20" y="593" width="147.5" height="34"/>
+                            <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="메인으로">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="gotoMainView" destination="Xt7-A5-Eec" eventType="touchUpInside" id="XTW-Zl-OEN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-VM-kc7">
+                            <rect key="frame" x="0.0" y="131" width="187.5" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="가계부">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Wr-FCw">
+                            <rect key="frame" x="0.0" y="206" width="187.5" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="일기">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
+                            <rect key="frame" x="0.0" y="281" width="187.5" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="지도">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF9-d0-tdK">
+                            <rect key="frame" x="0.0" y="356" width="187.5" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="여행 수정">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
+                            <rect key="frame" x="37" y="45" width="113" height="26"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="yat-g0-AtZ" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="08a-gb-bxl"/>
+                        <constraint firstItem="3QA-Rm-sYw" firstAttribute="top" secondItem="UG8-Wr-FCw" secondAttribute="bottom" constant="40" id="1HS-xd-zBw"/>
+                        <constraint firstItem="WbH-Oa-JG3" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" constant="20" id="4fH-uu-9Kb"/>
+                        <constraint firstItem="oF9-d0-tdK" firstAttribute="top" secondItem="3QA-Rm-sYw" secondAttribute="bottom" constant="40" id="5ZC-VU-2A5"/>
+                        <constraint firstItem="iqH-VM-kc7" firstAttribute="top" secondItem="yat-g0-AtZ" secondAttribute="bottom" constant="60" id="Ftd-Tf-R2c"/>
+                        <constraint firstAttribute="trailing" secondItem="oF9-d0-tdK" secondAttribute="trailing" id="GCI-bW-f3H"/>
+                        <constraint firstAttribute="trailing" secondItem="UG8-Wr-FCw" secondAttribute="trailing" id="Jau-B7-9cn"/>
+                        <constraint firstItem="iqH-VM-kc7" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="KKa-yq-deU"/>
+                        <constraint firstAttribute="trailing" secondItem="iqH-VM-kc7" secondAttribute="trailing" id="MHB-FX-Eqt"/>
+                        <constraint firstItem="oF9-d0-tdK" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="TCD-5f-6KQ"/>
+                        <constraint firstItem="yat-g0-AtZ" firstAttribute="top" secondItem="z00-Mp-7kM" secondAttribute="top" constant="45" id="ffV-Y6-nKb"/>
+                        <constraint firstAttribute="trailing" secondItem="3QA-Rm-sYw" secondAttribute="trailing" id="g1w-PA-Db5"/>
+                        <constraint firstAttribute="trailing" secondItem="WbH-Oa-JG3" secondAttribute="trailing" constant="20" id="lH9-KJ-bz0"/>
+                        <constraint firstItem="UG8-Wr-FCw" firstAttribute="top" secondItem="iqH-VM-kc7" secondAttribute="bottom" constant="40" id="nIJ-V9-4if"/>
+                        <constraint firstItem="3QA-Rm-sYw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="ta1-2s-IGt"/>
+                        <constraint firstItem="UG8-Wr-FCw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="yL9-RC-kYe"/>
+                        <constraint firstAttribute="bottom" secondItem="WbH-Oa-JG3" secondAttribute="bottom" constant="40" id="yjP-nI-hut"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbI-wv-Z3v" userLabel="BackgroundView">
+                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="667"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="e2O-Vf-FO9" appends="YES" id="QuM-Xk-ZhR"/>
+                    </connections>
+                </view>
+            </subviews>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="z00-Mp-7kM" firstAttribute="top" secondItem="Xt7-A5-Eec" secondAttribute="top" id="BkF-8e-h6Q"/>
+                <constraint firstItem="cbI-wv-Z3v" firstAttribute="width" secondItem="z00-Mp-7kM" secondAttribute="width" id="PeU-tY-vc3"/>
+                <constraint firstAttribute="bottom" secondItem="z00-Mp-7kM" secondAttribute="bottom" id="Pre-NV-mIT"/>
+                <constraint firstItem="z00-Mp-7kM" firstAttribute="leading" secondItem="Xt7-A5-Eec" secondAttribute="leading" id="cGc-2D-EOB"/>
+                <constraint firstItem="cbI-wv-Z3v" firstAttribute="top" secondItem="Xt7-A5-Eec" secondAttribute="top" id="eDa-HL-w20"/>
+                <constraint firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="trailing" id="ijg-K0-fIW"/>
+                <constraint firstItem="cbI-wv-Z3v" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="trailing" id="tgY-ZX-eao"/>
+                <constraint firstAttribute="bottom" secondItem="cbI-wv-Z3v" secondAttribute="bottom" id="vdH-CW-PG5"/>
+            </constraints>
+            <connections>
+                <outlet property="goMainButton" destination="WbH-Oa-JG3" id="fqc-eE-s7D"/>
+            </connections>
+            <point key="canvasLocation" x="-47" y="-85"/>
+        </view>
+        <tapGestureRecognizer id="e2O-Vf-FO9">
+            <connections>
+                <action selector="hideSideBar:" destination="Xt7-A5-Eec" id="F9W-0s-rHw"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="Logo_PayRoad" width="113" height="26"/>
+    </resources>
+</document>

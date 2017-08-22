@@ -1,4 +1,4 @@
-//
+
 //  AddCurrencyViewController.swift
 //  PayRoad
 //
@@ -20,6 +20,7 @@ class CurrencyEditorViewController: UIViewController {
     var editedCurrency: Currency!
     
     var editorMode: EditorMode = .new
+    var isUpdating = false
     
     @IBOutlet weak var currencySelectButton: UIButton!
     @IBOutlet weak var rateTextField: UITextField!
@@ -35,7 +36,15 @@ class CurrencyEditorViewController: UIViewController {
         budgetTextField.delegate = self
         rateTextField.addTarget(self, action: #selector(editingChangedRate(_:)), for: .editingChanged)
         budgetTextField.addTarget(self, action: #selector(editingChangedBudget(_:)), for: .editingChanged)
+        
         adjustViewMode()
+        
+        currencySelectButton.cornerRound(cornerOptions: [.bottomLeft, .topLeft], cornerRadius: 5)
+        rateTextField.borderStyle = .roundedRect
+        
+        rateTextField.layer.cornerRadius = 5
+        rateTextField.layer.borderColor = ColorStore.unselectGray.cgColor
+        rateTextField.layer.borderWidth = 0.5
     }
     
     func editingChangedRate(_ sender: UITextField) {
@@ -60,12 +69,12 @@ class CurrencyEditorViewController: UIViewController {
     
     func checkIsExistInputField() -> Bool {
         guard !(editedCurrency.code == "") else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "화폐를 선택해주세요.")
+            UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "화폐를 선택해주세요.")
             return false
         }
         
         guard !(budgetTextField.text!.isEmpty) else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "예산을 입력해주세요..")
+            UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "예산을 입력해주세요.")
             return false
         }
         return true
@@ -75,6 +84,7 @@ class CurrencyEditorViewController: UIViewController {
         if segue.identifier == "selectCurrencyCode" {
             let currencySelectTableViewController = segue.destination as! CurrencySelectTableViewController
             currencySelectTableViewController.delegate = self
+            currencySelectTableViewController.travel = travel
         }
     }
     
@@ -120,8 +130,14 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
 
 extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegate {
     func currencySelectResponse(code: String) {
+        isUpdating = true
+        
         currencySelectButton.setTitle(code, for: .normal)
         let standard = travel.currencies.first!.code
+        
+        updateRateButton.isEnabled = false
+        rotateView(targetView: updateRateButton)
+        
         exchangeRateFromAPI(standard: standard, compare: code) { [unowned self] rate in
             OperationQueue.main.addOperation {
                 self.rateTextField.isEnabled = true
@@ -133,7 +149,20 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
                 self.editedCurrency.code = code
                 self.editedCurrency.rate = Double(rate) ?? 0
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
+                self.isUpdating = false
             }
+        }
+    }
+    
+    func rotateView(targetView: UIView) {
+        UIView.animate(withDuration: 0.03, delay: 0.0, options: .curveLinear, animations: {
+            targetView.transform = targetView.transform.rotated(by: CGFloat.pi / 10)
+        }) { [unowned self] (finished) in
+            guard self.isUpdating == true else {
+                return
+            }
+            
+            self.rotateView(targetView: targetView)
         }
     }
     
@@ -167,6 +196,11 @@ extension CurrencyEditorViewController {
             editedCurrency.budget = originCurrency.budget
         }
         
+        let origImage = #imageLiteral(resourceName: "Icon_Refresh")
+        let tintedImage = origImage.withRenderingMode(.alwaysTemplate)
+        updateRateButton.setImage(tintedImage, for: .normal)
+        updateRateButton.tintColor = ColorStore.mainSkyBlue
+        
         let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
         switch self.editorMode {
         case .new:
@@ -179,9 +213,10 @@ extension CurrencyEditorViewController {
             navigationItem.title = "예산 수정"
             
             currencySelectButton.setTitle(originCurrency.code, for: .normal)
+            currencySelectButton.backgroundColor = UIColor.gray
             currencySelectButton.isEnabled = false
             
-            budgetTextField.text = String(originCurrency.budget)
+            budgetTextField.text = NumberStringUtil.roughString(number: originCurrency.budget)
             
             if originCurrency.code == standardCurrency.code {
                 rateTextField.text = "기준 통화"

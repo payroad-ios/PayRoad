@@ -13,43 +13,108 @@ enum PhotoFormat: String {
     case png = "png"
 }
 
+// getFilePath
+// saveImage
+// loadImage
+// removeImage
+// containPath
+
+enum DirectoryType: String {
+    case image = "image"
+}
+
 struct FileUtil {
-    private static func filePathForDocumentDir(_ filename: String) -> String? {
-        guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            else {
-                print("fail to get document URL")
-                return nil
+    static func generateDirectoryPath(travelID: String, directory: DirectoryType? = nil) -> String {
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentURL.appendingPathComponent("travel", isDirectory: true)
+        guard let _ = directory else {
+            return fileURL.appendingPathComponent(travelID, isDirectory: true).path
         }
-        
-        let fileURL = documentURL.appendingPathComponent(filename)
+        return fileURL.appendingPathComponent(travelID, isDirectory: true).appendingPathComponent(directory!.rawValue, isDirectory: true).path
+    }
+    
+    static func getFileURLPathFrom(_ filePath: String) -> String? {
+        guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let fileURL = documentURL.appendingPathComponent("travel", isDirectory: true).appendingPathComponent(filePath)
         return fileURL.path
     }
     
-    static func saveImageToDocumentDir(_ image: UIImage, filePath: String) {
-        guard let imagePath = filePathForDocumentDir(filePath) else {
-            return
+    static func dataFrom(_ filePath: String) -> Data? {
+        guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
         }
-        
-        let imageData = image.data()
-        
-        try? imageData.write(to: URL(fileURLWithPath: imagePath), options: [.atomic])
+        let fileURL = documentURL.appendingPathComponent("travel", isDirectory: true).appendingPathComponent(filePath)
+        let fileData = try? Data(contentsOf: fileURL)
+        return fileData
     }
     
-    static func saveNewImage(image: UIImage, format: PhotoFormat = .jpg) -> Photo {
-        let photo = Photo()
-        photo.id = UUID().uuidString
-        photo.fileType = format.rawValue
+    static func removeData(filePath: String) -> Bool {
+        guard let directoryPath = getFileURLPathFrom(filePath) else {
+            return false
+        }
+        return removeItem(atPath: directoryPath)
+    }
+    
+    static func removeAllData(travelID: String) -> Bool {
+        let directoryPath = generateDirectoryPath(travelID: travelID)
+        return removeItem(atPath: directoryPath)
+    }
+    
+    private static func removeItem(atPath: String) -> Bool {
+        do {
+            try FileManager.default.removeItem(atPath: atPath)
+        } catch {
+            return false
+        }
+        return true
+    }
+}
 
-        FileUtil.saveImageToDocumentDir(image, filePath: photo.fileURL)
-        return photo
+struct PhotoUtil {
+    static func saveTransactionPhoto(travelID: String, transactionID: String, photo: UIImage) -> Photo {
+        let photoModel = Photo()
+        photoModel.travelID = travelID
+        photoModel.preID = transactionID.substring(to: 8)
+        
+        let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
+        
+        OperationQueue.current?.addOperation {
+            let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+            print(isSuccess ? "저장 성공" : "저장 실패")
+        }
+        return photoModel
     }
     
-    static func loadImageFromDocumentDir(filePath: String) -> UIImage? {
-        guard let imagePath = filePathForDocumentDir(filePath) else {
+    static func saveCoverPhoto(travelID: String, photo: UIImage) -> Photo {
+        let photoModel = Photo()
+        photoModel.travelID = travelID
+        
+        let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
+        let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+        print(isSuccess ? "저장 성공" : "저장 실패")
+        return photoModel
+    }
+    
+    private static func writePhotoToDocument(photo: UIImage, directoryPath: String, fileName: String) -> Bool {
+        let imageData = photo.data()
+        let url = URL(fileURLWithPath: directoryPath + "/" + fileName)
+        do {
+            try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
+            try imageData.write(to: url, options: [.atomic])
+        } catch {
+            return false
+        }
+        return true
+    }
+    
+    static func loadPhotoFrom(filePath: String) -> UIImage? {
+        guard let data = FileUtil.dataFrom(filePath) else {
             return nil
         }
         
-        guard let image = UIImage(contentsOfFile: imagePath)
+        guard let image = UIImage(data: data)
             else {
                 print("fail to load image \(filePath)")
                 return nil
@@ -58,9 +123,9 @@ struct FileUtil {
         return image
     }
     
-    static func removeImageOnDocumentDir(filePath: String) {
-        guard let imagePath = filePathForDocumentDir(filePath) else {
-            return
+    static func deletePhoto(filePath: String) -> Bool {
+        guard let imagePath = FileUtil.getFileURLPathFrom(filePath) else {
+            return false
         }
         
         do {
@@ -68,5 +133,7 @@ struct FileUtil {
         } catch {
             print(error.localizedDescription)
         }
+        return true
     }
 }
+

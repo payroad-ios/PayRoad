@@ -17,9 +17,7 @@ class TravelTableViewController: UIViewController {
         return realm.objects(Travel.self)
     }()
     var notificationToken: NotificationToken? = nil
-    
-    let tempBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
-    
+        
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -31,7 +29,7 @@ class TravelTableViewController: UIViewController {
         tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.tableFooterView = UIView()
-        
+        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "Logo_PayRoad-Small"))
         notificationToken = travels.addNotificationBlock({ (changes: RealmCollectionChange) in
             self.tableView.reloadData()
         })
@@ -60,13 +58,10 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         cell.travelView.travelNameLabel.text = travel.name
         cell.travelView.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
         
-        guard let fileURL = travel.photo?.fileURL else {
+        guard let photo = travel.photo else {
             return cell
         }
-        cell.travelView.backgroundImage.image = FileUtil.loadImageFromDocumentDir(filePath: fileURL)
-        
-        //image Random Setting
-//        cell.travelView.backgroundImage.image = tempBackgroundBGArray[Int(arc4random_uniform(UInt32(tempBackgroundBGArray.count)))]
+        cell.travelView.backgroundImage.image = photo.fetchPhoto()
         
         return cell
     }

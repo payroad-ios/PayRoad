@@ -23,7 +23,7 @@ class TransactionMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false).filter("lat != nil AND lng != nil")
+        sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date").filter("lat != nil AND lng != nil")
         
         mapView.delegate = self
         collectionView.delegate = self
