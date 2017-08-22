@@ -25,3 +25,14 @@ class Transaction: Object {
         return "id"
     }
 }
+
+extension Transaction: CascadingDeletable {
+    func childrenToDelete() -> [AnyObject?] {
+        var objectList = [AnyObject?]()
+        
+        objectList.append(dateInRegion)
+        objectList.append(photos)
+        
+        return objectList
+    }
+}
