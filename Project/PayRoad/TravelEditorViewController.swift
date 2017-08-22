@@ -210,10 +210,7 @@ extension TravelEditorViewController {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil, userInfo: nil)
         
             FileUtil.removeAllData(travelID: self.travel.id)
-            
-            try! self.realm.write {
-                self.realm.delete(self.travel)
-            }
+            Object.cascadingDelete(realm: self.realm, object: self.travel)
             
             let navigationController = self.presentingViewController as? UINavigationController
             self.dismiss(animated: true) {

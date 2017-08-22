@@ -22,3 +22,17 @@ class Travel: Object {
         return "id"
     }
 }
+
+extension Travel: CascadingDeletable {
+    func childrenToDelete() -> [AnyObject?] {
+        var objectList = [AnyObject?]()
+        
+        objectList.append(startDateInRegion)
+        objectList.append(endDateInRegion)
+        objectList.append(photo)
+        objectList.append(transactions)
+        objectList.append(currencies)
+        
+        return objectList
+    }
+}
