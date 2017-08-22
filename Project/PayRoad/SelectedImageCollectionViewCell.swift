@@ -33,7 +33,7 @@ class SelectedImageCollectionViewCell: UICollectionViewCell {
         setupViews()
         clipsToBounds = true
         layer.cornerRadius = frame.height / 20
-        layer.borderColor = ColorStore.lightGray.cgColor
+        layer.borderColor = ColorStore.unselectGray.withAlphaComponent(0.8).cgColor
         layer.borderWidth = 0.8
     }
     

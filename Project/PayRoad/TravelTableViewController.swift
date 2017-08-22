@@ -29,7 +29,7 @@ class TravelTableViewController: UIViewController {
         tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.tableFooterView = UIView()
-        
+        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "Logo_PayRoad-Small"))
         notificationToken = travels.addNotificationBlock({ (changes: RealmCollectionChange) in
             self.tableView.reloadData()
         })

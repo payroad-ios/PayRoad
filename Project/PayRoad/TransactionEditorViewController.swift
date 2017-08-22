@@ -52,11 +52,11 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func loadView() {
         super.loadView()
-        nameTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
-        contentTextView.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
-        dateEditTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
+        nameTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        contentTextView.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        dateEditTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         payTypeToggleButton.backgroundColor = ColorStore.mainSkyBlue
-        payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 3
+        payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 5
         payTypeToggleButton.setTitleColor(payTypeToggleButton.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
         payTypeToggleButton.setTitle("현금", for: .normal)
         payTypeToggleButton.setTitle("카드", for: .selected)

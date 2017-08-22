@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,59 +31,55 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-VM-kc7">
-                            <rect key="frame" x="0.0" y="133.5" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="131" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="가계부">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Wr-FCw">
-                            <rect key="frame" x="0.0" y="208.5" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="206" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="일기">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
-                            <rect key="frame" x="0.0" y="283.5" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="281" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="지도">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF9-d0-tdK">
-                            <rect key="frame" x="0.0" y="358.5" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="356" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="여행 수정">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay Road" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCb-fY-vEC">
-                            <rect key="frame" x="0.0" y="40" width="187.5" height="34"/>
-                            <fontDescription key="fontDescription" type="italicSystem" pointSize="28"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
+                            <rect key="frame" x="37" y="45" width="113" height="26"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <constraints>
+                        <constraint firstItem="yat-g0-AtZ" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="08a-gb-bxl"/>
                         <constraint firstItem="3QA-Rm-sYw" firstAttribute="top" secondItem="UG8-Wr-FCw" secondAttribute="bottom" constant="40" id="1HS-xd-zBw"/>
                         <constraint firstItem="WbH-Oa-JG3" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" constant="20" id="4fH-uu-9Kb"/>
                         <constraint firstItem="oF9-d0-tdK" firstAttribute="top" secondItem="3QA-Rm-sYw" secondAttribute="bottom" constant="40" id="5ZC-VU-2A5"/>
+                        <constraint firstItem="iqH-VM-kc7" firstAttribute="top" secondItem="yat-g0-AtZ" secondAttribute="bottom" constant="60" id="Ftd-Tf-R2c"/>
                         <constraint firstAttribute="trailing" secondItem="oF9-d0-tdK" secondAttribute="trailing" id="GCI-bW-f3H"/>
                         <constraint firstAttribute="trailing" secondItem="UG8-Wr-FCw" secondAttribute="trailing" id="Jau-B7-9cn"/>
                         <constraint firstItem="iqH-VM-kc7" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="KKa-yq-deU"/>
                         <constraint firstAttribute="trailing" secondItem="iqH-VM-kc7" secondAttribute="trailing" id="MHB-FX-Eqt"/>
                         <constraint firstItem="oF9-d0-tdK" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="TCD-5f-6KQ"/>
-                        <constraint firstAttribute="trailing" secondItem="HCb-fY-vEC" secondAttribute="trailing" id="c6B-SF-9n6"/>
-                        <constraint firstItem="HCb-fY-vEC" firstAttribute="top" secondItem="z00-Mp-7kM" secondAttribute="top" constant="40" id="fGt-bQ-Ygl"/>
+                        <constraint firstItem="yat-g0-AtZ" firstAttribute="top" secondItem="z00-Mp-7kM" secondAttribute="top" constant="45" id="ffV-Y6-nKb"/>
                         <constraint firstAttribute="trailing" secondItem="3QA-Rm-sYw" secondAttribute="trailing" id="g1w-PA-Db5"/>
-                        <constraint firstItem="HCb-fY-vEC" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="h00-z7-rsg"/>
                         <constraint firstAttribute="trailing" secondItem="WbH-Oa-JG3" secondAttribute="trailing" constant="20" id="lH9-KJ-bz0"/>
                         <constraint firstItem="UG8-Wr-FCw" firstAttribute="top" secondItem="iqH-VM-kc7" secondAttribute="bottom" constant="40" id="nIJ-V9-4if"/>
                         <constraint firstItem="3QA-Rm-sYw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="ta1-2s-IGt"/>
-                        <constraint firstItem="iqH-VM-kc7" firstAttribute="top" secondItem="HCb-fY-vEC" secondAttribute="bottom" constant="60" id="vFg-03-O2h"/>
                         <constraint firstItem="UG8-Wr-FCw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="yL9-RC-kYe"/>
                         <constraint firstAttribute="bottom" secondItem="WbH-Oa-JG3" secondAttribute="bottom" constant="40" id="yjP-nI-hut"/>
                     </constraints>
@@ -110,7 +106,7 @@
             <connections>
                 <outlet property="goMainButton" destination="WbH-Oa-JG3" id="fqc-eE-s7D"/>
             </connections>
-            <point key="canvasLocation" x="-83.5" y="-93.5"/>
+            <point key="canvasLocation" x="-47" y="-85"/>
         </view>
         <tapGestureRecognizer id="e2O-Vf-FO9">
             <connections>
@@ -118,4 +114,7 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="Logo_PayRoad" width="113" height="26"/>
+    </resources>
 </document>
