@@ -157,25 +157,6 @@ class TransactionTableViewController: UIViewController {
         travelNotificationToken?.stop()
     }
     
-    //TODO: 스트링 길다. 나중에 자릅시다.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "editTransaction" {
-            guard let indexPath = tableView.indexPathForSelectedRow,
-                let navigationController = segue.destination as? UINavigationController,
-                let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
-                else {
-                    return
-            }
-            let key = dynamicDateList[indexPath.section]
-            let selectedTransaction = dateDictionary[key]?[indexPath.row]
-            
-            editTransactionTableViewController.editorMode = .edit
-            editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.transaction = selectedTransaction!
-            editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
-        }
-    }
-    
     func initDataStructures() {
         dateDictionary = [YMD: [Transaction]]()
         originDateList = [YMD]()
@@ -398,7 +379,17 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "editTransaction", sender: nil)
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+        
+        let key = dynamicDateList[indexPath.section]
+        let selectedTransaction = dateDictionary[key]?[indexPath.row]
+        
+        let transactionDetailViewController = UIStoryboard.loadViewController(from: .TransactionDetailView, ID: "TransactionDetailViewController") as! TransactionDetailViewController
+        transactionDetailViewController.transaction = selectedTransaction
+        navigationController?.pushViewController(transactionDetailViewController, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

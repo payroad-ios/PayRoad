@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Qtq-Ek-UWn">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--항목 이름-->
+        <scene sceneID="J0T-Os-iRf">
+            <objects>
+                <viewController storyboardIdentifier="TransactionDetailViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Tu-o3-9g7" customClass="TransactionDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="61B-KI-39F"/>
+                        <viewControllerLayoutGuide type="bottom" id="9mi-vM-EhD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3a7-K8-dw9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xue-Qv-IeI">
+                                <rect key="frame" x="0.0" y="64" width="375" height="936"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mym-a8-D4c" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nnu-DG-Xrq" userLabel="ICollection View">
+                                                <rect key="frame" x="0.0" y="10" width="375" height="240"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="240" id="QNY-WJ-nc8"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RBB-lI-NDv">
+                                                    <size key="itemSize" width="200" height="200"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells/>
+                                            </collectionView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
+                                                <rect key="frame" x="28" y="280" width="319" height="30"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Food" translatesAutoresizingMaskIntoConstraints="NO" id="1Ou-Ra-fbo">
+                                                        <rect key="frame" x="0.0" y="10" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="ejJ-eq-50z"/>
+                                                            <constraint firstAttribute="width" constant="20" id="hHa-J6-xmf"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Shopping" translatesAutoresizingMaskIntoConstraints="NO" id="oss-iT-5e6">
+                                                        <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="20" id="5Sc-NI-qsO"/>
+                                                            <constraint firstAttribute="height" constant="20" id="gaE-7B-FOg"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="금액" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J4-Sa-uix">
+                                                        <rect key="frame" x="40" y="8" width="279" height="22"/>
+                                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                        <color key="textColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="VIA-Pa-F2c"/>
+                                                </constraints>
+                                            </stackView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="foX-Jp-Cg0">
+                                                <rect key="frame" x="28" y="320" width="319" height="160"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-ca-xWk" customClass="GMSMapView">
+                                                <rect key="frame" x="28" y="490" width="319" height="290"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="IQK-ca-xWk" secondAttribute="trailing" constant="20" id="30d-4P-oGZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="nnu-DG-Xrq" secondAttribute="trailing" id="3Pk-nO-4Da"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="fM7-hx-cAV" secondAttribute="trailing" constant="20" id="4Du-3e-w6L"/>
+                                            <constraint firstItem="foX-Jp-Cg0" firstAttribute="top" secondItem="fM7-hx-cAV" secondAttribute="bottom" constant="10" id="4LG-Sv-HRO"/>
+                                            <constraint firstItem="IQK-ca-xWk" firstAttribute="top" secondItem="foX-Jp-Cg0" secondAttribute="bottom" constant="10" id="6Uq-g5-h0D"/>
+                                            <constraint firstItem="fM7-hx-cAV" firstAttribute="top" secondItem="nnu-DG-Xrq" secondAttribute="bottom" constant="30" id="7iB-L0-a70"/>
+                                            <constraint firstItem="nnu-DG-Xrq" firstAttribute="top" secondItem="Mym-a8-D4c" secondAttribute="top" constant="10" id="AE4-cV-ukJ"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="foX-Jp-Cg0" secondAttribute="trailing" constant="20" id="BxP-bw-v81"/>
+                                            <constraint firstItem="nnu-DG-Xrq" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leading" id="C0P-Zs-LaD"/>
+                                            <constraint firstItem="fM7-hx-cAV" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="H5t-I5-4de"/>
+                                            <constraint firstItem="foX-Jp-Cg0" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="JHo-5f-kc8"/>
+                                            <constraint firstItem="foX-Jp-Cg0" firstAttribute="bottom" secondItem="Mym-a8-D4c" secondAttribute="bottom" multiplier="0.6" id="cal-wY-i3V"/>
+                                            <constraint firstAttribute="bottom" secondItem="IQK-ca-xWk" secondAttribute="bottom" constant="20" id="isC-Ua-k9j"/>
+                                            <constraint firstAttribute="height" constant="800" id="oTC-AY-Zrj"/>
+                                            <constraint firstItem="IQK-ca-xWk" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="qbo-nw-aT7"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Mym-a8-D4c" firstAttribute="top" secondItem="Xue-Qv-IeI" secondAttribute="top" id="Irx-zk-Lde"/>
+                                    <constraint firstAttribute="bottom" secondItem="Mym-a8-D4c" secondAttribute="bottom" id="Xfi-JW-xNi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mym-a8-D4c" secondAttribute="trailing" id="bGX-LB-Nxh"/>
+                                    <constraint firstItem="Mym-a8-D4c" firstAttribute="centerX" secondItem="Xue-Qv-IeI" secondAttribute="centerX" id="xch-XR-dkY"/>
+                                    <constraint firstItem="Mym-a8-D4c" firstAttribute="leading" secondItem="Xue-Qv-IeI" secondAttribute="leading" id="z3b-UJ-yfE"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xue-Qv-IeI" secondAttribute="trailing" id="6ej-ve-woB"/>
+                            <constraint firstItem="Xue-Qv-IeI" firstAttribute="leading" secondItem="3a7-K8-dw9" secondAttribute="leading" id="fp4-If-CpR"/>
+                            <constraint firstItem="Xue-Qv-IeI" firstAttribute="top" secondItem="61B-KI-39F" secondAttribute="bottom" id="q3F-d9-OzZ"/>
+                            <constraint firstItem="9mi-vM-EhD" firstAttribute="top" secondItem="Xue-Qv-IeI" secondAttribute="bottom" id="sng-nP-QgV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="항목 이름" id="Ju3-Xd-kKF">
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Setting" id="F3p-7Z-84q">
+                            <connections>
+                                <action selector="editorButtonDidTap:" destination="1Tu-o3-9g7" id="fpg-bP-GGp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="amountLabel" destination="7J4-Sa-uix" id="RLa-08-foc"/>
+                        <outlet property="categoryImageView" destination="1Ou-Ra-fbo" id="Jvy-Pt-Xpf"/>
+                        <outlet property="collectionView" destination="nnu-DG-Xrq" id="hhH-Qy-b7H"/>
+                        <outlet property="descTextView" destination="foX-Jp-Cg0" id="1Id-ZY-hBK"/>
+                        <outlet property="mapView" destination="IQK-ca-xWk" id="aak-1e-LAY"/>
+                        <outlet property="payContentStackView" destination="fM7-hx-cAV" id="Onj-eO-hI5"/>
+                        <outlet property="payTypeImageView" destination="oss-iT-5e6" id="C25-St-9Hn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wc6-vJ-y0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1535.2" y="-58.020989505247378"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nze-rq-3GO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qtq-Ek-UWn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="rhe-gZ-1VQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Tu-o3-9g7" kind="relationship" relationship="rootViewController" id="MEe-GJ-Mxc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fPt-NS-oV7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="-58"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Category_Food" width="32" height="32"/>
+        <image name="Category_Shopping" width="32" height="32"/>
+        <image name="Icon_Setting" width="20" height="20"/>
+    </resources>
+</document>
