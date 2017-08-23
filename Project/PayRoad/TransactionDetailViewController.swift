@@ -24,6 +24,7 @@ class TransactionDetailViewController: UIViewController {
     @IBOutlet weak var descTextView: UITextView!
     @IBOutlet weak var payContentStackView: UIStackView!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var photoPageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +123,7 @@ class TransactionDetailViewController: UIViewController {
 
 extension TransactionDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        photoPageControl.numberOfPages = transaction.photos.count
         return transaction.photos.count
     }
     
@@ -133,6 +135,10 @@ extension TransactionDetailViewController: UICollectionViewDelegate, UICollectio
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.photoPageControl.currentPage = indexPath.row
     }
 }
 
