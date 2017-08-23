@@ -43,6 +43,12 @@ class TravelTableViewController: UIViewController {
         }
     }
     
+    func pushNewTravelViewController(object: Travel) {
+        let transactionTableViewController = UIStoryboard.loadViewController(from: .TransactionTableView, ID: "Travel") as! TransactionTableViewController
+        transactionTableViewController.travel = object
+        navigationController?.pushViewController(transactionTableViewController, animated: true)
+    }
+    
     deinit {
         notificationToken?.stop()
     }
