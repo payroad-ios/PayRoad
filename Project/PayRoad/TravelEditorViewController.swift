@@ -29,14 +29,12 @@ class TravelEditorViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
-    @IBOutlet weak var setupCurrencyBudgetButton: UIButton!
     @IBOutlet weak var travelPreview: TravelView!
     @IBOutlet weak var deleteTravelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCurrencyBudgetButton.layer.cornerRadius = setupCurrencyBudgetButton.frame.height / 5
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
 
         startDateTextField.inputDatePicker(mode: .date, date: travel.startDateInRegion?.date)
@@ -128,17 +126,17 @@ extension TravelEditorViewController {
                 travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
                 isModifyPhoto = true
                 
-                //TODO: 에러 해결해야 할 것
-                try? realm.write {
-                    if let currencyCode = Locale.current.currencyCode {
-                        let currency = Currency()
-                        currency.id = travel.id + "-" + currencyCode
-                        currency.code = currencyCode
-                        currency.rate = 1.0
-                        travel.currencies.append(currency)
-                    }
-                }
-                
+//                //TODO: 에러 해결해야 할 것
+//                try? realm.write {
+//                    if let currencyCode = Locale.current.currencyCode {
+//                        let currency = Currency()
+//                        currency.id = travel.id + "-" + currencyCode
+//                        currency.code = currencyCode
+//                        currency.rate = 1.0
+//                        travel.currencies.append(currency)
+//                    }
+//                }
+            
             case .edit:
                 self.navigationItem.title = self.travel.name
                 
