@@ -9,13 +9,21 @@
 import UIKit
 
 extension UIStoryboard {
-    static let CurrencyTableView = UIStoryboard(name: "CurrencyTableViewController", bundle: nil)
-    static let TransactionTableView = UIStoryboard(name: "TransactionTableViewController", bundle: nil)
-    static let TransactionEditorView = UIStoryboard(name: "TransactionEditorViewController", bundle: nil)
-    static let CurrencyEditorView = UIStoryboard(name: "CurrencyEditorViewController", bundle: nil)
+    //Mark: Travel
     static let TravelTableView = UIStoryboard(name: "TravelTableViewController", bundle: nil)
     static let TravelEditorView = UIStoryboard(name: "TravelEditorViewController", bundle: nil)
+    
+    //Mark: Trasaction
+    static let TransactionTableView = UIStoryboard(name: "TransactionTableViewController", bundle: nil)
+    static let TransactionEditorView = UIStoryboard(name: "TransactionEditorViewController", bundle: nil)
+    static let TransactionDetailView = UIStoryboard(name: "TransactionDetailViewController", bundle: nil)
+    
+    //Mark: Map
     static let TransactionMapView = UIStoryboard(name: "TransactionMapViewController", bundle: nil)
+    
+    //Mark: Currency
+    static let CurrencyTableView = UIStoryboard(name: "CurrencyTableViewController", bundle: nil)
+    static let CurrencyEditorView = UIStoryboard(name: "CurrencyEditorViewController", bundle: nil)
     
     static func loadViewController(from storyboard: UIStoryboard, ID: String) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: ID)

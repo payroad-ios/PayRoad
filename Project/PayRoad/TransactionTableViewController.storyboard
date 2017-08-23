@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -227,7 +227,7 @@
                         <outlet property="spendingLabel" destination="Atn-6m-6wM" id="OgR-Be-Ei3"/>
                         <outlet property="spendingProgressView" destination="YfO-9g-nsO" id="PCr-po-t9g"/>
                         <outlet property="tableView" destination="qAj-v2-Up4" id="Vvj-mu-HVs"/>
-                        <segue destination="gcQ-KE-jyJ" kind="presentation" identifier="editTransaction" id="MZ3-2i-D7Z"/>
+                        <segue destination="wCA-Th-3qU" kind="show" identifier="detailTransaction" id="rXN-Xn-RFh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8WD-7G-RXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,13 +239,13 @@
             </objects>
             <point key="canvasLocation" x="925.60000000000002" y="169.56521739130437"/>
         </scene>
-        <!--TransactionEditorViewController-->
-        <scene sceneID="cfx-tO-KGz">
+        <!--TransactionDetailViewController-->
+        <scene sceneID="G33-Lj-syf">
             <objects>
-                <viewControllerPlaceholder storyboardName="TransactionEditorViewController" id="gcQ-KE-jyJ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BDy-iP-to0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="TransactionDetailViewController" id="wCA-Th-3qU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qlv-bx-FEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="589"/>
+            <point key="canvasLocation" x="1532" y="169"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VHY-Dv-Y57">

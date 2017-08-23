@@ -28,13 +28,13 @@
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
 		A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763AD111F4830A100D43E06 /* EnumGroup.swift */; };
-		A7774DD11F4D918C00A06660 /* BRCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7774DCA1F4D918B00A06660 /* BRCalendarView.swift */; };
-		A7774DD21F4D918C00A06660 /* BRCalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7774DCB1F4D918B00A06660 /* BRCalendarView.xib */; };
-		A7774DD31F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7774DCC1F4D918B00A06660 /* BRCalendarMonthCollectionViewCell.swift */; };
-		A7774DD41F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7774DCD1F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.xib */; };
-		A7774DD51F4D918C00A06660 /* BRCalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7774DCE1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.swift */; };
-		A7774DD61F4D918C00A06660 /* BRCalendarDayCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7774DCF1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.xib */; };
-		A7774DD71F4D918C00A06660 /* BRCalendarFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7774DD01F4D918C00A06660 /* BRCalendarFormatter.swift */; };
+		A76E06031F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E05FC1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift */; };
+		A76E06041F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */; };
+		A76E06051F4DC56800FE009A /* BRCalendarFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E05FE1F4DC56800FE009A /* BRCalendarFormatter.swift */; };
+		A76E06061F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E05FF1F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.swift */; };
+		A76E06071F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76E06001F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib */; };
+		A76E06081F4DC56800FE009A /* BRCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E06011F4DC56800FE009A /* BRCalendarView.swift */; };
+		A76E06091F4DC56900FE009A /* BRCalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76E06021F4DC56800FE009A /* BRCalendarView.xib */; };
 		A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */; };
 		A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */; };
 		A7B0AA101F461BC2005DE60C /* ExtenstionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0AA0F1F461BC2005DE60C /* ExtenstionString.swift */; };
@@ -62,9 +62,9 @@
 		B38736561F499B0E000DC81C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736551F499B0E000DC81C /* Constants.swift */; };
 		B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736571F49B199000DC81C /* TransactionMapViewController.swift */; };
 		B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */; };
-		B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */; };
-		B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */; };
 		B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */; };
+		B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */; };
+		B3CB3B891F4D503200429BB2 /* TransactionMapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -73,6 +73,10 @@
 		E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */; };
 		E51756261F469EFF0018A03A /* SideBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E51756251F469EFF0018A03A /* SideBarView.xib */; };
 		E51756281F46C6640018A03A /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51756271F46C6630018A03A /* SideBarView.swift */; };
+		E531B4CC1F4D54FC00CC7F51 /* TransactionDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E531B4CB1F4D54FC00CC7F51 /* TransactionDetailCollectionViewCell.xib */; };
+		E531B4CE1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531B4CD1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift */; };
+		E5A6720B1F4D3E1900B8C9A9 /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */; };
+		E5A6720D1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */; };
 		E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */; };
 		E5C7AAB01F4BFDB70059E0DB /* NumberStringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */; };
 		E5C7AAB41F4C07E40059E0DB /* ExtensionObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7AAB31F4C07E40059E0DB /* ExtensionObject.swift */; };
@@ -109,13 +113,13 @@
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
 		A763AD111F4830A100D43E06 /* EnumGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumGroup.swift; sourceTree = "<group>"; };
-		A7774DCA1F4D918B00A06660 /* BRCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarView.swift; sourceTree = "<group>"; };
-		A7774DCB1F4D918B00A06660 /* BRCalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarView.xib; sourceTree = "<group>"; };
-		A7774DCC1F4D918B00A06660 /* BRCalendarMonthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarMonthCollectionViewCell.swift; sourceTree = "<group>"; };
-		A7774DCD1F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarMonthCollectionViewCell.xib; sourceTree = "<group>"; };
-		A7774DCE1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
-		A7774DCF1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarDayCollectionViewCell.xib; sourceTree = "<group>"; };
-		A7774DD01F4D918C00A06660 /* BRCalendarFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarFormatter.swift; sourceTree = "<group>"; };
+		A76E05FC1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarDayCollectionViewCell.xib; sourceTree = "<group>"; };
+		A76E05FE1F4DC56800FE009A /* BRCalendarFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarFormatter.swift; sourceTree = "<group>"; };
+		A76E05FF1F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarMonthCollectionViewCell.swift; sourceTree = "<group>"; };
+		A76E06001F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarMonthCollectionViewCell.xib; sourceTree = "<group>"; };
+		A76E06011F4DC56800FE009A /* BRCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarView.swift; sourceTree = "<group>"; };
+		A76E06021F4DC56800FE009A /* BRCalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarView.xib; sourceTree = "<group>"; };
 		A77D74471F455297002BF9C8 /* TravelEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelEditorViewController.swift; sourceTree = "<group>"; };
 		A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIAlertController.swift; sourceTree = "<group>"; };
 		A7B0AA0F1F461BC2005DE60C /* ExtenstionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtenstionString.swift; sourceTree = "<group>"; };
@@ -143,9 +147,9 @@
 		B38736551F499B0E000DC81C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B38736571F49B199000DC81C /* TransactionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapViewController.swift; sourceTree = "<group>"; };
 		B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionMapViewController.storyboard; sourceTree = "<group>"; };
-		B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPopUpViewController.swift; sourceTree = "<group>"; };
-		B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionPopUpViewController.storyboard; sourceTree = "<group>"; };
 		B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapCollectionViewCell.swift; sourceTree = "<group>"; };
+		B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionMapMarkerView.xib; sourceTree = "<group>"; };
+		B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapMarkerView.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -154,6 +158,10 @@
 		E50D13B11F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyBudgetTableViewCell.swift; sourceTree = "<group>"; };
 		E51756251F469EFF0018A03A /* SideBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideBarView.xib; sourceTree = "<group>"; };
 		E51756271F46C6630018A03A /* SideBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
+		E531B4CB1F4D54FC00CC7F51 /* TransactionDetailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		E531B4CD1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
+		E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionDetailViewController.storyboard; sourceTree = "<group>"; };
 		E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberStringUtil.swift; sourceTree = "<group>"; };
 		E5C7AAB31F4C07E40059E0DB /* ExtensionObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionObject.swift; sourceTree = "<group>"; };
@@ -210,9 +218,10 @@
 				A74507D41F397C6B00DFFADF /* Model */,
 				A74507EA1F399CDB00DFFADF /* Travel */,
 				A74507EB1F399CE600DFFADF /* Transaction */,
+				B3B614821F4D9EE500205BAD /* Map */,
 				A74507EC1F399CF200DFFADF /* Currency */,
 				A751094D1F4A3A4200766E07 /* MultiImagePicker */,
-				A7DAA9801F4D6FAC00FD907E /* BRCalendar */,
+				A76E05FB1F4DC55900FE009A /* New Group */,
 				A74507F71F3A217400DFFADF /* Extension */,
 				A7B4F6EF1F444DC40049D812 /* View */,
 				A74507CD1F3976FF00DFFADF /* Resource */,
@@ -266,12 +275,10 @@
 				A74507E81F39966600DFFADF /* TransactionEditorViewController.swift */,
 				A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */,
 				E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */,
-				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
-				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
-				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
-				B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */,
-				B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */,
 				A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */,
+				E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */,
+				E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */,
+				E531B4CD1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -328,6 +335,20 @@
 			name = MultiImagePicker;
 			sourceTree = "<group>";
 		};
+		A76E05FB1F4DC55900FE009A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				A76E06011F4DC56800FE009A /* BRCalendarView.swift */,
+				A76E06021F4DC56800FE009A /* BRCalendarView.xib */,
+				A76E05FF1F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.swift */,
+				A76E06001F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib */,
+				A76E05FC1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift */,
+				A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */,
+				A76E05FE1F4DC56800FE009A /* BRCalendarFormatter.swift */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		A7B4F6EF1F444DC40049D812 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,23 +357,22 @@
 				A7B4F6F21F444EA80049D812 /* TravelView.swift */,
 				A7B4F6F01F444DD70049D812 /* TravelView.xib */,
 				A7B4F6E51F437A320049D812 /* CategoryCollectionViewCell.xib */,
+				E531B4CB1F4D54FC00CC7F51 /* TransactionDetailCollectionViewCell.xib */,
 				E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		A7DAA9801F4D6FAC00FD907E /* BRCalendar */ = {
+		B3B614821F4D9EE500205BAD /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				A7774DCA1F4D918B00A06660 /* BRCalendarView.swift */,
-				A7774DCB1F4D918B00A06660 /* BRCalendarView.xib */,
-				A7774DCC1F4D918B00A06660 /* BRCalendarMonthCollectionViewCell.swift */,
-				A7774DCD1F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.xib */,
-				A7774DCE1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.swift */,
-				A7774DCF1F4D918C00A06660 /* BRCalendarDayCollectionViewCell.xib */,
-				A7774DD01F4D918C00A06660 /* BRCalendarFormatter.swift */,
+				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
+				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
+				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
+				B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */,
+				B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */,
 			);
-			name = BRCalendar;
+			name = Map;
 			sourceTree = "<group>";
 		};
 		CDA36D981A0D25526FB5B498 /* Pods */ = {
@@ -431,20 +451,22 @@
 				A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */,
 				E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
+				A76E06071F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib in Resources */,
 				E51756261F469EFF0018A03A /* SideBarView.xib in Resources */,
+				E531B4CC1F4D54FC00CC7F51 /* TransactionDetailCollectionViewCell.xib in Resources */,
 				A74507E71F3991E700DFFADF /* CurrencyTableViewController.storyboard in Resources */,
 				A74507DC1F39887B00DFFADF /* TransactionTableViewController.storyboard in Resources */,
+				E5A6720D1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard in Resources */,
+				A76E06041F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib in Resources */,
 				A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */,
 				A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */,
-				A7774DD61F4D918C00A06660 /* BRCalendarDayCollectionViewCell.xib in Resources */,
-				A7774DD21F4D918C00A06660 /* BRCalendarView.xib in Resources */,
 				A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */,
 				B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */,
-				B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */,
 				A7FED7D61F47DA3800FD76EC /* MultiImagePickerView.xib in Resources */,
+				A76E06091F4DC56900FE009A /* BRCalendarView.xib in Resources */,
 				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
 				B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */,
-				A7774DD41F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.xib in Resources */,
+				B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,8 +541,10 @@
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
 				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7B0AA141F478BDC005DE60C /* MultiImagePickerViewController.swift in Sources */,
+				B3CB3B891F4D503200429BB2 /* TransactionMapMarkerView.swift in Sources */,
 				E5C7AAB41F4C07E40059E0DB /* ExtensionObject.swift in Sources */,
 				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
+				E5A6720B1F4D3E1900B8C9A9 /* TransactionDetailViewController.swift in Sources */,
 				A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */,
 				B38735E81F45C5CE000DC81C /* RealmInitializer.swift in Sources */,
 				A74507E41F39905900DFFADF /* CurrencyTableViewController.swift in Sources */,
@@ -530,7 +554,9 @@
 				A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */,
 				E50D13B21F43F2A300BD36CC /* CurrencyBudgetTableViewCell.swift in Sources */,
 				E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */,
+				E531B4CE1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift in Sources */,
 				A74507DA1F39878B00DFFADF /* Travel.swift in Sources */,
+				A76E06061F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.swift in Sources */,
 				A7B4F6EC1F4434D30049D812 /* TravelTableViewCell.swift in Sources */,
 				E5B26E5D1F3C11A100D63AAB /* DateUtil.swift in Sources */,
 				E5C7AABA1F4C86710059E0DB /* ExtensionDouble.swift in Sources */,
@@ -539,13 +565,12 @@
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
 				A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */,
 				A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */,
+				A76E06051F4DC56800FE009A /* BRCalendarFormatter.swift in Sources */,
 				E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */,
 				A7FED7D41F47DA1100FD76EC /* MultiImagePickerView.swift in Sources */,
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
-				A7774DD71F4D918C00A06660 /* BRCalendarFormatter.swift in Sources */,
 				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
 				B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */,
-				B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A7B0AA101F461BC2005DE60C /* ExtenstionString.swift in Sources */,
@@ -554,7 +579,6 @@
 				A74507D81F3984AB00DFFADF /* Transaction.swift in Sources */,
 				E50D13B01F42D91200BD36CC /* Category.swift in Sources */,
 				E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */,
-				A7774DD11F4D918C00A06660 /* BRCalendarView.swift in Sources */,
 				B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */,
 				B380C12F1F3D3109003857A2 /* DateInRegion.swift in Sources */,
 				B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */,
@@ -562,9 +586,9 @@
 				A7FED7CE1F47D45A00FD76EC /* UserPhotoAlbum.swift in Sources */,
 				A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */,
 				A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */,
-				A7774DD31F4D918C00A06660 /* BRCalendarMonthCollectionViewCell.swift in Sources */,
+				A76E06081F4DC56800FE009A /* BRCalendarView.swift in Sources */,
 				A7FED7D01F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift in Sources */,
-				A7774DD51F4D918C00A06660 /* BRCalendarDayCollectionViewCell.swift in Sources */,
+				A76E06031F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift in Sources */,
 				E5C7AAB01F4BFDB70059E0DB /* NumberStringUtil.swift in Sources */,
 				A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */,
 				A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */,

@@ -39,7 +39,6 @@ class TravelEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCurrencyBudgetButton.layer.cornerRadius = setupCurrencyBudgetButton.frame.height / 5
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
         
         startCalendar.target = self
@@ -140,7 +139,7 @@ class TravelEditorViewController: UIViewController {
             UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "여행 기간을 설정해 주세요.")
             return false
         }
-
+        
         guard (startCalendar.selectedDate! < endCalendar.selectedDate!) else {
             UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "여행 기간이 올바르지 않습니다.")
             return false
@@ -171,7 +170,6 @@ extension TravelEditorViewController {
                         travel.currencies.append(currency)
                     }
                 }
-                
             case .edit:
                 self.navigationItem.title = self.travel.name
                 
