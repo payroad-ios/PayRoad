@@ -140,7 +140,7 @@ class TravelEditorViewController: UIViewController {
             return false
         }
         
-        guard (startCalendar.selectedDate! < endCalendar.selectedDate!) else {
+        guard (startCalendar.selectedDate! <= endCalendar.selectedDate!) else {
             UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "여행 기간이 올바르지 않습니다.")
             return false
         }
