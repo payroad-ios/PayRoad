@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4la-Sh-xmH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4la-Sh-xmH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,54 +25,75 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B3d-wu-kGg">
-                                <rect key="frame" x="0.0" y="557" width="375" height="110"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="B3d-wu-kGg">
+                                <rect key="frame" x="0.0" y="557" width="375" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="2QC-5p-Pqv"/>
+                                    <constraint firstAttribute="height" constant="90" id="2QC-5p-Pqv"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="3GP-ev-ITe">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3GP-ev-ITe">
                                     <size key="itemSize" width="340" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TransactionMapCell" id="Dmk-j8-l20" customClass="TransactionMapCollectionViewCell" customModule="PayRoad" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="340" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="340" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m71-5P-2OD">
-                                                    <rect key="frame" x="20" y="12" width="295" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLm-2j-0uN">
-                                                    <rect key="frame" x="20" y="35" width="300" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-6U-L7v">
-                                                    <rect key="frame" x="20" y="58" width="300" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="001-Qf-80T">
+                                                    <rect key="frame" x="90" y="10" width="240" height="70"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m71-5P-2OD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="23.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLm-2j-0uN">
+                                                            <rect key="frame" x="0.0" y="23.5" width="240" height="23"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-6U-L7v">
+                                                            <rect key="frame" x="0.0" y="46.5" width="240" height="23.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hR7-kv-nxh">
+                                                    <rect key="frame" x="10" y="10" width="70" height="70"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="l2t-4T-pGb"/>
+                                                        <constraint firstAttribute="height" constant="70" id="uVq-cL-58G"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="001-Qf-80T" firstAttribute="top" secondItem="Dmk-j8-l20" secondAttribute="top" constant="10" id="2jb-3U-OR8"/>
+                                            <constraint firstItem="001-Qf-80T" firstAttribute="leading" secondItem="hR7-kv-nxh" secondAttribute="trailing" constant="10" id="9WF-Ef-dnn"/>
+                                            <constraint firstItem="hR7-kv-nxh" firstAttribute="leading" secondItem="Dmk-j8-l20" secondAttribute="leading" constant="10" id="FpN-q3-6ZI"/>
+                                            <constraint firstAttribute="trailing" secondItem="001-Qf-80T" secondAttribute="trailing" constant="10" id="HPe-xN-4X6"/>
+                                            <constraint firstAttribute="bottom" secondItem="hR7-kv-nxh" secondAttribute="bottom" constant="10" id="Uuk-z4-ulw"/>
+                                            <constraint firstAttribute="bottom" secondItem="001-Qf-80T" secondAttribute="bottom" constant="10" id="cea-V4-GtY"/>
+                                            <constraint firstItem="hR7-kv-nxh" firstAttribute="top" secondItem="Dmk-j8-l20" secondAttribute="top" constant="10" id="rOZ-1Y-iZ6"/>
+                                        </constraints>
+                                        <size key="customSize" width="340" height="90"/>
                                         <connections>
                                             <outlet property="amountLabel" destination="wLm-2j-0uN" id="Kd7-ya-3K2"/>
                                             <outlet property="dateLabel" destination="Qfk-6U-L7v" id="aLe-qZ-3CB"/>
                                             <outlet property="nameLabel" destination="m71-5P-2OD" id="TEj-nK-kaW"/>
+                                            <outlet property="thumbnailImageView" destination="hR7-kv-nxh" id="fzZ-sU-5Ql"/>
+                                            <segue destination="U43-Je-oC8" kind="show" identifier="showTransactionDetail" id="gzu-lx-Q4J"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -105,12 +126,20 @@
             </objects>
             <point key="canvasLocation" x="1076" y="690.40479760119945"/>
         </scene>
+        <!--TransactionDetailViewController-->
+        <scene sceneID="HRR-9Y-4dv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TransactionDetailViewController" id="U43-Je-oC8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fy3-ku-Fcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1748" y="942"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dCc-nC-GZs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4la-Sh-xmH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zgY-ZH-kIr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zgY-ZH-kIr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
