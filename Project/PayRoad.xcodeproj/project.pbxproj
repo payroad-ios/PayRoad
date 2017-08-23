@@ -221,7 +221,7 @@
 				B3B614821F4D9EE500205BAD /* Map */,
 				A74507EC1F399CF200DFFADF /* Currency */,
 				A751094D1F4A3A4200766E07 /* MultiImagePicker */,
-				A76E05FB1F4DC55900FE009A /* New Group */,
+				A76E05FB1F4DC55900FE009A /* BRCalendar */,
 				A74507F71F3A217400DFFADF /* Extension */,
 				A7B4F6EF1F444DC40049D812 /* View */,
 				A74507CD1F3976FF00DFFADF /* Resource */,
@@ -335,7 +335,7 @@
 			name = MultiImagePicker;
 			sourceTree = "<group>";
 		};
-		A76E05FB1F4DC55900FE009A /* New Group */ = {
+		A76E05FB1F4DC55900FE009A /* BRCalendar */ = {
 			isa = PBXGroup;
 			children = (
 				A76E06011F4DC56800FE009A /* BRCalendarView.swift */,
@@ -346,7 +346,7 @@
 				A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */,
 				A76E05FE1F4DC56800FE009A /* BRCalendarFormatter.swift */,
 			);
-			name = "New Group";
+			name = BRCalendar;
 			sourceTree = "<group>";
 		};
 		A7B4F6EF1F444DC40049D812 /* View */ = {

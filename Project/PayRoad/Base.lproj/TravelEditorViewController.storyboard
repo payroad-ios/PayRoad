@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hcl-Cc-P0i">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,6 +29,11 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon_Camera" translatesAutoresizingMaskIntoConstraints="NO" id="mxf-w9-5vR">
+                                        <rect key="frame" x="13" y="11" width="21" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="여행명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lO-gS-iMJ">
                                         <rect key="frame" x="38" y="204" width="307" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,6 +98,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundScrollView" destination="F10-3l-pnX" id="JON-F4-SgZ"/>
+                        <outlet property="cameraIconImageView" destination="mxf-w9-5vR" id="QPu-QK-qpo"/>
                         <outlet property="deleteTravelButton" destination="Y1G-m5-h6f" id="2zX-cm-48R"/>
                         <outlet property="endDateCalendarTextField" destination="8XP-9d-vBV" id="gkQ-CH-dHq"/>
                         <outlet property="startDateCalendarTextField" destination="c09-AE-VO6" id="nX4-fz-us5"/>
@@ -124,6 +130,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_Camera" width="21" height="18"/>
         <image name="Icon_Cancel" width="17" height="16"/>
         <image name="Icon_Check" width="18" height="14"/>
     </resources>

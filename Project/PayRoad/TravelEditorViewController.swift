@@ -35,10 +35,12 @@ class TravelEditorViewController: UIViewController {
     @IBOutlet weak var setupCurrencyBudgetButton: UIButton!
     @IBOutlet weak var travelPreview: TravelView!
     @IBOutlet weak var deleteTravelButton: UIButton!
+    @IBOutlet weak var cameraIconImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        cameraIconImageView.image = cameraIconImageView.image!.withRenderingMode(.alwaysTemplate)
+        cameraIconImageView.tintColor = UIColor.white
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
         
         startCalendar.target = self
