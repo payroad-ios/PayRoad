@@ -13,5 +13,6 @@ class TransactionMapCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     
 }
