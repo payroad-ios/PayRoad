@@ -21,6 +21,7 @@ class TransactionTableViewController: UIViewController {
 
     var transactionsNotificationToken: NotificationToken? = nil
     var travelNotificationToken: NotificationToken? = nil
+    var currencyNotificationToken: NotificationToken? = nil
     
     var travelPeriodDates = [YMD]()
     var dateDictionary = [YMD: [Transaction]]()
@@ -64,6 +65,15 @@ class TransactionTableViewController: UIViewController {
         window.addSubview(sideBar)
 
         title = travel.name
+        
+        if travel.currencies.count == 0 {
+            let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
+            let navigationController = UINavigationController(rootViewController: currencyTableViewController)
+            currencyTableViewController.travel = self.travel
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
         sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
@@ -107,6 +117,12 @@ class TransactionTableViewController: UIViewController {
             self?.title = self?.travel.name
             self?.extractDatePeriod()
             self?.collectionView.reloadData()
+        }
+        
+        currencyNotificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            self?.initDataStructures()
+            self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.displayTotalSpendingCurrency()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
@@ -266,6 +282,11 @@ class TransactionTableViewController: UIViewController {
     }
     
     func displayTotalSpendingCurrency() {
+        
+        if travel.currencies.count == 0 {
+            return
+        }
+        
         if totalSpendingIndex >= travel.currencies.count {
             totalSpendingIndex = 0
         }
