@@ -104,20 +104,25 @@ class TransactionTableViewController: UIViewController {
         allListButton.layer.shadowOffset = CGSize(width: 0, height: 3)
         allListButton.layer.shadowRadius = 3
         allListButton.layer.shadowOpacity = 0.4
-        
         extractDatePeriod()
-        initDataStructures()
-        displayTotalSpendingCurrency()
-        sortTransactionsSelectedDate()
-
+        
+        transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            self?.initDataStructures()
+            self?.sortTransactionsSelectedDate()
+            self?.displayTotalSpendingCurrency()
+        }
+        
         travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
             self?.title = self?.travel.name
-            self?.initDataStructures()
-            self?.displayTotalSpendingCurrency()
-            
             self?.extractDatePeriod()
             self?.collectionView.reloadData()
             self?.sortTransactionsSelectedDate()
+        }
+        
+        currencyNotificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            self?.initDataStructures()
+            self?.sortTransactionsSelectedDate()
+            self?.displayTotalSpendingCurrency()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
@@ -165,6 +170,8 @@ class TransactionTableViewController: UIViewController {
     
     func stopNotificationToken() {
         travelNotificationToken?.stop()
+        transactionsNotificationToken?.stop()
+        currencyNotificationToken?.stop()
     }
     
     func initDataStructures() {
@@ -307,6 +314,8 @@ class TransactionTableViewController: UIViewController {
         }
         
         spendingProgressView.setProgress(spendingRate, animated: true)
+        spendingProgressView.progressTintColor = spendingProgressView.progress > 0.9 ? ColorStore.destructiveRed : ColorStore.mainSkyBlue
+
         //TODO: 소숫점 자릿수 정하기
         percentageLabel.text = "\(NumberStringUtil.string(number: spendingRate * 100, dropPoint: 0))%"
     }
@@ -376,22 +385,17 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
+        cell.transactionNameLabel.text = transaction.name
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
+        cell.paymentImageView.image = transaction.paymentImage()
+        
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
             cell.thumbnailImageView.image = thumbnailImage
         }
         
-        cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
-        
         if let category = transaction.category,
             let categoryImage = UIImage(named: category.assetName) {
             cell.categoryImageView.image = categoryImage
-        }
-        
-        if transaction.isCash {
-            //cell.thumbnailImageView = ...
-        } else {
-            //cell.thumbnailImageView = ...
         }
         
         return cell
