@@ -121,7 +121,7 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
             textField.text = "1 \(code)당, \(editedCurrency.rate) \(standard)"
             
         } else if textField === budgetTextField {
-            textField.text = String(editedCurrency.budget)
+            textField.text = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2)
         }
         
         textField.endEditing(true)
@@ -216,7 +216,7 @@ extension CurrencyEditorViewController {
             currencySelectButton.backgroundColor = UIColor.gray
             currencySelectButton.isEnabled = false
             
-            budgetTextField.text = NumberStringUtil.roughString(number: originCurrency.budget)
+            budgetTextField.text = originCurrency.budget.nonZeroString(maxDecimalPlace: 2)
             
             if originCurrency.code == standardCurrency.code {
                 rateTextField.text = "기준 통화"

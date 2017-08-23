@@ -293,13 +293,13 @@ class TransactionTableViewController: UIViewController {
         var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
-            spendingLabel.text = "\(NumberStringUtil.roughString(number: amountByCurrency)) \(currency.code)"
+            spendingLabel.text = "\(amountByCurrency.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
             let balance = currency.budget - amountByCurrency
-            balanceLabel.text = "\(NumberStringUtil.roughString(number: balance)) \(currency.code)"
+            balanceLabel.text = "\(balance.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
             spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
-            balanceLabel.text = "\(NumberStringUtil.roughString(number: currency.budget)) \(currency.code)"
+            balanceLabel.text = "\(currency.budget.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
         }
         
         if spendingRate < 0 || spendingRate > 1 {
@@ -308,7 +308,7 @@ class TransactionTableViewController: UIViewController {
         
         spendingProgressView.setProgress(spendingRate, animated: true)
         //TODO: 소숫점 자릿수 정하기
-        percentageLabel.text = "\(NumberStringUtil.numberString(number: spendingRate * 100, dropPoint: 0))%"
+        percentageLabel.text = "\(NumberStringUtil.string(number: spendingRate * 100, dropPoint: 0))%"
     }
     
     deinit {
@@ -358,7 +358,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         
         let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            totalAmountLabel.text = "\(NumberStringUtil.roughString(number: totalAmount)) \(travel.currencies.first!.code)"
+            totalAmountLabel.text = "\(totalAmount.nonZeroString(maxDecimalPlace: 2)) \(travel.currencies.first!.code)"
         }
         
         sectionView.addSubview(ymdLabel)
@@ -381,7 +381,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(NumberStringUtil.roughString(number: transaction.amount) )"
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
         
         if let category = transaction.category,
             let categoryImage = UIImage(named: category.assetName) {
