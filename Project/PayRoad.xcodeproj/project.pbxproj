@@ -55,9 +55,9 @@
 		B38736561F499B0E000DC81C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736551F499B0E000DC81C /* Constants.swift */; };
 		B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736571F49B199000DC81C /* TransactionMapViewController.swift */; };
 		B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */; };
-		B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */; };
-		B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */; };
 		B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */; };
+		B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */; };
+		B3CB3B891F4D503200429BB2 /* TransactionMapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
 		E50D13AA1F41C56E00BD36CC /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50D13A91F41C56E00BD36CC /* FileUtil.swift */; };
@@ -133,9 +133,9 @@
 		B38736551F499B0E000DC81C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B38736571F49B199000DC81C /* TransactionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapViewController.swift; sourceTree = "<group>"; };
 		B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionMapViewController.storyboard; sourceTree = "<group>"; };
-		B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionPopUpViewController.swift; sourceTree = "<group>"; };
-		B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionPopUpViewController.storyboard; sourceTree = "<group>"; };
 		B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapCollectionViewCell.swift; sourceTree = "<group>"; };
+		B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionMapMarkerView.xib; sourceTree = "<group>"; };
+		B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapMarkerView.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
 		E50D13A91F41C56E00BD36CC /* FileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
@@ -204,6 +204,7 @@
 				A74507D41F397C6B00DFFADF /* Model */,
 				A74507EA1F399CDB00DFFADF /* Travel */,
 				A74507EB1F399CE600DFFADF /* Transaction */,
+				B3B614821F4D9EE500205BAD /* Map */,
 				A74507EC1F399CF200DFFADF /* Currency */,
 				A751094D1F4A3A4200766E07 /* MultiImagePicker */,
 				A74507F71F3A217400DFFADF /* Extension */,
@@ -259,11 +260,6 @@
 				A74507E81F39966600DFFADF /* TransactionEditorViewController.swift */,
 				A74507F21F39B2AA00DFFADF /* TransactionEditorViewController.storyboard */,
 				E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */,
-				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
-				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
-				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
-				B3CB3B711F4A638A00429BB2 /* TransactionPopUpViewController.swift */,
-				B3CB3B731F4A63A800429BB2 /* TransactionPopUpViewController.storyboard */,
 				A7B4F6E31F437A1F0049D812 /* CategoryCollectionViewCell.swift */,
 				E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */,
 				E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */,
@@ -338,6 +334,18 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		B3B614821F4D9EE500205BAD /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				B38736571F49B199000DC81C /* TransactionMapViewController.swift */,
+				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
+				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
+				B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */,
+				B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		CDA36D981A0D25526FB5B498 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +390,7 @@
 				TargetAttributes = {
 					A74507B61F3976C300DFFADF = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = VD42G8XRH9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -423,10 +432,10 @@
 				A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */,
 				A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */,
 				B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */,
-				B3CB3B741F4A63A800429BB2 /* TransactionPopUpViewController.storyboard in Resources */,
 				A7FED7D61F47DA3800FD76EC /* MultiImagePickerView.xib in Resources */,
 				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
 				B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */,
+				B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +510,7 @@
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
 				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7B0AA141F478BDC005DE60C /* MultiImagePickerViewController.swift in Sources */,
+				B3CB3B891F4D503200429BB2 /* TransactionMapMarkerView.swift in Sources */,
 				E5C7AAB41F4C07E40059E0DB /* ExtensionObject.swift in Sources */,
 				A7B4F6E81F43A30C0049D812 /* UnableInputTextField.swift in Sources */,
 				E5A6720B1F4D3E1900B8C9A9 /* TransactionDetailViewController.swift in Sources */,
@@ -528,7 +538,6 @@
 				A74507E91F39966600DFFADF /* TransactionEditorViewController.swift in Sources */,
 				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
 				B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */,
-				B3CB3B721F4A638A00429BB2 /* TransactionPopUpViewController.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A7B0AA101F461BC2005DE60C /* ExtenstionString.swift in Sources */,
@@ -698,11 +707,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VD42G8XRH9;
 				INFOPLIST_FILE = PayRoad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad.frdy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -715,11 +724,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VD42G8XRH9;
 				INFOPLIST_FILE = PayRoad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad;
+				PRODUCT_BUNDLE_IDENTIFIER = io.refuel.PayRoad.frdy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
