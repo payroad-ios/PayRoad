@@ -144,10 +144,11 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
                 self.updateRateButton.isEnabled = true
                 self.rateTextField.textColor = self.rateTextField.textColor?.withAlphaComponent(0.6)
                 self.rateTextField.text = "1 \(code)당, \(rate) \(standard)"
-                self.lastUpdateDateLabel.text = DateFormatter.string(for: Date(), timeZone: TimeZone.current)
+                self.lastUpdateDateLabel.text = "마지막 업데이트 : \(DateFormatter.string(for: Date()))"
                 
                 self.editedCurrency.code = code
                 self.editedCurrency.rate = Double(rate) ?? 0
+                self.editedCurrency.lastUpdateDate = Date()
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
                 self.isUpdating = false
             }
@@ -194,6 +195,7 @@ extension CurrencyEditorViewController {
             editedCurrency.code = originCurrency.code
             editedCurrency.rate = originCurrency.rate
             editedCurrency.budget = originCurrency.budget
+            editedCurrency.lastUpdateDate = originCurrency.lastUpdateDate
         }
         
         let origImage = #imageLiteral(resourceName: "Icon_Refresh")
@@ -207,7 +209,7 @@ extension CurrencyEditorViewController {
             barButtonItem.action = #selector(saveButtonDidTap)
             rateTextField.isEnabled = false
             updateRateButton.isEnabled = false
-            
+            lastUpdateDateLabel.text = "마지막 업데이트 : 없음"
         case .edit:
             barButtonItem.action = #selector(editButtonDidTap)
             navigationItem.title = "예산 수정"
@@ -222,8 +224,10 @@ extension CurrencyEditorViewController {
                 rateTextField.text = "기준 통화"
                 rateTextField.isEnabled = false
                 updateRateButton.isEnabled = false
+                lastUpdateDateLabel.text = "기준 통화는 환율 업데이트가 되지 않습니다."
             } else {
                 rateTextField.text = "1 \(originCurrency.code)당 \(originCurrency.rate)\(standardCurrency.code)"
+                lastUpdateDateLabel.text = "마지막 업데이트 : \(DateFormatter.string(for: originCurrency.lastUpdateDate))"
             }
         }
         navigationItem.rightBarButtonItem = barButtonItem
@@ -236,7 +240,7 @@ extension CurrencyEditorViewController {
             currency.code = editedCurrency.code
             currency.rate = editedCurrency.rate
             currency.budget = editedCurrency.budget
-            
+            currency.lastUpdateDate = editedCurrency.lastUpdateDate
             do {
                 try realm.write {
                     travel.currencies.append(currency)
@@ -256,6 +260,7 @@ extension CurrencyEditorViewController {
                 try realm.write {
                     originCurrency.rate = editedCurrency.rate
                     originCurrency.budget = editedCurrency.budget
+                    originCurrency.lastUpdateDate = editedCurrency.lastUpdateDate
                     print("통화 수정")
                 }
             } catch {

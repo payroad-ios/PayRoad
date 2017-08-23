@@ -12,6 +12,8 @@ import RealmSwift
 
 class CurrencyTableViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     var travel: Travel!
     var notificationToken: NotificationToken? = nil
     
@@ -19,6 +21,18 @@ class CurrencyTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if travel.currencies.count == 0 {
+            try? realm.write {
+                if let currencyCode = Locale.current.currencyCode {
+                    let currency = Currency()
+                    currency.id = travel.id + "-" + currencyCode
+                    currency.code = currencyCode
+                    currency.rate = 1.0
+                    travel.currencies.append(currency)
+                }
+            }
+        }
         
         tableView.delegate = self
         tableView.dataSource = self

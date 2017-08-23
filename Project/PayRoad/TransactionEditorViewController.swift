@@ -11,8 +11,14 @@ import UIKit
 import RealmSwift
 import GooglePlacePicker
 
+protocol TransactionEditorDelegate {
+    func edited(transaction: Transaction)
+}
+
 class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     let realm = try! Realm()
+    
+    var delegate: TransactionEditorDelegate?
     
     var travel: Travel!
     var currency: Currency!
@@ -261,6 +267,7 @@ extension TransactionEditorViewController {
                         transaction.isCash = transaction.isCash
                         transaction.dateInRegion = transaction.dateInRegion
                         
+                        delegate?.edited(transaction: transaction)
                     // 수정 시 update를 쓰기위한 코드. append로 할 경우 수정시에도 데이터가 더해짐. 아래 코드로 사용할 경우 해결이 되나, 역관계 성립이 안되어 Travel에 종속되지 않음.
                     // 리스트에 종속시킴과 동시에 update 파라미터를 지원하는 메서드가 있으면 좋을 것.
 //                    realm.add(transaction, update: true)

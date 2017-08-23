@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BRCalendarView" customModule="PayRoad" customModuleProvider="target">
+            <connections>
+                <outlet property="doneButton" destination="GHv-Yc-Cs1" id="mVJ-9l-U2d"/>
+                <outlet property="monthCollectionView" destination="xWu-H3-BzG" id="ul0-Ti-aMG"/>
+                <outlet property="todayButton" destination="22l-gp-xFQ" id="D4l-UD-2hj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="261"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xWu-H3-BzG">
+                    <rect key="frame" x="0.0" y="0.0" width="423" height="261"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nEn-qN-tA3">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHv-Yc-Cs1">
+                    <rect key="frame" x="373" y="10" width="30" height="28"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                    <state key="normal" title="Done">
+                        <color key="titleColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="doneButtonDidTap:" destination="-1" eventType="touchUpInside" id="vW8-hu-AwU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22l-gp-xFQ">
+                    <rect key="frame" x="20" y="10" width="34" height="28"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
+                    <state key="normal" title="Today">
+                        <color key="titleColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="todayButtonDidTap:" destination="-1" eventType="touchUpInside" id="GJo-iL-xvs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xWu-H3-BzG" secondAttribute="trailing" id="F7K-ka-uab"/>
+                <constraint firstItem="GHv-Yc-Cs1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="aLy-ud-qBZ"/>
+                <constraint firstItem="22l-gp-xFQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="gyc-sN-hZU"/>
+                <constraint firstItem="xWu-H3-BzG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hXX-W3-g2Z"/>
+                <constraint firstAttribute="bottom" secondItem="xWu-H3-BzG" secondAttribute="bottom" id="mWY-on-0NK"/>
+                <constraint firstItem="xWu-H3-BzG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pNO-o2-CsI"/>
+                <constraint firstItem="22l-gp-xFQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="v4D-6P-jDf"/>
+                <constraint firstAttribute="trailing" secondItem="GHv-Yc-Cs1" secondAttribute="trailing" constant="20" id="vpq-Qa-CN1"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-35.5" y="-122.5"/>
+        </view>
+    </objects>
+</document>
