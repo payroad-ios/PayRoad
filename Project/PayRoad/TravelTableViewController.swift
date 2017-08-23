@@ -19,6 +19,7 @@ class TravelTableViewController: UIViewController {
     var notificationToken: NotificationToken? = nil
         
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noticeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,15 @@ class TravelTableViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.tableFooterView = UIView()
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "Logo_PayRoad-Small"))
         notificationToken = travels.addNotificationBlock({ (changes: RealmCollectionChange) in
             self.tableView.reloadData()
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        noticeLabel.isHidden = travels.isEmpty ? false : true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
