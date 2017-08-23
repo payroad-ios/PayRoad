@@ -23,12 +23,15 @@ class TravelEditorViewController: UIViewController {
         return imagePicker
     }()
     
+    let startCalendar = BRCalendarView()
+    let endCalendar = BRCalendarView()
+    
     let defaultBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
     
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var startDateTextField: UITextField!
-    @IBOutlet weak var endDateTextField: UITextField!
+    @IBOutlet weak var startDateCalendarTextField: UITextField!
+    @IBOutlet weak var endDateCalendarTextField: UITextField!
     @IBOutlet weak var setupCurrencyBudgetButton: UIButton!
     @IBOutlet weak var travelPreview: TravelView!
     @IBOutlet weak var deleteTravelButton: UIButton!
@@ -38,9 +41,14 @@ class TravelEditorViewController: UIViewController {
         
         setupCurrencyBudgetButton.layer.cornerRadius = setupCurrencyBudgetButton.frame.height / 5
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
-
-        startDateTextField.inputDatePicker(mode: .date, date: travel.startDateInRegion?.date)
-        endDateTextField.inputDatePicker(mode: .date, date: travel.endDateInRegion?.date)
+        
+        startCalendar.target = self
+        endCalendar.target = self
+        startDateCalendarTextField.inputView = startCalendar
+        endDateCalendarTextField.inputView = endCalendar
+        
+        startCalendar.selectDate(date: travel.startDateInRegion?.date, animated: false)
+        endCalendar.selectDate(date: travel.endDateInRegion?.date, animated: false)
         
         let travelPreviewTapGuesture = UITapGestureRecognizer()
         travelPreviewTapGuesture.addTarget(self, action: #selector(presentImagePicker))
@@ -49,23 +57,42 @@ class TravelEditorViewController: UIViewController {
         adjustViewMode()
         
         titleTextField.addTarget(self, action: #selector(nameTextApply(_:)), for: .editingChanged)
-        startDateTextField.addTarget(self, action: #selector(startDateTextApply(_:)), for: .editingDidEnd)
-        endDateTextField.addTarget(self, action: #selector(endDateTextApply(_:)), for: .editingDidEnd)
+        startDateCalendarTextField.addTarget(self, action: #selector(startDateTextApply(_:)), for: .editingDidEnd)
+        endDateCalendarTextField.addTarget(self, action: #selector(endDateTextApply(_:)), for: .editingDidEnd)
     }
-    
     
     func nameTextApply(_ sender: UITextField) {
         travelPreview.travelNameLabel.text = sender.text
     }
     
     func startDateTextApply(_ sender: UITextField) {
-        let datePicker = sender.inputView as! UIDatePicker
-        travelPreview.fillDatePeriodLabel(startDate: datePicker.date)
+        let calendar = sender.inputView as! BRCalendarView
+        travelPreview.fillDatePeriodLabel(startDate: calendar.selectedDate)
+        startDateCalendarTextField.text = DateUtil.dateFormatter.string(from: calendar.selectedDate!)
+        endCalendar.selectDate(date: calendar.selectedDate, animated: true)
+        endDateCalendarTextField.isEnabled = true
     }
     
     func endDateTextApply(_ sender: UITextField) {
-        let datePicker = sender.inputView as! UIDatePicker
-        travelPreview.fillDatePeriodLabel(endDate: datePicker.date)
+        let calendar = sender.inputView as! BRCalendarView
+        if validatePeriodOrder() {
+            travelPreview.fillDatePeriodLabel(endDate: calendar.selectedDate)
+            endDateCalendarTextField.text = DateUtil.dateFormatter.string(from: calendar.selectedDate!)
+        } else {
+            endCalendar.selectDate(date: startCalendar.selectedDate, animated: true)
+            sender.becomeFirstResponder()
+            UIAlertController.oneButtonAlert(target: self, title: "기간 설정", message: "여행 기간이 올바르지 않습니다.")
+        }
+    }
+    
+    func validatePeriodOrder() -> Bool {
+        guard let start = startCalendar.selectedDate else { return false }
+        guard let end = endCalendar.selectedDate else { return false }
+        if start > end {
+            return false
+        } else {
+            return true
+        }
     }
     
     func presentImagePicker(_ sender: UITapGestureRecognizer) {
@@ -105,12 +132,17 @@ class TravelEditorViewController: UIViewController {
     
     func checkIsExistInputField() -> Bool {
         guard !(titleTextField.text!.isEmpty) else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "제목을 입력해 주세요.")
+            UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "제목을 입력해 주세요.")
             return false
         }
         
-        guard !(startDateTextField.text!.isEmpty || endDateTextField.text!.isEmpty) else {
-            UIAlertController.oneButtonAlert(target: self, title: "에러", message: "기간을 지정해 주세요.")
+        guard !(startDateCalendarTextField.text!.isEmpty || endDateCalendarTextField.text!.isEmpty) else {
+            UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "여행 기간을 설정해 주세요.")
+            return false
+        }
+
+        guard (startCalendar.selectedDate! < endCalendar.selectedDate!) else {
+            UIAlertController.oneButtonAlert(target: self, title: "저장 오류", message: "여행 기간이 올바르지 않습니다.")
             return false
         }
         return true
@@ -127,6 +159,7 @@ extension TravelEditorViewController {
                 deleteTravelButton.isHidden = true
                 travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
                 isModifyPhoto = true
+                endDateCalendarTextField.isEnabled = false
                 
                 //TODO: 에러 해결해야 할 것
                 try? realm.write {
@@ -145,13 +178,12 @@ extension TravelEditorViewController {
                 deleteTravelButton.isHidden = false
                 isModifyPhoto = false
                 titleTextField?.text = travel.name
-                startDateTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
-                endDateTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
+                startDateCalendarTextField?.text = DateUtil.dateFormatter.string(from: travel.startDateInRegion!.date)
+                endDateCalendarTextField?.text = DateUtil.dateFormatter.string(from: travel.endDateInRegion!.date)
                 
                 travelPreview.travelNameLabel.text = travel.name
                 travelPreview.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
                 
-
                 if let filePath = travel.photo?.filePath {
                     travelPreview.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
                 
@@ -168,16 +200,24 @@ extension TravelEditorViewController {
             }
             
             view.endEditing(true)
-            dismiss(animated: true, completion: nil)
+            
+            if editorMode == .new {
+                if let navi = self.presentingViewController as? UINavigationController {
+                    dismiss(animated: true, completion: {
+                        let travelTableView = navi.topViewController as! TravelTableViewController
+                        travelTableView.pushNewTravelViewController(object: self.travel)
+                    })
+                }
+            } else {
+                dismiss(animated: true, completion: nil)
+            }
         }
     }
     
     func travelFromUI(travel: inout Travel) {
         guard let name = titleTextField?.text,
-            let startDateText = startDateTextField?.text,
-            let startDate = DateUtil.dateFormatter.date(from: startDateText),
-            let endDateText = endDateTextField?.text,
-            let endDate = DateUtil.dateFormatter.date(from: endDateText)
+            let startDate = startCalendar.selectedDate,
+            let endDate = endCalendar.selectedDate
         else {
             print("fail to get travel from UI")
             return
