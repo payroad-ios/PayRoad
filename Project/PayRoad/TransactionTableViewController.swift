@@ -36,7 +36,7 @@ class TransactionTableViewController: UIViewController {
     
     var currentSelectedDate: YMD? {
         didSet {
-            filterTransaction(selected: currentSelectedDate)
+            sortTransactionsSelectedDate()
         }
     }
     
@@ -104,25 +104,20 @@ class TransactionTableViewController: UIViewController {
         allListButton.layer.shadowOffset = CGSize(width: 0, height: 3)
         allListButton.layer.shadowRadius = 3
         allListButton.layer.shadowOpacity = 0.4
+        
         extractDatePeriod()
-        
-        transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
-            self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
-            self?.displayTotalSpendingCurrency()
-        }
-        
-//        NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
+        initDataStructures()
+        displayTotalSpendingCurrency()
+        sortTransactionsSelectedDate()
+
         travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
             self?.title = self?.travel.name
+            self?.initDataStructures()
+            self?.displayTotalSpendingCurrency()
+            
             self?.extractDatePeriod()
             self?.collectionView.reloadData()
-        }
-        
-        currencyNotificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
-            self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
-            self?.displayTotalSpendingCurrency()
+            self?.sortTransactionsSelectedDate()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
@@ -169,7 +164,6 @@ class TransactionTableViewController: UIViewController {
     }
     
     func stopNotificationToken() {
-        transactionsNotificationToken?.stop()
         travelNotificationToken?.stop()
     }
     
@@ -219,15 +213,19 @@ class TransactionTableViewController: UIViewController {
         }
     }
     
-    func filterTransaction(selected: YMD?) {
+    func sortTransactionsSelectedDate() {
         defer {
             tableView.reloadData()
         }
-        guard let date = selected else {
+        guard let date = currentSelectedDate else {
             dynamicDateList = originDateList
             return
         }
         dynamicDateList = [date]
+        
+        let index = travelPeriodDates.index(of: date)
+        let indexPath = IndexPath(row: index!, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     func extractDatePeriod() {
@@ -264,7 +262,7 @@ class TransactionTableViewController: UIViewController {
         }
         
         initDataStructures()
-        filterTransaction(selected: currentSelectedDate)
+        sortTransactionsSelectedDate()
         displayTotalSpendingCurrency()
     }
     
@@ -431,7 +429,7 @@ extension TransactionTableViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.contentOffset.y
         pullToAddLabel.frame = CGRect(x: 0, y: height, width: view.frame.width, height: -height)
-        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "놓아서 새 항목 추가" : "당겨서 새 항목 추가"
+        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "-  놓아서 새 항목 추가" : "↓ 당겨서 새 항목 추가"
         noticeLabel.alpha = 1 - (-scrollView.contentOffset.y / 50)
     }
     
