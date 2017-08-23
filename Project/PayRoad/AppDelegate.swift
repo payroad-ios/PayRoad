@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UINavigationBar customize
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = ColorStore.basicBlack
-//        UINavigationBar.appearance().barTintColor = 
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorStore.basicBlack]
         
         GMSServices.provideAPIKey(kMapsAPIKey)
