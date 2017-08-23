@@ -31,35 +31,35 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-VM-kc7">
-                            <rect key="frame" x="0.0" y="131" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="137" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="가계부">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Wr-FCw">
-                            <rect key="frame" x="0.0" y="206" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="212" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="일기">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
-                            <rect key="frame" x="0.0" y="281" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="287" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="지도">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF9-d0-tdK">
-                            <rect key="frame" x="0.0" y="356" width="187.5" height="35"/>
+                            <rect key="frame" x="0.0" y="362" width="187.5" height="35"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <state key="normal" title="여행 수정">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
-                            <rect key="frame" x="37" y="45" width="113" height="26"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad-SideBar" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
+                            <rect key="frame" x="24.5" y="45" width="138" height="32"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -115,6 +115,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="Logo_PayRoad" width="113" height="26"/>
+        <image name="Logo_PayRoad-SideBar" width="138" height="32"/>
     </resources>
 </document>

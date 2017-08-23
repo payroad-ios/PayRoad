@@ -21,16 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LunchScreen_PayRoad" translatesAutoresizingMaskIntoConstraints="NO" id="VtT-p0-6B1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REFUEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boL-gg-Rcy">
+                                <rect key="frame" x="160" y="594.5" width="56.5" height="20.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="17"/>
+                                <color key="textColor" red="0.45435855263157898" green="0.45435855263157898" blue="0.45435855263157898" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad-Lunch" translatesAutoresizingMaskIntoConstraints="NO" id="k2v-72-kQH">
+                                <rect key="frame" x="93" y="162" width="188" height="67"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VtT-p0-6B1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="1eB-GX-ZET"/>
-                            <constraint firstAttribute="bottom" secondItem="VtT-p0-6B1" secondAttribute="bottom" id="ZNn-A4-Se2"/>
-                            <constraint firstAttribute="trailing" secondItem="VtT-p0-6B1" secondAttribute="trailing" id="fY0-H4-h8s"/>
-                            <constraint firstItem="VtT-p0-6B1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="mjD-f7-ghO"/>
+                            <constraint firstItem="k2v-72-kQH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ING-8u-RWg"/>
+                            <constraint firstItem="k2v-72-kQH" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="142" id="LCD-2A-iIp"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="boL-gg-Rcy" secondAttribute="bottom" constant="52" id="sks-Dq-SMf"/>
+                            <constraint firstItem="boL-gg-Rcy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uEH-9G-B9V"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LunchScreen_PayRoad" width="375" height="667"/>
+        <image name="Logo_PayRoad-Lunch" width="188" height="67"/>
     </resources>
 </document>

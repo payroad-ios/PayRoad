@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Logo_PayRoad.png",
+      "filename" : "Logo_PayRoad-SideBar.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Logo_PayRoad@2x.png",
+      "filename" : "Logo_PayRoad-SideBar@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Logo_PayRoad@3x.png",
+      "filename" : "Logo_PayRoad-SideBar@3x.png",
       "scale" : "3x"
     }
   ],
