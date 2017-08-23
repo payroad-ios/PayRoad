@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,8 +43,13 @@
                                                 </collectionViewFlowLayout>
                                                 <cells/>
                                             </collectionView>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ooz-rt-rOI">
+                                                <rect key="frame" x="168" y="258" width="39" height="37"/>
+                                                <color key="pageIndicatorTintColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="currentPageIndicatorTintColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </pageControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
-                                                <rect key="frame" x="28" y="280" width="319" height="30"/>
+                                                <rect key="frame" x="28" y="305" width="319" height="30"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Food" translatesAutoresizingMaskIntoConstraints="NO" id="1Ou-Ra-fbo">
                                                         <rect key="frame" x="0.0" y="10" width="20" height="20"/>
@@ -71,17 +76,17 @@
                                                     <constraint firstAttribute="height" constant="30" id="VIA-Pa-F2c"/>
                                                 </constraints>
                                             </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-ca-xWk" customClass="GMSMapView">
+                                                <rect key="frame" x="28" y="490" width="319" height="290"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="foX-Jp-Cg0">
-                                                <rect key="frame" x="28" y="320" width="319" height="160"/>
+                                                <rect key="frame" x="28" y="345" width="319" height="135"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-ca-xWk" customClass="GMSMapView">
-                                                <rect key="frame" x="28" y="490" width="319" height="290"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -90,16 +95,18 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="fM7-hx-cAV" secondAttribute="trailing" constant="20" id="4Du-3e-w6L"/>
                                             <constraint firstItem="foX-Jp-Cg0" firstAttribute="top" secondItem="fM7-hx-cAV" secondAttribute="bottom" constant="10" id="4LG-Sv-HRO"/>
                                             <constraint firstItem="IQK-ca-xWk" firstAttribute="top" secondItem="foX-Jp-Cg0" secondAttribute="bottom" constant="10" id="6Uq-g5-h0D"/>
-                                            <constraint firstItem="fM7-hx-cAV" firstAttribute="top" secondItem="nnu-DG-Xrq" secondAttribute="bottom" constant="30" id="7iB-L0-a70"/>
                                             <constraint firstItem="nnu-DG-Xrq" firstAttribute="top" secondItem="Mym-a8-D4c" secondAttribute="top" constant="10" id="AE4-cV-ukJ"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="foX-Jp-Cg0" secondAttribute="trailing" constant="20" id="BxP-bw-v81"/>
                                             <constraint firstItem="nnu-DG-Xrq" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leading" id="C0P-Zs-LaD"/>
                                             <constraint firstItem="fM7-hx-cAV" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="H5t-I5-4de"/>
                                             <constraint firstItem="foX-Jp-Cg0" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="JHo-5f-kc8"/>
+                                            <constraint firstItem="fM7-hx-cAV" firstAttribute="top" secondItem="Ooz-rt-rOI" secondAttribute="bottom" constant="10" id="aNb-Bv-cHX"/>
                                             <constraint firstItem="foX-Jp-Cg0" firstAttribute="bottom" secondItem="Mym-a8-D4c" secondAttribute="bottom" multiplier="0.6" id="cal-wY-i3V"/>
                                             <constraint firstAttribute="bottom" secondItem="IQK-ca-xWk" secondAttribute="bottom" constant="20" id="isC-Ua-k9j"/>
                                             <constraint firstAttribute="height" constant="800" id="oTC-AY-Zrj"/>
                                             <constraint firstItem="IQK-ca-xWk" firstAttribute="leading" secondItem="Mym-a8-D4c" secondAttribute="leadingMargin" constant="20" id="qbo-nw-aT7"/>
+                                            <constraint firstItem="Ooz-rt-rOI" firstAttribute="centerX" secondItem="nnu-DG-Xrq" secondAttribute="centerX" id="vQD-7g-clx"/>
+                                            <constraint firstItem="Ooz-rt-rOI" firstAttribute="top" secondItem="nnu-DG-Xrq" secondAttribute="bottom" constant="8" id="wQl-Nh-tnl"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -137,6 +144,7 @@
                         <outlet property="mapView" destination="IQK-ca-xWk" id="aak-1e-LAY"/>
                         <outlet property="payContentStackView" destination="fM7-hx-cAV" id="Onj-eO-hI5"/>
                         <outlet property="payTypeImageView" destination="oss-iT-5e6" id="C25-St-9Hn"/>
+                        <outlet property="photoPageControl" destination="Ooz-rt-rOI" id="wEB-nJ-0Ir"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wc6-vJ-y0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
