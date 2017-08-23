@@ -159,17 +159,7 @@ extension TravelEditorViewController {
                 travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
                 isModifyPhoto = true
                 endDateCalendarTextField.isEnabled = false
-                
-                //TODO: 에러 해결해야 할 것
-                try? realm.write {
-                    if let currencyCode = Locale.current.currencyCode {
-                        let currency = Currency()
-                        currency.id = travel.id + "-" + currencyCode
-                        currency.code = currencyCode
-                        currency.rate = 1.0
-                        travel.currencies.append(currency)
-                    }
-                }
+            
             case .edit:
                 self.navigationItem.title = self.travel.name
                 
