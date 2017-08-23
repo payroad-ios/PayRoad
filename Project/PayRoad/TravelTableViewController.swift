@@ -74,6 +74,12 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         }
         cell.travelView.backgroundImage.image = photo.fetchPhoto()
         
+        guard let code = travel.currencies.first?.code else {
+            return cell
+        }
+        
+        let totalAmount = travel.transactions.reduce(0) { $0.0 + $0.1.amount }
+        cell.travelView.spendingAmountLabel.text = "\(code) \(Int(totalAmount).stringThousandsSeparator())"
         return cell
     }
     

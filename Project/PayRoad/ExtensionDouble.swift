@@ -24,4 +24,8 @@ extension Double {
     func nonZeroString(maxDecimalPlace: Int) -> String {
         return NumberStringUtil.string(number: self, dropPoint: self.findZeroOnDecimal(maxDecimalPlace: maxDecimalPlace))
     }
+    
+    func stringThousandsSeparator() -> String {
+        return String().thousandsSeparator(double: self)
+    }
 }
