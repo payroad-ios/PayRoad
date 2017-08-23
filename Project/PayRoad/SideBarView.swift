@@ -10,12 +10,12 @@ import UIKit
 
 class SideBarView: UIView {
     @IBOutlet weak var goMainButton: UIButton!
+    @IBOutlet weak var backgroundView: UIView!
     
     @IBAction func hideSideBar(_ sender: Any) {
         guard let navigationController = UIApplication.shared.windows.first!.rootViewController as? UINavigationController else {
             return
         }
-        
         hide() {
             navigationController.viewControllers.first?.view.isUserInteractionEnabled = true
         }
@@ -32,9 +32,28 @@ class SideBarView: UIView {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        print(#function)
+        self.isUserInteractionEnabled = false
+        self.frame = self.defaultCGRect()
+        
+        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
+        
+        backgroundView.backgroundColor = UIColor.black
+        backgroundView.alpha = 0
+        
+        self.layer.shadowColor = ColorStore.darkGray.cgColor
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowOffset = CGSize.zero
+        self.layer.shadowRadius = 7
+    }
+
     func show(completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: 0.5, animations: { [unowned self] in
+//        UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
+        UIView.animate(withDuration: 0.25, animations: { [unowned self] in
             self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            self.backgroundView.alpha = 0.3
         }, completion: { [unowned self] (result) in
             self.isUserInteractionEnabled = true
             
@@ -49,9 +68,11 @@ class SideBarView: UIView {
     }
     
     func hide(completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: 0.5, animations: { [unowned self] in
+        UIView.animate(withDuration: 0.18, animations: { [unowned self] in
             self.frame =  self.defaultCGRect()
+            self.backgroundView.alpha = 0
         }, completion: { (result) in
+//            UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar - 1)
             self.isUserInteractionEnabled = false
             
             guard result == true,
@@ -64,20 +85,20 @@ class SideBarView: UIView {
         })
     }
     
-    func setUpView() {
-        self.isUserInteractionEnabled = false
-        self.frame = self.defaultCGRect()
-        
-        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
-        
-        self.layer.shadowColor = ColorStore.darkGray.cgColor
-        self.layer.shadowOpacity = 0.8
-        self.layer.shadowOffset = CGSize.zero
-        self.layer.shadowRadius = 7
-    }
+//    func setUpView() {
+//        self.isUserInteractionEnabled = false
+//        self.frame = self.defaultCGRect()
+//        
+//        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
+//        
+//        self.layer.shadowColor = ColorStore.darkGray.cgColor
+//        self.layer.shadowOpacity = 0.8
+//        self.layer.shadowOffset = CGSize.zero
+//        self.layer.shadowRadius = 7
+//    }
     
     func defaultCGRect() -> CGRect {
-        return CGRect(x: -self.frame.width / 2 - 20,
+        return CGRect(x: -self.frame.width / 2 - 50,
                       y: 0,
                       width: self.frame.width,
                       height: self.frame.height)

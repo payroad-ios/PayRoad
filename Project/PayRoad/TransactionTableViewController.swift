@@ -59,7 +59,7 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        sideBar.setUpView()
+//        sideBar.setUpView()
         
         let window = UIApplication.shared.keyWindow!
         window.addSubview(sideBar)
