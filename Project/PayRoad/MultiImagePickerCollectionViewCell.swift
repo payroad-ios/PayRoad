@@ -19,7 +19,7 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
     
     let countLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = ColorStore.destructiveRed
+        label.backgroundColor = ColorStore.mainSkyBlue
         label.textAlignment = .center
         label.textColor = UIColor.white
         label.isHidden = true
@@ -28,9 +28,8 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    override func layoutSubviews() {
-        countLabel.text = countLabel.text == "1" ? "대표" : countLabel.text
-        countLabel.font = countLabel.font.withSize(12)
+    func covertString() -> String? {
+        return countLabel.text == "1" ? "대표" : countLabel.text
     }
     
     override init(frame: CGRect) {
@@ -40,16 +39,27 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            layer.borderWidth = isSelected ? 5 : 0
-            countLabel.isHidden = isSelected ? false : true
+            indicateForStatus()
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        countLabel.text = covertString()
+    }
+    
+    func indicateForStatus() {
+        layer.borderWidth = isSelected ? 5 : 0
+        countLabel.isHidden = isSelected ? false : true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         photoImageView.image = nil
+        countLabel.text = nil
+        layer.borderWidth = 0
+        countLabel.isHidden = true
     }
-    
     
     func setupViews() {
         let margin: CGFloat = 3
@@ -66,7 +76,8 @@ class MultiImagePickerCollectionViewCell: UICollectionViewCell {
         countLabel.widthAnchor.constraint(equalToConstant: 25).isActive = true
         countLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
-        layer.borderColor = ColorStore.destructiveRed.cgColor
+        layer.borderColor = ColorStore.mainSkyBlue.cgColor
+        countLabel.font = countLabel.font.withSize(12)
     }
     
     required init?(coder aDecoder: NSCoder) {

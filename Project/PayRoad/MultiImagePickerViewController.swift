@@ -17,11 +17,13 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
     let margin: CGFloat = 2
     let cellID = "Cell"
     var delegate: MultiImagePickerDelegate?
-    
-    var selectedImages = [[Int: UIImage]]()
     var userPhotoAlbum = UserPhotoAlbum()
-    
+
+    var selectedImages = [[Int: UIImage]]()
     var orderIndexPaths = [IndexPath]()
+    
+    var restoreSelectedImages = [[Int: UIImage]]()
+    var restoreOrderIndexPaths = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,12 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
         
         collectionView?.allowsMultipleSelection = true
         collectionView!.register(MultiImagePickerCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        restoreSelectedImages = selectedImages
+        restoreOrderIndexPaths = orderIndexPaths
     }
     
     func checkPhotoAuthorization() {
@@ -51,19 +59,42 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
         navigationItem.rightBarButtonItems = [confirmBarButton]
     }
     
-    func removeDeselectItem(at index: Int) {
-        let inputIndexPath = orderIndexPaths[index]
-        collectionView!.deselectItem(at: inputIndexPath, animated: true)
-        
-        selectedImages.remove(at: index)
-        orderIndexPaths.remove(at: index)
+    func drawCountCellOrder() {
         for (index, item) in orderIndexPaths.enumerated() {
-            let cell = collectionView?.cellForItem(at: item) as! MultiImagePickerCollectionViewCell
-            cell.countLabel.text = String(index + 1)
+            if let cell = collectionView?.cellForItem(at: item) as? MultiImagePickerCollectionViewCell {
+                cell.countLabel.text = String(index + 1)
+            }
         }
     }
     
+    func removeDeselectItem(at index: Int) {
+        let inputIndexPath = orderIndexPaths[index]
+        collectionView?.deselectItem(at: inputIndexPath, animated: false)
+        collectionView?.reloadItems(at: [inputIndexPath])
+        
+        selectedImages.remove(at: index)
+        orderIndexPaths.remove(at: index)
+        
+        drawCountCellOrder()
+    }
+    
+    func restorePicker() {
+        for indexPath in orderIndexPaths {
+            collectionView?.deselectItem(at: indexPath, animated: false)
+            collectionView?.reloadItems(at: [indexPath])
+        }
+        
+        for indexPath in restoreOrderIndexPaths {
+            collectionView?.selectItem(at: indexPath, animated: false, scrollPosition: .centeredHorizontally)
+        }
+        selectedImages = restoreSelectedImages
+        orderIndexPaths = restoreOrderIndexPaths
+        
+        drawCountCellOrder()
+    }
+    
     func cancelButtonDidTap() {
+        restorePicker()
         dismiss(animated: true, completion: nil)
     }
     
@@ -84,7 +115,7 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MultiImagePickerCollectionViewCell
-        
+        cell.indicateForStatus()
         userPhotoAlbum.requestImage(at: indexPath.row, imageSize: .thumbnail) { (image) in
             cell.photoImageView.image = image
         }
@@ -110,6 +141,15 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let imageIndex = selectedImages.index { [Int]($0.keys).contains(indexPath.row) }
         removeDeselectItem(at: imageIndex!)
+    }    
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let cell = cell as! MultiImagePickerCollectionViewCell 
+        
+        if orderIndexPaths.contains(indexPath) {
+            let orderIndex = orderIndexPaths.index(of: indexPath)!
+            cell.countLabel.text = String(orderIndex + 1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -128,37 +168,5 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
