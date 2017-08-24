@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="C9g-oH-rGO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f3W-JX-eCx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="gPn-9P-2Wh">
             <objects>
-                <viewController id="C9g-oH-rGO" customClass="PhotoDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoDetailView" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C9g-oH-rGO" customClass="PhotoDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aXE-uz-QNc"/>
                         <viewControllerLayoutGuide type="bottom" id="9Gt-jV-FOB"/>
@@ -21,48 +21,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-7o-ZRC">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaB-5E-zwN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-7o-ZRC">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SampleBG_Franch" translatesAutoresizingMaskIntoConstraints="NO" id="MIz-mm-o7P">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="MIz-mm-o7P" secondAttribute="trailing" id="C2t-3T-N2C"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="top" id="DM3-Gk-Fwr"/>
-                                    <constraint firstAttribute="bottom" secondItem="MIz-mm-o7P" secondAttribute="bottom" id="XPL-dL-lkw"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="leading" secondItem="CcB-7o-ZRC" secondAttribute="leading" id="cQ7-JW-25t"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerY" secondItem="CcB-7o-ZRC" secondAttribute="centerY" id="nfV-Wf-bL8"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerX" secondItem="CcB-7o-ZRC" secondAttribute="centerX" id="uEv-IC-7Pt"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerX" secondItem="CcB-7o-ZRC" secondAttribute="centerX" id="07L-NX-sXP"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="leading" secondItem="CcB-7o-ZRC" secondAttribute="leading" id="7qa-Dm-hhe"/>
+                                    <constraint firstAttribute="bottom" secondItem="MIz-mm-o7P" secondAttribute="bottom" id="GBK-3F-Mab"/>
+                                    <constraint firstAttribute="trailing" secondItem="MIz-mm-o7P" secondAttribute="trailing" id="Xtf-pa-8TC"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="top" id="oeT-9T-4Yq"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerY" secondItem="CcB-7o-ZRC" secondAttribute="centerY" id="sqI-Xu-eFa"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="IOy-fw-lsQ"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="Tce-Cd-Wrq"/>
-                            <constraint firstItem="9Gt-jV-FOB" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="W4L-BO-La1"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="YvO-rz-Nf7"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="bgY-VT-El3"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="cEi-S0-BwM"/>
-                            <constraint firstAttribute="bottom" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="d6W-vx-Gh6"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="wXl-1a-5ps"/>
-                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="wvY-dz-aJj"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="xNv-V7-kjW"/>
+                            <constraint firstAttribute="bottom" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="5Wx-n4-TaX"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="BPc-SU-S6n"/>
+                            <constraint firstItem="VaB-5E-zwN" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="HnS-kk-tbg"/>
+                            <constraint firstItem="VaB-5E-zwN" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="JEw-q9-nQL"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="SzT-zO-48V"/>
+                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="ad3-zK-Gzu"/>
+                            <constraint firstAttribute="bottom" secondItem="VaB-5E-zwN" secondAttribute="bottom" id="d3g-vP-Shx"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="e2b-QS-sR7"/>
+                            <constraint firstAttribute="trailing" secondItem="VaB-5E-zwN" secondAttribute="trailing" id="fae-wu-bZf"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="jtk-Md-sSz"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="sZL-OC-L59"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="tJW-tP-Ytm"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="dcW-gE-e1Z">
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Cancel" id="Erj-t8-aPY"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="baseScrollView" destination="CcB-7o-ZRC" id="HFF-yp-TWM"/>
+                        <outlet property="baseView" destination="VaB-5E-zwN" id="Bhb-HV-5vB"/>
                         <outlet property="detailImageView" destination="MIz-mm-o7P" id="bII-nV-Kdk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDb-cF-MRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="213"/>
+            <point key="canvasLocation" x="1236" y="212.74362818590706"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="apP-Zf-2FM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f3W-JX-eCx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UFh-7G-hVj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O6f-qd-MLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="296.80000000000001" y="212.74362818590706"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
         <image name="SampleBG_Franch" width="722" height="480"/>
     </resources>
 </document>
