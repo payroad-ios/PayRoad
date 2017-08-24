@@ -84,17 +84,32 @@
                                     <segue destination="yUU-u0-Keo" kind="show" identifier="selectCurrencyCode" id="Iv4-TX-Xyj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADn-7c-zwM">
+                                <rect key="frame" x="36" y="590" width="303" height="37"/>
+                                <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="Yyr-Lm-iXV"/>
+                                </constraints>
+                                <state key="normal" title="화폐 삭제">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonDidTap:" destination="F8w-PZ-Zlp" eventType="touchUpInside" id="Q4U-oE-QdM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="top" secondItem="faC-zk-IQp" secondAttribute="bottom" constant="4" id="32h-Z6-frr"/>
+                            <constraint firstItem="gC5-Cd-lCL" firstAttribute="top" secondItem="ADn-7c-zwM" secondAttribute="bottom" constant="40" id="596-qp-BJN"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="BlR-pA-gdd"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="height" secondItem="cHL-ZT-Wzp" secondAttribute="height" id="CBo-rR-XUc"/>
                             <constraint firstItem="BKw-wz-cbK" firstAttribute="top" secondItem="Ow7-Bv-Kv4" secondAttribute="bottom" constant="10" id="CtF-YJ-LJE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cHL-ZT-Wzp" secondAttribute="trailing" constant="10" id="EYL-Wo-God"/>
                             <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="HcA-Sn-fzD"/>
                             <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="top" secondItem="cHL-ZT-Wzp" secondAttribute="bottom" constant="4" id="IHW-4B-R5T"/>
+                            <constraint firstItem="ADn-7c-zwM" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="20" id="K9r-EM-28L"/>
                             <constraint firstItem="cHL-ZT-Wzp" firstAttribute="top" secondItem="Io8-Cf-GYK" secondAttribute="bottom" constant="8" id="Ldy-xV-2yL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ow7-Bv-Kv4" secondAttribute="trailing" constant="10" id="ZDo-QU-DXh"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="top" secondItem="Io8-Cf-GYK" secondAttribute="bottom" constant="8" id="eAq-J0-O6V"/>
@@ -102,6 +117,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="BKw-wz-cbK" secondAttribute="trailing" constant="10" id="hqv-bD-muq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ow7-Bv-Kv4" secondAttribute="trailing" constant="10" id="hwL-KA-y4p"/>
                             <constraint firstItem="5tB-kA-kPa" firstAttribute="top" secondItem="BKw-wz-cbK" secondAttribute="bottom" constant="10" id="jBA-46-rZE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ADn-7c-zwM" secondAttribute="trailing" constant="20" id="lL1-9X-tpc"/>
                             <constraint firstItem="Io8-Cf-GYK" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="rmZ-qy-hI8"/>
                             <constraint firstItem="Io8-Cf-GYK" firstAttribute="top" secondItem="gQK-J9-JUh" secondAttribute="bottom" constant="30" id="uAB-HY-MQA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Io8-Cf-GYK" secondAttribute="trailing" constant="10" id="yme-0K-27S"/>
@@ -123,6 +139,7 @@
                     <connections>
                         <outlet property="budgetTextField" destination="5tB-kA-kPa" id="bLx-yh-bc0"/>
                         <outlet property="currencySelectButton" destination="faC-zk-IQp" id="Sz4-MQ-VbC"/>
+                        <outlet property="deleteCurrencyButton" destination="ADn-7c-zwM" id="X0G-rp-8wn"/>
                         <outlet property="lastUpdateDateLabel" destination="E32-Wm-nDt" id="C4T-Uh-axH"/>
                         <outlet property="rateTextField" destination="cHL-ZT-Wzp" id="yhE-za-TpO"/>
                         <outlet property="updateRateButton" destination="WpK-yN-Ddy" id="hIi-Qe-ZQg"/>
@@ -150,7 +167,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rJ0-Uc-ksM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="woN-cp-dyl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="woN-cp-dyl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

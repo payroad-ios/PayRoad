@@ -27,6 +27,7 @@ class CurrencyEditorViewController: UIViewController {
     @IBOutlet weak var lastUpdateDateLabel: UILabel!
     @IBOutlet weak var budgetTextField: UITextField!
     @IBOutlet weak var updateRateButton: UIButton!
+    @IBOutlet weak var deleteCurrencyButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,8 @@ class CurrencyEditorViewController: UIViewController {
         rateTextField.layer.cornerRadius = 5
         rateTextField.layer.borderColor = ColorStore.unselectGray.cgColor
         rateTextField.layer.borderWidth = 0.5
+        
+        deleteCurrencyButton.cornerRound(cornerOptions: [.allCorners], cornerRadius: 5)
     }
     
     func editingChangedRate(_ sender: UITextField) {
@@ -104,6 +107,31 @@ class CurrencyEditorViewController: UIViewController {
         }
         
         currencySelectResponse(code: code)
+    }
+    
+    @IBAction func deleteButtonDidTap(_ sender: Any) {
+        
+        let realm = try! Realm()
+        let result = realm.objects(Transaction.self).filter("currency.id == '\(originCurrency.id)'")
+        
+        let alert = UIAlertController(title: "\(originCurrency.code) 통화 삭제",
+                                    message: "해당 통화를 삭제하면, 현재 이 통화를 사용하고 있는 \(result.count)개의 지출 내역이 함께 삭제됩니다.\n정말 삭제하시겠습니까?",
+                                    preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [unowned self] (alertAction) in
+            result.forEach({ (transaction) in
+                Object.cascadingDelete(realm: realm, object: transaction)
+            })
+            
+            try! realm.write {
+                realm.delete(self.originCurrency)
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -210,6 +238,7 @@ extension CurrencyEditorViewController {
             rateTextField.isEnabled = false
             updateRateButton.isEnabled = false
             lastUpdateDateLabel.text = "마지막 업데이트 : 없음"
+            deleteCurrencyButton.isHidden = true
         case .edit:
             barButtonItem.action = #selector(editButtonDidTap)
             navigationItem.title = "예산 수정"
@@ -225,6 +254,7 @@ extension CurrencyEditorViewController {
                 rateTextField.isEnabled = false
                 updateRateButton.isEnabled = false
                 lastUpdateDateLabel.text = "기준 통화는 환율 업데이트가 되지 않습니다."
+                deleteCurrencyButton.isHidden = true
             } else {
                 rateTextField.text = "1 \(originCurrency.code)당 \(originCurrency.rate)\(standardCurrency.code)"
                 lastUpdateDateLabel.text = "마지막 업데이트 : \(DateFormatter.string(for: originCurrency.lastUpdateDate))"
