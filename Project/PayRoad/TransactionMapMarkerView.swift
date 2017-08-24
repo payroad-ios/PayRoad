@@ -10,7 +10,7 @@ import UIKit
 
 class TransactionMapMarkerView: UIView {
     
-    @IBOutlet weak var textLabel: UILabel!
+    private let textLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,16 +22,22 @@ class TransactionMapMarkerView: UIView {
         createMarker()
     }
 
-
     func createMarker() {
+        self.backgroundColor = UIColor.white
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 5.0
-        print("marker created")
+    
+        self.addSubview(textLabel)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        textLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        textLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightMedium)
     }
-
-    class func instanceFromNib() -> UIView {
-        return UINib(nibName: "TransactionMapMarkerView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
+    
+    func setTextLabel(text: String) {
+        self.textLabel.text = text
+        self.frame.size.width += textLabel.intrinsicContentSize.width
+        self.frame.size.height += textLabel.intrinsicContentSize.height
     }
 }
-
