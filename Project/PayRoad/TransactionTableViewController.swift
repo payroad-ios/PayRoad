@@ -36,7 +36,7 @@ class TransactionTableViewController: UIViewController {
     
     var currentSelectedDate: YMD? {
         didSet {
-            filterTransaction(selected: currentSelectedDate)
+            sortTransactionsSelectedDate()
         }
     }
     
@@ -59,7 +59,7 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        sideBar.setUpView()
+//        sideBar.setUpView()
         
         let window = UIApplication.shared.keyWindow!
         window.addSubview(sideBar)
@@ -108,20 +108,20 @@ class TransactionTableViewController: UIViewController {
         
         transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.sortTransactionsSelectedDate()
             self?.displayTotalSpendingCurrency()
         }
         
-//        NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
         travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
             self?.title = self?.travel.name
             self?.extractDatePeriod()
             self?.collectionView.reloadData()
+            self?.sortTransactionsSelectedDate()
         }
         
         currencyNotificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.sortTransactionsSelectedDate()
             self?.displayTotalSpendingCurrency()
         }
         
@@ -169,8 +169,9 @@ class TransactionTableViewController: UIViewController {
     }
     
     func stopNotificationToken() {
-        transactionsNotificationToken?.stop()
         travelNotificationToken?.stop()
+        transactionsNotificationToken?.stop()
+        currencyNotificationToken?.stop()
     }
     
     func initDataStructures() {
@@ -219,15 +220,19 @@ class TransactionTableViewController: UIViewController {
         }
     }
     
-    func filterTransaction(selected: YMD?) {
+    func sortTransactionsSelectedDate() {
         defer {
             tableView.reloadData()
         }
-        guard let date = selected else {
+        guard let date = currentSelectedDate else {
             dynamicDateList = originDateList
             return
         }
         dynamicDateList = [date]
+        
+        let index = travelPeriodDates.index(of: date)
+        let indexPath = IndexPath(row: index!, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     func extractDatePeriod() {
@@ -264,7 +269,7 @@ class TransactionTableViewController: UIViewController {
         }
         
         initDataStructures()
-        filterTransaction(selected: currentSelectedDate)
+        sortTransactionsSelectedDate()
         displayTotalSpendingCurrency()
     }
     
@@ -309,6 +314,8 @@ class TransactionTableViewController: UIViewController {
         }
         
         spendingProgressView.setProgress(spendingRate, animated: true)
+        spendingProgressView.progressTintColor = spendingProgressView.progress > 0.9 ? ColorStore.destructiveRed : ColorStore.mainSkyBlue
+
         //TODO: 소숫점 자릿수 정하기
         percentageLabel.text = "\(NumberStringUtil.string(number: spendingRate * 100, dropPoint: 0))%"
     }
@@ -378,22 +385,17 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
+        cell.transactionNameLabel.text = transaction.name
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
+        cell.paymentImageView.image = transaction.paymentImage()
+        
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
             cell.thumbnailImageView.image = thumbnailImage
         }
         
-        cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
-        
         if let category = transaction.category,
             let categoryImage = UIImage(named: category.assetName) {
             cell.categoryImageView.image = categoryImage
-        }
-        
-        if transaction.isCash {
-            //cell.thumbnailImageView = ...
-        } else {
-            //cell.thumbnailImageView = ...
         }
         
         return cell
@@ -431,7 +433,7 @@ extension TransactionTableViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.contentOffset.y
         pullToAddLabel.frame = CGRect(x: 0, y: height, width: view.frame.width, height: -height)
-        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "놓아서 새 항목 추가" : "당겨서 새 항목 추가"
+        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "-  놓아서 새 항목 추가" : "↓ 당겨서 새 항목 추가"
         noticeLabel.alpha = 1 - (-scrollView.contentOffset.y / 50)
     }
     

@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,13 +16,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZ4-Gt-JIa" userLabel="BackgroundView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="e2O-Vf-FO9" appends="YES" id="Fqj-C9-hs6"/>
+                    </connections>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z00-Mp-7kM" userLabel="MenuView">
-                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="208.5" height="667"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbH-Oa-JG3">
-                            <rect key="frame" x="20" y="593" width="147.5" height="34"/>
-                            <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <rect key="frame" x="35.5" y="592" width="139" height="35"/>
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.44705882352941173" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
                             <state key="normal" title="메인으로">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -31,35 +38,35 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-VM-kc7">
-                            <rect key="frame" x="0.0" y="137" width="187.5" height="35"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="0.0" y="137" width="208.5" height="36"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                             <state key="normal" title="가계부">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Wr-FCw">
-                            <rect key="frame" x="0.0" y="212" width="187.5" height="35"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="0.0" y="213" width="208.5" height="36"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                             <state key="normal" title="일기">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
-                            <rect key="frame" x="0.0" y="287" width="187.5" height="35"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="0.0" y="289" width="208.5" height="36"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                             <state key="normal" title="지도">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF9-d0-tdK">
-                            <rect key="frame" x="0.0" y="362" width="187.5" height="35"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <rect key="frame" x="0.0" y="365" width="208.5" height="36"/>
+                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
                             <state key="normal" title="여행 수정">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad-SideBar" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
-                            <rect key="frame" x="24.5" y="45" width="138" height="32"/>
+                            <rect key="frame" x="35.5" y="45" width="138" height="32"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,8 +74,8 @@
                     <constraints>
                         <constraint firstItem="yat-g0-AtZ" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="08a-gb-bxl"/>
                         <constraint firstItem="3QA-Rm-sYw" firstAttribute="top" secondItem="UG8-Wr-FCw" secondAttribute="bottom" constant="40" id="1HS-xd-zBw"/>
-                        <constraint firstItem="WbH-Oa-JG3" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" constant="20" id="4fH-uu-9Kb"/>
                         <constraint firstItem="oF9-d0-tdK" firstAttribute="top" secondItem="3QA-Rm-sYw" secondAttribute="bottom" constant="40" id="5ZC-VU-2A5"/>
+                        <constraint firstItem="WbH-Oa-JG3" firstAttribute="width" secondItem="z00-Mp-7kM" secondAttribute="width" multiplier="1:1.5" id="9H7-XS-gkH"/>
                         <constraint firstItem="iqH-VM-kc7" firstAttribute="top" secondItem="yat-g0-AtZ" secondAttribute="bottom" constant="60" id="Ftd-Tf-R2c"/>
                         <constraint firstAttribute="trailing" secondItem="oF9-d0-tdK" secondAttribute="trailing" id="GCI-bW-f3H"/>
                         <constraint firstAttribute="trailing" secondItem="UG8-Wr-FCw" secondAttribute="trailing" id="Jau-B7-9cn"/>
@@ -77,40 +84,34 @@
                         <constraint firstItem="oF9-d0-tdK" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="TCD-5f-6KQ"/>
                         <constraint firstItem="yat-g0-AtZ" firstAttribute="top" secondItem="z00-Mp-7kM" secondAttribute="top" constant="45" id="ffV-Y6-nKb"/>
                         <constraint firstAttribute="trailing" secondItem="3QA-Rm-sYw" secondAttribute="trailing" id="g1w-PA-Db5"/>
-                        <constraint firstAttribute="trailing" secondItem="WbH-Oa-JG3" secondAttribute="trailing" constant="20" id="lH9-KJ-bz0"/>
+                        <constraint firstItem="WbH-Oa-JG3" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="kIS-oQ-dXc"/>
                         <constraint firstItem="UG8-Wr-FCw" firstAttribute="top" secondItem="iqH-VM-kc7" secondAttribute="bottom" constant="40" id="nIJ-V9-4if"/>
                         <constraint firstItem="3QA-Rm-sYw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="ta1-2s-IGt"/>
                         <constraint firstItem="UG8-Wr-FCw" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="yL9-RC-kYe"/>
                         <constraint firstAttribute="bottom" secondItem="WbH-Oa-JG3" secondAttribute="bottom" constant="40" id="yjP-nI-hut"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbI-wv-Z3v" userLabel="BackgroundView">
-                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="667"/>
-                    <gestureRecognizers/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="e2O-Vf-FO9" appends="YES" id="QuM-Xk-ZhR"/>
-                    </connections>
-                </view>
             </subviews>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="iZ4-Gt-JIa" secondAttribute="trailing" id="8Ov-9Q-t4b"/>
                 <constraint firstItem="z00-Mp-7kM" firstAttribute="top" secondItem="Xt7-A5-Eec" secondAttribute="top" id="BkF-8e-h6Q"/>
-                <constraint firstItem="cbI-wv-Z3v" firstAttribute="width" secondItem="z00-Mp-7kM" secondAttribute="width" id="PeU-tY-vc3"/>
+                <constraint firstAttribute="bottom" secondItem="iZ4-Gt-JIa" secondAttribute="bottom" id="NhV-3e-Rfj"/>
+                <constraint firstItem="iZ4-Gt-JIa" firstAttribute="top" secondItem="Xt7-A5-Eec" secondAttribute="top" id="ORI-O3-ifk"/>
                 <constraint firstAttribute="bottom" secondItem="z00-Mp-7kM" secondAttribute="bottom" id="Pre-NV-mIT"/>
                 <constraint firstItem="z00-Mp-7kM" firstAttribute="leading" secondItem="Xt7-A5-Eec" secondAttribute="leading" id="cGc-2D-EOB"/>
-                <constraint firstItem="cbI-wv-Z3v" firstAttribute="top" secondItem="Xt7-A5-Eec" secondAttribute="top" id="eDa-HL-w20"/>
-                <constraint firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="trailing" id="ijg-K0-fIW"/>
-                <constraint firstItem="cbI-wv-Z3v" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="trailing" id="tgY-ZX-eao"/>
-                <constraint firstAttribute="bottom" secondItem="cbI-wv-Z3v" secondAttribute="bottom" id="vdH-CW-PG5"/>
+                <constraint firstAttribute="width" secondItem="z00-Mp-7kM" secondAttribute="width" multiplier="1.8:1" id="dYr-HO-rdx"/>
+                <constraint firstItem="iZ4-Gt-JIa" firstAttribute="leading" secondItem="Xt7-A5-Eec" secondAttribute="leading" id="wv8-ar-l1O"/>
             </constraints>
             <connections>
+                <outlet property="backgroundView" destination="iZ4-Gt-JIa" id="MfF-Fe-3oj"/>
                 <outlet property="goMainButton" destination="WbH-Oa-JG3" id="fqc-eE-s7D"/>
             </connections>
             <point key="canvasLocation" x="-47" y="-85"/>
         </view>
         <tapGestureRecognizer id="e2O-Vf-FO9">
             <connections>
-                <action selector="hideSideBar:" destination="Xt7-A5-Eec" id="F9W-0s-rHw"/>
+                <action selector="hideSideBar:" destination="Xt7-A5-Eec" id="1Ks-j4-eX5"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

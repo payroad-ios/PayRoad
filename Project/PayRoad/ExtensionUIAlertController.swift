@@ -16,7 +16,7 @@ extension UIAlertController {
         target.present(alertController, animated: true, completion: nil)
     }
     
-    static func confirmStyleAlert(target: UIViewController, title: String, message: String?, buttonTitle: String?, handler: @escaping (UIAlertAction) -> Void){
+    static func confirmStyleAlert(target: UIViewController, title: String?, message: String?, buttonTitle: String?, handler: @escaping (UIAlertAction) -> Void){
         let alertController = self.init(title: title, message: message, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         let confirmAction = UIAlertAction(title: buttonTitle ?? "확인", style: .destructive, handler: handler)

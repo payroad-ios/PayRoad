@@ -28,4 +28,26 @@ extension String {
         let endIndex = index(from: r.upperBound)
         return substring(with: startIndex..<endIndex)
     }
+    
+    func thousandsSeparator(integer: Int) -> String {
+        var result: String = ""
+        var index = 0
+        let string = String(integer).characters
+        let stringCount = string.count
+        
+        for i in string.reversed() {
+            index += 1
+            result += String(i)
+            if index % 3 == 0 && index != stringCount {
+                result += ","
+            }
+        }
+        return String(result.characters.reversed())
+    }
+    
+    func thousandsSeparator(double: Double) -> String {
+        let string = String(double).components(separatedBy: ".")
+        let stringSeparate = thousandsSeparator(integer: Int(string.first!)!)
+        return stringSeparate + "." + string.last!
+    }
 }

@@ -56,4 +56,8 @@ extension Transaction: CascadingDeletable {
         
         return objectList
     }
+    
+    func paymentImage() -> UIImage {
+        return isCash ? #imageLiteral(resourceName: "Payment_Cash") : #imageLiteral(resourceName: "Payment_Credit")
+    }
 }
