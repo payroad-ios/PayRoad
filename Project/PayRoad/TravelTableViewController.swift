@@ -78,7 +78,7 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         }
         
-        let totalAmount = travel.transactions.reduce(0) { $0.0 + $0.1.amount }
+        let totalAmount = travel.transactions.reduce(0) { $0.0 + $0.1.amount * $0.1.currency!.rate }
         cell.travelView.spendingAmountLabel.text = "\(code) \(Int(totalAmount).stringThousandsSeparator())"
         return cell
     }
