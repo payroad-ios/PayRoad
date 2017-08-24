@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="C9g-oH-rGO">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo Detail View Controller-->
+        <scene sceneID="gPn-9P-2Wh">
+            <objects>
+                <viewController id="C9g-oH-rGO" customClass="PhotoDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aXE-uz-QNc"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Gt-jV-FOB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SQ9-te-xQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-7o-ZRC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SampleBG_Franch" translatesAutoresizingMaskIntoConstraints="NO" id="MIz-mm-o7P">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MIz-mm-o7P" secondAttribute="trailing" id="C2t-3T-N2C"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="top" id="DM3-Gk-Fwr"/>
+                                    <constraint firstAttribute="bottom" secondItem="MIz-mm-o7P" secondAttribute="bottom" id="XPL-dL-lkw"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="leading" secondItem="CcB-7o-ZRC" secondAttribute="leading" id="cQ7-JW-25t"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerY" secondItem="CcB-7o-ZRC" secondAttribute="centerY" id="nfV-Wf-bL8"/>
+                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerX" secondItem="CcB-7o-ZRC" secondAttribute="centerX" id="uEv-IC-7Pt"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="IOy-fw-lsQ"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="Tce-Cd-Wrq"/>
+                            <constraint firstItem="9Gt-jV-FOB" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="W4L-BO-La1"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="YvO-rz-Nf7"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="bgY-VT-El3"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="cEi-S0-BwM"/>
+                            <constraint firstAttribute="bottom" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="d6W-vx-Gh6"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="wXl-1a-5ps"/>
+                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="wvY-dz-aJj"/>
+                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="xNv-V7-kjW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="baseScrollView" destination="CcB-7o-ZRC" id="HFF-yp-TWM"/>
+                        <outlet property="detailImageView" destination="MIz-mm-o7P" id="bII-nV-Kdk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vDb-cF-MRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="213"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SampleBG_Franch" width="722" height="480"/>
+    </resources>
+</document>

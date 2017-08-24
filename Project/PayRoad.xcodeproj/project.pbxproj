@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */; };
+		A73EA1481F4E90AC00764A74 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */; };
+		A73EA14A1F4E90C900764A74 /* PhotoDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */; };
 		A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BA1F3976C300DFFADF /* AppDelegate.swift */; };
 		A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */; };
 		A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */; };
@@ -92,6 +94,8 @@
 		2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayRoad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.release.xcconfig"; sourceTree = "<group>"; };
 		7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.debug.xcconfig"; sourceTree = "<group>"; };
+		A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoDetailViewController.storyboard; sourceTree = "<group>"; };
 		A74507B71F3976C300DFFADF /* PayRoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayRoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74507BA1F3976C300DFFADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 				E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */,
 				E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */,
 				E531B4CD1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift */,
+				A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */,
+				A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
 				A7B4F6F11F444DD70049D812 /* TravelView.xib in Resources */,
 				A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */,
+				A73EA14A1F4E90C900764A74 /* PhotoDetailViewController.storyboard in Resources */,
 				E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
 				A76E06071F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib in Resources */,
@@ -567,6 +574,7 @@
 				A7FED7D21F47D67200FD76EC /* SelectedImageCollectionViewCell.swift in Sources */,
 				A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */,
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
+				A73EA1481F4E90AC00764A74 /* PhotoDetailViewController.swift in Sources */,
 				A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */,
 				A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */,
 				A76E06051F4DC56800FE009A /* BRCalendarFormatter.swift in Sources */,
