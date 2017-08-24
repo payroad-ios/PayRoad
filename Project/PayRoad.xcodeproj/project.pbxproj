@@ -66,7 +66,6 @@
 		B38736581F49B199000DC81C /* TransactionMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38736571F49B199000DC81C /* TransactionMapViewController.swift */; };
 		B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */; };
 		B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */; };
-		B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */; };
 		B3CB3B891F4D503200429BB2 /* TransactionMapMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */; };
 		B3FE8ACD1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */; };
 		B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */; };
@@ -154,7 +153,6 @@
 		B38736571F49B199000DC81C /* TransactionMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapViewController.swift; sourceTree = "<group>"; };
 		B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TransactionMapViewController.storyboard; sourceTree = "<group>"; };
 		B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapCollectionViewCell.swift; sourceTree = "<group>"; };
-		B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionMapMarkerView.xib; sourceTree = "<group>"; };
 		B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionMapMarkerView.swift; sourceTree = "<group>"; };
 		B3FE8ACC1F3AD50A00A4A6C4 /* CurrencySelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencySelectTableViewController.swift; sourceTree = "<group>"; };
 		B3FE8ACE1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CurrencySelectTableViewController.storyboard; sourceTree = "<group>"; };
@@ -379,7 +377,6 @@
 				B38736591F49B1AB000DC81C /* TransactionMapViewController.storyboard */,
 				B3CB3B791F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift */,
 				B3CB3B881F4D503200429BB2 /* TransactionMapMarkerView.swift */,
-				B3CB3B861F4D4D8C00429BB2 /* TransactionMapMarkerView.xib */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -476,7 +473,6 @@
 				A76E06091F4DC56900FE009A /* BRCalendarView.xib in Resources */,
 				A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */,
 				B3FE8ACF1F3AD58C00A4A6C4 /* CurrencySelectTableViewController.storyboard in Resources */,
-				B3CB3B871F4D4D8C00429BB2 /* TransactionMapMarkerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

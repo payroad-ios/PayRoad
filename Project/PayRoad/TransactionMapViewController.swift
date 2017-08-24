@@ -22,7 +22,7 @@ class TransactionMapViewController: UIViewController {
     var sortedTransactions: Results<Transaction>!
     var markers = [TransactionGMSMarker]()
     var currentSelectedMarkerIndex = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,25 +55,25 @@ class TransactionMapViewController: UIViewController {
         
         let path = GMSMutablePath()
         
-        for transaction in sortedTransactions {
+        for (index, transaction) in sortedTransactions.enumerated() {
             guard let position = transaction.coordinate else { continue }
             
             let marker = TransactionGMSMarker()
             marker.position = position
             marker.transaction = transaction
+            marker.appearAnimation = .pop
             marker.map = mapView
             
             bounds = bounds.includingCoordinate(marker.position)
             markers.append(marker)
             
-            path.add(position)
-            
-            let transactionMarkerView = TransactionMapMarkerView.instanceFromNib() as! TransactionMapMarkerView
-            transactionMarkerView.textLabel.text = "\(transaction.amount) \(transaction.currency!.code)"
-            
+            let transactionMarkerView = TransactionMapMarkerView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
+            transactionMarkerView.setTextLabel(text: "\(transaction.amount.nonZeroString(maxDecimalPlace: 2)) \(transaction.currency!.code)")
+           
             marker.iconView = transactionMarkerView
+            marker.zIndex = Int32(index)
             
-            
+            path.add(position)
         }
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 50.0)
@@ -90,11 +90,11 @@ class TransactionMapViewController: UIViewController {
         for (index, marker) in markers.enumerated() {
             if marker == newMarker && index != currentSelectedMarkerIndex {
                 currentSelectedMarkerIndex = index
-                marker.zIndex = 1
+                marker.zIndex = Int32(markers.count)
                 marker.iconView?.backgroundColor = UIColor.lightGray
                 collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .right, animated: true)
             } else {
-                marker.zIndex = 0
+                marker.zIndex = Int32(index)
                 marker.iconView?.backgroundColor = UIColor.white
             }
         }
@@ -126,7 +126,7 @@ extension TransactionMapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         changeSelectedMarker(new: marker)
         
-        return false
+        return true
     }
 }
 
@@ -145,6 +145,8 @@ extension TransactionMapViewController: UICollectionViewDelegate, UICollectionVi
         
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
             cell.thumbnailImageView.image = thumbnailImage
+        } else {
+            cell.thumbnailImageView.image = nil
         }
         
         return cell
@@ -168,6 +170,4 @@ extension TransactionMapViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.size.width, height: 90.0)
     }
-    
-    
 }
