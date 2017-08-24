@@ -66,6 +66,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         super.loadView()
         nameTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         contentTextView.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        dateEditTextField.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
         dateEditTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         payTypeToggleButton.backgroundColor = ColorStore.mainSkyBlue
         payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 5
