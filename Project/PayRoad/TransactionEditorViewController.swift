@@ -25,6 +25,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     var transaction = Transaction()
     
     var editorMode: EditorMode = .new
+    var titleName: String!
     
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -116,6 +117,70 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         print("\(isCash ? "현금" : "카드") 선택됨")
     }
     
+    
+    func setTitleView(subTitle: String?) -> UIView {
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 1, width: 0, height: 0))
+        titleLabel.text = titleName
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = ColorStore.basicBlack
+        titleLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 17)
+        titleLabel.textAlignment = .center
+        titleLabel.sizeToFit()
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        
+        let attributed = [
+            NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 13),
+            NSForegroundColorAttributeName: ColorStore.darkGray,
+            NSParagraphStyleAttributeName: style
+        ]
+        
+        let subTitleButton = UIButton(frame: CGRect(x: 0, y: 22, width: 0, height: 0))
+        subTitleButton.backgroundColor = UIColor.clear
+        subTitleButton.setTitle(" " + (subTitle ?? "현위치 검색중.."), for: .normal)
+        subTitleButton.setImage(#imageLiteral(resourceName: "Icon_LocationPin"), for: .normal)
+        
+        let attString = NSMutableAttributedString(string: subTitleButton.titleLabel!.text!)
+        attString.addAttributes(attributed, range: NSMakeRange(0, attString.length))
+        
+        subTitleButton.setAttributedTitle(attString, for: .normal)
+        subTitleButton.sizeToFit()
+        subTitleButton.addTarget(self, action: #selector(setLocationInfo), for: .touchUpInside)
+        
+        let imageView = UIImageView(frame: CGRect(x: subTitleButton.frame.maxX + 2, y: subTitleButton.frame.midY - 3, width: 8, height: 4))
+        imageView.image = #imageLiteral(resourceName: "Icon_DropDown")
+        
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: max(titleLabel.frame.width, subTitleButton.frame.width), height: 40))
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(subTitleButton)
+        titleView.addSubview(imageView)
+        
+        let widthGap = subTitleButton.frame.width - titleLabel.frame.width
+        
+        if widthGap < 0 {
+            let gap = abs(widthGap / 2)
+            subTitleButton.frame.origin.x = gap
+            imageView.frame.origin.x = imageView.frame.origin.x + gap
+        } else {
+            titleLabel.frame.origin.x = widthGap / 2
+        }
+        return titleView
+    }
+    
+    func updateTitleView(subTitle: String?) {
+        navigationItem.titleView = setTitleView(subTitle: subTitle)
+    }
+    
+    //TODO: Location Setting Method
+    func setLocationInfo() {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        
+        present(placePicker, animated: true, completion: nil)
+    }
+    
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
@@ -141,14 +206,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         return true
-    }
-    
-    @IBAction func locationButtonDidTap(_ sender: Any) {
-        let config = GMSPlacePickerConfig(viewport: nil)
-        let placePicker = GMSPlacePickerViewController(config: config)
-        placePicker.delegate = self
-        
-        present(placePicker, animated: true, completion: nil)
     }
 }
 
@@ -178,7 +235,8 @@ extension TransactionEditorViewController {
         
         switch self.editorMode {
         case .new:
-            
+            titleName = "새 항목"
+            updateTitleView(subTitle: nil)
             //TODO: PickerView 없애면서 들어내야될 코드
             if let lastCurrency = travel.transactions.last?.currency {
                 currency = lastCurrency
@@ -203,8 +261,8 @@ extension TransactionEditorViewController {
             }
             
         case .edit:
-            self.navigationItem.title = "항목 수정"
-            
+            titleName = "항목 수정"
+            updateTitleView(subTitle: nil)
             nameTextField?.text = transaction.name
             amountTextField?.text = String(transaction.amount)
             currencyTextField?.text = transaction.currency?.code
@@ -214,7 +272,7 @@ extension TransactionEditorViewController {
             category = transaction.category
             
             if let placeName = transaction.placeName {
-                locationButton.setTitle("📍 \(placeName)", for: .normal)
+                updateTitleView(subTitle: placeName)
             }
             
             if let _category = transaction.category {
@@ -397,7 +455,7 @@ extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate 
         viewController.dismiss(animated: true, completion: nil)
         
         currentPlace = place
-        locationButton.setTitle("📍 \(place.name)", for: .normal)
+        updateTitleView(subTitle: place.name)
     }
     
     func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
