@@ -16,6 +16,15 @@ class TransactionDetailViewController: UIViewController {
     let realm = try! Realm()
     
     var transaction: Transaction!
+    lazy var photoDetailViewController: PhotoDetailViewController = {
+        let photoDetailVC = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
+        photoDetailVC.modalPresentationStyle = .overCurrentContext
+        photoDetailVC.modalTransitionStyle = .crossDissolve
+        photoDetailVC.photos = self.transaction.photos.map { $0 }
+        print("reuse")
+        return photoDetailVC
+    }()
+
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categoryImageView: UIImageView!
@@ -139,6 +148,11 @@ extension TransactionDetailViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.photoPageControl.currentPage = indexPath.row
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        photoDetailViewController.selectedIndex = indexPath.row
+        present(photoDetailViewController, animated: true, completion: nil)
     }
 }
 

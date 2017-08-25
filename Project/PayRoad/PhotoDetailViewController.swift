@@ -9,6 +9,8 @@
 import UIKit
 
 class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
+    var photos: [Photo]!
+    var selectedIndex: Int!
     var imageArray = [UIImage]()
     var originFrame = CGRect()
     
@@ -31,9 +33,23 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         detailImageView.addGestureRecognizer(panGuesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showSelectedIndexImage()
+        restoreView(view: detailImageView)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
+    }
+    
+    func setupImageView() {
+        
+    }
+    
+    func showSelectedIndexImage() {
+        detailImageView.image = photos[selectedIndex].fetchPhoto()
     }
     
     func dismissDownPanGesture(_ sender: UIPanGestureRecognizer) {
@@ -74,15 +90,19 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
                 })
             } else {
                 UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
-                    targetView.frame = self.originFrame
                     UIApplication.shared.isStatusBarHidden = true
-
-                    self.baseView.alpha = 1
+                    self.restoreView(view: targetView)
                 }, completion: nil)
             }
         default:
             break
         }
+    }
+    
+    func restoreView(view: UIView) {
+        view.frame = self.originFrame
+        
+        self.baseView.alpha = 1
     }
     
     func didDoubleTapGuesture(_ sender: UITapGestureRecognizer) {
