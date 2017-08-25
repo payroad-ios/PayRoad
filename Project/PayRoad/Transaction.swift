@@ -19,7 +19,6 @@ class Transaction: Object {
     dynamic var dateInRegion: DateInRegion?
     dynamic var category: Category?
     
-    dynamic var placeID: String? = nil // 장소 ID
     dynamic var placeName: String? = nil // 장소명
     let lat = RealmOptional<Double>() // Latitude
     let lng = RealmOptional<Double>() // Longitude

@@ -49,8 +49,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     }()
     
     let locationManager = CLLocationManager()
-    var currentPlace: GMSPlace?
-    var currentLocation: CLLocation?
+    var currentLocationCoordinate: CLLocationCoordinate2D? // 위치 -> 현 위치 또는 사용자가 Google Place Picker로 선택한 위치
+    var currentLocationName: String? // 위치에 대한 지역 이름 (CLGeocoder)
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -61,7 +61,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
     @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
-    @IBOutlet weak var locationButton: UIButton!
     
     override func loadView() {
         super.loadView()
@@ -84,6 +83,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.requestWhenInUseAuthorization()
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
@@ -138,7 +139,7 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         
         let subTitleButton = UIButton(frame: CGRect(x: 0, y: 22, width: 0, height: 0))
         subTitleButton.backgroundColor = UIColor.clear
-        subTitleButton.setTitle(" " + (subTitle ?? "현위치 검색중.."), for: .normal)
+        subTitleButton.setTitle(" " + (subTitle ?? "위치 설정"), for: .normal)
         subTitleButton.setImage(#imageLiteral(resourceName: "Icon_LocationPin"), for: .normal)
         
         let attString = NSMutableAttributedString(string: subTitleButton.titleLabel!.text!)
@@ -174,7 +175,16 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     //TODO: Location Setting Method
     func setLocationInfo() {
-        let config = GMSPlacePickerConfig(viewport: nil)
+        var viewport: GMSCoordinateBounds? = nil
+        
+        if let currentLocationCoordinate = currentLocationCoordinate {
+            let center = currentLocationCoordinate
+            let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.005, longitude: center.longitude + 0.005)
+            let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.005, longitude: center.longitude - 0.005)
+            viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        }
+        
+        let config = GMSPlacePickerConfig(viewport: viewport)
         let placePicker = GMSPlacePickerViewController(config: config)
         placePicker.delegate = self
         
@@ -206,6 +216,17 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         return true
+    }
+    
+    func generateLocaionName(from placemark: CLPlacemark) -> String {
+        var locationComponents = [String]()
+        
+        if let country = placemark.country { locationComponents.append(country) }
+        if let administrativeArea = placemark.administrativeArea { locationComponents.append(administrativeArea) }
+        if let locality = placemark.locality { locationComponents.append(locality) }
+        if let subLocality = placemark.subLocality { locationComponents.append(subLocality) }
+
+        return locationComponents.joined(separator: " ")
     }
 }
 
@@ -250,13 +271,19 @@ extension TransactionEditorViewController {
                 category = _category
             }
             
-            locationManager.requestWhenInUseAuthorization()
             let status = CLLocationManager.authorizationStatus()
             
             if status == CLAuthorizationStatus.authorizedWhenInUse {
-                currentLocation = locationManager.location
-                if let currentLocation = currentLocation {
-                    locationButton.setTitle("📍 현 위치", for: .normal)
+                if let currentLocation = locationManager.location {
+                    currentLocationCoordinate = currentLocation.coordinate
+                    updateTitleView(subTitle: "현 위치")
+                    
+                    CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: { placemarks, error in
+                        if let placemark = placemarks?.first {
+                            self.currentLocationName = self.generateLocaionName(from: placemark)
+                            self.updateTitleView(subTitle: self.currentLocationName)
+                        }
+                    })
                 }
             }
             
@@ -271,8 +298,23 @@ extension TransactionEditorViewController {
             currency = transaction.currency
             category = transaction.category
             
-            if let placeName = transaction.placeName {
-                updateTitleView(subTitle: placeName)
+            if let coordinate = transaction.coordinate {
+                currentLocationCoordinate = coordinate
+                
+                if let placeName = transaction.placeName {
+                    updateTitleView(subTitle: placeName)
+                } else {
+                    self.updateTitleView(subTitle: "알 수 없는 위치")
+                    
+                    // 위치 가져오기 재시도
+                    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                        if let placemark = placemarks?.first {
+                            self.currentLocationName = self.generateLocaionName(from: placemark)
+                            self.updateTitleView(subTitle: self.currentLocationName)
+                        }
+                    })
+                }
             }
             
             if let _category = transaction.category {
@@ -353,15 +395,12 @@ extension TransactionEditorViewController {
     }
     
     func saveLocationTransaction(target: Transaction) {
-        if let currentPlace = currentPlace {
-            if currentPlace.types.contains("synthetic_geocode") {
-                // 장소 이름이 없는 경우 -> Select this location
+        if let currentLocationCoordinate = currentLocationCoordinate {
+            target.coordinate = currentLocationCoordinate
+            
+            if let currentLocationName = currentLocationName {
+                target.placeName = currentLocationName
             }
-            target.placeID = currentPlace.placeID
-            target.placeName = currentPlace.name
-            target.coordinate = currentPlace.coordinate
-        } else if let currentLocation = currentLocation {
-            target.coordinate = currentLocation.coordinate
         }
     }
 
@@ -453,9 +492,24 @@ extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate 
     
     func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
         viewController.dismiss(animated: true, completion: nil)
+    
+        currentLocationCoordinate = place.coordinate
         
-        currentPlace = place
-        updateTitleView(subTitle: place.name)
+        if place.types.contains("synthetic_geocode") {
+            updateTitleView(subTitle: "설정한 위치")
+            
+            let location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                if let placemark = placemarks?.first {
+                    self.currentLocationName = self.generateLocaionName(from: placemark)
+                    self.updateTitleView(subTitle: self.currentLocationName)
+                }
+            })
+        } else {
+            currentLocationName = place.name
+            updateTitleView(subTitle: place.name)
+        }
+
     }
     
     func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
