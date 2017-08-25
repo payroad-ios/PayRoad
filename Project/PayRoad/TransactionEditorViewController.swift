@@ -61,13 +61,18 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
     @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
+    @IBOutlet weak var textViewUnderLineView: UIView!
     
     override func loadView() {
         super.loadView()
+        
         nameTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
-        contentTextView.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
         dateEditTextField.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
         dateEditTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        textViewUnderLineView.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        contentTextView.placeholder = "내용을 입력해주세요"
+        nameTextField.borderStyle = .none
+        
         payTypeToggleButton.backgroundColor = ColorStore.mainSkyBlue
         payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 5
         payTypeToggleButton.setTitleColor(payTypeToggleButton.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
@@ -327,8 +332,8 @@ extension TransactionEditorViewController {
                 photos.append(image)
             }
             multiImagePickerView.visibleImages = photos
-            
         }
+
         let index = travel.currencies.index(of: currency)
         pickerView.selectRow(index!, inComponent: 0, animated: true)
         

@@ -85,6 +85,7 @@
 		E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */; };
 		E5CADCE01F449D280072AB15 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */; };
 		E5EA601B1F3FD4AC0077B39D /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */; };
+		E5F9B1351F4E9C5200C94948 /* ExtensionUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F9B1341F4E9C5200C94948 /* ExtensionUITextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +171,7 @@
 		E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionTableViewCell.xib; sourceTree = "<group>"; };
 		E5CADCDF1F449D280072AB15 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
+		E5F9B1341F4E9C5200C94948 /* ExtensionUITextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 				A77D74491F457F25002BF9C8 /* ExtensionUIAlertController.swift */,
 				E5EA601A1F3FD4AC0077B39D /* ExtensionUIImage.swift */,
 				A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */,
+				E5F9B1341F4E9C5200C94948 /* ExtensionUITextView.swift */,
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */,
 				A7B0AA0F1F461BC2005DE60C /* ExtenstionString.swift */,
@@ -538,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A74507DE1F3988BB00DFFADF /* TransactionTableViewController.swift in Sources */,
+				E5F9B1351F4E9C5200C94948 /* ExtensionUITextView.swift in Sources */,
 				A7B4F6EE1F4439C40049D812 /* CustomLabel.swift in Sources */,
 				A7FCABB71F4E38AF009B0739 /* ExtensionInt.swift in Sources */,
 				A7B0AA141F478BDC005DE60C /* MultiImagePickerViewController.swift in Sources */,
