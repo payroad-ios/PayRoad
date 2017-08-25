@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -118,7 +118,7 @@
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="내용" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hJP-Rj-smH">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hJP-Rj-smH">
                                                 <rect key="frame" x="32" y="169" width="311" height="130"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="fkE-ap-KoK"/>
@@ -126,10 +126,18 @@
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                             </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bj6-8d-GoQ" userLabel="TextView UnderLine View">
+                                                <rect key="frame" x="32" y="299" width="311" height="2"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="2" id="tcI-9W-heG"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="gYh-ce-8Bm" firstAttribute="bottom" secondItem="Ih9-cq-ZjM" secondAttribute="bottom" id="0UN-9x-jZV"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="centerX" secondItem="hJP-Rj-smH" secondAttribute="centerX" id="0YR-tA-tqv"/>
                                             <constraint firstItem="Pok-cr-oR7" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="32" id="2IA-SO-kzV"/>
                                             <constraint firstItem="9Dl-f5-EnQ" firstAttribute="top" secondItem="76X-HA-SdE" secondAttribute="top" constant="8" id="2kw-kW-zCP"/>
                                             <constraint firstAttribute="trailing" secondItem="6Qq-Md-60W" secondAttribute="trailing" id="3ap-1Q-yEt"/>
@@ -137,16 +145,18 @@
                                             <constraint firstItem="hJP-Rj-smH" firstAttribute="top" secondItem="Pok-cr-oR7" secondAttribute="bottom" constant="4" id="9bf-vf-BLe"/>
                                             <constraint firstAttribute="trailing" secondItem="Pok-cr-oR7" secondAttribute="trailing" constant="32" id="DMH-ov-z2k"/>
                                             <constraint firstItem="gYh-ce-8Bm" firstAttribute="leading" secondItem="Ih9-cq-ZjM" secondAttribute="leading" id="DRl-dm-EJC"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="width" secondItem="hJP-Rj-smH" secondAttribute="width" id="KhU-sP-D0R"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="top" secondItem="hJP-Rj-smH" secondAttribute="bottom" id="VXO-7d-RFH"/>
                                             <constraint firstAttribute="trailing" secondItem="Qep-jJ-Exz" secondAttribute="trailing" constant="34" id="Vqx-e4-6GD"/>
                                             <constraint firstItem="Pok-cr-oR7" firstAttribute="top" secondItem="gYh-ce-8Bm" secondAttribute="bottom" constant="10" id="Vtw-fp-lR2"/>
                                             <constraint firstAttribute="trailing" secondItem="Ih9-cq-ZjM" secondAttribute="trailing" id="ZUa-0T-eYY"/>
                                             <constraint firstItem="9Dl-f5-EnQ" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="20" id="eAT-AJ-CPX"/>
                                             <constraint firstAttribute="trailing" secondItem="9Dl-f5-EnQ" secondAttribute="trailing" constant="20" id="eXz-t0-dvn"/>
+                                            <constraint firstItem="6Qq-Md-60W" firstAttribute="top" secondItem="Bj6-8d-GoQ" secondAttribute="bottom" constant="8" id="ilq-kF-5oR"/>
                                             <constraint firstAttribute="trailing" secondItem="hJP-Rj-smH" secondAttribute="trailing" constant="32" id="lEL-Ot-dv1"/>
                                             <constraint firstItem="Ih9-cq-ZjM" firstAttribute="top" secondItem="9Dl-f5-EnQ" secondAttribute="bottom" constant="10" id="lTG-ak-nWQ"/>
                                             <constraint firstItem="gYh-ce-8Bm" firstAttribute="trailing" secondItem="Ih9-cq-ZjM" secondAttribute="trailing" id="mmw-3r-T54"/>
                                             <constraint firstItem="gYh-ce-8Bm" firstAttribute="top" secondItem="Ih9-cq-ZjM" secondAttribute="top" id="pu5-2u-am1"/>
-                                            <constraint firstItem="6Qq-Md-60W" firstAttribute="top" secondItem="hJP-Rj-smH" secondAttribute="bottom" constant="10" id="rAQ-JV-fcm"/>
                                             <constraint firstItem="6Qq-Md-60W" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" id="rir-eJ-Ojj"/>
                                             <constraint firstItem="hJP-Rj-smH" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="32" id="ylu-aA-Gww"/>
                                             <constraint firstItem="Qep-jJ-Exz" firstAttribute="top" secondItem="6Qq-Md-60W" secondAttribute="bottom" constant="10" id="ym8-EX-bWn"/>
@@ -191,6 +201,7 @@
                         <outlet property="multiImagePickerView" destination="6Qq-Md-60W" id="9wF-6f-FEh"/>
                         <outlet property="nameTextField" destination="Pok-cr-oR7" id="dlI-3J-bym"/>
                         <outlet property="payTypeToggleButton" destination="qLF-6p-ZJJ" id="i0H-B2-CfH"/>
+                        <outlet property="textViewUnderLineView" destination="Bj6-8d-GoQ" id="Pbd-aw-eE7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8b-0h-UTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,7 +218,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0bd-wK-JTh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="B4n-EG-RkE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B4n-EG-RkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
