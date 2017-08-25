@@ -52,32 +52,32 @@
                                                 <color key="pageIndicatorTintColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="currentPageIndicatorTintColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </pageControl>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
-                                                <rect key="frame" x="28" y="305" width="319" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
+                                                <rect key="frame" x="28" y="305" width="319" height="40"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Food" translatesAutoresizingMaskIntoConstraints="NO" id="1Ou-Ra-fbo">
-                                                        <rect key="frame" x="0.0" y="10" width="20" height="20"/>
+                                                        <rect key="frame" x="0.0" y="7.5" width="25" height="25"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="ejJ-eq-50z"/>
-                                                            <constraint firstAttribute="width" constant="20" id="hHa-J6-xmf"/>
+                                                            <constraint firstAttribute="height" constant="25" id="ejJ-eq-50z"/>
+                                                            <constraint firstAttribute="width" constant="25" id="hHa-J6-xmf"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Shopping" translatesAutoresizingMaskIntoConstraints="NO" id="oss-iT-5e6">
-                                                        <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Payment_Credit" translatesAutoresizingMaskIntoConstraints="NO" id="oss-iT-5e6">
+                                                        <rect key="frame" x="33" y="10" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="5Sc-NI-qsO"/>
                                                             <constraint firstAttribute="height" constant="20" id="gaE-7B-FOg"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="금액" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J4-Sa-uix">
-                                                        <rect key="frame" x="40" y="8" width="279" height="22"/>
+                                                        <rect key="frame" x="61" y="9" width="258" height="22"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
                                                         <color key="textColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="VIA-Pa-F2c"/>
+                                                    <constraint firstAttribute="height" constant="40" id="VIA-Pa-F2c"/>
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-ca-xWk" customClass="GMSMapView">
@@ -85,7 +85,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="foX-Jp-Cg0">
-                                                <rect key="frame" x="28" y="345" width="319" height="135"/>
+                                                <rect key="frame" x="28" y="355" width="319" height="125"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -162,5 +162,6 @@
         <image name="Category_Shopping" width="32" height="32"/>
         <image name="Icon_ImageDefault" width="64" height="64"/>
         <image name="Icon_Setting" width="20" height="20"/>
+        <image name="Payment_Credit" width="23" height="15"/>
     </resources>
 </document>

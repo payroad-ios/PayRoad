@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum NumberStringOption {
+    case `default`
+    case seperator
+}
+
 extension String {
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
@@ -27,6 +32,20 @@ extension String {
         let startIndex = index(from: r.lowerBound)
         let endIndex = index(from: r.upperBound)
         return substring(with: startIndex..<endIndex)
+    }
+    
+    func thousandsSeparate() -> String {
+        if self.contains("."),
+            let double = Double(self) {
+            return self.thousandsSeparator(double: double)
+        } else {
+            if let int = Int(self) {
+                return self.thousandsSeparator(integer: int)
+            }
+        }
+        
+        print("string is not number")
+        return self
     }
     
     func thousandsSeparator(integer: Int) -> String {
