@@ -18,13 +18,12 @@ class TransactionDetailViewController: UIViewController {
     var transaction: Transaction!
     lazy var photoDetailViewController: PhotoDetailViewController = {
         let photoDetailVC = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
+        photoDetailVC.delegate = self
         photoDetailVC.modalPresentationStyle = .overCurrentContext
         photoDetailVC.modalTransitionStyle = .crossDissolve
         photoDetailVC.photos = self.transaction.photos.map { $0 }
-        print("reuse")
         return photoDetailVC
     }()
-
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categoryImageView: UIImageView!
@@ -34,6 +33,7 @@ class TransactionDetailViewController: UIViewController {
     @IBOutlet weak var payContentStackView: UIStackView!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var photoPageControl: UIPageControl!
+    @IBOutlet weak var emptyImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,8 @@ class TransactionDetailViewController: UIViewController {
         
         mapView.delegate = self
         createMapView()
+        
+        emptyImageView.isHidden = !transaction.photos.isEmpty
     }
     
     func createMapView() {
@@ -115,7 +117,7 @@ class TransactionDetailViewController: UIViewController {
             try! self.realm.write {
                 self.realm.delete(self.transaction)
             }
-            
+
             self.navigationController?.popViewController(animated: true)
         }
         
@@ -125,6 +127,13 @@ class TransactionDetailViewController: UIViewController {
         moreOptionAlertController.addAction(transactionDelete)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
+    }
+}
+
+extension TransactionDetailViewController: PhotoDatailViewDelegate {
+    func changedCurrentPhoto(_ page: Int) {
+        let indexPath = IndexPath(row: page, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
 }
 
