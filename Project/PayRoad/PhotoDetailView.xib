@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2LJ-Mc-lpV" customClass="PhotoDetailView" customModule="PayRoad" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y9-Hw-Uxg">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nJh-wq-fxJ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="nJh-wq-fxJ" firstAttribute="leading" secondItem="1Y9-Hw-Uxg" secondAttribute="leading" id="1ZY-hv-Ym1"/>
+                        <constraint firstItem="nJh-wq-fxJ" firstAttribute="top" secondItem="1Y9-Hw-Uxg" secondAttribute="top" id="8o1-cG-yI4"/>
+                        <constraint firstItem="nJh-wq-fxJ" firstAttribute="centerY" secondItem="1Y9-Hw-Uxg" secondAttribute="centerY" id="9uV-YK-GR9"/>
+                        <constraint firstAttribute="trailing" secondItem="nJh-wq-fxJ" secondAttribute="trailing" id="NcZ-ti-5oO"/>
+                        <constraint firstAttribute="bottom" secondItem="nJh-wq-fxJ" secondAttribute="bottom" id="cHu-Sk-YYw"/>
+                        <constraint firstItem="nJh-wq-fxJ" firstAttribute="centerX" secondItem="1Y9-Hw-Uxg" secondAttribute="centerX" id="ecs-Kw-L8g"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="centerY" secondItem="2LJ-Mc-lpV" secondAttribute="centerY" id="1iS-vP-qAU"/>
+                <constraint firstAttribute="bottom" secondItem="1Y9-Hw-Uxg" secondAttribute="bottom" id="7oj-FG-GRp"/>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="centerX" secondItem="2LJ-Mc-lpV" secondAttribute="centerX" id="HYs-de-d7K"/>
+                <constraint firstAttribute="trailing" secondItem="1Y9-Hw-Uxg" secondAttribute="trailing" id="QAT-Ai-TYG"/>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="leading" secondItem="2LJ-Mc-lpV" secondAttribute="leading" id="atf-V0-cHE"/>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="top" secondItem="2LJ-Mc-lpV" secondAttribute="top" id="gmv-8O-K74"/>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="centerY" secondItem="2LJ-Mc-lpV" secondAttribute="centerY" id="lmY-RM-jID"/>
+                <constraint firstItem="1Y9-Hw-Uxg" firstAttribute="centerX" secondItem="2LJ-Mc-lpV" secondAttribute="centerX" id="pDt-cn-r6a"/>
+            </constraints>
+            <connections>
+                <outlet property="detailImageView" destination="nJh-wq-fxJ" id="b0N-e5-bAb"/>
+                <outlet property="zoomScrollView" destination="1Y9-Hw-Uxg" id="yKR-rE-Lz9"/>
+            </connections>
+        </view>
+    </objects>
+</document>
