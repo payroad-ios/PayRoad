@@ -168,15 +168,26 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
         
         exchangeRateFromAPI(standard: standard, compare: code) { [unowned self] rate in
             OperationQueue.main.addOperation {
+    
                 self.rateTextField.isEnabled = true
                 self.updateRateButton.isEnabled = true
                 self.rateTextField.textColor = self.rateTextField.textColor?.withAlphaComponent(0.6)
-                self.rateTextField.text = "1 \(code)당, \(rate) \(standard)"
-                self.lastUpdateDateLabel.text = "마지막 업데이트 : \(DateFormatter.string(for: Date()))"
                 
                 self.editedCurrency.code = code
-                self.editedCurrency.rate = Double(rate) ?? 0
-                self.editedCurrency.lastUpdateDate = Date()
+                
+                if let rateString = rate, let rate = Double(rateString) {
+                    self.editedCurrency.rate = rate
+                    
+                    let updatedAt = Date()
+                    self.lastUpdateDateLabel.text = "마지막 업데이트 : \(DateFormatter.string(for: updatedAt))"
+                    self.editedCurrency.lastUpdateDate = updatedAt
+                } else {
+                    self.editedCurrency.rate = 0.0
+                    
+                    UIAlertController.oneButtonAlert(target: self, title: "환율 가져오기 실패", message: "네트워크 오류로 환율 정보를 가져오지 못했습니다. 직접 환율을 입력해주세요.")
+                }
+                
+                self.rateTextField.text = "1 \(code)당, \(self.editedCurrency.rate) \(standard)"
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
                 self.isUpdating = false
             }
@@ -195,20 +206,26 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
         }
     }
     
-    func exchangeRateFromAPI(standard: String, compare: String, completion: @escaping (String) -> Void) {
+    func exchangeRateFromAPI(standard: String, compare: String, completion: @escaping (String?) -> Void) {
+        
         let url = URL(string: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22\(compare)\(standard)%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")!
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let request = URLRequest(url: url, timeoutInterval: 10.0)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             let jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
-            guard let jsonObject = jsonData as? [String: Any],
+            
+            var exchangeRate: String? = nil
+            
+            if let jsonObject = jsonData as? [String: Any],
                 let query = jsonObject["query"] as? [String: Any],
                 let results = query["results"] as? [String: Any],
                 let result = results["rate"] as? [String: String],
-                let rate = result["Rate"]
-            else {
-                return
+                let rate = result["Rate"] {
+                exchangeRate = rate
             }
-            completion(rate)
+            
+            completion(exchangeRate)
         }
         task.resume()
         navigationItem.rightBarButtonItem?.isEnabled = false
