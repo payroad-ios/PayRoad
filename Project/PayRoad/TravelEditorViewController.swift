@@ -32,7 +32,6 @@ class TravelEditorViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var startDateCalendarTextField: UITextField!
     @IBOutlet weak var endDateCalendarTextField: UITextField!
-    @IBOutlet weak var setupCurrencyBudgetButton: UIButton!
     @IBOutlet weak var travelPreview: TravelView!
     @IBOutlet weak var deleteTravelButton: UIButton!
     @IBOutlet weak var cameraIconImageView: UIImageView!
@@ -60,6 +59,8 @@ class TravelEditorViewController: UIViewController {
         titleTextField.addTarget(self, action: #selector(nameTextApply(_:)), for: .editingChanged)
         startDateCalendarTextField.addTarget(self, action: #selector(startDateTextApply(_:)), for: .editingDidEnd)
         endDateCalendarTextField.addTarget(self, action: #selector(endDateTextApply(_:)), for: .editingDidEnd)
+        
+        titleTextField.delegate = self
     }
     
     func nameTextApply(_ sender: UITextField) {
@@ -129,6 +130,10 @@ class TravelEditorViewController: UIViewController {
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         view.endEditing(true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func backgroundDidTap(_ sender: Any) {
+        view.endEditing(true)
     }
     
     func checkIsExistInputField() -> Bool {
@@ -250,6 +255,15 @@ extension TravelEditorViewController {
     }
 }
 
+extension TravelEditorViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === titleTextField {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+}
 
 extension TravelEditorViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

@@ -15,7 +15,7 @@ protocol TransactionEditorDelegate {
     func edited(transaction: Transaction)
 }
 
-class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
+class TransactionEditorViewController: UIViewController {
     let realm = try! Realm()
     
     var delegate: TransactionEditorDelegate?
@@ -98,6 +98,10 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         
         multiImagePickerView.delegate = self
         
+        let bgTapGestureReconizer: UITapGestureRecognizer = .init(target: self, action: #selector(backgroundDidTap(_:)))
+        bgTapGestureReconizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(bgTapGestureReconizer)
+        
         let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
         
@@ -105,6 +109,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
 
         setupCurrencyPicker()
         adjustViewMode()
+        
+        nameTextField.delegate = self
     }
     
     func setupCurrencyPicker() {
@@ -205,6 +211,10 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func backgroundDidTap(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
     func checkIsExistInputField() -> Bool {
         guard !(amountTextField.text!.isEmpty) else {
             UIAlertController.oneButtonAlert(target: self, title: "에러", message: "사용 금액을 입력해주세요.")
@@ -232,6 +242,16 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         if let subLocality = placemark.subLocality { locationComponents.append(subLocality) }
 
         return locationComponents.joined(separator: " ")
+    }
+}
+
+extension TransactionEditorViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === nameTextField {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
 }
 

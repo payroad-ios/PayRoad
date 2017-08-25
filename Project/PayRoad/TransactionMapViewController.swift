@@ -68,7 +68,7 @@ class TransactionMapViewController: UIViewController {
             markers.append(marker)
             
             let transactionMarkerView = TransactionMapMarkerView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
-            transactionMarkerView.setTextLabel(text: "\(transaction.amount.nonZeroString(maxDecimalPlace: 2)) \(transaction.currency!.code)")
+            transactionMarkerView.setTextLabel(text: "\(transaction.amount.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(transaction.currency!.code)")
            
             marker.iconView = transactionMarkerView
             marker.zIndex = Int32(index)
