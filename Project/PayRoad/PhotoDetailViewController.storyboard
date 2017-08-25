@@ -12,6 +12,7 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="gPn-9P-2Wh">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vDb-cF-MRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhotoDetailView" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C9g-oH-rGO" customClass="PhotoDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aXE-uz-QNc"/>
@@ -21,43 +22,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaB-5E-zwN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45n-vR-Uhn">
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcB-7o-ZRC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pd-Vp-rCI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SampleBG_Franch" translatesAutoresizingMaskIntoConstraints="NO" id="MIz-mm-o7P">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerX" secondItem="CcB-7o-ZRC" secondAttribute="centerX" id="07L-NX-sXP"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="leading" secondItem="CcB-7o-ZRC" secondAttribute="leading" id="7qa-Dm-hhe"/>
-                                    <constraint firstAttribute="bottom" secondItem="MIz-mm-o7P" secondAttribute="bottom" id="GBK-3F-Mab"/>
-                                    <constraint firstAttribute="trailing" secondItem="MIz-mm-o7P" secondAttribute="trailing" id="Xtf-pa-8TC"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="top" secondItem="CcB-7o-ZRC" secondAttribute="top" id="oeT-9T-4Yq"/>
-                                    <constraint firstItem="MIz-mm-o7P" firstAttribute="centerY" secondItem="CcB-7o-ZRC" secondAttribute="centerY" id="sqI-Xu-eFa"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="CcB-7o-ZRC" secondAttribute="bottom" id="5Wx-n4-TaX"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="BPc-SU-S6n"/>
-                            <constraint firstItem="VaB-5E-zwN" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="HnS-kk-tbg"/>
-                            <constraint firstItem="VaB-5E-zwN" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="JEw-q9-nQL"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="SzT-zO-48V"/>
-                            <constraint firstAttribute="trailing" secondItem="CcB-7o-ZRC" secondAttribute="trailing" id="ad3-zK-Gzu"/>
-                            <constraint firstAttribute="bottom" secondItem="VaB-5E-zwN" secondAttribute="bottom" id="d3g-vP-Shx"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="e2b-QS-sR7"/>
-                            <constraint firstAttribute="trailing" secondItem="VaB-5E-zwN" secondAttribute="trailing" id="fae-wu-bZf"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="leading" secondItem="SQ9-te-xQ5" secondAttribute="leading" id="jtk-Md-sSz"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="sZL-OC-L59"/>
-                            <constraint firstItem="CcB-7o-ZRC" firstAttribute="top" secondItem="SQ9-te-xQ5" secondAttribute="top" id="tJW-tP-Ytm"/>
+                            <constraint firstItem="45n-vR-Uhn" firstAttribute="width" secondItem="SQ9-te-xQ5" secondAttribute="width" id="NIX-QS-Qc0"/>
+                            <constraint firstItem="2pd-Vp-rCI" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="RcX-jC-Zpk"/>
+                            <constraint firstItem="2pd-Vp-rCI" firstAttribute="height" secondItem="SQ9-te-xQ5" secondAttribute="height" id="hDQ-JG-2yE"/>
+                            <constraint firstItem="2pd-Vp-rCI" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="hg8-Cf-EyG"/>
+                            <constraint firstItem="45n-vR-Uhn" firstAttribute="centerX" secondItem="SQ9-te-xQ5" secondAttribute="centerX" id="mPr-5Z-vHD"/>
+                            <constraint firstItem="2pd-Vp-rCI" firstAttribute="width" secondItem="SQ9-te-xQ5" secondAttribute="width" id="uup-AN-1XG"/>
+                            <constraint firstItem="45n-vR-Uhn" firstAttribute="centerY" secondItem="SQ9-te-xQ5" secondAttribute="centerY" id="w8W-0O-hJV"/>
+                            <constraint firstItem="45n-vR-Uhn" firstAttribute="height" secondItem="SQ9-te-xQ5" secondAttribute="height" id="yQN-fH-f9P"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -65,33 +48,30 @@
                         <barButtonItem key="rightBarButtonItem" image="Icon_Cancel" id="Erj-t8-aPY"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="baseScrollView" destination="CcB-7o-ZRC" id="HFF-yp-TWM"/>
-                        <outlet property="baseView" destination="VaB-5E-zwN" id="Bhb-HV-5vB"/>
-                        <outlet property="detailImageView" destination="MIz-mm-o7P" id="bII-nV-Kdk"/>
+                        <outlet property="baseBlackView" destination="45n-vR-Uhn" id="h8I-HP-Pxf"/>
+                        <outlet property="baseScrollView" destination="2pd-Vp-rCI" id="6zI-WD-etm"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vDb-cF-MRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1236" y="212.74362818590706"/>
+            <point key="canvasLocation" x="1132" y="207"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="apP-Zf-2FM">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O6f-qd-MLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f3W-JX-eCx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UFh-7G-hVj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UFh-7G-hVj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O6f-qd-MLo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="296.80000000000001" y="212.74362818590706"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon_Cancel" width="17" height="16"/>
-        <image name="SampleBG_Franch" width="722" height="480"/>
     </resources>
 </document>

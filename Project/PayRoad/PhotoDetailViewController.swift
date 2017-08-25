@@ -8,35 +8,42 @@
 
 import UIKit
 
+protocol PhotoDatailViewDelegate {
+    func changedCurrentPhoto(_ page: Int)
+}
+
 class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
+    var delegate: PhotoDatailViewDelegate?
+    
     var photos: [Photo]!
     var selectedIndex: Int!
-    var imageArray = [UIImage]()
-    var originFrame = CGRect()
+    var photoDetailViews = [PhotoDetailView]()
+    
+    var previousPage = 0
+    var currentPage = 0 {
+        didSet {
+            photoDetailViews[previousPage].resetZoomScale()
+            photoDetailViews[currentPage].resetZoomScale()
+            delegate?.changedCurrentPhoto(currentPage)
+        }
+    }
     
     @IBOutlet weak var baseScrollView: UIScrollView!
-    @IBOutlet weak var detailImageView: UIImageView!
-    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var baseBlackView: UIView!
     
     override func viewDidLoad() {
-        
-        let doubleTapGuesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapGuesture(_:)))
-        doubleTapGuesture.numberOfTapsRequired = 2
-        
-        let panGuesture = UIPanGestureRecognizer(target: self, action: #selector(dismissDownPanGesture(_:)))
-        
         baseScrollView.delegate = self
-        baseScrollView.maximumZoomScale = 5
-        baseScrollView.minimumZoomScale = 1
-        
-        view.addGestureRecognizer(doubleTapGuesture)
-        detailImageView.addGestureRecognizer(panGuesture)
+        setupImageView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showSelectedIndexImage()
-        restoreView(view: detailImageView)
+        
+        for item in photoDetailViews {
+            item.restoreView(view: item.detailImageView)
+            item.resetZoomScale()
+        }
+        showSelectedIndexImage(index: selectedIndex)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,84 +52,43 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setupImageView() {
-        
-    }
-    
-    func showSelectedIndexImage() {
-        detailImageView.image = photos[selectedIndex].fetchPhoto()
-    }
-    
-    func dismissDownPanGesture(_ sender: UIPanGestureRecognizer) {
-        let targetView = sender.view!
-        let translation = sender.translation(in: view)
-        
-        switch sender.state {
-        case .began:
-            originFrame = sender.view!.frame
+        for (index, item) in photos.enumerated() {
+            let photoDetailView = UINib(nibName: "PhotoDetailView", bundle: nil).instantiate(withOwner: self, options: nil).first as! PhotoDetailView
             
-        case .changed:
-            targetView.center = CGPoint(
-                x: targetView.center.x + translation.x,
-                y: targetView.center.y + translation.y
-            )
-            sender.setTranslation(CGPoint.zero, in: targetView)
+            photoDetailView.delegate = self
+            photoDetailView.detailImageView.image = item.fetchPhoto()
             
-            let diff = targetView.center.y - view.frame.height
-            let value = abs(diff / targetView.center.y)
-            if value <= 1 {
-                UIApplication.shared.isStatusBarHidden = false
-                baseView.alpha = value
-            }
+            let dynamicX = self.view.frame.width * CGFloat(index)
+            photoDetailView.frame = CGRect(x: dynamicX, y: 0, width: photoDetailView.frame.width, height: photoDetailView.frame.height)
+            baseScrollView.contentSize.width = baseScrollView.frame.width * CGFloat(index + 1)
             
-        case .ended:
-            let velocity = sender.velocity(in: targetView)
-            
-            if velocity.y >= 200 {
-                let targetSize = targetView.frame.size
-                UIView.animate(withDuration: 0.2, animations: {
-                    targetView.frame.origin.y = targetSize.height
-                    targetView.frame.size = CGSize(
-                        width: targetSize.width * 0.5,
-                        height: targetSize.height * 0.5
-                    )
-                }, completion: { (bool) in
-                    self.dismiss(animated: true, completion: nil)
-                })
-            } else {
-                UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseIn], animations: {
-                    UIApplication.shared.isStatusBarHidden = true
-                    self.restoreView(view: targetView)
-                }, completion: nil)
-            }
-        default:
-            break
+            baseScrollView.addSubview(photoDetailView)
+            photoDetailViews.append(photoDetailView)
         }
     }
     
-    func restoreView(view: UIView) {
-        view.frame = self.originFrame
-        
-        self.baseView.alpha = 1
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        let page = Int(round(scrollView.contentOffset.x / view.frame.width))
+        previousPage = page
     }
     
-    func didDoubleTapGuesture(_ sender: UITapGestureRecognizer) {
-        if baseScrollView.zoomScale == 1 {
-            baseScrollView.setZoomScale(2.5, animated: true)
-        } else {
-            baseScrollView.setZoomScale(1, animated: true)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(round(scrollView.contentOffset.x / view.frame.width))
+        if currentPage != page {
+            currentPage = page
         }
+    }
+    
+    func showSelectedIndexImage(index: Int) {
+        let newOffset = view.frame.width * CGFloat(index)
+        baseScrollView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: true)
     }
     
     func panDownGuesture(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.detailImageView
-    }
-    
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 }
