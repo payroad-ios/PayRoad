@@ -159,12 +159,12 @@ extension TravelEditorViewController {
             case .new:
                 deleteTravelButton.isHidden = true
                 travelPreview.backgroundImage.image = defaultBackgroundBGArray[Int(arc4random_uniform(UInt32(defaultBackgroundBGArray.count)))]
+                travelPreview.spendingAmountLabel.text = ""
                 isModifyPhoto = true
                 endDateCalendarTextField.isEnabled = false
             
             case .edit:
                 self.navigationItem.title = self.travel.name
-                
                 deleteTravelButton.isHidden = false
                 isModifyPhoto = false
                 titleTextField?.text = travel.name
@@ -173,6 +173,7 @@ extension TravelEditorViewController {
                 
                 travelPreview.travelNameLabel.text = travel.name
                 travelPreview.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
+                travelPreview.spendingAmountLabel.text = travel.stringTotalAmount()
                 
                 if let filePath = travel.photo?.filePath {
                     travelPreview.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
