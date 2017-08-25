@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		37A67149B8040920DACDD902 /* Pods_PayRoad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */; };
+		A73EA1481F4E90AC00764A74 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */; };
+		A73EA14A1F4E90C900764A74 /* PhotoDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */; };
 		A74507BB1F3976C300DFFADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BA1F3976C300DFFADF /* AppDelegate.swift */; };
 		A74507BD1F3976C300DFFADF /* TravelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */; };
 		A74507C01F3976C300DFFADF /* TravelTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507BE1F3976C300DFFADF /* TravelTableViewController.storyboard */; };
@@ -27,6 +29,8 @@
 		A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A74507F41F39B2C700DFFADF /* CurrencyEditorViewController.storyboard */; };
 		A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */; };
 		A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */; };
+		A74E90741F5010CA00EED07B /* PhotoDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74E90731F5010CA00EED07B /* PhotoDetailView.xib */; };
+		A74E90761F5010DD00EED07B /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E90751F5010DD00EED07B /* PhotoDetailView.swift */; };
 		A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763AD111F4830A100D43E06 /* EnumGroup.swift */; };
 		A76E06031F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E05FC1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift */; };
 		A76E06041F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */; };
@@ -92,6 +96,8 @@
 		2E1B603C0E5E73CA5282ADBC /* Pods_PayRoad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayRoad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53275B437C85A3D9CB30A8FA /* Pods-PayRoad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.release.xcconfig"; sourceTree = "<group>"; };
 		7D962E818C81615168C21B29 /* Pods-PayRoad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayRoad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PayRoad/Pods-PayRoad.debug.xcconfig"; sourceTree = "<group>"; };
+		A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoDetailViewController.storyboard; sourceTree = "<group>"; };
 		A74507B71F3976C300DFFADF /* PayRoad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayRoad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74507BA1F3976C300DFFADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A74507BC1F3976C300DFFADF /* TravelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTableViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +119,8 @@
 		A74507F51F39B2C700DFFADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CurrencyEditorViewController.storyboard; sourceTree = "<group>"; };
 		A74507FA1F3A4EBB00DFFADF /* ExtensionUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUITextField.swift; sourceTree = "<group>"; };
 		A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIStoryboard.swift; sourceTree = "<group>"; };
+		A74E90731F5010CA00EED07B /* PhotoDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoDetailView.xib; sourceTree = "<group>"; };
+		A74E90751F5010DD00EED07B /* PhotoDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
 		A763AD111F4830A100D43E06 /* EnumGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumGroup.swift; sourceTree = "<group>"; };
 		A76E05FC1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		A76E05FD1F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BRCalendarDayCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -281,6 +289,10 @@
 				E5A6720A1F4D3E1800B8C9A9 /* TransactionDetailViewController.swift */,
 				E5A6720C1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard */,
 				E531B4CD1F4D556200CC7F51 /* TransactionDetailCollectionViewCell.swift */,
+				A73EA1471F4E90AC00764A74 /* PhotoDetailViewController.swift */,
+				A73EA1491F4E90C900764A74 /* PhotoDetailViewController.storyboard */,
+				A74E90751F5010DD00EED07B /* PhotoDetailView.swift */,
+				A74E90731F5010CA00EED07B /* PhotoDetailView.xib */,
 			);
 			name = Transaction;
 			sourceTree = "<group>";
@@ -452,6 +464,7 @@
 				A74507C51F3976C300DFFADF /* LaunchScreen.storyboard in Resources */,
 				A7B4F6F11F444DD70049D812 /* TravelView.xib in Resources */,
 				A74507F11F39B29000DFFADF /* TravelEditorViewController.storyboard in Resources */,
+				A73EA14A1F4E90C900764A74 /* PhotoDetailViewController.storyboard in Resources */,
 				E5C9B8EA1F45533B005B1353 /* TransactionTableViewCell.xib in Resources */,
 				A74507C21F3976C300DFFADF /* Assets.xcassets in Resources */,
 				A76E06071F4DC56800FE009A /* BRCalendarMonthCollectionViewCell.xib in Resources */,
@@ -462,6 +475,7 @@
 				E5A6720D1F4D3E2100B8C9A9 /* TransactionDetailViewController.storyboard in Resources */,
 				A76E06041F4DC56800FE009A /* BRCalendarDayCollectionViewCell.xib in Resources */,
 				A74507F31F39B2AA00DFFADF /* TransactionEditorViewController.storyboard in Resources */,
+				A74E90741F5010CA00EED07B /* PhotoDetailView.xib in Resources */,
 				A7B4F6E61F437A320049D812 /* CategoryCollectionViewCell.xib in Resources */,
 				A74507F61F39B2C700DFFADF /* CurrencyEditorViewController.storyboard in Resources */,
 				B387365A1F49B1AB000DC81C /* TransactionMapViewController.storyboard in Resources */,
@@ -567,6 +581,7 @@
 				A7FED7D21F47D67200FD76EC /* SelectedImageCollectionViewCell.swift in Sources */,
 				A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */,
 				A74507E21F398E2200DFFADF /* CurrencyEditorViewController.swift in Sources */,
+				A73EA1481F4E90AC00764A74 /* PhotoDetailViewController.swift in Sources */,
 				A7B4F6E01F436E900049D812 /* ExtensionUIView.swift in Sources */,
 				A7B4F6E21F4379920049D812 /* ExtensionDataFormatter.swift in Sources */,
 				A76E06051F4DC56800FE009A /* BRCalendarFormatter.swift in Sources */,
@@ -576,6 +591,7 @@
 				A763AD121F4830A100D43E06 /* EnumGroup.swift in Sources */,
 				B3CB3B7A1F4BD49F00429BB2 /* TransactionMapCollectionViewCell.swift in Sources */,
 				A77D744A1F457F25002BF9C8 /* ExtensionUIAlertController.swift in Sources */,
+				A74E90761F5010DD00EED07B /* PhotoDetailView.swift in Sources */,
 				A74507FB1F3A4EBB00DFFADF /* ExtensionUITextField.swift in Sources */,
 				A7B0AA101F461BC2005DE60C /* ExtenstionString.swift in Sources */,
 				A74507FD1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift in Sources */,

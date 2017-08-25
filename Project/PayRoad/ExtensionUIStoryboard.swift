@@ -25,6 +25,9 @@ extension UIStoryboard {
     static let CurrencyTableView = UIStoryboard(name: "CurrencyTableViewController", bundle: nil)
     static let CurrencyEditorView = UIStoryboard(name: "CurrencyEditorViewController", bundle: nil)
     
+    //Mark: Etc
+    static let PhotoDetailView = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
+    
     static func loadViewController(from storyboard: UIStoryboard, ID: String) -> UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: ID)
         return viewController
