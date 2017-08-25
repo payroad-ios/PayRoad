@@ -61,11 +61,14 @@ class CurrencyEditorViewController: UIViewController {
     }
     
     func editingChangedBudget(_ sender: UITextField) {
-        guard let budgetText = sender.text,
-            let budget = Double(budgetText)
-        else {
+        guard let budgetText = sender.text else { return }
+        
+        guard !budgetText.isEmpty else {
+            editedCurrency.budget = 0
             return
         }
+        
+        guard let budget = Double(budgetText) else { return }
         
         editedCurrency.budget = budget
     }
@@ -139,6 +142,8 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField === rateTextField {
             rateTextField.text = String(editedCurrency.rate)
+        } else if textField === budgetTextField {
+            textField.text = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2, option: .default)
         }
     }
     
@@ -149,7 +154,7 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
             textField.text = "1 \(code)당, \(editedCurrency.rate) \(standard)"
             
         } else if textField === budgetTextField {
-            textField.text = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2)
+            textField.text = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2, option: .seperator)
         }
         
         textField.endEditing(true)
@@ -264,7 +269,7 @@ extension CurrencyEditorViewController {
             currencySelectButton.backgroundColor = UIColor.gray
             currencySelectButton.isEnabled = false
             
-            budgetTextField.text = originCurrency.budget.nonZeroString(maxDecimalPlace: 2)
+            budgetTextField.text = originCurrency.budget.nonZeroString(maxDecimalPlace: 2, option: .seperator)
             
             if originCurrency.code == standardCurrency.code {
                 rateTextField.text = "기준 통화"

@@ -21,11 +21,14 @@ extension Double {
         return count
     }
     
-    func nonZeroString(maxDecimalPlace: Int) -> String {
-        return NumberStringUtil.string(number: self, dropPoint: self.findZeroOnDecimal(maxDecimalPlace: maxDecimalPlace))
-    }
-    
-    func stringThousandsSeparator() -> String {
-        return String().thousandsSeparator(double: self)
+    func nonZeroString(maxDecimalPlace: Int, option: NumberStringOption) -> String {
+        let result = NumberStringUtil.string(number: self, dropPoint: self.findZeroOnDecimal(maxDecimalPlace: maxDecimalPlace))
+        
+        switch option {
+        case .default:
+            return result
+        case .seperator:
+            return result.thousandsSeparate()
+        }
     }
 }

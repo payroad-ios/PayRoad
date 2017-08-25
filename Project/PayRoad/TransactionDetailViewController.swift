@@ -36,10 +36,10 @@ class TransactionDetailViewController: UIViewController {
         collectionView.backgroundColor = ColorStore.lightestGray
         
         descTextView.isEditable = false
-        descTextView.addUpperline(color: ColorStore.lightGray, borderWidth: 0.5)
         descTextView.backgroundColor = ColorStore.lightestGray
         
         payContentStackView.addUpperline(color: ColorStore.lightGray, borderWidth: 0.5)
+        payContentStackView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
         
         let nibCell = UINib(nibName: "TransactionDetailCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: "transactionCollectionViewCell")
@@ -74,13 +74,9 @@ class TransactionDetailViewController: UIViewController {
             categoryImageView.image = UIImage(named: assetName)
         }
         
-        if transaction.isCash {
-            payTypeImageView.image = #imageLiteral(resourceName: "Category_Food")
-        } else {
-            payTypeImageView.image = #imageLiteral(resourceName: "Category_Food")
-        }
+        payTypeImageView.image = transaction.paymentImage()
         
-        amountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
+        amountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
         descTextView.text = transaction.content
     }
     

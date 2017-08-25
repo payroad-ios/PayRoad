@@ -300,13 +300,13 @@ class TransactionTableViewController: UIViewController {
         var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
-            spendingLabel.text = "\(amountByCurrency.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
+            spendingLabel.text = "\(amountByCurrency.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
             let balance = currency.budget - amountByCurrency
-            balanceLabel.text = "\(balance.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
+            balanceLabel.text = "\(balance.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
             spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
-            balanceLabel.text = "\(currency.budget.nonZeroString(maxDecimalPlace: 2)) \(currency.code)"
+            balanceLabel.text = "\(currency.budget.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
         }
         
         if spendingRate < 0 || spendingRate > 1 {
@@ -367,7 +367,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         
         let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            totalAmountLabel.text = "\(totalAmount.nonZeroString(maxDecimalPlace: 2)) \(travel.currencies.first!.code)"
+            totalAmountLabel.text = "\(totalAmount.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(travel.currencies.first!.code)"
         }
         
         sectionView.addSubview(ymdLabel)
@@ -386,7 +386,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2))"
+        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
         cell.paymentImageView.image = transaction.paymentImage()
         
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
