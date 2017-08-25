@@ -12,7 +12,7 @@
         <!--Travel Table View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TravelTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TravelTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TravelTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -70,7 +70,7 @@
                     <navigationItem key="navigationItem" id="4dE-vc-FwP">
                         <barButtonItem key="rightBarButtonItem" image="Icon_Add" id="kIF-rI-xH4">
                             <connections>
-                                <segue destination="KNu-eJ-E6n" kind="presentation" identifier="" id="Hnw-iv-bYC"/>
+                                <segue destination="KNu-eJ-E6n" kind="presentation" identifier="addTravel" id="Hnw-iv-bYC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -96,7 +96,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GCl-po-igM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5yX-6B-puh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5yX-6B-puh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
