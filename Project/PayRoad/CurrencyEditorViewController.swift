@@ -31,6 +31,7 @@ class CurrencyEditorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.standardCurrency = travel.currencies.first!
         rateTextField.delegate = self
