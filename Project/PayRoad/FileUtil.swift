@@ -13,12 +13,6 @@ enum PhotoFormat: String {
     case png = "png"
 }
 
-// getFilePath
-// saveImage
-// loadImage
-// removeImage
-// containPath
-
 enum DirectoryType: String {
     case image = "image"
 }
@@ -73,16 +67,19 @@ struct FileUtil {
 }
 
 struct PhotoUtil {
-    static func saveTransactionPhoto(travelID: String, transactionID: String, photo: UIImage) -> Photo {
+    static func saveTransactionPhoto(travelID: String, transactionID: String, photo: UIImage, completion: @escaping () -> Void?) -> Photo {
         let photoModel = Photo()
         photoModel.travelID = travelID
         photoModel.preID = transactionID.substring(to: 8)
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
         
-        OperationQueue.current?.addOperation {
+        DispatchQueue.global().async {
             let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
             print(isSuccess ? "저장 성공" : "저장 실패")
+            DispatchQueue.main.async {
+                completion()
+            }
         }
         return photoModel
     }

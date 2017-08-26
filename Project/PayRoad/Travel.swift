@@ -14,6 +14,7 @@ class Travel: Object {
     dynamic var startDateInRegion: DateInRegion?
     dynamic var endDateInRegion: DateInRegion?
     dynamic var photo: Photo?
+    var totalAmount: Double?
     
     let transactions = List<Transaction>()
     let currencies = List<Currency>()
@@ -21,6 +22,15 @@ class Travel: Object {
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["totalAmount"]
+    }
+    
+    func stringTotalAmount() -> String {
+        totalAmount = transactions.reduce(0) { $0.0 + $0.1.amount * $0.1.currency!.rate }
+        return "\(currencies.first!.code) \(totalAmount!)"
     }
 }
 
