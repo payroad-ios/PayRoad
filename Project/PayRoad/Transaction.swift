@@ -46,6 +46,21 @@ class Transaction: Object {
     }
 }
 
+extension Transaction {
+    func paymentImage() -> UIImage {
+        return isCash ? #imageLiteral(resourceName: "Payment_Cash") : #imageLiteral(resourceName: "Payment_Credit")
+    }
+    
+    func stringAmountWithCode(order: Order) -> String {
+        switch order {
+        case .first:
+            return "\(currency?.code ?? "") \(amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
+        case .last:
+            return "\(amount.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency?.code ?? "")"
+        }
+    }
+}
+
 extension Transaction: CascadingDeletable {
     func childrenToDelete() -> [AnyObject?] {
         var objectList = [AnyObject?]()
@@ -54,9 +69,5 @@ extension Transaction: CascadingDeletable {
         objectList.append(photos)
         
         return objectList
-    }
-    
-    func paymentImage() -> UIImage {
-        return isCash ? #imageLiteral(resourceName: "Payment_Cash") : #imageLiteral(resourceName: "Payment_Credit")
     }
 }
