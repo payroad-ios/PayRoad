@@ -28,9 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         RealmInitializer.initializeCategories()
-//        application.statusBarStyle = .lightContent
-        
-        // UINavigationBar customize
+
+        //UINavigationBar customize
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = ColorStore.basicBlack
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorStore.basicBlack]

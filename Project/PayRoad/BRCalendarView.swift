@@ -88,8 +88,8 @@ enum CollectionViewType: String {
         view.frame = bounds
         view.backgroundColor = UIColor.gray
         view.autoresizingMask = [UIViewAutoresizing.flexibleHeight, UIViewAutoresizing.flexibleWidth]
+        view.setNeedsLayout()
         view.layoutIfNeeded()
-        view.layoutSubviews()
         addSubview(view)
         view.addUpperline(color: ColorStore.blackLayer, borderWidth: 0.5)
     }
@@ -116,7 +116,6 @@ enum CollectionViewType: String {
     func brCalendar(currentMonth date: Date) {
         delegate?.brCalendar(currentMonth: date)
     }
-    
 }
 
 extension BRCalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
