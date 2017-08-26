@@ -59,8 +59,6 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-//        sideBar.setUpView()
-        
         let window = UIApplication.shared.keyWindow!
         window.addSubview(sideBar)
 
@@ -126,6 +124,11 @@ class TransactionTableViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: nil)
+    }
+    
+    func reloadTableView(_ sender: Notification) {
+        tableView.reloadData()
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
