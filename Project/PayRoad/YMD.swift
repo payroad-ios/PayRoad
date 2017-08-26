@@ -10,9 +10,9 @@ import Foundation
 
 struct YMD {
     
-    var year = 0
-    var month = 0
-    var day = 0
+    var year = 1970
+    var month = 1
+    var day = 1
     
     var date: Date {
         var dateComponents = DateComponents()
@@ -55,7 +55,7 @@ struct YMD {
     
     public func string() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .full
         dateFormatter.timeStyle = .none
         return dateFormatter.string(from: self.date)
     }
