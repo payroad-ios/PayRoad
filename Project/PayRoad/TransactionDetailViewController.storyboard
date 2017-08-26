@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,6 +41,10 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_ImageDefault" id="I6p-bs-PFd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <cells/>
                                             </collectionView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ooz-rt-rOI">
@@ -48,32 +52,32 @@
                                                 <color key="pageIndicatorTintColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="currentPageIndicatorTintColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </pageControl>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
-                                                <rect key="frame" x="28" y="305" width="319" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-hx-cAV">
+                                                <rect key="frame" x="28" y="305" width="319" height="40"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Food" translatesAutoresizingMaskIntoConstraints="NO" id="1Ou-Ra-fbo">
-                                                        <rect key="frame" x="0.0" y="10" width="20" height="20"/>
+                                                        <rect key="frame" x="0.0" y="7.5" width="25" height="25"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="ejJ-eq-50z"/>
-                                                            <constraint firstAttribute="width" constant="20" id="hHa-J6-xmf"/>
+                                                            <constraint firstAttribute="height" constant="25" id="ejJ-eq-50z"/>
+                                                            <constraint firstAttribute="width" constant="25" id="hHa-J6-xmf"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Category_Shopping" translatesAutoresizingMaskIntoConstraints="NO" id="oss-iT-5e6">
-                                                        <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Payment_Credit" translatesAutoresizingMaskIntoConstraints="NO" id="oss-iT-5e6">
+                                                        <rect key="frame" x="33" y="10" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="5Sc-NI-qsO"/>
                                                             <constraint firstAttribute="height" constant="20" id="gaE-7B-FOg"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="금액" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J4-Sa-uix">
-                                                        <rect key="frame" x="40" y="8" width="279" height="22"/>
+                                                        <rect key="frame" x="61" y="9" width="258" height="22"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
                                                         <color key="textColor" red="0.48254299160000003" green="0.66491085289999996" blue="0.94720488790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="VIA-Pa-F2c"/>
+                                                    <constraint firstAttribute="height" constant="40" id="VIA-Pa-F2c"/>
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQK-ca-xWk" customClass="GMSMapView">
@@ -81,7 +85,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="foX-Jp-Cg0">
-                                                <rect key="frame" x="28" y="345" width="319" height="135"/>
+                                                <rect key="frame" x="28" y="355" width="319" height="125"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -141,6 +145,7 @@
                         <outlet property="categoryImageView" destination="1Ou-Ra-fbo" id="Jvy-Pt-Xpf"/>
                         <outlet property="collectionView" destination="nnu-DG-Xrq" id="hhH-Qy-b7H"/>
                         <outlet property="descTextView" destination="foX-Jp-Cg0" id="1Id-ZY-hBK"/>
+                        <outlet property="emptyImageView" destination="I6p-bs-PFd" id="Tu1-ST-Bfc"/>
                         <outlet property="mapView" destination="IQK-ca-xWk" id="aak-1e-LAY"/>
                         <outlet property="payContentStackView" destination="fM7-hx-cAV" id="Onj-eO-hI5"/>
                         <outlet property="payTypeImageView" destination="oss-iT-5e6" id="C25-St-9Hn"/>
@@ -155,6 +160,8 @@
     <resources>
         <image name="Category_Food" width="32" height="32"/>
         <image name="Category_Shopping" width="32" height="32"/>
+        <image name="Icon_ImageDefault" width="64" height="64"/>
         <image name="Icon_Setting" width="20" height="20"/>
+        <image name="Payment_Credit" width="23" height="15"/>
     </resources>
 </document>
