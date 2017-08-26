@@ -18,6 +18,7 @@ class Travel: Object {
     
     let transactions = List<Transaction>()
     let currencies = List<Currency>()
+    let diaries = List<Diary>()
     
     override static func primaryKey() -> String? {
         return "id"
@@ -42,6 +43,7 @@ extension Travel: CascadingDeletable {
         objectList.append(photo)
         objectList.append(transactions)
         objectList.append(currencies)
+        objectList.append(diaries)
         
         return objectList
     }

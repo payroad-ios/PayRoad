@@ -80,8 +80,9 @@ class CurrencyEditorViewController: UIViewController {
         }
         
         guard !(budgetTextField.text!.isEmpty) else {
-            UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "예산을 입력해주세요.")
-            return false
+            //UIAlertController.oneButtonAlert(target: self, title: "저장 실패", message: "예산을 입력해주세요.")
+            editedCurrency.budget = 0.0
+            return true
         }
         return true
     }
@@ -180,7 +181,7 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
                 
                 self.editedCurrency.code = code
                 
-                if let rateString = rate, let rate = Double(rateString) {
+                if let rate = rate {
                     self.editedCurrency.rate = rate
                     
                     let updatedAt = Date()
@@ -211,23 +212,21 @@ extension CurrencyEditorViewController: CurrencySelectTableViewControllerDelegat
         }
     }
     
-    func exchangeRateFromAPI(standard: String, compare: String, completion: @escaping (String?) -> Void) {
+    func exchangeRateFromAPI(standard: String, compare: String, completion: @escaping (Double?) -> Void) {
         
-        let url = URL(string: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22\(compare)\(standard)%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")!
+        let query = "\(compare)_\(standard)"
+        let url = URL(string: "https://free.currencyconverterapi.com/api/v3/convert?q=\(query)&compact=ultra")!
         
         let request = URLRequest(url: url, timeoutInterval: 10.0)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             let jsonData = try? JSONSerialization.jsonObject(with: data!, options: [])
             
-            var exchangeRate: String? = nil
+            var exchangeRate: Double? = nil
             
-            if let jsonObject = jsonData as? [String: Any],
-                let query = jsonObject["query"] as? [String: Any],
-                let results = query["results"] as? [String: Any],
-                let result = results["rate"] as? [String: String],
-                let rate = result["Rate"] {
-                exchangeRate = rate
+            if let jsonObject = jsonData as? [String: Double],
+                let val = jsonObject[query] {
+                exchangeRate = val
             }
             
             completion(exchangeRate)

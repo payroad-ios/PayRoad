@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bb0-Lz-npS">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--DAY 1-->
+        <scene sceneID="bdz-da-9yF">
+            <objects>
+                <viewController id="n9x-dp-35e" customClass="DiaryEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PZ8-8H-x65"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nyf-wB-wcE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mX1-eJ-nbx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IU2-lx-1w9">
+                                <rect key="frame" x="20" y="84" width="335" height="63.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAY 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zuk-yW-FUx">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="43"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017년 8월 18일 월요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBI-QP-cnG">
+                                        <rect key="frame" x="0.0" y="43" width="335" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 여행은 어땠나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-rD-WLa">
+                                <rect key="frame" x="20" y="177.5" width="335" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LWy-Gv-qz3">
+                                <rect key="frame" x="15" y="211.5" width="345" height="435.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wnQ-rD-WLa" firstAttribute="top" secondItem="IU2-lx-1w9" secondAttribute="bottom" constant="30" id="0Z9-Ih-HlI"/>
+                            <constraint firstItem="LWy-Gv-qz3" firstAttribute="leading" secondItem="mX1-eJ-nbx" secondAttribute="leading" constant="15" id="CY4-qg-isc"/>
+                            <constraint firstAttribute="trailing" secondItem="IU2-lx-1w9" secondAttribute="trailing" constant="20" id="OHj-eV-xgj"/>
+                            <constraint firstItem="IU2-lx-1w9" firstAttribute="top" secondItem="PZ8-8H-x65" secondAttribute="bottom" constant="20" id="cdd-lU-0Qn"/>
+                            <constraint firstItem="LWy-Gv-qz3" firstAttribute="top" secondItem="wnQ-rD-WLa" secondAttribute="bottom" constant="10" id="oAd-xg-yJj"/>
+                            <constraint firstItem="Nyf-wB-wcE" firstAttribute="top" secondItem="LWy-Gv-qz3" secondAttribute="bottom" constant="20" id="oTU-fv-Ffu"/>
+                            <constraint firstItem="wnQ-rD-WLa" firstAttribute="leading" secondItem="mX1-eJ-nbx" secondAttribute="leading" constant="20" id="t7z-bd-YRU"/>
+                            <constraint firstItem="IU2-lx-1w9" firstAttribute="leading" secondItem="mX1-eJ-nbx" secondAttribute="leading" constant="20" id="ta7-Cn-4jn"/>
+                            <constraint firstAttribute="trailing" secondItem="LWy-Gv-qz3" secondAttribute="trailing" constant="15" id="x3d-28-xw7"/>
+                            <constraint firstAttribute="trailing" secondItem="wnQ-rD-WLa" secondAttribute="trailing" constant="20" id="z0I-tg-znH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="DAY 1" id="a0n-kS-a5b">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oMe-FN-7q2">
+                            <connections>
+                                <action selector="cancelButtonDidTap:" destination="n9x-dp-35e" id="l4l-0R-0vY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="M65-f9-lPU">
+                            <connections>
+                                <action selector="saveButtonDidTap:" destination="n9x-dp-35e" id="2k8-co-Q1q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentTextView" destination="LWy-Gv-qz3" id="h7N-dt-MIh"/>
+                        <outlet property="dateLabel" destination="bBI-QP-cnG" id="n8L-aJ-t4s"/>
+                        <outlet property="dayLabel" destination="Zuk-yW-FUx" id="Hmy-5d-ZXM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCO-Vs-5kf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="775" y="99"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MFW-3D-q4d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bb0-Lz-npS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6z3-F4-Jg5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="n9x-dp-35e" kind="relationship" relationship="rootViewController" id="3be-gC-Sj2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KmS-9W-mEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8.8000000000000007" y="98.50074962518741"/>
+        </scene>
+    </scenes>
+</document>

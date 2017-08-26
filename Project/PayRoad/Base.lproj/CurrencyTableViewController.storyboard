@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--통화 관리-->
+        <!--통화 및 예산-->
         <scene sceneID="k3e-6o-atd">
             <objects>
                 <viewController storyboardIdentifier="CurrencyTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HR1-Bc-H6Q" customClass="CurrencyTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                             <constraint firstItem="3Iz-aw-aN6" firstAttribute="top" secondItem="xc1-hD-3Wv" secondAttribute="top" id="t3m-Cd-vyu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="통화 관리" id="YRp-bv-Ojc">
+                    <navigationItem key="navigationItem" title="통화 및 예산" id="YRp-bv-Ojc">
                         <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="qn5-hy-xsu">
                             <connections>
                                 <action selector="cancelButtonDidTap:" destination="HR1-Bc-H6Q" id="psJ-5D-M4O"/>
