@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,16 +20,14 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9BQ-gc-ylK">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="9BQ-gc-ylK" secondAttribute="height" multiplier="1:1" id="XAH-c0-c74"/>
-                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="9BQ-gc-ylK" secondAttribute="bottom" id="01x-qf-3VR"/>
-                <constraint firstItem="9BQ-gc-ylK" firstAttribute="top" secondItem="v49-ow-qar" secondAttribute="top" id="H7T-0L-kJg"/>
-                <constraint firstItem="9BQ-gc-ylK" firstAttribute="centerX" secondItem="v49-ow-qar" secondAttribute="centerX" id="qHI-Bo-Bfu"/>
+                <constraint firstAttribute="bottom" secondItem="9BQ-gc-ylK" secondAttribute="bottom" id="Qp3-tM-yTc"/>
+                <constraint firstItem="9BQ-gc-ylK" firstAttribute="top" secondItem="v49-ow-qar" secondAttribute="top" id="bLY-R5-fGH"/>
+                <constraint firstItem="9BQ-gc-ylK" firstAttribute="leading" secondItem="v49-ow-qar" secondAttribute="leading" id="hUl-bC-GQH"/>
+                <constraint firstAttribute="trailing" secondItem="9BQ-gc-ylK" secondAttribute="trailing" id="z7y-Uc-fuo"/>
             </constraints>
             <connections>
                 <outlet property="transactionPhotoImageView" destination="9BQ-gc-ylK" id="Vkg-sM-zE0"/>

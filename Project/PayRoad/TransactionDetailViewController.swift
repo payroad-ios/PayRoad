@@ -25,6 +25,7 @@ class TransactionDetailViewController: UIViewController {
         return photoDetailVC
     }()
     
+    @IBOutlet weak var baseScrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var payTypeImageView: UIImageView!
@@ -37,6 +38,10 @@ class TransactionDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function, baseScrollView.contentSize)
+        print(#function, baseScrollView.contentOffset)
+        print(#function, baseScrollView.frame)
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -47,8 +52,8 @@ class TransactionDetailViewController: UIViewController {
         descTextView.isEditable = false
         descTextView.backgroundColor = ColorStore.lightestGray
         
-        payContentStackView.addUpperline(color: ColorStore.lightGray, borderWidth: 0.5)
-        payContentStackView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
+//        payContentStackView.addUpperline(color: ColorStore.lightGray, borderWidth: 0.5)
+//        payContentStackView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
         
         let nibCell = UINib(nibName: "TransactionDetailCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: "transactionCollectionViewCell")
@@ -59,6 +64,14 @@ class TransactionDetailViewController: UIViewController {
         createMapView()
         
         emptyImageView.isHidden = !transaction.photos.isEmpty
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        baseScrollView.contentSize = CGSize(width: view.frame.width, height: 1000)
+
+        print(#function, baseScrollView.contentSize)
+        print(#function, baseScrollView.contentOffset)
+        print(#function, baseScrollView.frame)
     }
     
     func createMapView() {
