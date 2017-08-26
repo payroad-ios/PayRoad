@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bb0-Lz-npS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bb0-Lz-npS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -66,12 +66,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="DAY 1" id="a0n-kS-a5b">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oMe-FN-7q2">
+                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="oMe-FN-7q2">
                             <connections>
                                 <action selector="cancelButtonDidTap:" destination="n9x-dp-35e" id="l4l-0R-0vY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="M65-f9-lPU">
+                        <barButtonItem key="rightBarButtonItem" image="Icon_Check" id="M65-f9-lPU">
                             <connections>
                                 <action selector="saveButtonDidTap:" destination="n9x-dp-35e" id="2k8-co-Q1q"/>
                             </connections>
@@ -92,7 +92,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bb0-Lz-npS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6z3-F4-Jg5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6z3-F4-Jg5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -106,4 +106,8 @@
             <point key="canvasLocation" x="8.8000000000000007" y="98.50074962518741"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
+        <image name="Icon_Check" width="18" height="14"/>
+    </resources>
 </document>
