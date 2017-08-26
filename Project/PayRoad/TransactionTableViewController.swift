@@ -109,6 +109,11 @@ class TransactionTableViewController: UIViewController {
         transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
             self?.sortTransactionsSelectedDate()
+            
+            if let lastCurrency = self?.travel.transactions.last?.currency,
+                let lastCurrencyIndex = self?.travel.currencies.index(of: lastCurrency) {
+                self?.totalSpendingIndex = lastCurrencyIndex
+            }
             self?.displayTotalSpendingCurrency()
         }
         
@@ -159,11 +164,20 @@ class TransactionTableViewController: UIViewController {
             self.present(navigationController, animated: true, completion: nil)
         }
         
+        let travelDiary = UIAlertAction(title: "여행 일기", style: .default) { [unowned self] _ in
+            let diaryTableViewController = UIStoryboard.loadViewController(from: .DiaryTableView, ID: "DiaryTableViewController") as! DiaryTableViewController
+            let navigationController = UINavigationController(rootViewController: diaryTableViewController)
+            diaryTableViewController.travel = self.travel
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         moreOptionAlertController.addAction(travelEdit)
         moreOptionAlertController.addAction(currencySetting)
         moreOptionAlertController.addAction(transactionMap)
+        moreOptionAlertController.addAction(travelDiary)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
     }

@@ -25,6 +25,10 @@ extension UIStoryboard {
     static let CurrencyTableView = UIStoryboard(name: "CurrencyTableViewController", bundle: nil)
     static let CurrencyEditorView = UIStoryboard(name: "CurrencyEditorViewController", bundle: nil)
     
+    //Mark: Diary
+    static let DiaryTableView = UIStoryboard(name: "DiaryTableViewController", bundle: nil)
+    static let DiaryEditorView = UIStoryboard(name: "DiaryEditorViewController", bundle: nil)
+    
     //Mark: Etc
     static let PhotoDetailView = UIStoryboard(name: "PhotoDetailViewController", bundle: nil)
     
