@@ -170,7 +170,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hcl-Cc-P0i" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DPF-L7-efR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DPF-L7-efR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

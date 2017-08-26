@@ -59,8 +59,6 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-//        sideBar.setUpView()
-        
         let window = UIApplication.shared.keyWindow!
         window.addSubview(sideBar)
 
@@ -131,6 +129,11 @@ class TransactionTableViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: nil)
+    }
+    
+    func reloadTableView(_ sender: Notification) {
+        tableView.reloadData()
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -481,13 +484,25 @@ extension TransactionTableViewController: UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateSelectCollectionViewCell
         let travelPeriodDate = travelPeriodDates[indexPath.row]
         cell.dayLabel.text = "\(travelPeriodDate.day)\n\(travelPeriodDate.monthName)"
+        
+        cell.dayLabel.textColor = collectionView.indexPathsForSelectedItems?.contains(indexPath) == true ? ColorStore.mainSkyBlue : ColorStore.basicBlack
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         allListButton.isSelected = false
         allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! DateSelectCollectionViewCell
+        cell.dayLabel.textColor = ColorStore.mainSkyBlue
+
         currentSelectedDate = travelPeriodDates[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? DateSelectCollectionViewCell {
+            cell.dayLabel.textColor = ColorStore.basicBlack
+        }
     }
 }
 

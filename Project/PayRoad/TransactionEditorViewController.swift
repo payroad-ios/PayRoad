@@ -413,8 +413,10 @@ extension TransactionEditorViewController {
     }
     
     func savePhotoTransaction(target: Transaction) {
-        multiImagePickerView.visibleImages.forEach {
-            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: $0)
+        for image in multiImagePickerView.visibleImages {
+            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image, completion: {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: self.transaction.id)
+            })
             target.photos.append(photo)
         }
     }

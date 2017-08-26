@@ -16,10 +16,4 @@ class DateSelectCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.white
         dayLabel.textColor = ColorStore.basicBlack
     }
-    
-    override var isSelected: Bool {
-        didSet {
-            self.dayLabel.textColor = isSelected ? ColorStore.mainSkyBlue : ColorStore.basicBlack
-        }
-    }
 }
