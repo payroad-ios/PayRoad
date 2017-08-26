@@ -18,3 +18,8 @@ enum PaymentType {
     case cash
     case card
 }
+
+enum Order {
+    case first
+    case last
+}

@@ -56,9 +56,9 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         case .ended:
             let velocity = sender.velocity(in: targetView)
             
-            if velocity.y >= 200 && abs(velocity.x) <= 700 && zoomScrollView.zoomScale == 1 {
+            if velocity.y >= 200 && abs(velocity.x) <= 200 && zoomScrollView.zoomScale == 1 {
                 let targetSize = targetView.frame.size
-                
+
                 UIView.animate(withDuration: 0.2, animations: { [unowned self] in
                     UIApplication.shared.isStatusBarHidden = false
                     targetView.frame.origin.y = self.frame.maxY
@@ -89,7 +89,7 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     }
     
     func resetZoomScale() {
-        zoomScrollView.zoomScale = 1
+        zoomScrollView.setZoomScale(1, animated: true)
     }
     
     func didDoubleTapGuesture(_ sender: UITapGestureRecognizer) {

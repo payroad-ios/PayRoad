@@ -51,7 +51,8 @@ extension UITextView: UITextViewDelegate {
                 placeholderLabel.text = newValue
                 placeholderLabel.sizeToFit()
             } else {
-                self.addPlaceholder(newValue!)
+                guard let value = newValue else { return }
+                self.addPlaceholder(value)
             }
         }
     }

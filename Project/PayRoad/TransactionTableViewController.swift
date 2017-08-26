@@ -403,7 +403,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
+        cell.transactionAmountLabel.text = transaction.stringAmountWithCode(order: .first)
         cell.paymentImageView.image = transaction.paymentImage()
         
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {

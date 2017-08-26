@@ -25,18 +25,32 @@ class TransactionDetailViewController: UIViewController {
         return photoDetailVC
     }()
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var baseScrollView: UIScrollView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var imageView: UIView!
+    @IBOutlet weak var descView: UIView!
+    @IBOutlet weak var locationView: UIView!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var amountOriginCurrencyLabel: UILabel!
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var payTypeImageView: UIImageView!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var descTextView: UITextView!
-    @IBOutlet weak var payContentStackView: UIStackView!
-    @IBOutlet weak var mapView: GMSMapView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var photoPageControl: UIPageControl!
     @IBOutlet weak var emptyImageView: UIImageView!
     
+    @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    @IBOutlet weak var imageViewConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
+        topView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
+        descView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -47,9 +61,6 @@ class TransactionDetailViewController: UIViewController {
         descTextView.isEditable = false
         descTextView.backgroundColor = ColorStore.lightestGray
         
-        payContentStackView.addUpperline(color: ColorStore.lightGray, borderWidth: 0.5)
-        payContentStackView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
-        
         let nibCell = UINib(nibName: "TransactionDetailCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: "transactionCollectionViewCell")
         
@@ -57,8 +68,10 @@ class TransactionDetailViewController: UIViewController {
         
         mapView.delegate = self
         createMapView()
-        
-        emptyImageView.isHidden = !transaction.photos.isEmpty
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func createMapView() {
@@ -74,21 +87,33 @@ class TransactionDetailViewController: UIViewController {
         marker.snippet = "\(transaction.amount) \(transaction.currency!.code)"
         marker.map = mapView
         
+        
         let camera = GMSCameraPosition.camera(withTarget: position, zoom: 17)
         mapView.camera = camera
+        mapView.layer.cornerRadius = 8
     }
     
     func applyUIFromTransaction(transaction: Transaction) {
         title = transaction.name
         
         if let assetName = transaction.category?.assetName {
-            categoryImageView.image = UIImage(named: assetName)
+            categoryImageView.image = UIImage(named: assetName)?.withRenderingMode(.alwaysTemplate)
         }
         
-        payTypeImageView.image = transaction.paymentImage()
+        guard let code = transaction.travel.first?.currencies.first?.code,
+            let rate = transaction.currency?.rate else {
+            return
+        }
         
-        amountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
+        dateLabel.text = transaction.dateInRegion?.string()
+        titleLabel.text = transaction.name
+        payTypeImageView.image = transaction.paymentImage()
+        amountLabel.text = transaction.stringAmountWithCode(order: .first)
+        amountOriginCurrencyLabel.text = "\(code) \((rate * transaction.amount).nonZeroString(maxDecimalPlace: 2, option: .seperator))"
+        
+        descTextView.placeholder = transaction.content.isEmpty ? "기록된 내용이 없습니다." : nil
         descTextView.text = transaction.content
+        imageViewConstraint.constant = transaction.photos.isEmpty ? 0 : 190
     }
     
     @IBAction func editorButtonDidTap(_ sender: Any) {
@@ -100,11 +125,9 @@ class TransactionDetailViewController: UIViewController {
             transactionEditorViewController.travel = self.transaction.travel.first!
             transactionEditorViewController.editorMode = .edit
             transactionEditorViewController.standardDate = self.transaction.dateInRegion
-            
             transactionEditorViewController.delegate = self
             
             let navigationController = UINavigationController(rootViewController: transactionEditorViewController)
-            
             self.present(navigationController, animated: true, completion: nil)
         }
         
@@ -113,7 +136,6 @@ class TransactionDetailViewController: UIViewController {
             try! self.realm.write {
                 self.realm.delete(self.transaction)
             }
-
             self.navigationController?.popViewController(animated: true)
         }
         
