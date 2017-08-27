@@ -36,11 +36,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8vu-1n-wAi" id="4zR-6o-9eg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oft-Yu-iBy" customClass="TravelView" customModule="PayRoad" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
@@ -68,6 +68,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4dE-vc-FwP">
+                        <barButtonItem key="leftBarButtonItem" title="샘플" id="UmH-iy-dM9">
+                            <connections>
+                                <action selector="hiddenButtonDidTap:" destination="BYZ-38-t0r" id="7il-Ir-srW"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Icon_Add" id="kIF-rI-xH4">
                             <connections>
                                 <segue destination="KNu-eJ-E6n" kind="presentation" identifier="addTravel" id="Hnw-iv-bYC"/>
@@ -96,7 +101,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GCl-po-igM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5yX-6B-puh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5yX-6B-puh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
