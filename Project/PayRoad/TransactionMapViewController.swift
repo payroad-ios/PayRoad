@@ -93,7 +93,7 @@ class TransactionMapViewController: UIViewController {
                 currentSelectedMarkerIndex = index
                 marker.zIndex = Int32(markers.count)
                 marker.iconView?.backgroundColor = UIColor.lightGray
-                mapView.animate(toZoom: 14)
+                mapView.animate(toZoom: 16)
                 collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .right, animated: true)
             } else {
                 marker.zIndex = Int32(index)

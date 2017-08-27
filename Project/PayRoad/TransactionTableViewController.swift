@@ -265,6 +265,8 @@ class TransactionTableViewController: UIViewController {
         let seletedIndexPath = collectionView.indexPathsForSelectedItems
         guard let indexPath = seletedIndexPath?.first else { return }
         collectionView.deselectItem(at: indexPath, animated: false)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateSelectCollectionViewCell else { return }
+        cell.dayLabel.textColor = ColorStore.basicBlack
     }
     
     @IBAction func paymentTypeButtonDidTap(_ sender: Any) {

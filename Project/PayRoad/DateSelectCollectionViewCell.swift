@@ -16,4 +16,9 @@ class DateSelectCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.white
         dayLabel.textColor = ColorStore.basicBlack
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dayLabel.textColor = ColorStore.basicBlack
+    }
 }
