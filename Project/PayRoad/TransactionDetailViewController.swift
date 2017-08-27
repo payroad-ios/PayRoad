@@ -64,10 +64,13 @@ class TransactionDetailViewController: UIViewController {
         let nibCell = UINib(nibName: "TransactionDetailCollectionViewCell", bundle: nil)
         collectionView.register(nibCell, forCellWithReuseIdentifier: "transactionCollectionViewCell")
         
-        applyUIFromTransaction(transaction: transaction)
+        applyUIFromTransaction()
         
         mapView.delegate = self
         createMapView()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: self.transaction.id)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applyUIFromTransaction), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +96,7 @@ class TransactionDetailViewController: UIViewController {
         mapView.layer.cornerRadius = 8
     }
     
-    func applyUIFromTransaction(transaction: Transaction) {
+    func applyUIFromTransaction() {
         title = transaction.name
         
         if let assetName = transaction.category?.assetName {
@@ -204,7 +207,8 @@ extension TransactionDetailViewController: UICollectionViewDelegateFlowLayout {
 
 extension TransactionDetailViewController: TransactionEditorDelegate {
     func edited(transaction: Transaction) {
-        applyUIFromTransaction(transaction: transaction)
+        self.transaction = transaction
+        applyUIFromTransaction()
         collectionView.reloadData()
     }
 }
