@@ -129,7 +129,7 @@ class TransactionTableViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
     }
     
     func reloadTableView(_ sender: Notification) {
@@ -159,30 +159,28 @@ class TransactionTableViewController: UIViewController {
             self.present(navigationController, animated: true, completion: nil)
         }
         
-        let transactionMap = UIAlertAction(title: "가계부 지도", style: .default) { [unowned self] _ in
-            let transactionMapViewController = UIStoryboard.loadViewController(from: .TransactionMapView, ID: "TransactionMapViewController") as! TransactionMapViewController
-            let navigationController = UINavigationController(rootViewController: transactionMapViewController)
-            transactionMapViewController.travel = self.travel
-            
-            self.present(navigationController, animated: true, completion: nil)
-        }
-        
-        let travelDiary = UIAlertAction(title: "여행 일기", style: .default) { [unowned self] _ in
-            let diaryTableViewController = UIStoryboard.loadViewController(from: .DiaryTableView, ID: "DiaryTableViewController") as! DiaryTableViewController
-            let navigationController = UINavigationController(rootViewController: diaryTableViewController)
-            diaryTableViewController.travel = self.travel
-            
-            self.present(navigationController, animated: true, completion: nil)
-        }
-        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         moreOptionAlertController.addAction(travelEdit)
         moreOptionAlertController.addAction(currencySetting)
-        moreOptionAlertController.addAction(transactionMap)
-        moreOptionAlertController.addAction(travelDiary)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
+    }
+    
+    func presentDiaryView() {
+        let diaryTableViewController = UIStoryboard.loadViewController(from: .DiaryTableView, ID: "DiaryTableViewController") as! DiaryTableViewController
+        let navigationController = UINavigationController(rootViewController: diaryTableViewController)
+        diaryTableViewController.travel = self.travel
+        
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    func presentMapView() {
+        let transactionMapViewController = UIStoryboard.loadViewController(from: .TransactionMapView, ID: "TransactionMapViewController") as! TransactionMapViewController
+        let navigationController = UINavigationController(rootViewController: transactionMapViewController)
+        transactionMapViewController.travel = self.travel
+        
+        present(navigationController, animated: true, completion: nil)
     }
     
     func stopNotificationToken() {
@@ -297,7 +295,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBAction func showSideBar(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
-        
+        sideBar.delegate = self
         sideBar.show() {
             self.view.isUserInteractionEnabled = true
         }

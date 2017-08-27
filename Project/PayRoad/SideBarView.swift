@@ -9,34 +9,45 @@
 import UIKit
 
 class SideBarView: UIView {
+    @IBOutlet weak var diaryButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var goMainButton: UIButton!
+    
+    @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var sideBarLeadingConstraint: NSLayoutConstraint!
+    weak var delegate: TransactionTableViewController?
     
     @IBAction func hideSideBar(_ sender: Any) {
-        guard let navigationController = UIApplication.shared.windows.first!.rootViewController as? UINavigationController else {
-            return
-        }
         hide() {
-            navigationController.viewControllers.first?.view.isUserInteractionEnabled = true
+            self.delegate?.navigationController?.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    @IBAction func diaryButtonDidTap(_ sender: Any) {
+        hide() {
+            self.delegate?.presentDiaryView()
+        }
+    }
+    
+    @IBAction func mapButtonDidTap(_ sender: Any) {
+        hide() {
+            self.delegate?.presentMapView()
         }
     }
     
     @IBAction func gotoMainView() {
-        guard let navigationController = UIApplication.shared.windows.first!.rootViewController as? UINavigationController else {
-            return
-        }
-        
         hide() {
-            navigationController.popToRootViewController(animated: true)
-            navigationController.viewControllers.first?.view.isUserInteractionEnabled = true
+            self.delegate?.navigationController?.popToRootViewController(animated: true)
+            self.delegate?.navigationController?.view.isUserInteractionEnabled = true
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        print(#function)
         self.isUserInteractionEnabled = false
-        self.frame = self.defaultCGRect()
+        self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        sideBarLeadingConstraint.constant = hideConstant()
         
         goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
         
@@ -50,10 +61,11 @@ class SideBarView: UIView {
     }
 
     func show(completion: (() -> Void)? = nil) {
-//        UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
+        UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
         UIView.animate(withDuration: 0.25, animations: { [unowned self] in
-            self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+            self.sideBarLeadingConstraint.constant = 0
             self.backgroundView.alpha = 0.3
+            self.layoutIfNeeded()
         }, completion: { [unowned self] (result) in
             self.isUserInteractionEnabled = true
             
@@ -69,10 +81,11 @@ class SideBarView: UIView {
     
     func hide(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.18, animations: { [unowned self] in
-            self.frame =  self.defaultCGRect()
+            self.sideBarLeadingConstraint.constant = self.hideConstant()
             self.backgroundView.alpha = 0
+            self.layoutIfNeeded()
         }, completion: { (result) in
-//            UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar - 1)
+            UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar - 1)
             self.isUserInteractionEnabled = false
             
             guard result == true,
@@ -85,22 +98,7 @@ class SideBarView: UIView {
         })
     }
     
-//    func setUpView() {
-//        self.isUserInteractionEnabled = false
-//        self.frame = self.defaultCGRect()
-//        
-//        goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
-//        
-//        self.layer.shadowColor = ColorStore.darkGray.cgColor
-//        self.layer.shadowOpacity = 0.8
-//        self.layer.shadowOffset = CGSize.zero
-//        self.layer.shadowRadius = 7
-//    }
-    
-    func defaultCGRect() -> CGRect {
-        return CGRect(x: -self.frame.width / 2 - 50,
-                      y: 0,
-                      width: self.frame.width,
-                      height: self.frame.height)
+    func hideConstant() -> CGFloat {
+        return -(self.menuView.frame.width + 10)
     }
 }

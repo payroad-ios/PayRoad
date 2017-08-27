@@ -50,6 +50,9 @@
                             <state key="normal" title="일기">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="diaryButtonDidTap:" destination="Xt7-A5-Eec" eventType="touchUpInside" id="GlS-2S-7AR"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
                             <rect key="frame" x="0.0" y="289" width="208.5" height="36"/>
@@ -57,13 +60,9 @@
                             <state key="normal" title="지도">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF9-d0-tdK">
-                            <rect key="frame" x="0.0" y="365" width="208.5" height="36"/>
-                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="20"/>
-                            <state key="normal" title="여행 수정">
-                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
+                            <connections>
+                                <action selector="mapButtonDidTap:" destination="Xt7-A5-Eec" eventType="touchUpInside" id="GB8-mH-f4Y"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad-SideBar" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
                             <rect key="frame" x="35.5" y="45" width="138" height="32"/>
@@ -74,14 +73,11 @@
                     <constraints>
                         <constraint firstItem="yat-g0-AtZ" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="08a-gb-bxl"/>
                         <constraint firstItem="3QA-Rm-sYw" firstAttribute="top" secondItem="UG8-Wr-FCw" secondAttribute="bottom" constant="40" id="1HS-xd-zBw"/>
-                        <constraint firstItem="oF9-d0-tdK" firstAttribute="top" secondItem="3QA-Rm-sYw" secondAttribute="bottom" constant="40" id="5ZC-VU-2A5"/>
                         <constraint firstItem="WbH-Oa-JG3" firstAttribute="width" secondItem="z00-Mp-7kM" secondAttribute="width" multiplier="1:1.5" id="9H7-XS-gkH"/>
                         <constraint firstItem="iqH-VM-kc7" firstAttribute="top" secondItem="yat-g0-AtZ" secondAttribute="bottom" constant="60" id="Ftd-Tf-R2c"/>
-                        <constraint firstAttribute="trailing" secondItem="oF9-d0-tdK" secondAttribute="trailing" id="GCI-bW-f3H"/>
                         <constraint firstAttribute="trailing" secondItem="UG8-Wr-FCw" secondAttribute="trailing" id="Jau-B7-9cn"/>
                         <constraint firstItem="iqH-VM-kc7" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="KKa-yq-deU"/>
                         <constraint firstAttribute="trailing" secondItem="iqH-VM-kc7" secondAttribute="trailing" id="MHB-FX-Eqt"/>
-                        <constraint firstItem="oF9-d0-tdK" firstAttribute="leading" secondItem="z00-Mp-7kM" secondAttribute="leading" id="TCD-5f-6KQ"/>
                         <constraint firstItem="yat-g0-AtZ" firstAttribute="top" secondItem="z00-Mp-7kM" secondAttribute="top" constant="45" id="ffV-Y6-nKb"/>
                         <constraint firstAttribute="trailing" secondItem="3QA-Rm-sYw" secondAttribute="trailing" id="g1w-PA-Db5"/>
                         <constraint firstItem="WbH-Oa-JG3" firstAttribute="centerX" secondItem="z00-Mp-7kM" secondAttribute="centerX" id="kIS-oQ-dXc"/>
@@ -105,7 +101,11 @@
             </constraints>
             <connections>
                 <outlet property="backgroundView" destination="iZ4-Gt-JIa" id="MfF-Fe-3oj"/>
+                <outlet property="diaryButton" destination="UG8-Wr-FCw" id="Fos-FP-Nwc"/>
                 <outlet property="goMainButton" destination="WbH-Oa-JG3" id="fqc-eE-s7D"/>
+                <outlet property="mapButton" destination="3QA-Rm-sYw" id="Jhc-ka-64E"/>
+                <outlet property="menuView" destination="z00-Mp-7kM" id="eF1-hQ-JE1"/>
+                <outlet property="sideBarLeadingConstraint" destination="cGc-2D-EOB" id="hOt-8a-FIb"/>
             </connections>
             <point key="canvasLocation" x="-47" y="-85"/>
         </view>
