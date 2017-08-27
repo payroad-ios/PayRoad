@@ -74,7 +74,8 @@ struct PhotoUtil {
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
         
-        DispatchQueue.global().async {
+//        DispatchQueue.global().async {
+        OperationQueue.current?.addOperation {
             let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
             print(isSuccess ? "저장 성공" : "저장 실패")
             DispatchQueue.main.async {
