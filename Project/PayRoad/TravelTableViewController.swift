@@ -54,6 +54,10 @@ class TravelTableViewController: UIViewController {
         navigationController?.pushViewController(transactionTableViewController, animated: true)
     }
     
+    @IBAction func hiddenButtonDidTap(_ sender: Any) {
+        RealmInitializer.addSampleTravelData()
+    }
+    
     deinit {
         notificationToken?.stop()
     }
