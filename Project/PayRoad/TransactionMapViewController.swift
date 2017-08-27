@@ -25,6 +25,7 @@ class TransactionMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date").filter("lat != nil AND lng != nil")
         
@@ -92,6 +93,7 @@ class TransactionMapViewController: UIViewController {
                 currentSelectedMarkerIndex = index
                 marker.zIndex = Int32(markers.count)
                 marker.iconView?.backgroundColor = UIColor.lightGray
+                mapView.animate(toZoom: 14)
                 collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .right, animated: true)
             } else {
                 marker.zIndex = Int32(index)
