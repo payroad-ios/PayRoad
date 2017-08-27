@@ -30,7 +30,7 @@ class Travel: Object {
     
     func stringTotalAmount() -> String {
         totalAmount = transactions.reduce(0) { $0.0 + $0.1.amount * $0.1.currency!.rate }
-        return "\(currencies.first!.code) \(totalAmount!)"
+        return "\(currencies.first!.code) \(totalAmount!.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
     }
 }
 
