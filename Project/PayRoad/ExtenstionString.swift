@@ -49,19 +49,23 @@ extension String {
     }
     
     func thousandsSeparator(integer: Int) -> String {
-        var result: String = ""
+        let isMinus = integer < 0 ? true : false
+        let convertNumber = abs(integer)
+        var resultString: String = ""
         var index = 0
-        let string = String(integer).characters
+        let string = String(convertNumber).characters
         let stringCount = string.count
         
         for i in string.reversed() {
             index += 1
-            result += String(i)
+            resultString += String(i)
             if index % 3 == 0 && index != stringCount {
-                result += ","
+                resultString += ","
             }
         }
-        return String(result.characters.reversed())
+        var result = isMinus ? "-" : ""
+        result.append(String(resultString.characters.reversed()))
+        return result
     }
     
     func thousandsSeparator(double: Double) -> String {
