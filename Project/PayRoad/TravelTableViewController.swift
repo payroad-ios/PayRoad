@@ -72,17 +72,14 @@ extension TravelTableViewController: UITableViewDelegate, UITableViewDataSource 
         let travel = travels[indexPath.row]
         cell.travelView.travelNameLabel.text = travel.name
         cell.travelView.fillDatePeriodLabel(startDate: travel.startDateInRegion!.date, endDate: travel.endDateInRegion!.date)
-        
-        guard let photo = travel.photo else {
-            return cell
-        }
-        cell.travelView.backgroundImage.image = photo.fetchPhoto()
-        
-        guard let code = travel.currencies.first?.code else {
-            return cell
+
+        if let code = travel.currencies.first?.code {
+            cell.travelView.spendingAmountLabel.text = travel.stringTotalAmount()
         }
         
-        cell.travelView.spendingAmountLabel.text = travel.stringTotalAmount()
+        if let photo = travel.photo {
+            cell.travelView.backgroundImage.image = photo.fetchPhoto()
+        }
         return cell
     }
     

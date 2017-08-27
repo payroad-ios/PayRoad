@@ -182,9 +182,8 @@ extension TravelEditorViewController {
                 
                 if let filePath = travel.photo?.filePath {
                     travelPreview.backgroundImage.image = PhotoUtil.loadPhotoFrom(filePath: filePath)
-                
+                }
                 deleteTravelButton.addTarget(self, action: #selector(deleteTravelButtonDidTap), for: .touchUpInside)
-            }
         }
     }
     
