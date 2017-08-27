@@ -55,6 +55,7 @@ class DiaryEditorViewController: UIViewController {
             try! realm.write {
                 travel.diaries.append(diary)
             }
+            view.endEditing(true)
         }
         dismiss(animated: true, completion: nil)
     }

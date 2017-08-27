@@ -103,5 +103,6 @@ extension DiaryTableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "editDiary", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

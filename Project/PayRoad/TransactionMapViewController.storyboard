@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4la-Sh-xmH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="4la-Sh-xmH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,7 +111,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="가계부 지도" id="FpE-tI-9Yh">
-                        <barButtonItem key="leftBarButtonItem" title="뒤로" id="3fb-ao-1td">
+                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="3fb-ao-1td">
                             <connections>
                                 <action selector="backButtonDidTap:" destination="2b6-v4-4q4" id="CxX-az-4Pc"/>
                             </connections>
@@ -153,4 +153,7 @@
             <point key="canvasLocation" x="261.60000000000002" y="691.304347826087"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
+    </resources>
 </document>
