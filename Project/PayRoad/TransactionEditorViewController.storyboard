@@ -93,7 +93,7 @@
                                                 <rect key="frame" x="0.0" y="51" width="375" height="64"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="항목명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pok-cr-oR7">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="항목명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pok-cr-oR7">
                                                 <rect key="frame" x="32" y="125" width="311" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="7jQ-xX-89s"/>
@@ -219,7 +219,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0bd-wK-JTh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B4n-EG-RkE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="B4n-EG-RkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
