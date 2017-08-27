@@ -209,6 +209,8 @@ extension TransactionDetailViewController: TransactionEditorDelegate {
     func edited(transaction: Transaction) {
         self.transaction = transaction
         applyUIFromTransaction()
+        mapView.clear()
+        createMapView()
         collectionView.reloadData()
     }
 }
