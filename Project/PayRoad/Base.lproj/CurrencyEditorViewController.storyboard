@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJ0-Uc-ksM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rJ0-Uc-ksM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Ow7-Bv-Kv4">
-                                <rect key="frame" x="26" y="160" width="323" height="30"/>
+                                <rect key="frame" x="26" y="156" width="323" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="마지막 업데이트 : 2017/01/01 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E32-Wm-nDt">
                                         <rect key="frame" x="0.0" y="0.0" width="293" height="30"/>
@@ -51,13 +51,13 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="금액" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5tB-kA-kPa">
-                                <rect key="frame" x="26" y="234" width="323" height="30"/>
+                                <rect key="frame" x="26" y="230" width="323" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예산" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKw-wz-cbK">
-                                <rect key="frame" x="26" y="200" width="323" height="24"/>
+                                <rect key="frame" x="26" y="196" width="323" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADn-7c-zwM">
                                 <rect key="frame" x="36" y="590" width="303" height="37"/>
-                                <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9882352941176471" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Yyr-Lm-iXV"/>
                                 </constraints>
@@ -101,25 +101,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="top" secondItem="faC-zk-IQp" secondAttribute="bottom" constant="4" id="32h-Z6-frr"/>
+                            <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="top" secondItem="faC-zk-IQp" secondAttribute="bottom" id="32h-Z6-frr"/>
                             <constraint firstItem="gC5-Cd-lCL" firstAttribute="top" secondItem="ADn-7c-zwM" secondAttribute="bottom" constant="40" id="596-qp-BJN"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="BlR-pA-gdd"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="height" secondItem="cHL-ZT-Wzp" secondAttribute="height" id="CBo-rR-XUc"/>
                             <constraint firstItem="BKw-wz-cbK" firstAttribute="top" secondItem="Ow7-Bv-Kv4" secondAttribute="bottom" constant="10" id="CtF-YJ-LJE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cHL-ZT-Wzp" secondAttribute="trailing" constant="10" id="EYL-Wo-God"/>
                             <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="HcA-Sn-fzD"/>
-                            <constraint firstItem="Ow7-Bv-Kv4" firstAttribute="top" secondItem="cHL-ZT-Wzp" secondAttribute="bottom" constant="4" id="IHW-4B-R5T"/>
                             <constraint firstItem="ADn-7c-zwM" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="20" id="K9r-EM-28L"/>
-                            <constraint firstItem="cHL-ZT-Wzp" firstAttribute="top" secondItem="Io8-Cf-GYK" secondAttribute="bottom" constant="8" id="Ldy-xV-2yL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ow7-Bv-Kv4" secondAttribute="trailing" constant="10" id="ZDo-QU-DXh"/>
                             <constraint firstItem="faC-zk-IQp" firstAttribute="top" secondItem="Io8-Cf-GYK" secondAttribute="bottom" constant="8" id="eAq-J0-O6V"/>
                             <constraint firstItem="5tB-kA-kPa" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="eml-tc-QVR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BKw-wz-cbK" secondAttribute="trailing" constant="10" id="hqv-bD-muq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ow7-Bv-Kv4" secondAttribute="trailing" constant="10" id="hwL-KA-y4p"/>
                             <constraint firstItem="5tB-kA-kPa" firstAttribute="top" secondItem="BKw-wz-cbK" secondAttribute="bottom" constant="10" id="jBA-46-rZE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ADn-7c-zwM" secondAttribute="trailing" constant="20" id="lL1-9X-tpc"/>
                             <constraint firstItem="Io8-Cf-GYK" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="rmZ-qy-hI8"/>
                             <constraint firstItem="Io8-Cf-GYK" firstAttribute="top" secondItem="gQK-J9-JUh" secondAttribute="bottom" constant="30" id="uAB-HY-MQA"/>
+                            <constraint firstItem="cHL-ZT-Wzp" firstAttribute="top" secondItem="faC-zk-IQp" secondAttribute="top" id="yfu-aQ-zZv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Io8-Cf-GYK" secondAttribute="trailing" constant="10" id="yme-0K-27S"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5tB-kA-kPa" secondAttribute="trailing" constant="10" id="ytK-KD-PgQ"/>
                             <constraint firstItem="BKw-wz-cbK" firstAttribute="leading" secondItem="I3R-Ka-Pdj" secondAttribute="leadingMargin" constant="10" id="zbn-pB-QWa"/>
