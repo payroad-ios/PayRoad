@@ -17,7 +17,6 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         zoomScrollView.delegate = self
         zoomScrollView.maximumZoomScale = 5
         zoomScrollView.minimumZoomScale = 1
@@ -41,7 +40,8 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
             originFrame = sender.view!.frame
             
         case .changed:
-            let addY = translation.y >= 0 ? translation.y : 0
+            let addY = translation.y <= 0 && originFrame.midY >= targetView.frame.midY ? 0 : translation.y
+
             targetView.center = CGPoint(
                 x: targetView.center.x,
                 y: targetView.center.y + addY
@@ -56,18 +56,19 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
         case .ended:
             let velocity = sender.velocity(in: targetView)
             
-            if velocity.y >= 200 && abs(velocity.x) <= 200 && zoomScrollView.zoomScale == 1 {
+            if velocity.y >= 200 && abs(velocity.x) <= 550 && zoomScrollView.zoomScale == 1 {
                 let targetSize = targetView.frame.size
 
                 UIView.animate(withDuration: 0.2, animations: { [unowned self] in
                     UIApplication.shared.isStatusBarHidden = false
                     targetView.frame.origin.y = self.frame.maxY
-                      targetView.frame.size = CGSize(
+                    targetView.frame.size = CGSize(
                         width: targetSize.width * 0.5,
                         height: targetSize.height * 0.5
                     )
                     self.delegate.baseBlackView.alpha = 0
                 }, completion: { [unowned self] _ in
+                    self.restoreView(view: targetView)
                     self.delegate.dismiss(animated: false, completion: nil)
                 })
                 

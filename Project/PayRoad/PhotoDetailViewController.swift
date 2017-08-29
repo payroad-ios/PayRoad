@@ -23,13 +23,13 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     var currentPage = 0 {
         didSet {
             photoDetailViews[previousPage].resetZoomScale()
-            photoDetailViews[currentPage].resetZoomScale()
             delegate?.changedCurrentPhoto(currentPage)
         }
     }
     
     @IBOutlet weak var baseScrollView: UIScrollView!
     @IBOutlet weak var baseBlackView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
     
     override func viewDidLoad() {
         baseScrollView.delegate = self
@@ -38,11 +38,8 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        for item in photoDetailViews {
-            item.restoreView(view: item.detailImageView)
-            item.resetZoomScale()
-        }
+        closeButton.imageView?.image = closeButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+
         showSelectedIndexImage(index: selectedIndex)
     }
     
@@ -82,6 +79,12 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     func showSelectedIndexImage(index: Int) {
         let newOffset = view.frame.width * CGFloat(index)
         baseScrollView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: true)
+    }
+    
+    @IBAction func closeButtonDidTap(_ sender: Any) {
+        UIApplication.shared.isStatusBarHidden = false
+        photoDetailViews[currentPage].resetZoomScale()
+        dismiss(animated: true, completion: nil)
     }
     
     func panDownGuesture(_ sender: UITapGestureRecognizer) {
