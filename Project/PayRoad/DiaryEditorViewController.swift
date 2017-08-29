@@ -59,10 +59,4 @@ class DiaryEditorViewController: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    @IBAction func cancelButtonDidTap(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
 }

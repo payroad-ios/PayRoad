@@ -50,8 +50,7 @@ class DiaryTableViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editDiary" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let navigationController = segue.destination as! UINavigationController
-                let diaryEditorViewController = navigationController.topViewController as! DiaryEditorViewController
+                let diaryEditorViewController = segue.destination as! DiaryEditorViewController
                 let ymd = travelPeriodDates[indexPath.row]
                 diaryEditorViewController.travel = travel
                 diaryEditorViewController.ymd = ymd
@@ -102,7 +101,6 @@ extension DiaryTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "editDiary", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
