@@ -15,4 +15,14 @@ class TransactionMapCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        thumbnailImageView.layer.borderColor = ColorStore.lightGray.cgColor
+        thumbnailImageView.layer.borderWidth = 0.7
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = #imageLiteral(resourceName: "Icon_ImageDefault")
+    }
 }

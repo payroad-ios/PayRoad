@@ -148,7 +148,7 @@ extension TransactionMapViewController: UICollectionViewDelegate, UICollectionVi
         if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
             cell.thumbnailImageView.image = thumbnailImage
         } else {
-            cell.thumbnailImageView.image = nil
+            cell.thumbnailImageView.image = #imageLiteral(resourceName: "Icon_ImageDefault")
         }
         
         return cell
