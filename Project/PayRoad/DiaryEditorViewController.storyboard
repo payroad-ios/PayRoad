@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bb0-Lz-npS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n9x-dp-35e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IU2-lx-1w9">
-                                <rect key="frame" x="20" y="84" width="335" height="63.5"/>
+                                <rect key="frame" x="20" y="40" width="335" height="63.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAY 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zuk-yW-FUx">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="43"/>
@@ -39,13 +39,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 여행은 어땠나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-rD-WLa">
-                                <rect key="frame" x="20" y="177.5" width="335" height="24"/>
+                                <rect key="frame" x="20" y="133.5" width="335" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LWy-Gv-qz3">
-                                <rect key="frame" x="15" y="211.5" width="345" height="435.5"/>
+                                <rect key="frame" x="15" y="167.5" width="345" height="479.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -66,11 +66,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="DAY 1" id="a0n-kS-a5b">
-                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="oMe-FN-7q2">
-                            <connections>
-                                <action selector="cancelButtonDidTap:" destination="n9x-dp-35e" id="l4l-0R-0vY"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Icon_Check" id="M65-f9-lPU">
                             <connections>
                                 <action selector="saveButtonDidTap:" destination="n9x-dp-35e" id="2k8-co-Q1q"/>
@@ -87,27 +82,8 @@
             </objects>
             <point key="canvasLocation" x="775" y="99"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MFW-3D-q4d">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bb0-Lz-npS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6z3-F4-Jg5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="n9x-dp-35e" kind="relationship" relationship="rootViewController" id="3be-gC-Sj2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KmS-9W-mEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="8.8000000000000007" y="98.50074962518741"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="Icon_Cancel" width="17" height="16"/>
         <image name="Icon_Check" width="18" height="14"/>
     </resources>
 </document>
