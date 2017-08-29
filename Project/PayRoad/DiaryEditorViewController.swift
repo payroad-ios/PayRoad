@@ -55,8 +55,8 @@ class DiaryEditorViewController: UIViewController {
             try! realm.write {
                 travel.diaries.append(diary)
             }
-            view.endEditing(true)
         }
-        dismiss(animated: true, completion: nil)
+        view.endEditing(true)
+        navigationController?.popViewController(animated: true)
     }
 }
