@@ -145,7 +145,8 @@ extension CurrencyEditorViewController: UITextFieldDelegate {
         if textField === rateTextField {
             rateTextField.text = String(editedCurrency.rate)
         } else if textField === budgetTextField {
-            textField.text = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2, option: .default)
+            let budget = editedCurrency.budget.nonZeroString(maxDecimalPlace: 2, option: .default)
+            textField.text = budget == "0" ? "" : budget
         }
     }
     
