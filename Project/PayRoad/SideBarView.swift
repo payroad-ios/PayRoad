@@ -99,6 +99,6 @@ class SideBarView: UIView {
     }
     
     func hideConstant() -> CGFloat {
-        return -(self.menuView.frame.width + 10)
+        return -(self.menuView.frame.width + 20)
     }
 }
