@@ -25,6 +25,7 @@ class CurrencySelectTableViewController: UIViewController {
     
     var delegate: CurrencySelectTableViewControllerDelegate?
     
+    var travel: Travel!
     var ISOCurrencies = [ISOCurrency]()
     var filteredCurrencies = [ISOCurrency]()
     
@@ -42,6 +43,10 @@ class CurrencySelectTableViewController: UIViewController {
                 let currency = ISOCurrency(code: currencyCode, name: currencyName)
                 ISOCurrencies.append(currency)
             }
+        }
+        
+        for ignoredCurrency in travel.currencies {
+            ISOCurrencies = ISOCurrencies.filter { $0.code != ignoredCurrency.code }
         }
         
         filteredCurrencies = ISOCurrencies

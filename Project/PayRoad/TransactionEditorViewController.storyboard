@@ -21,101 +21,166 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aSC-Io-J67">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSC-Io-J67">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elh-QA-Ris">
-                                        <rect key="frame" x="32" y="312" width="79" height="79"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76X-HA-SdE">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="9Dl-f5-EnQ">
+                                                <rect key="frame" x="20" y="8" width="335" height="33"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="MiW-0X-285">
+                                                        <rect key="frame" x="0.0" y="0.0" width="273" height="33"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLF-6p-ZJJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="55" height="33"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="55" id="un1-13-t9B"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="17"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="타입">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                            </button>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용금액" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OXc-SZ-XA0">
+                                                                <rect key="frame" x="55" y="2" width="218" height="31"/>
+                                                                <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="22"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cwA-H1-HpL">
+                                                        <rect key="frame" x="273" y="2" width="62" height="31"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="화폐" borderStyle="line" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI5-Os-qdv" customClass="UnableInputTextField" customModule="PayRoad" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="53" height="31"/>
+                                                                <color key="textColor" red="0.2274509804" green="0.2274509804" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="22"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                            </textField>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_DropDown" translatesAutoresizingMaskIntoConstraints="NO" id="bhw-yv-zWn">
+                                                                <rect key="frame" x="53" y="13.5" width="9" height="4"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="62" id="8jE-Ju-xjS"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="hI5-Os-qdv" firstAttribute="height" secondItem="OXc-SZ-XA0" secondAttribute="height" id="ncb-uL-88p"/>
+                                                </constraints>
+                                            </stackView>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="categoryCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ih9-cq-ZjM">
+                                                <rect key="frame" x="0.0" y="51" width="375" height="64"/>
+                                                <color key="backgroundColor" red="0.98374048219999999" green="0.98374048219999999" blue="0.98374048219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="qXk-es-6RK"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="4WR-7B-Swh">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells/>
+                                            </collectionView>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="CategoryCollectionView" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-ce-8Bm" userLabel="Collection View BG">
+                                                <rect key="frame" x="0.0" y="51" width="375" height="64"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="항목명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pok-cr-oR7">
+                                                <rect key="frame" x="32" y="125" width="311" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="7jQ-xX-89s"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="24"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Qq-Md-60W" customClass="MultiImagePickerView" customModule="PayRoad" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="309" width="375" height="160"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="160" id="8nP-r5-S0x"/>
+                                                </constraints>
+                                            </view>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="날짜" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qep-jJ-Exz" customClass="UnableInputTextField" customModule="PayRoad" customModuleProvider="target">
+                                                <rect key="frame" x="34" y="479" width="307" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="IrV-kh-yxn"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hJP-Rj-smH">
+                                                <rect key="frame" x="32" y="169" width="311" height="130"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="130" id="fkE-ap-KoK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bj6-8d-GoQ" userLabel="TextView UnderLine View">
+                                                <rect key="frame" x="32" y="299" width="311" height="2"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="2" id="tcI-9W-heG"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="BhK-5O-cLI" appends="YES" id="9nw-Mf-utN"/>
-                                        </connections>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="항목명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oZS-VG-LuT">
-                                        <rect key="frame" x="32" y="177" width="311" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사용금액" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cBu-pu-8GF">
-                                        <rect key="frame" x="84" y="16" width="206" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="화폐" borderStyle="line" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DBv-UJ-QPz" customClass="UnableInputTextField" customModule="PayRoad" customModuleProvider="target">
-                                        <rect key="frame" x="292" y="16" width="47" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textField>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="categoryCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PJU-5w-jL1">
-                                        <rect key="frame" x="0.0" y="70" width="375" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.98374048223350252" green="0.98374048223350252" blue="0.98374048223350252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qJ2-sQ-h7J">
-                                            <size key="itemSize" width="60" height="70"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v7V-MW-MY6">
-                                                <rect key="frame" x="15" y="5" width="60" height="70"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </view>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0V-4b-hPv">
-                                        <rect key="frame" x="0.0" y="70" width="375" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="gYh-ce-8Bm" firstAttribute="bottom" secondItem="Ih9-cq-ZjM" secondAttribute="bottom" id="0UN-9x-jZV"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="centerX" secondItem="hJP-Rj-smH" secondAttribute="centerX" id="0YR-tA-tqv"/>
+                                            <constraint firstItem="Pok-cr-oR7" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="32" id="2IA-SO-kzV"/>
+                                            <constraint firstItem="9Dl-f5-EnQ" firstAttribute="top" secondItem="76X-HA-SdE" secondAttribute="top" constant="8" id="2kw-kW-zCP"/>
+                                            <constraint firstAttribute="trailing" secondItem="6Qq-Md-60W" secondAttribute="trailing" id="3ap-1Q-yEt"/>
+                                            <constraint firstItem="Ih9-cq-ZjM" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" id="5Sh-F7-OyU"/>
+                                            <constraint firstItem="hJP-Rj-smH" firstAttribute="top" secondItem="Pok-cr-oR7" secondAttribute="bottom" constant="4" id="9bf-vf-BLe"/>
+                                            <constraint firstAttribute="trailing" secondItem="Pok-cr-oR7" secondAttribute="trailing" constant="32" id="DMH-ov-z2k"/>
+                                            <constraint firstItem="gYh-ce-8Bm" firstAttribute="leading" secondItem="Ih9-cq-ZjM" secondAttribute="leading" id="DRl-dm-EJC"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="width" secondItem="hJP-Rj-smH" secondAttribute="width" id="KhU-sP-D0R"/>
+                                            <constraint firstItem="Bj6-8d-GoQ" firstAttribute="top" secondItem="hJP-Rj-smH" secondAttribute="bottom" id="VXO-7d-RFH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qep-jJ-Exz" secondAttribute="trailing" constant="34" id="Vqx-e4-6GD"/>
+                                            <constraint firstItem="Pok-cr-oR7" firstAttribute="top" secondItem="gYh-ce-8Bm" secondAttribute="bottom" constant="10" id="Vtw-fp-lR2"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ih9-cq-ZjM" secondAttribute="trailing" id="ZUa-0T-eYY"/>
+                                            <constraint firstItem="9Dl-f5-EnQ" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="20" id="eAT-AJ-CPX"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Dl-f5-EnQ" secondAttribute="trailing" constant="20" id="eXz-t0-dvn"/>
+                                            <constraint firstItem="6Qq-Md-60W" firstAttribute="top" secondItem="Bj6-8d-GoQ" secondAttribute="bottom" constant="8" id="ilq-kF-5oR"/>
+                                            <constraint firstAttribute="trailing" secondItem="hJP-Rj-smH" secondAttribute="trailing" constant="32" id="lEL-Ot-dv1"/>
+                                            <constraint firstItem="Ih9-cq-ZjM" firstAttribute="top" secondItem="9Dl-f5-EnQ" secondAttribute="bottom" constant="10" id="lTG-ak-nWQ"/>
+                                            <constraint firstItem="gYh-ce-8Bm" firstAttribute="trailing" secondItem="Ih9-cq-ZjM" secondAttribute="trailing" id="mmw-3r-T54"/>
+                                            <constraint firstItem="gYh-ce-8Bm" firstAttribute="top" secondItem="Ih9-cq-ZjM" secondAttribute="top" id="pu5-2u-am1"/>
+                                            <constraint firstItem="6Qq-Md-60W" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" id="rir-eJ-Ojj"/>
+                                            <constraint firstItem="hJP-Rj-smH" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="32" id="ylu-aA-Gww"/>
+                                            <constraint firstItem="Qep-jJ-Exz" firstAttribute="top" secondItem="6Qq-Md-60W" secondAttribute="bottom" constant="10" id="ym8-EX-bWn"/>
+                                            <constraint firstItem="Qep-jJ-Exz" firstAttribute="leading" secondItem="76X-HA-SdE" secondAttribute="leading" constant="34" id="z9c-zs-rhu"/>
+                                        </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="내용" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="keC-in-GfN">
-                                        <rect key="frame" x="32" y="235" width="311" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="날짜" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NoO-vt-9dj" customClass="UnableInputTextField" customModule="PayRoad" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="441" width="311" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="24"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                    </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Icon_DropDown" translatesAutoresizingMaskIntoConstraints="NO" id="Cyp-bm-slv">
-                                        <rect key="frame" x="342" y="31" width="8" height="4"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kme-S0-gUi">
-                                        <rect key="frame" x="25" y="19" width="56" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="17"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="타입">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="76X-HA-SdE" secondAttribute="trailing" id="1cR-wq-1AR"/>
+                                    <constraint firstItem="76X-HA-SdE" firstAttribute="centerY" secondItem="aSC-Io-J67" secondAttribute="centerY" id="2GN-3Y-D0s"/>
+                                    <constraint firstItem="76X-HA-SdE" firstAttribute="leading" secondItem="aSC-Io-J67" secondAttribute="leading" id="CQ4-uD-blV"/>
+                                    <constraint firstItem="76X-HA-SdE" firstAttribute="centerX" secondItem="aSC-Io-J67" secondAttribute="centerX" id="Cq4-go-bAs"/>
+                                    <constraint firstAttribute="bottom" secondItem="76X-HA-SdE" secondAttribute="bottom" id="aPF-tY-36m"/>
+                                    <constraint firstItem="76X-HA-SdE" firstAttribute="top" secondItem="aSC-Io-J67" secondAttribute="top" id="zgJ-BL-opl"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aSC-Io-J67" firstAttribute="top" secondItem="cQ5-I9-1oD" secondAttribute="top" id="6uA-AK-9kp"/>
-                            <constraint firstItem="aSC-Io-J67" firstAttribute="leading" secondItem="cQ5-I9-1oD" secondAttribute="leading" id="QWI-xG-SE4"/>
-                            <constraint firstAttribute="bottom" secondItem="aSC-Io-J67" secondAttribute="bottom" id="k2V-aV-SMy"/>
-                            <constraint firstAttribute="trailing" secondItem="aSC-Io-J67" secondAttribute="trailing" id="kWT-9J-Keq"/>
+                            <constraint firstItem="aSC-Io-J67" firstAttribute="leading" secondItem="cQ5-I9-1oD" secondAttribute="leading" id="21y-KN-dg9"/>
+                            <constraint firstAttribute="trailing" secondItem="aSC-Io-J67" secondAttribute="trailing" id="EpO-ep-xI0"/>
+                            <constraint firstItem="aSC-Io-J67" firstAttribute="top" secondItem="A3V-MI-uLo" secondAttribute="bottom" id="Y11-yf-glQ"/>
+                            <constraint firstItem="mlY-GX-VH5" firstAttribute="top" secondItem="aSC-Io-J67" secondAttribute="bottom" id="sL4-Rq-7OH"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -128,15 +193,16 @@
                         <barButtonItem key="rightBarButtonItem" image="Icon_Check" id="QCy-aZ-DNJ"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="amountTextField" destination="cBu-pu-8GF" id="kJP-Bp-ioi"/>
-                        <outlet property="categoryCollectionView" destination="PJU-5w-jL1" id="Amv-pd-dCw"/>
-                        <outlet property="categoryCollectionViewBG" destination="H0V-4b-hPv" id="23S-RU-Ppw"/>
-                        <outlet property="contentTextView" destination="keC-in-GfN" id="m0W-7b-qBo"/>
-                        <outlet property="currencyTextField" destination="DBv-UJ-QPz" id="AIU-R2-ElT"/>
-                        <outlet property="dateEditTextField" destination="NoO-vt-9dj" id="7Ay-fZ-5zS"/>
-                        <outlet property="nameTextField" destination="oZS-VG-LuT" id="Tew-e4-SxZ"/>
-                        <outlet property="payTypeToggleButton" destination="kme-S0-gUi" id="s5E-Lc-WBZ"/>
-                        <outlet property="transactionImageView" destination="elh-QA-Ris" id="2qu-EC-ocC"/>
+                        <outlet property="amountTextField" destination="OXc-SZ-XA0" id="nK2-NN-NVc"/>
+                        <outlet property="categoryCollectionView" destination="Ih9-cq-ZjM" id="bRp-ys-cBv"/>
+                        <outlet property="categoryCollectionViewBG" destination="gYh-ce-8Bm" id="Kin-UW-TAI"/>
+                        <outlet property="contentTextView" destination="hJP-Rj-smH" id="Fet-gg-ohN"/>
+                        <outlet property="currencyTextField" destination="hI5-Os-qdv" id="yuz-xM-z8y"/>
+                        <outlet property="dateEditTextField" destination="Qep-jJ-Exz" id="77i-L3-C9F"/>
+                        <outlet property="multiImagePickerView" destination="6Qq-Md-60W" id="9wF-6f-FEh"/>
+                        <outlet property="nameTextField" destination="Pok-cr-oR7" id="dlI-3J-bym"/>
+                        <outlet property="payTypeToggleButton" destination="qLF-6p-ZJJ" id="i0H-B2-CfH"/>
+                        <outlet property="textViewUnderLineView" destination="Bj6-8d-GoQ" id="Pbd-aw-eE7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8b-0h-UTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +219,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0bd-wK-JTh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B4n-EG-RkE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="B4n-EG-RkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

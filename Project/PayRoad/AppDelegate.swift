@@ -7,24 +7,36 @@
 //
 
 import UIKit
+
 import RealmSwift
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    enum ShortcutItemType: String {
+        case addTravel = "AddTravel"
+        case addTransaction = "AddTransaction"
+    }
+    
     var window: UIWindow?
+    
+    let realm = try! Realm()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         RealmInitializer.initializeCategories()
-//        application.statusBarStyle = .lightContent
-        
+
         //UINavigationBar customize
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().barTintColor = ColorStore.mainSkyBlue
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UINavigationBar.appearance().tintColor = ColorStore.basicBlack
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorStore.basicBlack]
         
+        // Google Maps, Place initialize API Keys
+        GMSServices.provideAPIKey(kMapsAPIKey)
+        GMSPlacesClient.provideAPIKey(kPlacesAPIKey)
         
         return true
     }
@@ -50,7 +62,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(handleQuickAction(shortcutItem))
+    }
+    
+    func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        
+        var quickActionHandled = false
+        
+        let type = shortcutItem.type.components(separatedBy: ".").last!
+        if let shortcutItemType = ShortcutItemType.init(rawValue: type) {
+            
+            let travelTableViewController = UIStoryboard.loadViewController(from: .TravelTableView, ID: "TravelTableViewController") as! TravelTableViewController
+            let navigationController = UINavigationController(rootViewController: travelTableViewController)
+            self.window?.rootViewController = navigationController
+            self.window?.makeKeyAndVisible()
+            
+            switch shortcutItemType {
+            case .addTravel:
+                travelTableViewController.performSegue(withIdentifier: "addTravel", sender: nil)
+                quickActionHandled = true
+            
+            case .addTransaction:
+                guard let travel = realm.objects(Transaction.self).last?.travel.first else {
+                    return false
+                }
+                
+                let transactionTableViewController = UIStoryboard.loadViewController(from: .TransactionTableView, ID: "Travel") as! TransactionTableViewController
+                transactionTableViewController.travel = travel
+                navigationController.pushViewController(transactionTableViewController, animated: false)
+                
+                let transactionEditorViewController = UIStoryboard.loadViewController(from: .TransactionEditorView, ID: "TransactionEditorViewController") as! TransactionEditorViewController
+                transactionEditorViewController.travel = travel
+                
+                let transactionEditorNavigationController = UINavigationController(rootViewController: transactionEditorViewController)
+                
+                self.window?.rootViewController?.present(transactionEditorNavigationController, animated: true, completion: nil)
+                quickActionHandled = true
+            }
+        }
+        
+        return quickActionHandled
+    }
 }
 

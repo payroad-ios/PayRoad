@@ -13,7 +13,7 @@ class Currency: Object {
     dynamic var code = ""
     dynamic var rate: Double = 1.0
     dynamic var budget: Double = 0.0
-    
+    dynamic var lastUpdateDate = Date()
     let travel = LinkingObjects(fromType: Travel.self, property: "currencies")
     
     override static func primaryKey() -> String? {

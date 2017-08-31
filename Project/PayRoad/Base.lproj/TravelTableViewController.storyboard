@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PayRoad-->
+        <!--Travel Table View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TravelTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TravelTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TravelTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,9 +21,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8GV-yg-0eI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.9838404605263158" green="0.9838404605263158" blue="0.9838404605263158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새 여행을 추가하세요!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IuP-6S-CYZ">
+                                    <rect key="frame" x="0.0" y="168" width="375" height="118"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Thin" family="Apple SD Gothic Neo" pointSize="22"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="travelCell" rowHeight="140" id="8vu-1n-wAi" customClass="TravelTableViewCell" customModule="PayRoad" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="140"/>
@@ -60,14 +67,15 @@
                             <constraint firstAttribute="trailing" secondItem="8GV-yg-0eI" secondAttribute="trailing" id="qXF-s5-aKI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="PayRoad" id="4dE-vc-FwP">
+                    <navigationItem key="navigationItem" id="4dE-vc-FwP">
                         <barButtonItem key="rightBarButtonItem" image="Icon_Add" id="kIF-rI-xH4">
                             <connections>
-                                <segue destination="KNu-eJ-E6n" kind="presentation" identifier="" id="Hnw-iv-bYC"/>
+                                <segue destination="KNu-eJ-E6n" kind="presentation" identifier="addTravel" id="Hnw-iv-bYC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="noticeLabel" destination="IuP-6S-CYZ" id="vjs-pN-K8J"/>
                         <outlet property="tableView" destination="8GV-yg-0eI" id="fpS-rK-hf5"/>
                     </connections>
                 </viewController>

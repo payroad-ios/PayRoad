@@ -21,6 +21,7 @@ class TransactionTableViewController: UIViewController {
 
     var transactionsNotificationToken: NotificationToken? = nil
     var travelNotificationToken: NotificationToken? = nil
+    var currencyNotificationToken: NotificationToken? = nil
     
     var travelPeriodDates = [YMD]()
     var dateDictionary = [YMD: [Transaction]]()
@@ -35,11 +36,13 @@ class TransactionTableViewController: UIViewController {
     
     var currentSelectedDate: YMD? {
         didSet {
-            filterTransaction(selected: currentSelectedDate)
+            sortTransactionsSelectedDate()
         }
     }
     
     var pullToAddLabel = UILabel()
+    
+    let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -56,13 +59,25 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        let window = UIApplication.shared.keyWindow!
+        window.addSubview(sideBar)
+
         title = travel.name
+        
+        if travel.currencies.count == 0 {
+            let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
+            let navigationController = UINavigationController(rootViewController: currencyTableViewController)
+            currencyTableViewController.travel = self.travel
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
         sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.separatorColor = ColorStore.placeHolderGray
+        tableView.separatorColor = ColorStore.unselectGray
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.showsVerticalScrollIndicator = false
         
@@ -80,25 +95,45 @@ class TransactionTableViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         
         allListButton.isSelected = true
-        allListButton.setTitleColor(ColorStore.darkGray, for: .normal)
-        allListButton.setTitleColor(ColorStore.darkGray, for: .selected)
-        allListButton.backgroundColor = ColorStore.pastelYellow
+        allListButton.setTitleColor(ColorStore.basicBlack, for: .normal)
+        allListButton.setTitleColor(UIColor.white, for: .selected)
+        allListButton.backgroundColor = ColorStore.mainSkyBlue
+        allListButton.layer.shadowColor = ColorStore.darkGray.cgColor
+        allListButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        allListButton.layer.shadowRadius = 3
+        allListButton.layer.shadowOpacity = 0.4
         extractDatePeriod()
         
         transactionsNotificationToken = travel.transactions.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             self?.initDataStructures()
-            self?.filterTransaction(selected: self?.currentSelectedDate)
+            self?.sortTransactionsSelectedDate()
+            
+            if let lastCurrency = self?.travel.transactions.last?.currency,
+                let lastCurrencyIndex = self?.travel.currencies.index(of: lastCurrency) {
+                self?.totalSpendingIndex = lastCurrencyIndex
+            }
             self?.displayTotalSpendingCurrency()
         }
         
-//        NotificationToken 미 해제 시 해당 객체 삭제 불가. (에러 호출)
         travelNotificationToken = travel.addNotificationBlock{ [weak self] _ in
             self?.title = self?.travel.name
             self?.extractDatePeriod()
             self?.collectionView.reloadData()
+            self?.sortTransactionsSelectedDate()
+        }
+        
+        currencyNotificationToken = travel.currencies.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            self?.initDataStructures()
+            self?.sortTransactionsSelectedDate()
+            self?.displayTotalSpendingCurrency()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopNotificationToken), name: NSNotification.Name(rawValue: "stopTravelNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
+    }
+    
+    func reloadTableView(_ sender: Notification) {
+        tableView.reloadData()
     }
     
     @IBAction func editButtonDidTap(_ sender: Any) {
@@ -132,27 +167,26 @@ class TransactionTableViewController: UIViewController {
         present(moreOptionAlertController, animated: true, completion: nil)
     }
     
-    func stopNotificationToken() {
-        travelNotificationToken?.stop()
+    func presentDiaryView() {
+        let diaryTableViewController = UIStoryboard.loadViewController(from: .DiaryTableView, ID: "DiaryTableViewController") as! DiaryTableViewController
+        let navigationController = UINavigationController(rootViewController: diaryTableViewController)
+        diaryTableViewController.travel = self.travel
+        
+        present(navigationController, animated: true, completion: nil)
     }
     
-    //TODO: 스트링 길다. 나중에 자릅시다.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "editTransaction" {
-            guard let indexPath = tableView.indexPathForSelectedRow,
-                let navigationController = segue.destination as? UINavigationController,
-                let editTransactionTableViewController = navigationController.topViewController as? TransactionEditorViewController
-                else {
-                    return
-            }
-            let key = dynamicDateList[indexPath.section]
-            let selectedTransaction = dateDictionary[key]?[indexPath.row]
-            
-            editTransactionTableViewController.editorMode = .edit
-            editTransactionTableViewController.travel = travel
-            editTransactionTableViewController.originTransaction = selectedTransaction
-            editTransactionTableViewController.standardDate = selectedTransaction?.dateInRegion
-        }
+    func presentMapView() {
+        let transactionMapViewController = UIStoryboard.loadViewController(from: .TransactionMapView, ID: "TransactionMapViewController") as! TransactionMapViewController
+        let navigationController = UINavigationController(rootViewController: transactionMapViewController)
+        transactionMapViewController.travel = self.travel
+        
+        present(navigationController, animated: true, completion: nil)
+    }
+    
+    func stopNotificationToken() {
+        travelNotificationToken?.stop()
+        transactionsNotificationToken?.stop()
+        currencyNotificationToken?.stop()
     }
     
     func initDataStructures() {
@@ -201,15 +235,19 @@ class TransactionTableViewController: UIViewController {
         }
     }
     
-    func filterTransaction(selected: YMD?) {
+    func sortTransactionsSelectedDate() {
         defer {
             tableView.reloadData()
         }
-        guard let date = selected else {
+        guard let date = currentSelectedDate else {
             dynamicDateList = originDateList
             return
         }
         dynamicDateList = [date]
+        
+        let index = travelPeriodDates.index(of: date)
+        let indexPath = IndexPath(row: index!, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     func extractDatePeriod() {
@@ -221,32 +259,34 @@ class TransactionTableViewController: UIViewController {
     
     @IBAction func allListButtonDidTap(_ sender: Any) {
         allListButton.isSelected = true
-        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
+        allListButton.backgroundColor = allListButton.isSelected ? ColorStore.mainSkyBlue : UIColor.white
         
         currentSelectedDate = nil
         let seletedIndexPath = collectionView.indexPathsForSelectedItems
         guard let indexPath = seletedIndexPath?.first else { return }
         collectionView.deselectItem(at: indexPath, animated: false)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateSelectCollectionViewCell else { return }
+        cell.dayLabel.textColor = ColorStore.basicBlack
     }
     
     @IBAction func paymentTypeButtonDidTap(_ sender: Any) {
         switch currentPaymentType {
         case .all:
             currentPaymentType = .cash
-            paymentTypeButton.setTitle("현금", for: .normal)
+            paymentTypeButton.setTitle("  현금", for: .normal)
             sortedTransactions = travel.transactions.filter("isCash == true").sorted(byKeyPath: "dateInRegion.date", ascending: false)
         case .cash:
             currentPaymentType = .card
-            paymentTypeButton.setTitle("카드", for: .normal)
+            paymentTypeButton.setTitle("  카드", for: .normal)
             sortedTransactions = travel.transactions.filter("isCash == false").sorted(byKeyPath: "dateInRegion.date", ascending: false)
         case .card:
             currentPaymentType = .all
-            paymentTypeButton.setTitle("전체", for: .normal)
+            paymentTypeButton.setTitle("  전체", for: .normal)
             sortedTransactions = travel.transactions.sorted(byKeyPath: "dateInRegion.date", ascending: false)
         }
         
         initDataStructures()
-        filterTransaction(selected: currentSelectedDate)
+        sortTransactionsSelectedDate()
         displayTotalSpendingCurrency()
     }
     
@@ -255,7 +295,20 @@ class TransactionTableViewController: UIViewController {
         displayTotalSpendingCurrency()
     }
     
+    @IBAction func showSideBar(_ sender: Any) {
+        self.view.isUserInteractionEnabled = false
+        sideBar.delegate = self
+        sideBar.show() {
+            self.view.isUserInteractionEnabled = true
+        }
+    }
+    
     func displayTotalSpendingCurrency() {
+        
+        if travel.currencies.count == 0 {
+            return
+        }
+        
         if totalSpendingIndex >= travel.currencies.count {
             totalSpendingIndex = 0
         }
@@ -264,12 +317,13 @@ class TransactionTableViewController: UIViewController {
         var spendingRate: Float = 0.0
         
         if let amountByCurrency = totalSpendingByCurrency[currency] {
-            spendingLabel.text = "\(String(format: "%.2f", amountByCurrency)) \(currency.code)"
-            balanceLabel.text = "\(currency.budget - amountByCurrency) \(currency.code)"
+            spendingLabel.text = "\(amountByCurrency.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
+            let balance = currency.budget - amountByCurrency
+            balanceLabel.text = "\(balance.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
             spendingRate = Float(amountByCurrency / currency.budget)
         } else {
             spendingLabel.text = "0 \(currency.code)"
-            balanceLabel.text = "\(currency.budget) \(currency.code)"
+            balanceLabel.text = "\(currency.budget.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency.code)"
         }
         
         if spendingRate < 0 || spendingRate > 1 {
@@ -277,13 +331,14 @@ class TransactionTableViewController: UIViewController {
         }
         
         spendingProgressView.setProgress(spendingRate, animated: true)
+        spendingProgressView.progressTintColor = spendingProgressView.progress > 0.9 ? ColorStore.destructiveRed : ColorStore.mainSkyBlue
+
         //TODO: 소숫점 자릿수 정하기
-        percentageLabel.text = "\(String(format: "%.0f", spendingRate * 100))%"
+        percentageLabel.text = "\(NumberStringUtil.string(number: spendingRate * 100, dropPoint: 0))%"
     }
     
     deinit {
-        transactionsNotificationToken?.stop()
-        travelNotificationToken?.stop()
+        stopNotificationToken()
     }
 }
 
@@ -306,26 +361,30 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeight = tableViewSectionHeight
         let trailingSpace = CGFloat(4)
-        let fontSize = CGFloat(14)
+        let fontSize = CGFloat(13)
         
         let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: sectionHeight))
         let ymdLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width - (trailingSpace * 2), height: sectionHeight))
         let totalAmountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width  - (trailingSpace * 2), height: sectionHeight))
         
-        sectionView.backgroundColor = ColorStore.lightGray
+        sectionView.backgroundColor = ColorStore.lightestGray
+        sectionView.addUpperline(color: ColorStore.lightGray, borderWidth: 1)
+        sectionView.addUnderline(color: ColorStore.lightGray, borderWidth: 1)
         
         ymdLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
         ymdLabel.font = ymdLabel.font.withSize(fontSize)
+        ymdLabel.textColor = ColorStore.basicBlack
         
         totalAmountLabel.textAlignment = .right
         totalAmountLabel.center = .init(x: sectionView.frame.width / 2, y: sectionHeight / 2)
         totalAmountLabel.font = totalAmountLabel.font.withSize(fontSize)
+        totalAmountLabel.textColor = ColorStore.basicBlack
         
         ymdLabel.text = " \(dynamicDateList[section].string())"
         
         let ymd = dynamicDateList[section]
         if let totalAmount = totalSpendingByYMD[ymd] {
-            totalAmountLabel.text = "\(String(format: "%.2f", totalAmount)) \(travel.currencies.first!.code)"
+            totalAmountLabel.text = "\(totalAmount.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(travel.currencies.first!.code)"
         }
         
         sectionView.addSubview(ymdLabel)
@@ -343,29 +402,39 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
             return cell
         }
         
-        if let thumbnailURL = transaction.photos.first?.fileURL {
-            cell.thumbnailImageView.image = FileUtil.loadImageFromDocumentDir(filePath: thumbnailURL)
+        cell.transactionNameLabel.text = transaction.name
+        cell.transactionAmountLabel.text = transaction.stringAmountWithCode(order: .first)
+        cell.paymentImageView.image = transaction.paymentImage()
+        
+        if let thumbnailImage = transaction.photos.first?.fetchPhoto() {
+            cell.thumbnailImageView.image = thumbnailImage
         }
         
-        cell.transactionNameLabel.text = transaction.name
-        cell.transactionAmountLabel.text = "\(transaction.currency?.code ?? "") \(transaction.amount)"
-        
-        if transaction.isCash {
-            
-        } else {
-            
+        if let category = transaction.category,
+            let categoryImage = UIImage(named: category.assetName) {
+            cell.categoryImageView.image = categoryImage
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "editTransaction", sender: nil)
+        guard let indexPath = tableView.indexPathForSelectedRow else {
+            return
+        }
+        
+        let key = dynamicDateList[indexPath.section]
+        let selectedTransaction = dateDictionary[key]?[indexPath.row]
+        
+        let transactionDetailViewController = UIStoryboard.loadViewController(from: .TransactionDetailView, ID: "TransactionDetailViewController") as! TransactionDetailViewController
+        transactionDetailViewController.transaction = selectedTransaction
+        navigationController?.pushViewController(transactionDetailViewController, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90.0
+        return 80
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -381,7 +450,7 @@ extension TransactionTableViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.contentOffset.y
         pullToAddLabel.frame = CGRect(x: 0, y: height, width: view.frame.width, height: -height)
-        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "놓아서 새 항목 추가" : "당겨서 새 항목 추가"
+        pullToAddLabel.text = !(scrollView.contentOffset.y >= -50) ? "-  놓아서 새 항목 추가" : "↓ 당겨서 새 항목 추가"
         noticeLabel.alpha = 1 - (-scrollView.contentOffset.y / 50)
     }
     
@@ -415,13 +484,25 @@ extension TransactionTableViewController: UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateSelectCollectionViewCell
         let travelPeriodDate = travelPeriodDates[indexPath.row]
         cell.dayLabel.text = "\(travelPeriodDate.day)\n\(travelPeriodDate.monthName)"
+        
+        cell.dayLabel.textColor = collectionView.indexPathsForSelectedItems?.contains(indexPath) == true ? ColorStore.mainSkyBlue : ColorStore.basicBlack
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         allListButton.isSelected = false
         allListButton.backgroundColor = allListButton.isSelected ? ColorStore.pastelYellow : UIColor.white
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! DateSelectCollectionViewCell
+        cell.dayLabel.textColor = ColorStore.mainSkyBlue
+
         currentSelectedDate = travelPeriodDates[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? DateSelectCollectionViewCell {
+            cell.dayLabel.textColor = ColorStore.basicBlack
+        }
     }
 }
 

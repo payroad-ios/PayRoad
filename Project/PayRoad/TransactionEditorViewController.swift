@@ -9,16 +9,23 @@
 import UIKit
 
 import RealmSwift
+import GooglePlacePicker
 
-class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
-    
+protocol TransactionEditorDelegate {
+    func edited(transaction: Transaction)
+}
+
+class TransactionEditorViewController: UIViewController {
     let realm = try! Realm()
+    
+    var delegate: TransactionEditorDelegate?
     
     var travel: Travel!
     var currency: Currency!
-    var originTransaction: Transaction!
+    var transaction = Transaction()
     
     var editorMode: EditorMode = .new
+    var titleName: String!
     
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
@@ -29,7 +36,6 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     //User Input Data
     var standardDate: DateInRegion? = nil
-    var inputCategory: CategoryTEST? = nil
     var inputImages: [UIImage]? = nil
     var isCash = true {
         didSet {
@@ -37,23 +43,38 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    var category: Category? = nil
+    lazy var categories: Results<Category> = { [unowned self] in
+        return self.realm.objects(Category.self)
+    }()
+    
+    let locationManager = CLLocationManager()
+    var currentLocationCoordinate: CLLocationCoordinate2D? // 위치 -> 현 위치 또는 사용자가 Google Place Picker로 선택한 위치
+    var currentLocationName: String? // 위치에 대한 지역 이름 (CLGeocoder)
+    
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var currencyTextField: UITextField!
-    @IBOutlet weak var transactionImageView: UIImageView!
     @IBOutlet weak var payTypeToggleButton: UIButton!
     @IBOutlet weak var dateEditTextField: UITextField!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionViewBG: UIView!
+    @IBOutlet weak var multiImagePickerView: MultiImagePickerView!
+    @IBOutlet weak var textViewUnderLineView: UIView!
     
     override func loadView() {
         super.loadView()
-        nameTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
-        contentTextView.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
-        dateEditTextField.addUnderline(color: ColorStore.placeHolderGray, borderWidth: 0.5)
+        
+        nameTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        dateEditTextField.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        dateEditTextField.addUnderline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        textViewUnderLineView.addUpperline(color: ColorStore.unselectGray, borderWidth: 0.5)
+        contentTextView.placeholder = "내용을 입력해주세요"
+        nameTextField.borderStyle = .none
+        
         payTypeToggleButton.backgroundColor = ColorStore.mainSkyBlue
-        payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 3
+        payTypeToggleButton.layer.cornerRadius = payTypeToggleButton.frame.height / 5
         payTypeToggleButton.setTitleColor(payTypeToggleButton.currentTitleColor.withAlphaComponent(0.8), for: .highlighted)
         payTypeToggleButton.setTitle("현금", for: .normal)
         payTypeToggleButton.setTitle("카드", for: .selected)
@@ -67,10 +88,19 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.requestWhenInUseAuthorization()
+        
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.showsHorizontalScrollIndicator = false
         currencyTextField.delegate = self
+        
+        multiImagePickerView.delegate = self
+        
+        let bgTapGestureReconizer: UITapGestureRecognizer = .init(target: self, action: #selector(backgroundDidTap(_:)))
+        bgTapGestureReconizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(bgTapGestureReconizer)
         
         let nibCell = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
         categoryCollectionView.register(nibCell, forCellWithReuseIdentifier: "categoryCell")
@@ -79,6 +109,8 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
 
         setupCurrencyPicker()
         adjustViewMode()
+        
+        nameTextField.delegate = self
     }
     
     func setupCurrencyPicker() {
@@ -97,6 +129,79 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
         print("\(isCash ? "현금" : "카드") 선택됨")
     }
     
+    
+    func setTitleView(subTitle: String?) -> UIView {
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 1, width: 0, height: 0))
+        titleLabel.text = titleName
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = ColorStore.basicBlack
+        titleLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 17)
+        titleLabel.textAlignment = .center
+        titleLabel.sizeToFit()
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        
+        let attributed = [
+            NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 13),
+            NSForegroundColorAttributeName: ColorStore.darkGray,
+            NSParagraphStyleAttributeName: style
+        ]
+        
+        let subTitleButton = UIButton(frame: CGRect(x: 0, y: 22, width: 0, height: 0))
+        subTitleButton.backgroundColor = UIColor.clear
+        subTitleButton.setTitle(" " + (subTitle ?? "위치 설정"), for: .normal)
+        subTitleButton.setImage(#imageLiteral(resourceName: "Icon_LocationPin"), for: .normal)
+        
+        let attString = NSMutableAttributedString(string: subTitleButton.titleLabel!.text!)
+        attString.addAttributes(attributed, range: NSMakeRange(0, attString.length))
+        
+        subTitleButton.setAttributedTitle(attString, for: .normal)
+        subTitleButton.sizeToFit()
+        subTitleButton.addTarget(self, action: #selector(setLocationInfo), for: .touchUpInside)
+        
+        let imageView = UIImageView(frame: CGRect(x: subTitleButton.frame.maxX + 2, y: subTitleButton.frame.midY - 3, width: 8, height: 4))
+        imageView.image = #imageLiteral(resourceName: "Icon_DropDown")
+        
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: max(titleLabel.frame.width, subTitleButton.frame.width), height: 40))
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(subTitleButton)
+        titleView.addSubview(imageView)
+        
+        let widthGap = subTitleButton.frame.width - titleLabel.frame.width
+        
+        if widthGap < 0 {
+            let gap = abs(widthGap / 2)
+            subTitleButton.frame.origin.x = gap
+            imageView.frame.origin.x = imageView.frame.origin.x + gap
+        } else {
+            titleLabel.frame.origin.x = widthGap / 2
+        }
+        return titleView
+    }
+    
+    func updateTitleView(subTitle: String?) {
+        navigationItem.titleView = setTitleView(subTitle: subTitle)
+    }
+    
+    //TODO: Location Setting Method
+    func setLocationInfo() {
+        var viewport: GMSCoordinateBounds? = nil
+        
+        if let currentLocationCoordinate = currentLocationCoordinate {
+            let center = currentLocationCoordinate
+            let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.005, longitude: center.longitude + 0.005)
+            let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.005, longitude: center.longitude - 0.005)
+            viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        }
+        
+        let config = GMSPlacePickerConfig(viewport: viewport)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        
+        present(placePicker, animated: true, completion: nil)
+    }
+    
     func pickerDonePressed() {
         self.view.endEditing(true)
     }
@@ -104,6 +209,10 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         view.endEditing(true)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func backgroundDidTap(_ sender: Any) {
+        view.endEditing(true)
     }
     
     func checkIsExistInputField() -> Bool {
@@ -121,6 +230,27 @@ class TransactionEditorViewController: UIViewController, UITextFieldDelegate {
             UIAlertController.oneButtonAlert(target: self, title: "에러", message: "항목명을 입력해주세요.")
             return false
         }
+        return true
+    }
+    
+    func generateLocaionName(from placemark: CLPlacemark) -> String {
+        var locationComponents = [String]()
+        
+        if let country = placemark.country { locationComponents.append(country) }
+        if let administrativeArea = placemark.administrativeArea { locationComponents.append(administrativeArea) }
+        if let locality = placemark.locality { locationComponents.append(locality) }
+        if let subLocality = placemark.subLocality { locationComponents.append(subLocality) }
+
+        return locationComponents.joined(separator: " ")
+    }
+}
+
+extension TransactionEditorViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === nameTextField {
+            textField.resignFirstResponder()
+        }
+        
         return true
     }
 }
@@ -146,11 +276,13 @@ extension TransactionEditorViewController: UIPickerViewDelegate, UIPickerViewDat
 
 extension TransactionEditorViewController {
     fileprivate func adjustViewMode() {
-        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: nil)
+        let barButtonItem: UIBarButtonItem = .init(image: #imageLiteral(resourceName: "Icon_Check"), style: .plain, target: self, action: #selector(writeButtonDidTap))
+        navigationItem.rightBarButtonItem = barButtonItem
+        
         switch self.editorMode {
         case .new:
-            barButtonItem.action = #selector(saveButtonDidTap)
-            
+            titleName = "새 항목"
+            updateTitleView(subTitle: nil)
             //TODO: PickerView 없애면서 들어내야될 코드
             if let lastCurrency = travel.transactions.last?.currency {
                 currency = lastCurrency
@@ -159,92 +291,147 @@ extension TransactionEditorViewController {
                 currency = travel.currencies.first!
                 currencyTextField.text = currency?.code
             }
-        case .edit:
-            barButtonItem.action = #selector(editButtonDidTap)
-            self.navigationItem.title = "항목 수정"
-            nameTextField?.text = originTransaction.name
-            amountTextField?.text = String(originTransaction.amount)
-            currencyTextField?.text = originTransaction.currency?.code
-            contentTextView.text = originTransaction.content
-            isCash = originTransaction.isCash
             
-            if let photoURL = originTransaction.photos.first?.fileURL,
-                let image = FileUtil.loadImageFromDocumentDir(filePath: photoURL) {
-                transactionImageView.image = image
+            if let _category = realm.object(ofType: Category.self, forPrimaryKey: "category-etc") {
+                category = _category
             }
             
-            currency = originTransaction.currency
+            let status = CLLocationManager.authorizationStatus()
+            
+            if status == CLAuthorizationStatus.authorizedWhenInUse {
+                if let currentLocation = locationManager.location {
+                    currentLocationCoordinate = currentLocation.coordinate
+                    updateTitleView(subTitle: "현 위치")
+                    
+                    CLGeocoder().reverseGeocodeLocation(currentLocation, completionHandler: { placemarks, error in
+                        if let placemark = placemarks?.first {
+                            self.currentLocationName = self.generateLocaionName(from: placemark)
+                            self.updateTitleView(subTitle: self.currentLocationName)
+                        }
+                    })
+                }
+            }
+            
+        case .edit:
+            titleName = "항목 수정"
+            updateTitleView(subTitle: nil)
+            nameTextField?.text = transaction.name
+            amountTextField?.text = String(transaction.amount)
+            currencyTextField?.text = transaction.currency?.code
+            contentTextView.text = transaction.content
+            isCash = transaction.isCash
+            currency = transaction.currency
+            category = transaction.category
+            
+            if let coordinate = transaction.coordinate {
+                currentLocationCoordinate = coordinate
+                
+                if let placeName = transaction.placeName {
+                    updateTitleView(subTitle: placeName)
+                } else {
+                    self.updateTitleView(subTitle: "알 수 없는 위치")
+                    
+                    // 위치 가져오기 재시도
+                    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                        if let placemark = placemarks?.first {
+                            self.currentLocationName = self.generateLocaionName(from: placemark)
+                            self.updateTitleView(subTitle: self.currentLocationName)
+                        }
+                    })
+                }
+            }
+            
+            if let _category = transaction.category {
+                category = _category
+            }
+            
+            var photos = [UIImage]()
+            transaction.photos.forEach {
+                guard let image = $0.fetchPhoto() else { return }
+                photos.append(image)
+            }
+            multiImagePickerView.visibleImages = photos
         }
+
         let index = travel.currencies.index(of: currency)
         pickerView.selectRow(index!, inComponent: 0, animated: true)
         
-        navigationItem.rightBarButtonItem = barButtonItem
+        if let _category = category,
+            let categoryIndex = categories.index(of: _category) {
+            categoryCollectionView.selectItem(at: IndexPath(row: categoryIndex, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }
+        
     }
     
-    func saveButtonDidTap() {
+    func writeButtonDidTap() {
         if checkIsExistInputField() {
-            var transaction = Transaction()
-            transactionFromUI(transaction: &transaction)
-            
-            if let image = transactionImageView.image {
-                let photo = FileUtil.saveNewImage(image: image)
-                transaction.photos.append(photo)
-            }
-            
             do {
                 try realm.write {
-                    travel.transactions.append(transaction)
-                    print("트랜젝션 추가")
+                    transactionFromUI(transaction: &transaction)
+
+                    if editorMode == .new {
+                        savePhotoTransaction(target: transaction)
+                        saveLocationTransaction(target: transaction)
+                        travel.transactions.append(transaction)
+                        
+                    } else if editorMode == .edit {
+                        if multiImagePickerView.isChanged {
+                            for item in transaction.photos {
+                                FileUtil.removeData(filePath: item.filePath)
+                                realm.delete(item)
+                            }
+                            savePhotoTransaction(target: transaction)
+                        }
+                        
+                        saveLocationTransaction(target: transaction)
+                        
+                        transaction.name = transaction.name
+                        transaction.amount = transaction.amount
+                        transaction.currency = transaction.currency
+                        transaction.content = transaction.content
+                        transaction.isCash = transaction.isCash
+                        transaction.dateInRegion = transaction.dateInRegion
+                        
+                        delegate?.edited(transaction: transaction)
+                    // 수정 시 update를 쓰기위한 코드. append로 할 경우 수정시에도 데이터가 더해짐. 아래 코드로 사용할 경우 해결이 되나, 역관계 성립이 안되어 Travel에 종속되지 않음.
+                    // 리스트에 종속시킴과 동시에 update 파라미터를 지원하는 메서드가 있으면 좋을 것.
+//                    realm.add(transaction, update: true)
+                    }
+                    
+                    print("트랜젝션 수정")
                 }
+                
             } catch {
                 // Alert 위해 남겨둠
                 print(error)
             }
+            
             view.endEditing(true)
             dismiss(animated: true, completion: nil)
         }
     }
     
-    func editButtonDidTap() {
-        if checkIsExistInputField() {
-            var transaction = Transaction()
-            transactionFromUI(transaction: &transaction)
-            
-            let urlString = UUID().uuidString
-            
-            //image 부분 수정 필요
-            if let image = transactionImageView.image {
-                FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-            }
-            
-            do {
-                try realm.write {
-                    originTransaction.name = transaction.name
-                    originTransaction.amount = transaction.amount
-                    originTransaction.currency = transaction.currency
-                    originTransaction.content = transaction.content
-                    originTransaction.isCash = transaction.isCash
-                    originTransaction.dateInRegion = transaction.dateInRegion
-                    
-                    let urlString = UUID().uuidString
-                    
-                    if let image = transactionImageView.image {
-                        FileUtil.saveImageToDocumentDir(image, filePath: "\(urlString).jpg")
-                        originTransaction.photos.first?.id = urlString
-                        originTransaction.photos.first?.fileType = "jpg"
-                    }
-                    print("트랜젝션 수정")
-                }
-            } catch {
-                print(error)
-            }
-            view.endEditing(true)
-            dismiss(animated: true, completion: nil)
+    func savePhotoTransaction(target: Transaction) {
+        for image in multiImagePickerView.visibleImages {
+            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image, completion: {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didSavedPhoto"), object: self.transaction.id)
+            })
+            target.photos.append(photo)
         }
     }
     
+    func saveLocationTransaction(target: Transaction) {
+        if let currentLocationCoordinate = currentLocationCoordinate {
+            target.coordinate = currentLocationCoordinate
+            
+            if let currentLocationName = currentLocationName {
+                target.placeName = currentLocationName
+            }
+        }
+    }
+
     func transactionFromUI(transaction: inout Transaction) {
-        
         guard let name = nameTextField.text,
             let content = contentTextView.text,
             let amountText = amountTextField.text,
@@ -255,37 +442,44 @@ extension TransactionEditorViewController {
         }
         
         let datePicker = dateEditTextField.inputView as! UIDatePicker
-        let dateInRegion = DateInRegion()
-        dateInRegion.date = datePicker.date
-        dateInRegion.timeZone = standardDate?.timeZone ?? .current
         
         transaction.name = name
         transaction.amount = amount
-        transaction.content = content
         transaction.currency = currency
+        transaction.content = content
         transaction.isCash = isCash
-        transaction.dateInRegion = dateInRegion
+        transaction.category = category
+        
+        if let dateInRegion = standardDate {
+            dateInRegion.date = datePicker.date
+            transaction.dateInRegion = dateInRegion
+        } else {
+            let dateInRegion = DateInRegion()
+            dateInRegion.date = datePicker.date
+            transaction.dateInRegion = dateInRegion
+        }
     }
 }
-
-
 
 extension TransactionEditorViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCollectionViewCell
-        let category = CategoryStore.shard.categorys[indexPath.row]
-        cell.categoryImage.image = category.image
+        let category = categories[indexPath.row]
+        
+        cell.categoryImage.image = UIImage(named: category.assetName)
         cell.categoryName.text = category.name
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CategoryStore.shard.categorys.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: 선택한 카테고리 반영
-        print(CategoryStore.shard.categorys[indexPath.row].name)
+        print(categories[indexPath.row].name)
+        
+        category = categories[indexPath.row]
     }
 }
 
@@ -298,7 +492,8 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         }
         
         // Set photoImageView to display the selected image.
-        transactionImageView.image = selectedImage
+        multiImagePickerView.visibleImages.append(selectedImage)
+        multiImagePickerView.collectionView.reloadData()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
@@ -312,16 +507,41 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
         
-        if editorMode == .edit,
-            let photo = originTransaction.photos.first {
-            FileUtil.removeImageOnDocumentDir(filePath: photo.fileURL)
-            transactionImageView.image = nil
-        }
-        
         imagePickerController.sourceType = .photoLibrary
         
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate {
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        viewController.dismiss(animated: true, completion: nil)
+    
+        currentLocationCoordinate = place.coordinate
+        
+        if place.types.contains("synthetic_geocode") {
+            updateTitleView(subTitle: "설정한 위치")
+            
+            let location = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                if let placemark = placemarks?.first {
+                    self.currentLocationName = self.generateLocaionName(from: placemark)
+                    self.updateTitleView(subTitle: self.currentLocationName)
+                }
+            })
+        } else {
+            currentLocationName = place.name
+            updateTitleView(subTitle: place.name)
+        }
+
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
     }
 }

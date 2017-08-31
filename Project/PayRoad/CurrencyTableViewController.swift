@@ -12,6 +12,8 @@ import RealmSwift
 
 class CurrencyTableViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     var travel: Travel!
     var notificationToken: NotificationToken? = nil
     
@@ -19,6 +21,18 @@ class CurrencyTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if travel.currencies.count == 0 {
+            try? realm.write {
+                if let currencyCode = Locale.current.currencyCode {
+                    let currency = Currency()
+                    currency.id = travel.id + "-" + currencyCode
+                    currency.code = currencyCode
+                    currency.rate = 1.0
+                    travel.currencies.append(currency)
+                }
+            }
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -66,16 +80,21 @@ extension CurrencyTableViewController: UITableViewDelegate, UITableViewDataSourc
         let currency = travel.currencies[indexPath.row]
         cell.currencyCodeLabel?.text = currency.code
         cell.currencyLocaleLabel?.text = Locale.current.localizedString(forCurrencyCode: currency.code)
-        cell.budgetAmountLabel?.text = String(currency.budget)
+        cell.budgetAmountLabel?.text = currency.budget.nonZeroString(maxDecimalPlace: 2, option: .seperator)
         
         if currency.rate == 1.0 {
             cell.rateLabel?.text = "기준"
         } else {
             let basicCurrencyCode = travel.currencies.first!.code
-            cell.rateLabel?.text = "1\(currency.code)당 \(currency.rate)\(basicCurrencyCode)"
+            cell.rateLabel?.text = "1\(currency.code)당 \(currency.rate.nonZeroString(maxDecimalPlace: 2, option: .seperator))\(basicCurrencyCode)"
         }
             
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "editCurrency", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

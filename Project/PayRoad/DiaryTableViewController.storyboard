@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="awr-o2-oAI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--일기-->
+        <scene sceneID="GTh-ju-97f">
+            <objects>
+                <viewController storyboardIdentifier="DiaryTableViewController" id="kdg-ey-1K7" customClass="DiaryTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wYQ-6W-Llx"/>
+                        <viewControllerLayoutGuide type="bottom" id="xwc-25-UFG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="32r-zS-xZi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiO-31-WnT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiaryCell" rowHeight="70" id="dNU-O0-cCl" customClass="DiaryTableViewCell" customModule="PayRoad" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNU-O0-cCl" id="ofN-ML-1N0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5xl-wr-1Dq">
+                                                    <rect key="frame" x="15" y="10" width="345" height="24"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="DAY 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSP-Il-gzM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="56" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018. 10. 19" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYE-3g-EH5">
+                                                            <rect key="frame" x="56" y="2" width="289" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일기를 작성해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlV-Zp-I4s">
+                                                    <rect key="frame" x="15" y="39" width="345" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5xl-wr-1Dq" firstAttribute="top" secondItem="ofN-ML-1N0" secondAttribute="top" constant="10" id="Cnu-IG-Icd"/>
+                                                <constraint firstAttribute="bottom" secondItem="LlV-Zp-I4s" secondAttribute="bottom" constant="10" id="clZ-b2-pth"/>
+                                                <constraint firstItem="5xl-wr-1Dq" firstAttribute="leading" secondItem="ofN-ML-1N0" secondAttribute="leading" constant="15" id="iMD-JT-j6a"/>
+                                                <constraint firstAttribute="trailing" secondItem="5xl-wr-1Dq" secondAttribute="trailing" constant="15" id="vBa-1N-n6V"/>
+                                                <constraint firstAttribute="trailing" secondItem="LlV-Zp-I4s" secondAttribute="trailing" constant="15" id="xUh-mL-TJn"/>
+                                                <constraint firstItem="LlV-Zp-I4s" firstAttribute="leading" secondItem="ofN-ML-1N0" secondAttribute="leading" constant="15" id="xzZ-L1-aKd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="LlV-Zp-I4s" id="l8A-bf-fjT"/>
+                                            <outlet property="dateLabel" destination="HYE-3g-EH5" id="i2o-jX-uyd"/>
+                                            <outlet property="dayLabel" destination="iSP-Il-gzM" id="kN2-pY-iMg"/>
+                                            <segue destination="rqk-yU-518" kind="show" identifier="editDiary" id="xW6-3h-Xe6"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CiO-31-WnT" secondAttribute="trailing" id="N3r-Kd-TaD"/>
+                            <constraint firstItem="CiO-31-WnT" firstAttribute="leading" secondItem="32r-zS-xZi" secondAttribute="leading" id="bcA-2h-dNd"/>
+                            <constraint firstItem="CiO-31-WnT" firstAttribute="top" secondItem="32r-zS-xZi" secondAttribute="top" id="fgC-dC-8vI"/>
+                            <constraint firstAttribute="bottom" secondItem="CiO-31-WnT" secondAttribute="bottom" id="vJW-7Y-vnf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="일기" id="Qfv-hL-8I2">
+                        <barButtonItem key="leftBarButtonItem" image="Icon_Cancel" id="MU4-Tt-fQg">
+                            <connections>
+                                <action selector="backButtonDidTap:" destination="kdg-ey-1K7" id="D2A-HV-fb2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="CiO-31-WnT" id="AGh-Ux-lXf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uJB-bS-z9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="126.38680659670166"/>
+        </scene>
+        <!--DiaryEditorViewController-->
+        <scene sceneID="SXY-NQ-NdW">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="e" storyboardName="DiaryEditorViewController" id="rqk-yU-518" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVZ-JZ-8K3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1514" y="126"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9cf-hu-hB4">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="awr-o2-oAI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RJS-U9-BjH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kdg-ey-1K7" kind="relationship" relationship="rootViewController" id="lGW-Up-pHB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ia1-Zf-Ath" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-71.200000000000003" y="126.38680659670166"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon_Cancel" width="17" height="16"/>
+    </resources>
+</document>

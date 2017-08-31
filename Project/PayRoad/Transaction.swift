@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import CoreLocation
 
 class Transaction: Object {
     dynamic var id = UUID().uuidString
@@ -18,10 +19,55 @@ class Transaction: Object {
     dynamic var dateInRegion: DateInRegion?
     dynamic var category: Category?
     
+    dynamic var placeName: String? = nil // 장소명
+    let lat = RealmOptional<Double>() // Latitude
+    let lng = RealmOptional<Double>() // Longitude
+    
+    var coordinate: CLLocationCoordinate2D? {
+        get {
+            guard let latitude = lat.value, let longitude = lng.value else { return nil }
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        set {
+            lat.value = newValue?.latitude
+            lng.value = newValue?.longitude
+        }
+    }
+    
     let photos = List<Photo>()
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["coordinate"]
+    }
+}
+
+extension Transaction {
+    func paymentImage() -> UIImage {
+        return isCash ? #imageLiteral(resourceName: "Payment_Cash") : #imageLiteral(resourceName: "Payment_Credit")
+    }
+    
+    func stringAmountWithCode(order: Order) -> String {
+        switch order {
+        case .first:
+            return "\(currency?.code ?? "") \(amount.nonZeroString(maxDecimalPlace: 2, option: .seperator))"
+        case .last:
+            return "\(amount.nonZeroString(maxDecimalPlace: 2, option: .seperator)) \(currency?.code ?? "")"
+        }
+    }
+}
+
+extension Transaction: CascadingDeletable {
+    func childrenToDelete() -> [AnyObject?] {
+        var objectList = [AnyObject?]()
+        
+        objectList.append(dateInRegion)
+        objectList.append(photos)
+        
+        return objectList
     }
 }
