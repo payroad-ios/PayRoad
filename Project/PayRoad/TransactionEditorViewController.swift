@@ -371,17 +371,17 @@ extension TransactionEditorViewController {
                     transactionFromUI(transaction: &transaction)
 
                     if editorMode == .new {
-                        savePhotoTransaction(target: transaction)
+                        savePhotosToTransaction(target: transaction)
                         saveLocationTransaction(target: transaction)
                         travel.transactions.append(transaction)
-                        
-                    } else if editorMode == .edit {
+                    }
+                    else if editorMode == .edit {
                         if multiImagePickerView.isChanged {
                             for item in transaction.photos {
                                 FileUtil.removeData(filePath: item.filePath)
                                 realm.delete(item)
                             }
-                            savePhotoTransaction(target: transaction)
+                            savePhotosToTransaction(target: transaction)
                         }
                         
                         saveLocationTransaction(target: transaction)
@@ -394,11 +394,7 @@ extension TransactionEditorViewController {
                         transaction.dateInRegion = transaction.dateInRegion
                         
                         delegate?.edited(transaction: transaction)
-                    // 수정 시 update를 쓰기위한 코드. append로 할 경우 수정시에도 데이터가 더해짐. 아래 코드로 사용할 경우 해결이 되나, 역관계 성립이 안되어 Travel에 종속되지 않음.
-                    // 리스트에 종속시킴과 동시에 update 파라미터를 지원하는 메서드가 있으면 좋을 것.
-//                    realm.add(transaction, update: true)
                     }
-                    
                     print("트랜젝션 수정")
                 }
                 
@@ -412,12 +408,15 @@ extension TransactionEditorViewController {
         }
     }
     
-    func savePhotoTransaction(target: Transaction) {
-        for image in multiImagePickerView.visibleImages {
-            let photo = PhotoUtil.saveTransactionPhoto(travelID: travel.id, transactionID: transaction.id, photo: image, completion: {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didSavedPhoto"), object: self.transaction.id)
-            })
-            target.photos.append(photo)
+    func savePhotosToTransaction(target: Transaction) {
+        PhotoUtil.savePhotos(travelID: travel.id, transactionID: transaction.id, photos: multiImagePickerView.visibleImages) { photos -> Void in
+            guard let photosModel = photos else { return }
+            try? self.realm.write {
+                for photo in photosModel {
+                    self.transaction.photos.append(photo)
+                }
+            }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didSavedPhoto"), object: self.transaction.photos)
         }
     }
     

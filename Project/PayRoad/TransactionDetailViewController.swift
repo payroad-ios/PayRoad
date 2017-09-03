@@ -65,12 +65,12 @@ class TransactionDetailViewController: UIViewController {
         collectionView.register(nibCell, forCellWithReuseIdentifier: "transactionCollectionViewCell")
         
         applyUIFromTransaction()
-        
+        imageViewConstraint.constant = transaction.photos.isEmpty ? 0 : 190
+
         mapView.delegate = self
         createMapView()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: self.transaction.id)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(applyUIFromTransaction), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshImageViewer), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +116,16 @@ class TransactionDetailViewController: UIViewController {
         
         descTextView.placeholder = transaction.content.isEmpty ? "기록된 내용이 없습니다." : nil
         descTextView.text = transaction.content
-        imageViewConstraint.constant = transaction.photos.isEmpty ? 0 : 190
+    }
+    
+    func refreshImageViewer(_ notification: Notification) {
+        let photos = notification.object as! List<Photo>
+        transaction.photos = photos
+        collectionView.reloadData()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.imageViewConstraint.constant = self.transaction.photos.isEmpty ? 0 : 190
+            self.view.layoutIfNeeded()
+        })
     }
     
     @IBAction func editorButtonDidTap(_ sender: Any) {
@@ -211,7 +220,6 @@ extension TransactionDetailViewController: TransactionEditorDelegate {
         applyUIFromTransaction()
         mapView.clear()
         createMapView()
-        collectionView.reloadData()
     }
 }
 
