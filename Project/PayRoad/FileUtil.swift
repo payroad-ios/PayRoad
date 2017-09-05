@@ -66,33 +66,55 @@ struct FileUtil {
     }
 }
 
+struct SaveProcessing {
+    static var shared = SaveProcessing()
+    var isSaving = false
+    var completedModels = [Photo]()
+}
+
 struct PhotoUtil {
-    static func saveTransactionPhoto(travelID: String, transactionID: String, photo: UIImage, completion: @escaping () -> Void?) -> Photo {
+    static func savePhotos(travelID: String, transactionID: String, photos: [UIImage], completion: @escaping ([Photo]?) -> Void?) {
+        var resultPhotosModel = [Photo]()
+        DispatchQueue(label: "savePhotos").async {
+            for i in 0..<photos.count {
+                SaveProcessing.shared.isSaving = true
+                let photoModel = savePhoto(travelID: travelID, transactionID: transactionID, photo: photos[i])
+                if let _photoModel = photoModel {
+                    resultPhotosModel.append(_photoModel)
+                    SaveProcessing.shared.completedModels = resultPhotosModel
+                    print("저장 성공 \(i+1)/\(photos.count)")
+                }
+            }
+            SaveProcessing.shared.isSaving = false
+            SaveProcessing.shared.completedModels = [Photo]()
+            
+            DispatchQueue.main.async {
+                completion(resultPhotosModel)
+            }
+        }
+    }
+    
+    static func savePhoto(travelID: String, transactionID: String, photo: UIImage) -> Photo? {
         let photoModel = Photo()
         photoModel.travelID = travelID
         photoModel.preID = transactionID.substring(to: 8)
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
         
-//        DispatchQueue.global().async {
-        OperationQueue.current?.addOperation {
-            let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
-            print(isSuccess ? "저장 성공" : "저장 실패")
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
-        return photoModel
+        let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
+        print(isSuccess ? "저장 성공" : "저장 실패")
+        return isSuccess ? photoModel : nil
     }
     
-    static func saveCoverPhoto(travelID: String, photo: UIImage) -> Photo {
+    static func saveCoverPhoto(travelID: String, photo: UIImage) -> Photo? {
         let photoModel = Photo()
         photoModel.travelID = travelID
         
         let directoryPath = FileUtil.generateDirectoryPath(travelID: travelID, directory: .image)
         let isSuccess = PhotoUtil.writePhotoToDocument(photo: photo, directoryPath: directoryPath, fileName: photoModel.fileName)
         print(isSuccess ? "저장 성공" : "저장 실패")
-        return photoModel
+        
+        return isSuccess ? photoModel : nil
     }
     
     private static func writePhotoToDocument(photo: UIImage, directoryPath: String, fileName: String) -> Bool {

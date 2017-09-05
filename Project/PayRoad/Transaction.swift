@@ -34,7 +34,7 @@ class Transaction: Object {
         }
     }
     
-    let photos = List<Photo>()
+    var photos = List<Photo>()
     let travel = LinkingObjects(fromType: Travel.self, property: "transactions")
     
     override static func primaryKey() -> String? {
