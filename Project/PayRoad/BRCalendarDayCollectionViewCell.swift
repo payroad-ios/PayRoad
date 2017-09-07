@@ -9,7 +9,7 @@
 import UIKit
 
 class BRCalendarDayCollectionViewCell: UICollectionViewCell {
-    var fontColor = UIColor()
+    fileprivate var fontColor = UIColor()
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var backgroundCustomView: UIView!

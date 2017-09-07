@@ -14,16 +14,16 @@ protocol MultiImagePickerDelegate {
 }
     
 class MultiImagePickerCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    let margin: CGFloat = 2
-    let cellID = "Cell"
-    var delegate: MultiImagePickerDelegate?
-    var userPhotoAlbum = UserPhotoAlbum()
+    fileprivate let margin: CGFloat = 2
+    fileprivate let cellID = "Cell"
+    fileprivate(set) var delegate: MultiImagePickerDelegate?
+    fileprivate(set) var userPhotoAlbum = UserPhotoAlbum()
 
-    var selectedImages = [[Int: UIImage]]()
-    var orderIndexPaths = [IndexPath]()
+    fileprivate(set) var selectedImages = [[Int: UIImage]]()
+    fileprivate(set) var orderIndexPaths = [IndexPath]()
     
-    var restoreSelectedImages = [[Int: UIImage]]()
-    var restoreOrderIndexPaths = [IndexPath]()
+    fileprivate(set) var restoreSelectedImages = [[Int: UIImage]]()
+    fileprivate(set) var restoreOrderIndexPaths = [IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,6 +167,12 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+    }
+}
+
+extension MultiImagePickerCollectionViewController {
+    func set(delegate: MultiImagePickerDelegate) {
+        self.delegate = delegate
     }
 }
 

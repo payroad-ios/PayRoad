@@ -15,18 +15,18 @@ enum CollectionViewType: String {
 
 @IBDesignable class BRCalendarView: UIView, BRCalendarDelegate {
     
-    let cellId = "monthCell"
-    var dateOfMonthArray = [Date]()
-    var willIndexPath = Int()
-    var currentIndexPath = Int()
-    var todayDate: Date!
-    var startOfMonthDate: Date!
-    let brCalendar = BRCalendarFormatter()
-    let rangeMonth = 24
-    var selectedDate: Date? = nil
+    fileprivate let cellId = "monthCell"
+    fileprivate let brCalendar = BRCalendarFormatter()
+    fileprivate let rangeMonth = 24
+    fileprivate(set) var dateOfMonthArray = [Date]()
+    fileprivate(set) var willIndexPath = Int()
+    fileprivate(set) var currentIndexPath = Int()
+    fileprivate(set) var todayDate: Date!
+    fileprivate(set) var startOfMonthDate: Date!
+    fileprivate(set) var selectedDate: Date? = nil
     
-    var delegate: BRCalendarDelegate?
-    var target: UIViewController?
+    fileprivate(set) var delegate: BRCalendarDelegate?
+    fileprivate(set) var target: UIViewController?
     
     @IBOutlet weak var monthCollectionView: UICollectionView!
     @IBOutlet weak var todayButton: UIButton!
@@ -118,6 +118,12 @@ enum CollectionViewType: String {
     }
 }
 
+extension BRCalendarView {
+    func set(target: UIViewController) {
+        self.target = target
+    }
+}
+
 extension BRCalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -129,11 +135,11 @@ extension BRCalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BRCalendarMonthCollectionViewCell
-        cell.delegate = self
+        cell.set(delegate: self)
         
         let dateValue = dateOfMonthArray[indexPath.row]
         cell.presentMonthButton.setTitle(brCalendar.string(for: dateValue, type: .month), for: .normal)
-        cell.currentMonth = dateValue
+        cell.set(currentMonth: dateValue)
         return cell
     }
     

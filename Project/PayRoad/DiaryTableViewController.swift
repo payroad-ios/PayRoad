@@ -13,11 +13,11 @@ class DiaryTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var travel: Travel!
-    var travelPeriodDates = [YMD]()
-    var diaryDictionary = [YMD: Diary]()
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var travelPeriodDates = [YMD]()
+    fileprivate(set) var diaryDictionary = [YMD: Diary]()
     
-    var diaryNotificationToken: NotificationToken? = nil
+    fileprivate(set) var diaryNotificationToken: NotificationToken? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +53,11 @@ class DiaryTableViewController: UIViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let diaryEditorViewController = segue.destination as! DiaryEditorViewController
                 let ymd = travelPeriodDates[indexPath.row]
-                diaryEditorViewController.travel = travel
-                diaryEditorViewController.ymd = ymd
-                diaryEditorViewController.dayOfTravel = indexPath.row + 1
+                diaryEditorViewController.set(travel: travel)
+                diaryEditorViewController.set(ymd: ymd)
+                diaryEditorViewController.set(dayOfTravel: indexPath.row + 1)
                 if let diary = diaryDictionary[ymd] {
-                    diaryEditorViewController.diary = diary
+                    diaryEditorViewController.set(diary: diary)
                 }
             }
         }
@@ -65,6 +65,12 @@ class DiaryTableViewController: UIViewController {
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension DiaryTableViewController {
+    func set(travel: Travel) {
+        self.travel = travel
     }
 }
 

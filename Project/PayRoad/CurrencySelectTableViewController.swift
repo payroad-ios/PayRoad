@@ -14,7 +14,6 @@ struct ISOCurrency {
 }
 
 protocol CurrencySelectTableViewControllerDelegate {
-    
     func currencySelectResponse(code: String)
 }
 
@@ -23,11 +22,11 @@ class CurrencySelectTableViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var delegate: CurrencySelectTableViewControllerDelegate?
+    fileprivate(set) var delegate: CurrencySelectTableViewControllerDelegate?
     
-    var travel: Travel!
-    var ISOCurrencies = [ISOCurrency]()
-    var filteredCurrencies = [ISOCurrency]()
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var ISOCurrencies = [ISOCurrency]()
+    fileprivate(set) var filteredCurrencies = [ISOCurrency]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +50,16 @@ class CurrencySelectTableViewController: UIViewController {
         
         filteredCurrencies = ISOCurrencies
         tableView.reloadData()
+    }
+}
+
+extension CurrencySelectTableViewController {
+    func set(travel: Travel) {
+        self.travel = travel
+    }
+    
+    func set(delegate: CurrencySelectTableViewControllerDelegate?) {
+        self.delegate = delegate
     }
 }
 

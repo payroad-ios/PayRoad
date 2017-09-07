@@ -17,11 +17,11 @@ class BRCalendarMonthCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var daysCollectionView: UICollectionView!
     @IBOutlet weak var presentMonthButton: UIButton!
     
-    let cellId = "dayCell"
-    var delegate: BRCalendarDelegate?
-    let brCalendar = BRCalendarFormatter()
-    var dayOfMonthDate = [Date]()
-    var currentMonth: Date? {
+    fileprivate let cellId = "dayCell"
+    fileprivate let brCalendar = BRCalendarFormatter()
+    fileprivate(set) var delegate: BRCalendarDelegate?
+    fileprivate(set) var dayOfMonthDate = [Date]()
+    fileprivate(set) var currentMonth: Date? {
         didSet {
             generateData()
             delegate?.brCalendar(currentMonth: currentMonth!)
@@ -59,6 +59,17 @@ class BRCalendarMonthCollectionViewCell: UICollectionViewCell {
         delegate?.brCalendar(selected: dayOfMonthDate[indexPath.row])
         daysCollectionView.selectItem(at: indexPath, animated: animated, scrollPosition: .centeredHorizontally)
     }
+}
+
+extension BRCalendarMonthCollectionViewCell {
+    func set(delegate: BRCalendarDelegate) {
+        self.delegate = delegate
+    }
+    
+    func set(currentMonth: Date) {
+        self.currentMonth = currentMonth
+    }
+    
 }
 
 

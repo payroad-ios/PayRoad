@@ -12,15 +12,15 @@ import RealmSwift
 
 class CurrencyEditorViewController: UIViewController {
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    var travel: Travel!
-    var originCurrency: Currency!
-    var standardCurrency: Currency!
-    var editedCurrency: Currency!
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var originCurrency: Currency!
+    fileprivate(set) var standardCurrency: Currency!
+    fileprivate(set) var editedCurrency: Currency!
     
-    var editorMode: EditorMode = .new
-    var isUpdating = false
+    fileprivate(set) var editorMode: EditorMode = .new
+    fileprivate(set) var isUpdating = false
     
     @IBOutlet weak var currencySelectButton: UIButton!
     @IBOutlet weak var rateTextField: UITextField!
@@ -91,8 +91,8 @@ class CurrencyEditorViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "selectCurrencyCode" {
             let currencySelectTableViewController = segue.destination as! CurrencySelectTableViewController
-            currencySelectTableViewController.delegate = self
-            currencySelectTableViewController.travel = travel
+            currencySelectTableViewController.set(delegate: self)
+            currencySelectTableViewController.set(travel: travel)
         }
     }
     
@@ -137,6 +137,20 @@ class CurrencyEditorViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension CurrencyEditorViewController {
+    func set(travel: Travel) {
+        self.travel = travel
+    }
+    
+    func set(originCurrency: Currency) {
+        self.originCurrency = originCurrency
+    }
+        
+    func set(editorMode: EditorMode) {
+        self.editorMode = editorMode
     }
 }
 

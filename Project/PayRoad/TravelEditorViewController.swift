@@ -11,22 +11,22 @@ import UIKit
 import RealmSwift
 
 class TravelEditorViewController: UIViewController {    
-    let realm = try! Realm()
-    var editorMode: EditorMode = .new
-    var travel = Travel()
-    var isModifyPhoto = false
+    fileprivate let realm = try! Realm()
+    fileprivate(set) var editorMode: EditorMode = .new
+    fileprivate(set) var travel = Travel()
+    fileprivate(set) var isModifyPhoto = false
     
-    lazy var imagePicker: UIImagePickerController = {
+    fileprivate(set) lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         return imagePicker
     }()
     
-    let startCalendar = BRCalendarView()
-    let endCalendar = BRCalendarView()
+    fileprivate let startCalendar = BRCalendarView()
+    fileprivate let endCalendar = BRCalendarView()
     
-    let defaultBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
+    fileprivate let defaultBackgroundBGArray = [#imageLiteral(resourceName: "SampleBG_Rome"), #imageLiteral(resourceName: "SampleBG_Paris"), #imageLiteral(resourceName: "SampleBG_Seoul"), #imageLiteral(resourceName: "SampleBG_Franch"), #imageLiteral(resourceName: "SampleBG_JeonJu"), #imageLiteral(resourceName: "SampleBG_London"), #imageLiteral(resourceName: "SampleBG_NewYork"), #imageLiteral(resourceName: "SampleBG_NewYork2"), #imageLiteral(resourceName: "SampleBG_HongKong")]
     
     @IBOutlet weak var backgroundScrollView: UIScrollView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -42,8 +42,9 @@ class TravelEditorViewController: UIViewController {
         cameraIconImageView.tintColor = UIColor.white
         deleteTravelButton.layer.cornerRadius = deleteTravelButton.frame.height / 5
         
-        startCalendar.target = self
-        endCalendar.target = self
+        startCalendar.set(target: self)
+        endCalendar.set(target: self)
+        
         startDateCalendarTextField.inputView = startCalendar
         endDateCalendarTextField.inputView = endCalendar
         
@@ -105,7 +106,7 @@ class TravelEditorViewController: UIViewController {
         let currencyTableViewStoryboard = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
         let navigationController = UINavigationController(rootViewController: currencyTableViewStoryboard)
         
-        currencyTableViewStoryboard.travel = travel
+        currencyTableViewStoryboard.set(travel: self.travel)
         present(navigationController, animated: true, completion: nil)
     }
     
@@ -152,6 +153,16 @@ class TravelEditorViewController: UIViewController {
             return false
         }
         return true
+    }
+}
+
+extension TravelEditorViewController {
+    func set(travel: Travel) {
+        self.travel = travel
+    }
+    
+    func set(editorMode: EditorMode) {
+        self.editorMode = editorMode
     }
 }
 

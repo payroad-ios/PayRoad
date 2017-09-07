@@ -22,21 +22,21 @@ class UserPhotoAlbum {
         }
     }
     
-    let imageManager = PHImageManager.default()
-    let requestOptions: PHImageRequestOptions = {
+    fileprivate let imageManager = PHImageManager.default()
+    fileprivate let requestOptions: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.isSynchronous = true
         options.deliveryMode = .highQualityFormat
         return options
     }()
     
-    let fetchOptions: PHFetchOptions = {
+    fileprivate let fetchOptions: PHFetchOptions = {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false, selector: nil)]
         return options
     }()
     
-    lazy var fetchResult: PHFetchResult<PHAsset> = {
+    fileprivate(set) lazy var fetchResult: PHFetchResult<PHAsset> = {
         let result = PHAsset.fetchAssets(with: .image, options: self.fetchOptions)
         return result
     }()

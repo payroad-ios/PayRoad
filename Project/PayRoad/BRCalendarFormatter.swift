@@ -14,10 +14,10 @@ enum DateType {
 }
 
 class BRCalendarFormatter {
-    var calendar = Calendar.current
+    fileprivate var calendar = Calendar.current
 
-    let locale = Locale.current
-    let timeZone = TimeZone.current
+    fileprivate let locale = Locale.current
+    fileprivate let timeZone = TimeZone.current
 
     func startOfMonth(for date: Date) -> Date {
         var extractDateComponents = calendar.dateComponents(in: timeZone, from: date)

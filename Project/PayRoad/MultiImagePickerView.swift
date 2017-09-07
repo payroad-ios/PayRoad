@@ -10,10 +10,11 @@ import UIKit
 
 @IBDesignable class MultiImagePickerView: UIView, MultiImagePickerDelegate {
     
-    lazy var multiImagePickerCollectionViewController = MultiImagePickerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    var delegate: UIViewController!
-    let margin: CGFloat = 5
-    var visibleImages = [UIImage]()
+    fileprivate let margin: CGFloat = 5
+    fileprivate(set) lazy var multiImagePickerCollectionViewController = MultiImagePickerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    fileprivate(set) var delegate: UIViewController!
+    fileprivate(set) var visibleImages = [UIImage]()
+    
     var isChanged: Bool = false
     
     @IBOutlet weak var addImageButton: UIButton!
@@ -32,7 +33,7 @@ import UIKit
         collectionView.delegate = self
         collectionView.dataSource = self
 
-        multiImagePickerCollectionViewController.delegate = self
+        multiImagePickerCollectionViewController.set(delegate: self)
         collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -78,6 +79,20 @@ import UIKit
     @IBAction func addImageButtonDidTap(_ sender: UIButton) {
         let navigationController = UINavigationController(rootViewController: multiImagePickerCollectionViewController)
         delegate.present(navigationController, animated: true, completion: nil)
+    }
+}
+
+extension MultiImagePickerView {
+    func set(delegate: UIViewController) {
+        self.delegate = delegate
+    }
+    
+    func set(visibleImages: [UIImage]) {
+        self.visibleImages = visibleImages
+    }
+    
+    func appendVisibleImage(image: UIImage) {
+        self.visibleImages.append(image)
     }
 }
 
