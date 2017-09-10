@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol PhotoDatailViewDelegate {
+protocol PhotoDatailViewDelegate: class {
     func changedCurrentPhoto(_ page: Int)
 }
 
 class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
-    fileprivate(set) var delegate: PhotoDatailViewDelegate?
+    fileprivate(set) weak var delegate: PhotoDatailViewDelegate?
     
     fileprivate(set) var photos: [Photo]!
     fileprivate(set) var selectedIndex: Int!
@@ -89,6 +89,18 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func removePhotoDetailViews() {
+        photoDetailViews.forEach {
+            $0.removeFromSuperview()
+            $0.set(delegate: nil)
+        }
+        photoDetailViews = [PhotoDetailView]()
+    }
+    
+    deinit {
+        removePhotoDetailViews()
     }
 }
 
