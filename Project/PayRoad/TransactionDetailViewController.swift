@@ -13,15 +13,15 @@ import GoogleMaps
 
 class TransactionDetailViewController: UIViewController {
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    var transaction: Transaction!
-    lazy var photoDetailViewController: PhotoDetailViewController = {
+    fileprivate(set) var transaction: Transaction!
+    fileprivate(set) lazy var photoDetailViewController: PhotoDetailViewController = {
         let photoDetailVC = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
-        photoDetailVC.delegate = self
+        photoDetailVC.set(delegate: self)
         photoDetailVC.modalPresentationStyle = .overCurrentContext
         photoDetailVC.modalTransitionStyle = .crossDissolve
-        photoDetailVC.photos = self.transaction.photos.map { $0 }
+        photoDetailVC.set(photos: self.transaction.photos.map { $0 })
         return photoDetailVC
     }()
     
@@ -133,11 +133,11 @@ class TransactionDetailViewController: UIViewController {
         let transactionEdit = UIAlertAction(title: "지출 수정", style: .default) { [unowned self] _ in
             let transactionEditorViewController = UIStoryboard.loadViewController(from: .TransactionEditorView, ID: "TransactionEditorViewController") as! TransactionEditorViewController
             
-            transactionEditorViewController.transaction = self.transaction
-            transactionEditorViewController.travel = self.transaction.travel.first!
-            transactionEditorViewController.editorMode = .edit
-            transactionEditorViewController.standardDate = self.transaction.dateInRegion
-            transactionEditorViewController.delegate = self
+            transactionEditorViewController.set(transaction: self.transaction)
+            transactionEditorViewController.set(travel: self.transaction.travel.first!)
+            transactionEditorViewController.set(editorMode: .edit)
+            transactionEditorViewController.set(standardDate: self.transaction.dateInRegion)
+            transactionEditorViewController.set(delegate: self)
             
             let navigationController = UINavigationController(rootViewController: transactionEditorViewController)
             self.present(navigationController, animated: true, completion: nil)
@@ -157,6 +157,12 @@ class TransactionDetailViewController: UIViewController {
         moreOptionAlertController.addAction(transactionDelete)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
+    }
+}
+
+extension TransactionDetailViewController {
+    func set(transaction: Transaction?) {
+        self.transaction = transaction
     }
 }
 
@@ -190,7 +196,7 @@ extension TransactionDetailViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        photoDetailViewController.selectedIndex = indexPath.row
+        photoDetailViewController.set(selectedIndex: indexPath.row)
         present(photoDetailViewController, animated: true, completion: nil)
     }
 }
@@ -216,7 +222,7 @@ extension TransactionDetailViewController: UICollectionViewDelegateFlowLayout {
 
 extension TransactionDetailViewController: TransactionEditorDelegate {
     func edited(transaction: Transaction) {
-        self.transaction = transaction
+        set(transaction: transaction)
         applyUIFromTransaction()
         mapView.clear()
         createMapView()

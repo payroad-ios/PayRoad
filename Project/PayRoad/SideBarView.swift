@@ -9,14 +9,14 @@
 import UIKit
 
 class SideBarView: UIView {
+    fileprivate(set) weak var delegate: TransactionTableViewController?
+    
     @IBOutlet weak var diaryButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var goMainButton: UIButton!
-    
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var sideBarLeadingConstraint: NSLayoutConstraint!
-    weak var delegate: TransactionTableViewController?
     
     @IBAction func hideSideBar(_ sender: Any) {
         hide() {
@@ -100,5 +100,11 @@ class SideBarView: UIView {
     
     func hideConstant() -> CGFloat {
         return -(self.menuView.frame.width + 20)
+    }
+}
+
+extension SideBarView {
+    func set(delegate: TransactionTableViewController) {
+        self.delegate = delegate
     }
 }

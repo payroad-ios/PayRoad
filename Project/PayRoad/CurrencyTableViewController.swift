@@ -12,10 +12,10 @@ import RealmSwift
 
 class CurrencyTableViewController: UIViewController {
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    var travel: Travel!
-    var notificationToken: NotificationToken? = nil
+    fileprivate var travel: Travel!
+    fileprivate(set) var notificationToken: NotificationToken? = nil
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -51,7 +51,7 @@ class CurrencyTableViewController: UIViewController {
                 return
             }
             
-            addCurrencyTableViewController.travel = travel
+            addCurrencyTableViewController.set(travel: travel)
         }
         
         if segue.identifier == "editCurrency" {
@@ -62,14 +62,20 @@ class CurrencyTableViewController: UIViewController {
                 return
             }
             
-            editCurrencyTableViewController.editorMode = .edit
-            editCurrencyTableViewController.travel = travel
-            editCurrencyTableViewController.originCurrency = travel.currencies[indexPath.row]
+            editCurrencyTableViewController.set(editorMode: .edit)
+            editCurrencyTableViewController.set(travel: travel)
+            editCurrencyTableViewController.set(originCurrency: travel.currencies[indexPath.row])
         }
     }
 
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CurrencyTableViewController {
+    func set(travel: Travel) {
+        self.travel = travel
     }
 }
 

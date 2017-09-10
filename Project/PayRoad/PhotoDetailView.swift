@@ -9,8 +9,8 @@
 import UIKit
 
 class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-    var originFrame = CGRect()
-    weak var delegate: PhotoDetailViewController!
+    fileprivate(set) var originFrame = CGRect()
+    fileprivate(set) weak var delegate: PhotoDetailViewController!
 
     @IBOutlet weak var zoomScrollView: UIScrollView!
     @IBOutlet weak var detailImageView: UIImageView!
@@ -107,5 +107,11 @@ class PhotoDetailView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+extension PhotoDetailView {
+    func set(delegate: PhotoDetailViewController?) {
+        self.delegate = delegate
     }
 }

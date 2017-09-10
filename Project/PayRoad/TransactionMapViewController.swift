@@ -16,12 +16,11 @@ class TransactionMapViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var transactionsNotificationToken: NotificationToken? = nil
-    
-    var travel: Travel!
-    var sortedTransactions: Results<Transaction>!
-    var markers = [TransactionGMSMarker]()
-    var currentSelectedMarkerIndex = 0
+    fileprivate(set) var transactionsNotificationToken: NotificationToken? = nil
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var sortedTransactions: Results<Transaction>!
+    fileprivate(set) var markers = [TransactionGMSMarker]()
+    fileprivate(set) var currentSelectedMarkerIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,13 +105,19 @@ class TransactionMapViewController: UIViewController {
         if segue.identifier == "showTransactionDetail" {
             if let indexPath = collectionView.indexPathsForSelectedItems?.first {
                 let transactionDetailViewController = segue.destination as! TransactionDetailViewController
-                transactionDetailViewController.transaction = sortedTransactions[indexPath.row]
+                transactionDetailViewController.set(transaction: sortedTransactions[indexPath.row])
             }
         }
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TransactionMapViewController {
+    func set(travel: Travel) {
+        self.travel = travel
     }
 }
 

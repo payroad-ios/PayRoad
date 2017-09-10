@@ -13,14 +13,14 @@ protocol PhotoDatailViewDelegate {
 }
 
 class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
-    var delegate: PhotoDatailViewDelegate?
+    fileprivate(set) var delegate: PhotoDatailViewDelegate?
     
-    var photos: [Photo]!
-    var selectedIndex: Int!
-    var photoDetailViews = [PhotoDetailView]()
+    fileprivate(set) var photos: [Photo]!
+    fileprivate(set) var selectedIndex: Int!
+    fileprivate(set) var photoDetailViews = [PhotoDetailView]()
     
-    var previousPage = 0
-    var currentPage = 0 {
+    fileprivate(set) var previousPage = 0
+    fileprivate(set) var currentPage = 0 {
         didSet {
             photoDetailViews[previousPage].resetZoomScale()
             delegate?.changedCurrentPhoto(currentPage)
@@ -52,7 +52,7 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         for (index, item) in photos.enumerated() {
             let photoDetailView = UINib(nibName: "PhotoDetailView", bundle: nil).instantiate(withOwner: self, options: nil).first as! PhotoDetailView
             
-            photoDetailView.delegate = self
+            photoDetailView.set(delegate: self)
             photoDetailView.detailImageView.image = item.fetchPhoto()
             
             let dynamicX = self.view.frame.width * CGFloat(index)
@@ -87,11 +87,21 @@ class PhotoDetailViewController: UIViewController, UIScrollViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func panDownGuesture(_ sender: UITapGestureRecognizer) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PhotoDetailViewController {
+    func set(delegate: PhotoDatailViewDelegate?) {
+        self.delegate = delegate
+    }
+    
+    func set(photos: [Photo]) {
+        self.photos = photos
+    }
+    
+    func set(selectedIndex: Int?) {
+        self.selectedIndex = selectedIndex
     }
 }

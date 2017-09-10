@@ -12,37 +12,37 @@ import RealmSwift
 
 class TransactionTableViewController: UIViewController {
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    let tableViewSectionHeight = CGFloat(30)
+    fileprivate let tableViewSectionHeight = CGFloat(30)
     
-    var travel: Travel!
-    var sortedTransactions: Results<Transaction>!
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var sortedTransactions: Results<Transaction>!
 
-    var transactionsNotificationToken: NotificationToken? = nil
-    var travelNotificationToken: NotificationToken? = nil
-    var currencyNotificationToken: NotificationToken? = nil
+    fileprivate(set) var transactionsNotificationToken: NotificationToken? = nil
+    fileprivate(set) var travelNotificationToken: NotificationToken? = nil
+    fileprivate(set) var currencyNotificationToken: NotificationToken? = nil
     
-    var travelPeriodDates = [YMD]()
-    var dateDictionary = [YMD: [Transaction]]()
-    var originDateList = [YMD]()
-    var dynamicDateList = [YMD]()
+    fileprivate(set) var travelPeriodDates = [YMD]()
+    fileprivate(set) var dateDictionary = [YMD: [Transaction]]()
+    fileprivate(set) var originDateList = [YMD]()
+    fileprivate(set) var dynamicDateList = [YMD]()
     
-    var currentPaymentType = PaymentType.all
-    var totalSpendingIndex = 0
-    var totalSpendingByYMD = [YMD: Double]()
-    var totalSpendingByCurrency = [Currency: Double]()
-    var totalSpendingOfFirstCurrency = 0.0
+    fileprivate(set) var currentPaymentType = PaymentType.all
+    fileprivate(set) var totalSpendingIndex = 0
+    fileprivate(set) var totalSpendingByYMD = [YMD: Double]()
+    fileprivate(set) var totalSpendingByCurrency = [Currency: Double]()
+    fileprivate(set) var totalSpendingOfFirstCurrency = 0.0
     
-    var currentSelectedDate: YMD? {
+    fileprivate(set) var currentSelectedDate: YMD? {
         didSet {
             sortTransactionsSelectedDate()
         }
     }
     
-    var pullToAddLabel = UILabel()
+    fileprivate(set) var pullToAddLabel = UILabel()
     
-    let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
+    fileprivate let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -67,7 +67,7 @@ class TransactionTableViewController: UIViewController {
         if travel.currencies.count == 0 {
             let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
             let navigationController = UINavigationController(rootViewController: currencyTableViewController)
-            currencyTableViewController.travel = self.travel
+            currencyTableViewController.set(travel: self.travel)
             
             self.present(navigationController, animated: true, completion: nil)
         }
@@ -142,9 +142,8 @@ class TransactionTableViewController: UIViewController {
             print("여행 수정")
             
             let travelEditorViewController = UIStoryboard.loadViewController(from: .TravelEditorView, ID: "TravelEditorViewController") as! TravelEditorViewController
-            travelEditorViewController.travel = self.travel
-            
-            travelEditorViewController.editorMode = .edit
+            travelEditorViewController.set(travel: self.travel)
+            travelEditorViewController.set(editorMode: .edit)
             
             let navigationController = UINavigationController(rootViewController: travelEditorViewController)
             
@@ -154,7 +153,7 @@ class TransactionTableViewController: UIViewController {
         let currencySetting = UIAlertAction(title: "통화 설정", style: .default) { [unowned self] _ in
             let currencyTableViewController = UIStoryboard.loadViewController(from: .CurrencyTableView, ID: "CurrencyTableViewController") as! CurrencyTableViewController
             let navigationController = UINavigationController(rootViewController: currencyTableViewController)
-            currencyTableViewController.travel = self.travel
+            currencyTableViewController.set(travel: self.travel)
             
             self.present(navigationController, animated: true, completion: nil)
         }
@@ -170,7 +169,7 @@ class TransactionTableViewController: UIViewController {
     func presentDiaryView() {
         let diaryTableViewController = UIStoryboard.loadViewController(from: .DiaryTableView, ID: "DiaryTableViewController") as! DiaryTableViewController
         let navigationController = UINavigationController(rootViewController: diaryTableViewController)
-        diaryTableViewController.travel = self.travel
+        diaryTableViewController.set(travel: self.travel)
         
         present(navigationController, animated: true, completion: nil)
     }
@@ -178,7 +177,7 @@ class TransactionTableViewController: UIViewController {
     func presentMapView() {
         let transactionMapViewController = UIStoryboard.loadViewController(from: .TransactionMapView, ID: "TransactionMapViewController") as! TransactionMapViewController
         let navigationController = UINavigationController(rootViewController: transactionMapViewController)
-        transactionMapViewController.travel = self.travel
+        transactionMapViewController.set(travel: self.travel)
         
         present(navigationController, animated: true, completion: nil)
     }
@@ -297,7 +296,7 @@ class TransactionTableViewController: UIViewController {
     
     @IBAction func showSideBar(_ sender: Any) {
         self.view.isUserInteractionEnabled = false
-        sideBar.delegate = self
+        sideBar.set(delegate: self)
         sideBar.show() {
             self.view.isUserInteractionEnabled = true
         }
@@ -339,6 +338,13 @@ class TransactionTableViewController: UIViewController {
     
     deinit {
         stopNotificationToken()
+    }
+}
+
+extension TransactionTableViewController {
+    
+    func set(travel: Travel) {
+        self.travel = travel
     }
 }
 
@@ -427,7 +433,7 @@ extension TransactionTableViewController: UITableViewDelegate, UITableViewDataSo
         let selectedTransaction = dateDictionary[key]?[indexPath.row]
         
         let transactionDetailViewController = UIStoryboard.loadViewController(from: .TransactionDetailView, ID: "TransactionDetailViewController") as! TransactionDetailViewController
-        transactionDetailViewController.transaction = selectedTransaction
+        transactionDetailViewController.set(transaction: selectedTransaction)
         navigationController?.pushViewController(transactionDetailViewController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -466,8 +472,8 @@ extension TransactionTableViewController {
                 dateInRegion.date = Date()
             }
 
-            transactionEditorViewController.travel = travel
-            transactionEditorViewController.standardDate = dateInRegion
+            transactionEditorViewController.set(travel: travel)
+            transactionEditorViewController.set(standardDate: dateInRegion)
             present(navigationController, animated: true, completion: nil)
         }
     }

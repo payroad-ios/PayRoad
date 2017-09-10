@@ -93,11 +93,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 let transactionTableViewController = UIStoryboard.loadViewController(from: .TransactionTableView, ID: "Travel") as! TransactionTableViewController
-                transactionTableViewController.travel = travel
+                transactionTableViewController.set(travel: travel)
                 navigationController.pushViewController(transactionTableViewController, animated: false)
                 
                 let transactionEditorViewController = UIStoryboard.loadViewController(from: .TransactionEditorView, ID: "TransactionEditorViewController") as! TransactionEditorViewController
-                transactionEditorViewController.travel = travel
+                transactionEditorViewController.set(travel: travel)
                 
                 let transactionEditorNavigationController = UINavigationController(rootViewController: transactionEditorViewController)
                 

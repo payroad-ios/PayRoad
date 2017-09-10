@@ -11,13 +11,13 @@ import RealmSwift
 
 class DiaryEditorViewController: UIViewController {
     
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    var travel: Travel! // 여행
-    var ymd: YMD! // 년-월-일
-    var dayOfTravel: Int! // 여행 x번째 날
+    fileprivate(set) var travel: Travel! // 여행
+    fileprivate(set) var ymd: YMD! // 년-월-일
+    fileprivate(set) var dayOfTravel: Int! // 여행 x번째 날
     
-    var diary: Diary? // 다이어리
+    fileprivate(set) var diary: Diary? // 다이어리
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -58,5 +58,23 @@ class DiaryEditorViewController: UIViewController {
         }
         view.endEditing(true)
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension DiaryEditorViewController {
+    func set(travel: Travel) {
+        self.travel = travel
+    }
+    
+    func set(ymd: YMD) {
+        self.ymd = ymd
+    }
+    
+    func set(dayOfTravel: Int) {
+        self.dayOfTravel = dayOfTravel
+    }
+    
+    func set(diary: Diary) {
+        self.diary = diary
     }
 }

@@ -9,8 +9,8 @@
 import UIKit
 
 @IBDesignable class TravelView: UIView {
-    var startDateString = ""
-    var endDateString = ""
+    fileprivate(set) var startDateString = ""
+    fileprivate(set) var endDateString = ""
     
     @IBOutlet weak var blackLayerView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!

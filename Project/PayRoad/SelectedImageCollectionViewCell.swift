@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectedImageCollectionViewCell: UICollectionViewCell {
-    let photoImageView: UIImageView = {
+    fileprivate(set) lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -17,7 +17,7 @@ class SelectedImageCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    let deleteButton: UIButton = {
+    fileprivate(set) lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = ColorStore.lightestGray.withAlphaComponent(0.8)
         button.imageView?.contentMode = .scaleAspectFit

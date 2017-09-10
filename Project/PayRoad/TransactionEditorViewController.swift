@@ -16,18 +16,18 @@ protocol TransactionEditorDelegate {
 }
 
 class TransactionEditorViewController: UIViewController {
-    let realm = try! Realm()
+    fileprivate let realm = try! Realm()
     
-    var delegate: TransactionEditorDelegate?
+    fileprivate(set) var delegate: TransactionEditorDelegate?
     
-    var travel: Travel!
-    var currency: Currency!
-    var transaction = Transaction()
+    fileprivate(set) var travel: Travel!
+    fileprivate(set) var currency: Currency!
+    fileprivate(set) var transaction = Transaction()
     
-    var editorMode: EditorMode = .new
-    var titleName: String!
+    fileprivate(set) var editorMode: EditorMode = .new
+    fileprivate(set) var titleName: String!
     
-    lazy var pickerView: UIPickerView = {
+    fileprivate(set) lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -35,22 +35,22 @@ class TransactionEditorViewController: UIViewController {
     }()
     
     //User Input Data
-    var standardDate: DateInRegion? = nil
-    var inputImages: [UIImage]? = nil
-    var isCash = true {
+    fileprivate(set) var standardDate: DateInRegion? = nil
+    fileprivate(set) var inputImages: [UIImage]? = nil
+    fileprivate(set) var isCash = true {
         didSet {
             payTypeToggleButton.isSelected = !isCash
         }
     }
     
-    var category: Category? = nil
-    lazy var categories: Results<Category> = { [unowned self] in
+    fileprivate(set) var category: Category? = nil
+    fileprivate(set) lazy var categories: Results<Category> = { [unowned self] in
         return self.realm.objects(Category.self)
     }()
     
-    let locationManager = CLLocationManager()
-    var currentLocationCoordinate: CLLocationCoordinate2D? // 위치 -> 현 위치 또는 사용자가 Google Place Picker로 선택한 위치
-    var currentLocationName: String? // 위치에 대한 지역 이름 (CLGeocoder)
+    fileprivate let locationManager = CLLocationManager()
+    fileprivate(set) var currentLocationCoordinate: CLLocationCoordinate2D? // 위치 -> 현 위치 또는 사용자가 Google Place Picker로 선택한 위치
+    fileprivate(set) var currentLocationName: String? // 위치에 대한 지역 이름 (CLGeocoder)
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -96,7 +96,7 @@ class TransactionEditorViewController: UIViewController {
         categoryCollectionView.showsHorizontalScrollIndicator = false
         currencyTextField.delegate = self
         
-        multiImagePickerView.delegate = self
+        multiImagePickerView.set(delegate: self)
         
         let bgTapGestureReconizer: UITapGestureRecognizer = .init(target: self, action: #selector(backgroundDidTap(_:)))
         bgTapGestureReconizer.cancelsTouchesInView = false
@@ -245,6 +245,28 @@ class TransactionEditorViewController: UIViewController {
     }
 }
 
+extension TransactionEditorViewController {
+    func set(travel: Travel) {
+        self.travel = travel
+    }
+    
+    func set(transaction: Transaction) {
+        self.transaction = transaction
+    }
+    
+    func set(standardDate: DateInRegion?) {
+        self.standardDate = standardDate
+    }
+    
+    func set(delegate: TransactionEditorDelegate) {
+        self.delegate = delegate
+    }
+    
+    func set(editorMode: EditorMode) {
+        self.editorMode = editorMode
+    }
+}
+
 extension TransactionEditorViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === nameTextField {
@@ -351,7 +373,7 @@ extension TransactionEditorViewController {
                 guard let image = $0.fetchPhoto() else { return }
                 photos.append(image)
             }
-            multiImagePickerView.visibleImages = photos
+            multiImagePickerView.set(visibleImages: photos)
         }
 
         let index = travel.currencies.index(of: currency)
@@ -491,7 +513,7 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         }
         
         // Set photoImageView to display the selected image.
-        multiImagePickerView.visibleImages.append(selectedImage)
+        multiImagePickerView.appendVisibleImage(image: selectedImage)
         multiImagePickerView.collectionView.reloadData()
         
         // Dismiss the picker.

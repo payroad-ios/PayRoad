@@ -12,11 +12,11 @@ import RealmSwift
 
 class TravelTableViewController: UIViewController {
     
-    let travels: Results<Travel> = {
+    fileprivate let travels: Results<Travel> = {
         let realm = try! Realm()
         return realm.objects(Travel.self)
     }()
-    var notificationToken: NotificationToken? = nil
+    fileprivate var notificationToken: NotificationToken? = nil
         
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noticeLabel: UILabel!
@@ -44,13 +44,13 @@ class TravelTableViewController: UIViewController {
         if segue.identifier == "showTransactions",
             let indexPath = tableView.indexPathForSelectedRow,
             let transactionTableViewController = segue.destination as? TransactionTableViewController {
-            transactionTableViewController.travel = travels[indexPath.row]
+            transactionTableViewController.set(travel: travels[indexPath.row])
         }
     }
     
     func pushNewTravelViewController(object: Travel) {
         let transactionTableViewController = UIStoryboard.loadViewController(from: .TransactionTableView, ID: "Travel") as! TransactionTableViewController
-        transactionTableViewController.travel = object
+        transactionTableViewController.set(travel: object)
         navigationController?.pushViewController(transactionTableViewController, animated: true)
     }
     
