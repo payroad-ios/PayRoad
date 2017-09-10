@@ -16,14 +16,7 @@ class TransactionDetailViewController: UIViewController {
     fileprivate let realm = try! Realm()
     
     fileprivate(set) var transaction: Transaction!
-    fileprivate(set) lazy var photoDetailViewController: PhotoDetailViewController = {
-        let photoDetailVC = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
-        photoDetailVC.set(delegate: self)
-        photoDetailVC.modalPresentationStyle = .overCurrentContext
-        photoDetailVC.modalTransitionStyle = .crossDissolve
-        photoDetailVC.set(photos: self.transaction.photos.map { $0 })
-        return photoDetailVC
-    }()
+    fileprivate(set) var photoDetailViewController: PhotoDetailViewController!
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var baseScrollView: UIScrollView!
@@ -49,6 +42,12 @@ class TransactionDetailViewController: UIViewController {
     @IBOutlet weak var imageViewConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoDetailViewController = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
+        photoDetailViewController.modalPresentationStyle = .overCurrentContext
+        photoDetailViewController.modalTransitionStyle = .crossDissolve
+        photoDetailViewController.set(delegate: self)
+        photoDetailViewController.set(photos: self.transaction.photos.map { $0 })
+
         topView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
         descView.addUnderline(color: ColorStore.lightGray, borderWidth: 0.5)
         
@@ -71,10 +70,6 @@ class TransactionDetailViewController: UIViewController {
         createMapView()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTransactionTableView"), object: self.transaction.id)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshImageViewer), name: NSNotification.Name(rawValue: "didSavedPhoto"), object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     func createMapView() {
@@ -157,6 +152,10 @@ class TransactionDetailViewController: UIViewController {
         moreOptionAlertController.addAction(transactionDelete)
         moreOptionAlertController.addAction(cancel)
         present(moreOptionAlertController, animated: true, completion: nil)
+    }
+    
+    deinit {
+        photoDetailViewController.set(delegate: nil)
     }
 }
 
