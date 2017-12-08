@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Medium</string>
+            <string>AppleSDGothicNeo-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--여행 이름-->
         <scene sceneID="57G-n7-LG2">
             <objects>
                 <viewController storyboardIdentifier="Travel" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gj9-wY-KtZ" customClass="TransactionTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="RM4-Eg-1Gu"/>
-                        <viewControllerLayoutGuide type="bottom" id="a7t-0f-yvN"/>
+                        <viewControllerLayoutGuide type="top" id="06k-Wz-f0v"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gj7-xz-Hey"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wY8-m7-I3k">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="dateSelectCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-lm-94X">
@@ -194,7 +200,7 @@
                             <constraint firstAttribute="bottom" secondItem="qAj-v2-Up4" secondAttribute="bottom" id="Gfg-eE-XpZ"/>
                             <constraint firstItem="cg4-lm-94X" firstAttribute="leading" secondItem="9Dj-6J-E3J" secondAttribute="trailing" id="IiY-8Q-7fn"/>
                             <constraint firstItem="9Dj-6J-E3J" firstAttribute="height" secondItem="cg4-lm-94X" secondAttribute="height" id="SAj-Ws-zMX"/>
-                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="top" secondItem="RM4-Eg-1Gu" secondAttribute="bottom" id="UFD-EU-e5w"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="top" secondItem="06k-Wz-f0v" secondAttribute="bottom" id="UFD-EU-e5w"/>
                             <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="cg4-lm-94X" secondAttribute="bottom" id="WSk-4N-Db2"/>
                             <constraint firstAttribute="trailing" secondItem="fR5-y8-48X" secondAttribute="trailing" id="aoh-dI-LfR"/>
                             <constraint firstAttribute="trailing" secondItem="cg4-lm-94X" secondAttribute="trailing" id="j6J-HL-cec"/>
@@ -253,7 +259,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R3c-s2-qYk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w80-53-IxO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

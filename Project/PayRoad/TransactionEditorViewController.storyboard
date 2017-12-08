@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0bd-wK-JTh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Light</string>
+            <string>AppleSDGothicNeo-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--새 항목-->
         <scene sceneID="lC7-eU-Hux">
             <objects>
                 <viewController storyboardIdentifier="TransactionEditorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8cC-mM-Tm3" customClass="TransactionEditorViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="A3V-MI-uLo"/>
-                        <viewControllerLayoutGuide type="bottom" id="mlY-GX-VH5"/>
+                        <viewControllerLayoutGuide type="top" id="bI6-o9-xbw"/>
+                        <viewControllerLayoutGuide type="bottom" id="pdm-G4-B4Y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cQ5-I9-1oD">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSC-Io-J67">
@@ -179,8 +185,8 @@
                         <constraints>
                             <constraint firstItem="aSC-Io-J67" firstAttribute="leading" secondItem="cQ5-I9-1oD" secondAttribute="leading" id="21y-KN-dg9"/>
                             <constraint firstAttribute="trailing" secondItem="aSC-Io-J67" secondAttribute="trailing" id="EpO-ep-xI0"/>
-                            <constraint firstItem="aSC-Io-J67" firstAttribute="top" secondItem="A3V-MI-uLo" secondAttribute="bottom" id="Y11-yf-glQ"/>
-                            <constraint firstItem="mlY-GX-VH5" firstAttribute="top" secondItem="aSC-Io-J67" secondAttribute="bottom" id="sL4-Rq-7OH"/>
+                            <constraint firstItem="aSC-Io-J67" firstAttribute="top" secondItem="bI6-o9-xbw" secondAttribute="bottom" id="Y11-yf-glQ"/>
+                            <constraint firstItem="pdm-G4-B4Y" firstAttribute="top" secondItem="aSC-Io-J67" secondAttribute="bottom" id="sL4-Rq-7OH"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -220,7 +226,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0bd-wK-JTh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B4n-EG-RkE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

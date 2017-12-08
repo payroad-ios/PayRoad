@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Tu-o3-9g7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,8 +22,8 @@
             <objects>
                 <viewController storyboardIdentifier="TransactionDetailViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Tu-o3-9g7" customClass="TransactionDetailViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="61B-KI-39F"/>
-                        <viewControllerLayoutGuide type="bottom" id="9mi-vM-EhD"/>
+                        <viewControllerLayoutGuide type="top" id="yDp-LS-8GD"/>
+                        <viewControllerLayoutGuide type="bottom" id="0GF-zu-I2l"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3a7-K8-dw9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -219,7 +219,7 @@
                         <constraints>
                             <constraint firstItem="Xue-Qv-IeI" firstAttribute="leading" secondItem="3a7-K8-dw9" secondAttribute="leading" id="LYY-so-Udl"/>
                             <constraint firstAttribute="trailing" secondItem="Xue-Qv-IeI" secondAttribute="trailing" id="X5L-a1-GSg"/>
-                            <constraint firstItem="9mi-vM-EhD" firstAttribute="top" secondItem="Xue-Qv-IeI" secondAttribute="bottom" id="ctJ-gu-WYX"/>
+                            <constraint firstItem="0GF-zu-I2l" firstAttribute="top" secondItem="Xue-Qv-IeI" secondAttribute="bottom" id="ctJ-gu-WYX"/>
                             <constraint firstItem="Xue-Qv-IeI" firstAttribute="top" secondItem="3a7-K8-dw9" secondAttribute="top" id="mEM-I1-Uwn"/>
                             <constraint firstItem="Mym-a8-D4c" firstAttribute="width" secondItem="3a7-K8-dw9" secondAttribute="width" id="rb3-AV-v6s"/>
                         </constraints>
