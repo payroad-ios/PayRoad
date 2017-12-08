@@ -9,13 +9,19 @@
 import UIKit
 
 @IBDesignable class MultiImagePickerView: UIView, MultiImagePickerDelegate {
-    
     fileprivate let margin: CGFloat = 5
     fileprivate(set) lazy var multiImagePickerCollectionViewController = MultiImagePickerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    fileprivate lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        return imagePicker
+    }()
     fileprivate(set) var delegate: UIViewController!
     fileprivate(set) var visibleImages = [UIImage]()
     
     var isChanged: Bool = false
+    var isTakePicture: Bool = false
     
     @IBOutlet weak var addImageButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -66,10 +72,14 @@ import UIKit
     func deleteSelectedImage(_ sender: UIButton) {
         let cell = sender.superview as! SelectedImageCollectionViewCell
         let indexPath = collectionView.indexPath(for: cell)!
+        deselectImage(indexPath: indexPath)
+    }
+    
+    func deselectImage(indexPath: IndexPath) {
         visibleImages.remove(at: indexPath.row)
         collectionView.deleteItems(at: [indexPath])
         isChanged = true
-
+        
         guard !multiImagePickerCollectionViewController.orderIndexPaths.isEmpty else {
             return
         }
@@ -77,8 +87,44 @@ import UIKit
     }
     
     @IBAction func addImageButtonDidTap(_ sender: UIButton) {
-        let navigationController = UINavigationController(rootViewController: multiImagePickerCollectionViewController)
-        delegate.present(navigationController, animated: true, completion: nil)
+        let selectorAlertController = UIAlertController(title: "사진 추가", message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "직접 촬영", style: .default) { [weak self] _ in
+            guard let `self` = self else { return }
+            if !self.visibleImages.isEmpty {
+                
+            }
+            self.delegate.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+        let photoLibraryAction = UIAlertAction(title: "앨범에서 선택", style: .default) { [weak self] _ in
+            guard let `self` = self else { return }
+            
+            func presentMultiPicker() {
+                let navigationController = UINavigationController(rootViewController: self.multiImagePickerCollectionViewController)
+                self.delegate.present(navigationController, animated: true, completion: nil)
+            }
+            
+            if self.isTakePicture {
+                let deleteWarningAlertController = UIAlertController(title: "경고", message: "직접 촬영한 사진은 삭제됩니다.\n계속하시겠습니까?", preferredStyle: .alert)
+                let cancelButton = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                let okButton = UIAlertAction(title: "확인", style: .destructive, handler: { (_) in
+                    self.isTakePicture = false
+                    self.multiImagePickerCollectionViewController.resetSelectImage()
+                    presentMultiPicker()
+                })
+                
+                deleteWarningAlertController.addAction(cancelButton)
+                deleteWarningAlertController.addAction(okButton)
+                self.delegate.present(deleteWarningAlertController, animated: true, completion: nil)
+            } else {
+                presentMultiPicker()
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        selectorAlertController.addAction(cameraAction)
+        selectorAlertController.addAction(photoLibraryAction)
+        selectorAlertController.addAction(cancelAction)
+        delegate.present(selectorAlertController, animated: true, completion: nil)
     }
 }
 
@@ -114,8 +160,6 @@ extension MultiImagePickerView: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
-
-
 extension MultiImagePickerView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (frame.width / 4) - 1
@@ -132,5 +176,18 @@ extension MultiImagePickerView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+    }
+}
+
+extension MultiImagePickerView: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        
+        multiImagePicker(selectedImages: [image])
+        isTakePicture = true
+        
+        print("visible", visibleImages.count)
+        imagePicker.dismiss(animated: true, completion: nil)
+        
     }
 }

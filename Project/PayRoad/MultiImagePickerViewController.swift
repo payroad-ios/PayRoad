@@ -78,6 +78,13 @@ class MultiImagePickerCollectionViewController: UICollectionViewController, UICo
         drawCountCellOrder()
     }
     
+    func resetSelectImage() {
+        guard orderIndexPaths.count != 0 else { return }
+        for i in (0..<orderIndexPaths.count).reversed() {
+            removeDeselectItem(at: i)
+        }
+    }
+    
     func restorePicker() {
         for indexPath in orderIndexPaths {
             collectionView?.deselectItem(at: indexPath, animated: false)
