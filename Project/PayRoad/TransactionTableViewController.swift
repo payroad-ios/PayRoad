@@ -60,7 +60,7 @@ class TransactionTableViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         let window = UIApplication.shared.keyWindow!
-        window.addSubview(sideBar)
+//        window.addSubview(sideBar)
 
         title = travel.name
         

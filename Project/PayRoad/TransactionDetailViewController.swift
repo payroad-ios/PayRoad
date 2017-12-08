@@ -16,7 +16,7 @@ class TransactionDetailViewController: UIViewController {
     fileprivate let realm = try! Realm()
     
     fileprivate(set) var transaction: Transaction!
-    fileprivate(set) var photoDetailViewController: PhotoDetailViewController!
+    fileprivate(set) var photoDetailViewController = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var baseScrollView: UIScrollView!
@@ -42,7 +42,6 @@ class TransactionDetailViewController: UIViewController {
     @IBOutlet weak var imageViewConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoDetailViewController = UIStoryboard.loadViewController(from: .PhotoDetailView, ID: "PhotoDetailView") as! PhotoDetailViewController
         photoDetailViewController.modalPresentationStyle = .overCurrentContext
         photoDetailViewController.modalTransitionStyle = .crossDissolve
         photoDetailViewController.set(delegate: self)
@@ -117,6 +116,7 @@ class TransactionDetailViewController: UIViewController {
         let photos = notification.object as! List<Photo>
         transaction.photos = photos
         collectionView.reloadData()
+        photoDetailViewController.set(photos: self.transaction.photos.map { $0 })
         UIView.animate(withDuration: 0.3, animations: {
             self.imageViewConstraint.constant = self.transaction.photos.isEmpty ? 0 : 190
             self.view.layoutIfNeeded()
