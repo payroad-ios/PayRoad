@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gj9-wY-KtZ">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,12 +21,8 @@
         <scene sceneID="57G-n7-LG2">
             <objects>
                 <viewController storyboardIdentifier="Travel" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gj9-wY-KtZ" customClass="TransactionTableViewController" customModule="PayRoad" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="06k-Wz-f0v"/>
-                        <viewControllerLayoutGuide type="bottom" id="Gj7-xz-Hey"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wY8-m7-I3k">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="dateSelectCollectionView" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-lm-94X">
@@ -49,7 +46,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38S-SJ-Gu0">
-                                                    <rect key="frame" x="12.5" y="17" width="25" height="17"/>
+                                                    <rect key="frame" x="12.666666666666664" y="17" width="25" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -84,7 +81,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="transactionTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qAj-v2-Up4">
-                                <rect key="frame" x="0.0" y="60" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="630"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="↓ 새 항목을 등록해주세요." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tqA-YV-IQL">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -94,8 +91,8 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fR5-y8-48X">
-                                <rect key="frame" x="0.0" y="538" width="375" height="65"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fR5-y8-48X" userLabel="BudgetDetailView">
+                                <rect key="frame" x="0.0" y="625" width="375" height="65"/>
                                 <subviews>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YfO-9g-nsO">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="4"/>
@@ -128,13 +125,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="215" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용 예산" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-Tq-UoP">
-                                                                <rect key="frame" x="0.0" y="13" width="207.5" height="17"/>
+                                                                <rect key="frame" x="0.0" y="13" width="207.66666666666666" height="17"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                                                                 <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atn-6m-6wM">
-                                                                <rect key="frame" x="207.5" y="10.5" width="7.5" height="19.5"/>
+                                                                <rect key="frame" x="207.66666666666669" y="10.666666666666627" width="7.3333333333333428" height="19.333333333333329"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                                                 <color key="textColor" red="0.93725490196078431" green="0.44705882352941173" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -145,13 +142,13 @@
                                                         <rect key="frame" x="0.0" y="31" width="215" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="남은 예산" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGR-eR-YIx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207.5" height="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="207.66666666666666" height="17"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                                                                 <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXY-Qb-DmD">
-                                                                <rect key="frame" x="207.5" y="0.0" width="7.5" height="19.5"/>
+                                                                <rect key="frame" x="207.66666666666669" y="0.0" width="7.3333333333333428" height="19.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                                                 <color key="textColor" red="0.4823529411764706" green="0.66274509803921566" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -194,21 +191,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="fR5-y8-48X" secondAttribute="bottom" id="3dx-gC-lAP"/>
-                            <constraint firstItem="qAj-v2-Up4" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="8Ag-3V-G4W"/>
-                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="AId-x6-D0h"/>
-                            <constraint firstAttribute="bottom" secondItem="qAj-v2-Up4" secondAttribute="bottom" id="Gfg-eE-XpZ"/>
+                            <constraint firstItem="xQ6-SZ-g4g" firstAttribute="bottom" secondItem="fR5-y8-48X" secondAttribute="bottom" id="3dx-gC-lAP"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="leading" secondItem="xQ6-SZ-g4g" secondAttribute="leading" id="8Ag-3V-G4W"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="leading" secondItem="xQ6-SZ-g4g" secondAttribute="leading" id="AId-x6-D0h"/>
                             <constraint firstItem="cg4-lm-94X" firstAttribute="leading" secondItem="9Dj-6J-E3J" secondAttribute="trailing" id="IiY-8Q-7fn"/>
                             <constraint firstItem="9Dj-6J-E3J" firstAttribute="height" secondItem="cg4-lm-94X" secondAttribute="height" id="SAj-Ws-zMX"/>
-                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="top" secondItem="06k-Wz-f0v" secondAttribute="bottom" id="UFD-EU-e5w"/>
+                            <constraint firstItem="9Dj-6J-E3J" firstAttribute="top" secondItem="xQ6-SZ-g4g" secondAttribute="top" id="UFD-EU-e5w"/>
                             <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="cg4-lm-94X" secondAttribute="bottom" id="WSk-4N-Db2"/>
-                            <constraint firstAttribute="trailing" secondItem="fR5-y8-48X" secondAttribute="trailing" id="aoh-dI-LfR"/>
-                            <constraint firstAttribute="trailing" secondItem="cg4-lm-94X" secondAttribute="trailing" id="j6J-HL-cec"/>
-                            <constraint firstItem="fR5-y8-48X" firstAttribute="leading" secondItem="wY8-m7-I3k" secondAttribute="leading" id="nZJ-lu-63D"/>
-                            <constraint firstAttribute="trailing" secondItem="qAj-v2-Up4" secondAttribute="trailing" id="ogb-RB-JUW"/>
-                            <constraint firstItem="cg4-lm-94X" firstAttribute="top" secondItem="wY8-m7-I3k" secondAttribute="top" id="u2p-pa-LYQ"/>
+                            <constraint firstItem="xQ6-SZ-g4g" firstAttribute="trailing" secondItem="fR5-y8-48X" secondAttribute="trailing" id="aoh-dI-LfR"/>
+                            <constraint firstItem="qAj-v2-Up4" firstAttribute="bottom" secondItem="fR5-y8-48X" secondAttribute="bottom" id="cRy-bi-cgq"/>
+                            <constraint firstItem="xQ6-SZ-g4g" firstAttribute="trailing" secondItem="cg4-lm-94X" secondAttribute="trailing" id="j6J-HL-cec"/>
+                            <constraint firstItem="fR5-y8-48X" firstAttribute="leading" secondItem="xQ6-SZ-g4g" secondAttribute="leading" id="nZJ-lu-63D"/>
+                            <constraint firstItem="xQ6-SZ-g4g" firstAttribute="trailing" secondItem="qAj-v2-Up4" secondAttribute="trailing" id="ogb-RB-JUW"/>
+                            <constraint firstItem="cg4-lm-94X" firstAttribute="top" secondItem="9Dj-6J-E3J" secondAttribute="top" id="pFU-Sw-7tO"/>
                             <constraint firstItem="qAj-v2-Up4" firstAttribute="top" secondItem="9Dj-6J-E3J" secondAttribute="bottom" id="vmb-Jk-3cA"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="xQ6-SZ-g4g"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="여행 이름" id="k9i-xs-t2o">
@@ -243,7 +241,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="925.60000000000002" y="169.56521739130437"/>
+            <point key="canvasLocation" x="925.60000000000002" y="169.21182266009853"/>
         </scene>
         <!--TransactionDetailViewController-->
         <scene sceneID="G33-Lj-syf">
@@ -259,7 +257,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R3c-s2-qYk" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w80-53-IxO">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
