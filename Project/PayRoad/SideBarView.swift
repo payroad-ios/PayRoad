@@ -46,7 +46,8 @@ class SideBarView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.isUserInteractionEnabled = false
-        self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        let bounds = UIScreen.main.bounds
+        self.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         sideBarLeadingConstraint.constant = hideConstant()
         
         goMainButton.cornerRound(cornerOptions: .allCorners, cornerRadius: 5)
@@ -59,7 +60,7 @@ class SideBarView: UIView {
         self.layer.shadowOffset = CGSize.zero
         self.layer.shadowRadius = 7
     }
-
+    
     func show(completion: (() -> Void)? = nil) {
         UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
         UIView.animate(withDuration: 0.25, animations: { [unowned self] in

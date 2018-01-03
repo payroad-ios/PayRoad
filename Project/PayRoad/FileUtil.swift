@@ -73,9 +73,10 @@ struct SaveProcessing {
 }
 
 struct PhotoUtil {
+    private static let savePhotosQueue = DispatchQueue(label: "savePhotos")
     static func savePhotos(travelID: String, transactionID: String, photos: [UIImage], completion: @escaping ([Photo]?) -> Void?) {
         var resultPhotosModel = [Photo]()
-        DispatchQueue(label: "savePhotos").async {
+        savePhotosQueue.async {
             for i in 0..<photos.count {
                 SaveProcessing.shared.isSaving = true
                 let photoModel = savePhoto(travelID: travelID, transactionID: transactionID, photo: photos[i])
@@ -85,10 +86,10 @@ struct PhotoUtil {
                     print("저장 성공 \(i+1)/\(photos.count)")
                 }
             }
-            SaveProcessing.shared.isSaving = false
-            SaveProcessing.shared.completedModels = [Photo]()
-            
             DispatchQueue.main.async {
+                SaveProcessing.shared.isSaving = false
+                SaveProcessing.shared.completedModels = [Photo]()
+                
                 completion(resultPhotosModel)
             }
         }

@@ -528,7 +528,7 @@ extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINa
         self.view.endEditing(true)
         let imagePickerController = UIImagePickerController()
         
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = .camera
         
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
