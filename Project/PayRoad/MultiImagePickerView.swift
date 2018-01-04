@@ -14,7 +14,7 @@ import UIKit
     fileprivate lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         return imagePicker
     }()
     fileprivate(set) var delegate: UIViewController!

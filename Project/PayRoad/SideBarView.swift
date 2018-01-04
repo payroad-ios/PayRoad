@@ -62,7 +62,9 @@ class SideBarView: UIView {
     }
     
     func show(completion: (() -> Void)? = nil) {
-        UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
+        if Device.currentDevice != .iPhoneX {
+            UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar + 1)
+        }
         UIView.animate(withDuration: 0.25, animations: { [unowned self] in
             self.sideBarLeadingConstraint.constant = 0
             self.backgroundView.alpha = 0.3
@@ -86,7 +88,9 @@ class SideBarView: UIView {
             self.backgroundView.alpha = 0
             self.layoutIfNeeded()
         }, completion: { (result) in
-            UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar - 1)
+            if Device.currentDevice != .iPhoneX {
+                UIApplication.shared.keyWindow?.windowLevel = (UIWindowLevelStatusBar - 1)
+            }
             self.isUserInteractionEnabled = false
             
             guard result == true,

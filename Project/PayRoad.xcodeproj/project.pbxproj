@@ -55,6 +55,7 @@
 		A7EBD22D1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */; };
 		A7EBD22F1F3ED8790057E844 /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD22E1F3ED8790057E844 /* ColorStore.swift */; };
 		A7EBD2311F3ED8BE0057E844 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */; };
+		A7F875861FFD469800D4252E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F875851FFD469800D4252E /* Device.swift */; };
 		A7FED7CE1F47D45A00FD76EC /* UserPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FED7CD1F47D45A00FD76EC /* UserPhotoAlbum.swift */; };
 		A7FED7D01F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FED7CF1F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift */; };
 		A7FED7D21F47D67200FD76EC /* SelectedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FED7D11F47D67200FD76EC /* SelectedImageCollectionViewCell.swift */; };
@@ -150,6 +151,7 @@
 		A7EBD22C1F3EB64A0057E844 /* DateSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7EBD22E1F3ED8790057E844 /* ColorStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
+		A7F875851FFD469800D4252E /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		A7FED7CD1F47D45A00FD76EC /* UserPhotoAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotoAlbum.swift; sourceTree = "<group>"; };
 		A7FED7CF1F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7FED7D11F47D67200FD76EC /* SelectedImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -243,8 +245,9 @@
 				B3E11FA51F51293A00035C50 /* Diary */,
 				A751094D1F4A3A4200766E07 /* MultiImagePicker */,
 				A76E05FB1F4DC55900FE009A /* BRCalendar */,
-				A74507F71F3A217400DFFADF /* Extension */,
 				A7B4F6EF1F444DC40049D812 /* View */,
+				A7F875841FFD465900D4252E /* Helper */,
+				A74507F71F3A217400DFFADF /* Extension */,
 				A74507CD1F3976FF00DFFADF /* Resource */,
 			);
 			path = PayRoad;
@@ -327,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				A74507FC1F3ADD5600DFFADF /* ExtensionUIStoryboard.swift */,
-				E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */,
 				E5C7AAB91F4C86710059E0DB /* ExtensionDouble.swift */,
 				E5C7AABB1F4C89250059E0DB /* ExtensionFloat.swift */,
 				A7B4F6DF1F436E900049D812 /* ExtensionUIView.swift */,
@@ -338,13 +340,6 @@
 				A7EBD2301F3ED8BE0057E844 /* ExtensionUIColor.swift */,
 				A7B4F6E11F4379920049D812 /* ExtensionDataFormatter.swift */,
 				A7B0AA0F1F461BC2005DE60C /* ExtenstionString.swift */,
-				B38735E71F45C5CE000DC81C /* RealmInitializer.swift */,
-				A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */,
-				A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */,
-				A763AD111F4830A100D43E06 /* EnumGroup.swift */,
-				E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */,
-				E50D13A91F41C56E00BD36CC /* FileUtil.swift */,
-				A7EBD22E1F3ED8790057E844 /* ColorStore.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -388,6 +383,22 @@
 				E5C9B8E91F45533B005B1353 /* TransactionTableViewCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		A7F875841FFD465900D4252E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E5C7AAAF1F4BFDB70059E0DB /* NumberStringUtil.swift */,
+				B38735E71F45C5CE000DC81C /* RealmInitializer.swift */,
+				A7B4F6E71F43A30C0049D812 /* UnableInputTextField.swift */,
+				A7B4F6ED1F4439C40049D812 /* CustomLabel.swift */,
+				A763AD111F4830A100D43E06 /* EnumGroup.swift */,
+				E5B26E5C1F3C11A100D63AAB /* DateUtil.swift */,
+				E50D13A91F41C56E00BD36CC /* FileUtil.swift */,
+				A7EBD22E1F3ED8790057E844 /* ColorStore.swift */,
+				A7F875851FFD469800D4252E /* Device.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		B3B614821F4D9EE500205BAD /* Map */ = {
@@ -634,6 +645,7 @@
 				A7FED7CE1F47D45A00FD76EC /* UserPhotoAlbum.swift in Sources */,
 				A7B4F6F31F444EA80049D812 /* TravelView.swift in Sources */,
 				A77D74481F455297002BF9C8 /* TravelEditorViewController.swift in Sources */,
+				A7F875861FFD469800D4252E /* Device.swift in Sources */,
 				A76E06081F4DC56800FE009A /* BRCalendarView.swift in Sources */,
 				A7FED7D01F47D49700FD76EC /* MultiImagePickerCollectionViewCell.swift in Sources */,
 				A76E06031F4DC56800FE009A /* BRCalendarDayCollectionViewCell.swift in Sources */,
