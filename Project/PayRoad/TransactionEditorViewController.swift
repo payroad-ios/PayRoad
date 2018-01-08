@@ -504,38 +504,6 @@ extension TransactionEditorViewController: UICollectionViewDelegate, UICollectio
     }
 }
 
-
-extension TransactionEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        
-        // Set photoImageView to display the selected image.
-        multiImagePickerView.appendVisibleImage(image: selectedImage)
-        multiImagePickerView.collectionView.reloadData()
-        
-        // Dismiss the picker.
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-        let imagePickerController = UIImagePickerController()
-        
-        imagePickerController.sourceType = .camera
-        
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true, completion: nil)
-    }
-}
-
 extension TransactionEditorViewController: GMSPlacePickerViewControllerDelegate {
     
     func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {

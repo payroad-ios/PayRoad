@@ -19,7 +19,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Xt7-A5-Eec" customClass="SideBarView" customModule="PayRoad" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="Xt7-A5-Eec" customClass="SideMenuView" customModule="PayRoad" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -39,13 +39,11 @@
                             <state key="normal" title="메인으로">
                                 <color key="titleColor" red="0.93725490196078431" green="0.44705882352941173" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <connections>
-                                <action selector="gotoMainView" destination="Xt7-A5-Eec" eventType="touchUpInside" id="XTW-Zl-OEN"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqH-VM-kc7">
                             <rect key="frame" x="0.0" y="156" width="208.66666666666666" height="36"/>
                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="가계부">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -53,22 +51,18 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Wr-FCw">
                             <rect key="frame" x="0.0" y="232" width="208.66666666666666" height="36"/>
                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="일기">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <connections>
-                                <action selector="diaryButtonDidTap:" destination="Xt7-A5-Eec" eventType="touchUpInside" id="GlS-2S-7AR"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QA-Rm-sYw">
                             <rect key="frame" x="0.0" y="308" width="208.66666666666666" height="36"/>
                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="20"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="지도">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <connections>
-                                <action selector="mapButtonDidTap:" destination="Xt7-A5-Eec" eventType="touchUpInside" id="GB8-mH-f4Y"/>
-                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_PayRoad-SideBar" translatesAutoresizingMaskIntoConstraints="NO" id="yat-g0-AtZ">
                             <rect key="frame" x="35.666666666666657" y="74" width="138" height="32"/>
@@ -126,17 +120,15 @@
                 <outlet property="backgroundView" destination="iZ4-Gt-JIa" id="MfF-Fe-3oj"/>
                 <outlet property="diaryButton" destination="UG8-Wr-FCw" id="Fos-FP-Nwc"/>
                 <outlet property="goMainButton" destination="WbH-Oa-JG3" id="fqc-eE-s7D"/>
+                <outlet property="hideTapGesture" destination="e2O-Vf-FO9" id="Pan-3m-Ftt"/>
                 <outlet property="mapButton" destination="3QA-Rm-sYw" id="Jhc-ka-64E"/>
                 <outlet property="menuView" destination="z00-Mp-7kM" id="eF1-hQ-JE1"/>
                 <outlet property="sideBarLeadingConstraint" destination="zRc-uc-heD" id="7iE-IF-RCY"/>
+                <outlet property="transactionButton" destination="iqH-VM-kc7" id="Bka-AS-rJU"/>
             </connections>
             <point key="canvasLocation" x="-47.5" y="-85"/>
         </view>
-        <tapGestureRecognizer id="e2O-Vf-FO9">
-            <connections>
-                <action selector="hideSideBar:" destination="Xt7-A5-Eec" id="1Ks-j4-eX5"/>
-            </connections>
-        </tapGestureRecognizer>
+        <tapGestureRecognizer id="e2O-Vf-FO9"/>
     </objects>
     <resources>
         <image name="Logo_PayRoad-SideBar" width="138" height="32"/>

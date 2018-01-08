@@ -42,7 +42,7 @@ class TransactionTableViewController: UIViewController {
     
     fileprivate(set) var pullToAddLabel = UILabel()
     
-    fileprivate let sideBar = UINib(nibName: "SideBarView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideBarView
+    fileprivate let sideMenu = UINib(nibName: "SideMenuView", bundle: nil).instantiate(withOwner: self, options: nil).first as! SideMenuView
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -59,9 +59,6 @@ class TransactionTableViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let window = UIApplication.shared.keyWindow!
-        window.addSubview(sideBar)
-
         title = travel.name
         
         if travel.currencies.count == 0 {
@@ -295,11 +292,9 @@ class TransactionTableViewController: UIViewController {
     }
     
     @IBAction func showSideBar(_ sender: Any) {
-        self.view.isUserInteractionEnabled = false
-        sideBar.set(delegate: self)
-        sideBar.show() {
-            self.view.isUserInteractionEnabled = true
-        }
+        let window = UIApplication.shared.keyWindow
+        window?.addSubview(sideMenu)
+        sideMenu.show()
     }
     
     func displayTotalSpendingCurrency() {
