@@ -25,19 +25,19 @@ struct Device {
         if UIDevice().userInterfaceIdiom == .phone {
             switch UIScreen.main.nativeBounds.height {
             case 1136:
-                print("iPhone 5 or 5S or 5C")
+//                print("iPhone 5 or 5S or 5C")
                 return .iPhone5s
             case 1334:
-                print("iPhone 6/6S/7/8")
+//                print("iPhone 6/6S/7/8")
                 return .iPhone8
             case 2208:
-                print("iPhone 6+/6S+/7+/8+")
+//                print("iPhone 6+/6S+/7+/8+")
                 return .iPhone8plus
             case 2436:
-                print("iPhone X")
+//                print("iPhone X")
                 return .iPhoneX
             default:
-                print("unknown")
+//                print("unknown")
                 return .unknown
             }
         }
